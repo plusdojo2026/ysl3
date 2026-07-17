@@ -19,8 +19,8 @@ public class Controller extends HttpServlet {
 	        throws ServletException, IOException {
 	    request.setCharacterEncoding("UTF-8");
 	    
-	    //ページidを取得
-	    //ドロワーメニュー用
+	    //  ページidを取得し、画面遷移
+	    //  仮だしドロワーメニュー用だよ
 	    String pageId = request.getParameter("page_id");
 	    String page = "/WEB-INF/jsp/login.jsp";
 
