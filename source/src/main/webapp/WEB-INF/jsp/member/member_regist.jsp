@@ -14,7 +14,17 @@
   <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
   <!---------- メインここから ---------->
   <main class="main">
-
+  
+  <h1>メンバー新規登録</h1>
+<input type="text" name="login_id">
+<input type="text" name="user_name" >
+<div class="role-btn">
+	<input type="radio" name="role" value="一般">
+	<input type="radio" name="role" value="管理者">
+</div>
+<input type="text" name="mail" >
+<input type="text" name="password" >
+<input type="submit" name="submit" value="登録">
   </main>
     <!---------- メインここまで ---------->
   <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>

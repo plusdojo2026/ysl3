@@ -51,11 +51,18 @@ body {
   color: #eee;
 }
 
+.user-name-view {
+  margin-left: auto;
+  font-size: 18px;
+  color: #fff;
+  text-decoration: none;
+}
+
 .menu-button {
   width: 48px;
   height: 48px;
   padding: 0;
-  margin-left: auto;
+  margin-left: 28px;
 
   border: none;
   background: transparent;
@@ -133,7 +140,7 @@ body {
   padding: 16px 24px;
   color: #4e4d4c;
   text-decoration: none;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .menu a:hover {
@@ -143,12 +150,6 @@ body {
 /*----------------------*/
 /*--------今だけ--------*/
 /*----------------------*/
-.menu-title {
-  margin: 24px 20px 8px;
-  color: #4E4D4C;
-  font-size: 0.78rem;
-  font-weight: bold;
-}
 .now-menu a {
 	font-size: 12px;
 	padding: 0;
