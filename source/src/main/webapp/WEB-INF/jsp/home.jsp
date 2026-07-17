@@ -1,22 +1,62 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>ホーム | TaskManager</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ホーム | TaskManager</title>
 
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-  <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
-</head>
+    <link
+      rel="stylesheet"
+      href="${pageContext.request.contextPath}/css/common.css"
+    />
+    <script
+      src="${pageContext.request.contextPath}/js/common.js"
+      defer
+    ></script>
+  </head>
 
-<body>
-  <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
-  <!---------- メインここから ---------->
-  <main class="main">
+  <body>
+    <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
+    <!---------- メインここから ---------->
+    <main class="main">
+      <h2 class="page-title">ホーム</h2>
+      <!-- ホームナビここから -->
+      <section class="home-nav">
+        <div class="nav-icon">
+          <img />
+          <a href="">案件</a>
+        </div>
+        <div class="nav-icon">
+          <img />
+          <a href="">タスク</a>
+        </div>
+        <div class="nav-icon">
+          <img />
+          <a href="">月次</a>
+        </div>
+        <div class="nav-icon">
+          <img />
+          <a href="">マイページ</a>
+        </div>
+      </section>
+      <!-- ホームナビここまで -->
 
-  </main>
+      <!-- ホーム工数ログ表示ここから -->
+      <section class="home-log-view">
+        <h3 class="home-view-title">工数ログ</h3>
+        <div class="work-log-card">
+          <div>タスク名</div>
+          <div>担当者</div>
+          <div>実施日</div>
+          <div>工数</div>
+          <div>▼</div>
+        </div>
+      </section>
+      <!-- ホーム工数ログ表示ここまで -->
+
+    </main>
     <!---------- メインここまで ---------->
-  <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
-</body>
+    <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
+  </body>
 </html>
