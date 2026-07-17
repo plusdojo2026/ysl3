@@ -22,14 +22,14 @@
 </div>
 
 <!-- 月切り替えボタン -->
-<div class="buttons">
+<div class="month_btn">
   <button ><</button>
   <button >></button>
 
 </div>
 
 <!-- CSV出力ボタン -->
-<button id="csv_button">CSV出力</button>
+<button id="csv_btn">CSV出力</button>
 
 <h2>案件別実績</h2>
 
