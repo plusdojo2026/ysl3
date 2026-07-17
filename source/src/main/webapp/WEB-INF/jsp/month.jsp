@@ -17,12 +17,17 @@
   
   <h1>月次集計</h1>
 
+<!-- 日付表示 -->
+<div class="calendar">
+</div>
+
 <!-- 月切り替えボタン -->
 <div class="buttons">
   <button ><</button>
   <button >></button>
 
 </div>
+
 <!-- CSV出力ボタン -->
 <button id="csv_button">CSV出力</button>
 
