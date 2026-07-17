@@ -14,6 +14,21 @@
   <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
   <!---------- メインここから ---------->
   <main class="main">
+  
+  <h1>月次集計</h1>
+
+<!-- 月切り替えボタン -->
+<div class="buttons">
+  <button ><</button>
+  <button >></button>
+
+</div>
+<!-- CSV出力ボタン -->
+<button id="csv_button">CSV出力</button>
+
+<h2>案件別実績</h2>
+
+<h2>ユーザー別実績</h2>
 
   </main>
     <!---------- メインここまで ---------->
