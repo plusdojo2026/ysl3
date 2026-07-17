@@ -1,12 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ホーム | TaskManager</title>
+
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+  <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+</head>
+
+<body>
+  <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
+  <!---------- メインここから ---------->
+  <main class="main">
+
+  </main>
+    <!---------- メインここまで ---------->
+  <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
 </body>
 </html>

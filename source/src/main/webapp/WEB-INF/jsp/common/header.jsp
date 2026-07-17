@@ -1,12 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page contentType="text/html; charset=UTF-8" %>
+    <header class="header">
+      <a href="#" class="system-title">TaskManager</a>
 
-</body>
-</html>
+      <button id="menuButton" class="menu-button" type="button">☰</button>
+    </header>
+
+    <nav id="menu" class="menu">
+      <button id="closeButton" class="close-button" type="button">×</button>
+
+      <a href="#">ホーム</a>
+      <a href="#">案件一覧</a>
+      <a href="#">タスク一覧</a>
+      <a href="#">月次集計</a>
+      <a href="#">マイページ</a>
+      <a href="#">ログアウト</a>
+    </nav>
+    
+    
