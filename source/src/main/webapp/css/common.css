@@ -140,3 +140,16 @@ body {
   background: #e7f5f2;
   color: #29988b;
 }
+/*----------------------*/
+/*--------今だけ--------*/
+/*----------------------*/
+.menu-title {
+  margin: 24px 20px 8px;
+  color: #4E4D4C;
+  font-size: 0.78rem;
+  font-weight: bold;
+}
+.now-menu a {
+	font-size: 12px;
+	padding: 0;
+}
