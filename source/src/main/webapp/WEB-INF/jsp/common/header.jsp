@@ -1,19 +1,21 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-    <header class="header">
-      <a href="#" class="system-title">TaskManager</a>
 
-      <button id="menuButton" class="menu-button" type="button">☰</button>
-    </header>
+<header class="header">
+  <a href="${pageContext.request.contextPath}/Controller?page_id=home"
+     class="system-title">TaskManager</a>
 
-    <nav id="menu" class="menu">
-      <button id="closeButton" class="close-button" type="button">×</button>
+  <button id="menuButton" class="menu-button" type="button">☰</button>
+</header>
 
-      <a href="#">ホーム</a>
-      <a href="#">案件一覧</a>
-      <a href="#">タスク一覧</a>
-      <a href="#">月次集計</a>
-      <a href="#">マイページ</a>
-      <a href="#">ログアウト</a>
-    </nav>
-    
+<nav id="menu" class="menu">
+  <button id="closeButton" class="close-button" type="button">×</button>
+
+  <a href="${pageContext.request.contextPath}/Controller?page_id=toHome">ホーム</a>
+  <a href="${pageContext.request.contextPath}/Controller?page_id=toProjectList">案件</a>
+  <a href="${pageContext.request.contextPath}/Controller?page_id=toTaskList">タスク</a>
+  <a href="${pageContext.request.contextPath}/Controller?page_id=toMonth">月次集計</a>
+  <a href="${pageContext.request.contextPath}/Controller?page_id=toMypage">マイページ</a>
+  <a href="${pageContext.request.contextPath}/Controller?page_id=toMemberList">メンバー</a>
+  <a href="${pageContext.request.contextPath}/Controller?page_id=toLogout">ログアウト</a>
+</nav>
     
