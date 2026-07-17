@@ -17,12 +17,12 @@
 <h1>メンバー編集</h1>
 
 <input type="text" name="user_name">
-<div class="role_group">
+<div class="role-btn">
 	<input type="radio" name="role" value="一般" >
 	<input type="radio" name="role" value="管理者" >
 </div>
 <input type="text" name="mail" >
-<div class="sol_group">
+<div class="sol-btn">
 	<input type="radio" name="sol" value="有効">
 	<input type="radio" name="sol" value="無効">
 </div>
