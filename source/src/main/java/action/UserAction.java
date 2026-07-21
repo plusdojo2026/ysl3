@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import model.UserDTO;
 import service.UserService;
 
+
 public class UserAction {
 
 	HttpServletRequest request;
@@ -51,20 +52,15 @@ public class UserAction {
 
 			// ちゃんと入っていたら
 		} else {
-
-			//ログインできた人の情報をsessionに保存
-			HttpSession session = request.getSession();
-			session.setAttribute("user", dto);
-
-			// ユーザー情報を全て取得する
-			// ここに、ホームでタスクやログを色々出す処理を記述
-
-			// 飛び先のURLをControllerへ返す
-			page = "/WEB-INF/jsp/menu.jsp";
-
-			// 戻り値
-			return page;
+		    // ログインできた人の情報をsessionに保存
+		    HttpSession session = request.getSession();
+		    session.setAttribute("user", dto);
+		    
+		    // ホームアクションに飛ばし、ホーム画面でタスクやログを表示する
+		    page = "home";
+		    return page;
 		}
+
 
 	}
 
@@ -116,6 +112,7 @@ public class UserAction {
 
 	// ログアウトメソッド
 	public String logout() {
+		
 		// セッションを取得
 		HttpSession session = request.getSession(false);
 
