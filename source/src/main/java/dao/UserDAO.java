@@ -23,7 +23,7 @@ public class UserDAO {
 	
 	
 	//	パスワード変更メソッド
-	public int passwordChange(String loginId, String password, String newPassword) {
+	public int passwordChange(int userId, String password, String newPassword) {
 		int ans = 0;
 		//	処理はのちに記述。今は返すだけ
 		return ans;

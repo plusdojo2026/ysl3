@@ -46,7 +46,7 @@ public class UserService {
 	}
 	
 	// パスワード変更メソッド
-	public int passwordChange(String loginId, String password, String newPassword) {
+	public int passwordChange(int userId, String password, String newPassword) {
 		int ans = 0;
 
 		// DB接続
@@ -57,7 +57,7 @@ public class UserService {
 			UserDAO dao = new UserDAO(conn);
 			
 			// パスワード変更処理を実施。DAOのメソッドを実行
-			ans = dao.passwordChange(loginId, password, newPassword);
+			ans = dao.passwordChange(userId, password, newPassword);
 			
 		} finally {
 			

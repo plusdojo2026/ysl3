@@ -15,17 +15,17 @@
   <!---------- メインここから ---------->
   <main class="main">
 <h1>マイページ</h1>
-<input type="text" name="user_name" >
+<input type="text" name="user-name" >
 
 <h2>プロフィール</h2>
-<input type="text" name="login_id"><br>
-<input type="text" name="user_name" ><br>
+<input type="text" name="login-id"><br>
+<input type="text" name="user-name" ><br>
 <input type="text" name="mail" ><br>
 
 <h2>パスワード変更</h2>
 <input type="text" name="password" ><br>
-<input type="text" name="password" ><br>
-<input type="text" name="password" ><br>
+<input type="text" name="new-password" ><br>
+<input type="text" name="new-password-confirm" ><br>
 <input type="submit" name="submit" value="変更">
   </main>
     <!---------- メインここまで ---------->
