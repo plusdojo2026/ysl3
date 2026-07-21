@@ -18,8 +18,8 @@
 	<form method="POST" action="/ysl3/WorkAction" id="form" >
 		<div>
 		 工数登録
-		 <input type="text" id="project-name" name="project" value="${project.id}"  required readonly>/
-		 <input type="text" id="task-name" name="task" value="${task.id}"  required  readonly>
+		 <input type="text" id="project-name" name="project" value="${project.name}"   readonly>/
+		 <input type="text" id="task-name" name="task" value="${task.name}"   readonly>
 
 		</div>
 		<div>
