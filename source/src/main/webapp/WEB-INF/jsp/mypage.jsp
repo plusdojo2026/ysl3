@@ -14,7 +14,19 @@
   <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
   <!---------- メインここから ---------->
   <main class="main">
+<h1>マイページ</h1>
+<input type="text" name="user_name" >
 
+<h2>プロフィール</h2>
+<input type="text" name="login_id"><br>
+<input type="text" name="user_name" ><br>
+<input type="text" name="mail" ><br>
+
+<h2>パスワード変更</h2>
+<input type="text" name="password" ><br>
+<input type="text" name="password" ><br>
+<input type="text" name="password" ><br>
+<input type="submit" name="submit" value="登録">
   </main>
     <!---------- メインここまで ---------->
   <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
