@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import model.UserDTO;
 import service.UserService;
 
+
 public class UserAction {
 
 	HttpServletRequest request;
@@ -31,13 +32,6 @@ public class UserAction {
 		String loginId = request.getParameter("login-id");
 		String password = request.getParameter("password");
 
-		// 入力値の未入力チェック
-		if (loginId.trim().equals("") || password.trim().equals("")) {
-			request.setAttribute("errMsg", "※ID,PWを入力してください");
-			page = "/WEB-INF/jsp/login.jsp";
-			return page;
-		}
-
 		// ちゃんと両方入力されていたらserviceを実体化
 		UserService service = new UserService();
 		dto = service.login(loginId, password);
@@ -51,20 +45,15 @@ public class UserAction {
 
 			// ちゃんと入っていたら
 		} else {
-
-			//ログインできた人の情報をsessionに保存
-			HttpSession session = request.getSession();
-			session.setAttribute("user", dto);
-
-			// ユーザー情報を全て取得する
-			// ここに、ホームでタスクやログを色々出す処理を記述
-
-			// 飛び先のURLをControllerへ返す
-			page = "/WEB-INF/jsp/menu.jsp";
-
-			// 戻り値
-			return page;
+		    // ログインできた人の情報をsessionに保存
+		    HttpSession session = request.getSession();
+		    session.setAttribute("user", dto);
+		    
+		    // ホームアクションに飛ばし、ホーム画面でタスクやログを表示する
+		    page = "home";
+		    return page;
 		}
+
 
 	}
 
@@ -78,13 +67,6 @@ public class UserAction {
 		request.setCharacterEncoding("UTF-8");
 		String password = request.getParameter("password");
 		String newPassword = request.getParameter("new-password");
-
-		// 入力値の未入力チェック
-		if (password.trim().equals("") || newPassword.trim().equals("")) {
-			request.setAttribute("errMsg", "※パスワードを入力してください");
-			page = "/WEB-INF/jsp/mypage.jsp";
-			return page;
-		}
 
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();
@@ -116,6 +98,7 @@ public class UserAction {
 
 	// ログアウトメソッド
 	public String logout() {
+		
 		// セッションを取得
 		HttpSession session = request.getSession(false);
 
