@@ -55,6 +55,21 @@
       </section>
       <!-- ホーム工数ログ表示ここまで -->
 
+      <!-- ホームタスク一覧ここから -->
+       <section class="home-task-view">
+        <h3 class="home-view-title">タスク一覧</h3>
+        <div class="task-log-card">
+          <div>タスク名</div>
+          <div>担当者</div>
+          <div>期限：</div>
+          <div>ステータス</div>
+          <div>%</div>
+          <button>工数入力</button>
+          <button>削除</button>
+        </div>
+       </section>
+      <!-- ホームタスク一覧ここまで -->
+
     </main>
     <!---------- メインここまで ---------->
     <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
