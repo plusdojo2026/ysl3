@@ -6,8 +6,10 @@
   <meta charset="UTF-8">
   <title>タスク編集 | TaskManager</title>
 
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-  <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/task.css"/>
+<script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+<script src="${pageContext.request.contextPath}/js/task.js" defer></script>
 </head>
 
 <body>

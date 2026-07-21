@@ -6,8 +6,10 @@
   <meta charset="UTF-8">
   <title>案件詳細 | TaskManager</title>
 
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-  <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/project.css"/>
+<script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+<script src="${pageContext.request.contextPath}/js/project.js" defer></script>
 </head>
 
 <body>

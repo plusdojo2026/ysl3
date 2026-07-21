@@ -20,9 +20,9 @@
 
 <c:forEach var="e" item="">
 <form method="post" action="">
-<input type="text" name="user_id" value="{$e.user_id}">
-<input type="text" name="login_id" value="{$e.login_id}">
-<input type="text" name="user_name" value="{$e.user_name}">
+<input type="text" name="user-id" value="{$e.user-id}">
+<input type="text" name="login-id" value="{$e.login-id}">
+<input type="text" name="user-name" value="{$e.user-name}">
 <div class="role-btn">
 	<input type="radio" name="role" value="一般" >
 	<input type="radio" name="role" value="管理者" >

@@ -16,8 +16,8 @@
   <main class="main">
   
   <h1>メンバー新規登録</h1>
-<input type="text" name="login_id">
-<input type="text" name="user_name" >
+<input type="text" name="login-id">
+<input type="text" name="user-name" >
 <div class="role-btn">
 	<input type="radio" name="role" value="一般">
 	<input type="radio" name="role" value="管理者">
