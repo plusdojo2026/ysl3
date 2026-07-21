@@ -17,28 +17,28 @@ import model.ProjectDTO;
 			return dto;
 		}
 
-		//projectSearch(projectStatus:int, projectPriority:int) : ArrayList<ProjectDTO>
+		//projectSearchメソッド
 	public ProjectDTO projectSearch(int projectStatus , int projectPriority) {
 		ProjectDTO dto = null;
 		return dto;
 	}
-	
-	public int projectRegist(String projectCode, String projectName , int pmId , int projectStatus, int projectPriority, String projectStartDate , String projectEndDate , String projectExplan) {
+	//projectRegistメソッド
+	public int projectRegist(String projectCode, String projectName , int pmId , int projectStatus, int projectPriority, String projectStartDate , String projectEndDate , String projectExplain) {
 		int ans = 0 ;
 		return ans;
 	}
-	
-	public int projectUpdate(String projectCode , String projectName , int pmId , int projectStatus , int projectPriority , String projectStartDate , String projectEndDate , String projectExplan) {
+	//projectUpdateメソッド
+	public int projectUpdate(String projectCode , String projectName , int pmId , int projectStatus , int projectPriority , String projectStartDate , String projectEndDate , String projectExplain) {
 		int ans = 0 ;
 		return ans ; 
 	}
-	
+	//projectStatusChangeメソッド
 	public int projectStatusChange(int projectStatus) {
 		int ans = 0;
 		return ans;
 	}
-	
-	public ProjectDTO projectgdetail(int projectId) {
+	//projectdetailメソッド
+	public ProjectDTO projectdetail(int projectId) {
 		ProjectDTO dto = null;
 		return dto;
 	}
