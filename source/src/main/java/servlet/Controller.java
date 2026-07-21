@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import action.UserAction;
 
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
@@ -84,44 +87,49 @@ public class Controller extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		//		
-		//		String page = null;
-		//		
-		//		//ページIDを取得
-		//		String pageId = request.getParameter("page_id");
-		//		//ボタンの詳細を取得
-		//		String buttonId = request.getParameter("button_id");
-		//		
-		//		//何が入っているか確認
-		//		System.out.println("ページ："+pageId+" ボタン："+buttonId);
-		//		
-		//		//ここから区分けして、何の処理をさせるかを指定
-		//		if(pageId.equals("none") && buttonId.equals("ログアウト")) {
-		//			//ログアウトボタンが押されたら
-		//			HttpSession session = request.getSession();
-		//			session.invalidate();
-		//			page = "/WEB-INF/jsp/login.jsp";		
-		//		}else if(pageId.equals("L001") && buttonId.equals("ログイン")) {
-		//			//最初のページからログインボタンが押されたら
-		//			UserAction action = new UserAction(request);
-		//			page = action.login();
-		//		}else if(pageId.equals("M001") && buttonId.equals("登録")) {
-		//			//メニューから登録ボタンが押されたら
-		//			UserAction action = new UserAction(request);
-		//			page = action.regist();
-		//		}else if(pageId.equals("M002") && buttonId.equals("削除")) {
-		//			//メニューから削除ボタンが押されたら
-		//			UserAction action = new UserAction(request);
-		//			page = action.delete();
-		//		}
-		//		if(buttonId.equals("ホームへ")) {
-		//			page = "/WEB-INF/jsp/home.jsp";	
-		//		}else if(buttonId.equals("案件一覧へ")) {
-		//			page = "/WEB-INF/jsp/project_list.jsp";	
-		//		}
-		//		
-		//		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		//		dispatcher.forward(request, response);
+				
+				String page = null;
+				
+				//ページIDを取得
+				String pageId = request.getParameter("page-id");
+				
+				//ボタンの詳細を取得
+				String btnId = request.getParameter("button-id");
+				
+				//何が入っているか確認
+				System.out.println("ページ："+pageId+" ボタン："+btnId);
+				
+				//ここから区分けして、何の処理をさせるかを指定
+				if(pageId.equals("none") && btnId.equals("ログアウト")) {
+					
+					//ログアウトボタンが押されたら
+					HttpSession session = request.getSession();
+					session.invalidate();
+					page = "/WEB-INF/jsp/login.jsp";		
+				}else if(pageId.equals("L001") && btnId.equals("ログイン")) {
+					
+					//最初のページからログインボタンが押されたら
+					UserAction action = new UserAction(request);
+					page = action.login();
+				}else if(pageId.equals("M001") && btnId.equals("登録")) {
+					
+					//メニューから登録ボタンが押されたら
+					UserAction action = new UserAction(request);
+					page = action.regist();
+				}else if(pageId.equals("M002") && btnId.equals("削除")) {
+					
+					//メニューから削除ボタンが押されたら
+					UserAction action = new UserAction(request);
+					page = action.delete();
+				}
+				if(btnId.equals("ホームへ")) {
+					page = "/WEB-INF/jsp/home.jsp";	
+				}else if(btnId.equals("案件一覧へ")) {
+					page = "/WEB-INF/jsp/project_list.jsp";	
+				}
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher(page);
+				dispatcher.forward(request, response);
 	}
 
 }
