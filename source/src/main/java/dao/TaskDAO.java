@@ -1,5 +1,4 @@
 package dao;
-import java.security.Timestamp;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -17,9 +16,7 @@ public class TaskDAO {
 	
 	
 	//	タスク一覧を表示するメソッド
-	public ArrayList<TaskDTO> taskSelectAll(
-			int project_id, int task_id, String task_name, int task_status, int task_priority, String task_limit, 
-			float task_estimated_works, int intprogress, int user_id, Timestamp created_at, Timestamp update_at) {
+	public ArrayList<TaskDTO> taskSelectAll(int user_id) {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		//	処理はのちに記述。今は返すだけ
 		return taskList;
@@ -42,7 +39,7 @@ public class TaskDAO {
 	}
 
 	//	タスク編集メソッド
-	public int taskEdit(int project_id,String task_name, int task_status, int task_priority,
+	public int taskUpdate(int project_id,String task_name, int task_status, int task_priority,
 			int progress,float task_estimated_works, Data task_start_date, Data task_limit,String task_explanation) {
 		int ans = 0;
 		//	処理はのちに記述。今は返すだけ
@@ -57,26 +54,22 @@ public class TaskDAO {
      }
 
 	 //	タスクステータス更新メソッド
-	public int taskStatusUpdate(int task_id, int task_status, int progress){
+	public int taskStatusChange(int task_id){
 	     int ans = 0;
 		//	処理はのちに記述。今は返すだけ
 		return ans;
 	}
 			
      //	タスク詳細を表示するメソッド
-	public ArrayList<TaskDTO> taskDetail(
-		int project_id, int task_id, String task_name, int task_status, 	
-		int task_priority, String task_start_date,String task_limit, 
-		float task_estimated_works, int progress, int user_id) {
-			ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
+	public TaskDTO taskDetail(int task_id) {
+		TaskDTO  dto = null;
 		//	処理はのちに記述。今は返すだけ
-		return taskList;
-				
+		return dto;
 	}
-			
+	
+	
      //  ホーム画面のタスク一覧を表示するメソッド
-	public ArrayList<TaskDTO> taskHome(String task_name, int user_id,String task_limit,
-		int task_status, int progress) {
+	public ArrayList<TaskDTO> homeTaskList(int user_id) {
 		   ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		//	処理はのちに記述。今は返すだけ
 		return taskList;
@@ -84,23 +77,22 @@ public class TaskDAO {
 	}
 				
 	 //  案件一覧画面のタスク項目を表示するメソッド
-    public ArrayList<TaskDTO> taskProjectList(int task_id, int task_status, int progress) {
+    public ArrayList<TaskDTO> ProjectList(int user_id) {
 		   ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		//	処理はのちに記述。今は返すだけ
 		return taskList;
 						
 	} 
     
-    //  案件詳細画面のタスク項目を表示するメソッド
-    public ArrayList<TaskDTO> taskProjectDetail(String task_name,int user_id,Data task_limit, 
-    		int task_status, int progress) {
+    //  案件詳細画面のタスク項目を削除するメソッド
+    public ArrayList<TaskDTO> projectDetail(int task_id) {
 		   ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		//	処理はのちに記述。今は返すだけ
 		return taskList;
 						
 	}
     //   工数を登録するメソッド
-    public int taskWorkRegist(int task_id, String task_name) {
+    public int workRegist(int task_id) {
 		int ans = 0;
 		//	処理はのちに記述。今は返すだけ
 		return ans;
