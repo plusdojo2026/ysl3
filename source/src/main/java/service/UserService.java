@@ -22,7 +22,7 @@ public class UserService {
 	}
 
 	// ログインメソッド
-	public UserDTO login(String userId, String password) {
+	public UserDTO login(String loginId, String password) {
 		UserDTO dto = null;
 
 		// DB接続
@@ -33,7 +33,7 @@ public class UserService {
 			UserDAO dao = new UserDAO(this.conn);
 			
 			// ログイン処理を実施。DAOのメソッドを実行
-			dto = dao.login(userId, password);
+			dto = dao.login(loginId, password);
 			
 		} finally {
 			
