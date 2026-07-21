@@ -1,15 +1,13 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.UserDTO;
 
 public class UserDAO {
-	Connection conn = null;
+	
+	public Connection conn = null;
 	
 	//	コンストラクタ
 	public UserDAO(Connection conn) {
@@ -25,7 +23,7 @@ public class UserDAO {
 	
 	
 	//	パスワード変更メソッド
-	public int passwordChange(String userId, String password, String newPassword) {
+	public int passwordChange(String loginId, String password, String newPassword) {
 		int ans = 0;
 		//	処理はのちに記述。今は返すだけ
 		return ans;
