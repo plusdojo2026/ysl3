@@ -26,7 +26,7 @@
 <input type="text" name="password" ><br>
 <input type="text" name="password" ><br>
 <input type="text" name="password" ><br>
-<input type="submit" name="submit" value="登録">
+<input type="submit" name="submit" value="変更">
   </main>
     <!---------- メインここまで ---------->
   <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
