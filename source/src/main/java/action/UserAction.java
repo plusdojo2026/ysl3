@@ -32,13 +32,6 @@ public class UserAction {
 		String loginId = request.getParameter("login-id");
 		String password = request.getParameter("password");
 
-		// 入力値の未入力チェック
-		if (loginId.trim().equals("") || password.trim().equals("")) {
-			request.setAttribute("errMsg", "※ID,PWを入力してください");
-			page = "/WEB-INF/jsp/login.jsp";
-			return page;
-		}
-
 		// ちゃんと両方入力されていたらserviceを実体化
 		UserService service = new UserService();
 		dto = service.login(loginId, password);
@@ -74,13 +67,6 @@ public class UserAction {
 		request.setCharacterEncoding("UTF-8");
 		String password = request.getParameter("password");
 		String newPassword = request.getParameter("new-password");
-
-		// 入力値の未入力チェック
-		if (password.trim().equals("") || newPassword.trim().equals("")) {
-			request.setAttribute("errMsg", "※パスワードを入力してください");
-			page = "/WEB-INF/jsp/mypage.jsp";
-			return page;
-		}
 
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();
