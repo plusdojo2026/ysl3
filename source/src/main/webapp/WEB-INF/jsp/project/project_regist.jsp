@@ -15,7 +15,7 @@
   <!---------- メインここから ---------->
   <main class="main">
     <!-- 案件登録フォームここから -->
-      <form class="pr-regist-form">
+	  <form method="POST" class="pr-regist-form" action="<c:url value='/Controller'/>">
         <input type="hidden" name="page-id" value="PR02">
         案件コード(必須)<br>
         <input type="text" class="pr-regist-input" name="project-code" placeholder="20文字以内" required max="20">

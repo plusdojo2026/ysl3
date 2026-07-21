@@ -15,7 +15,7 @@
   <!---------- メインここから ---------->
   <main class="main">
     <!-- 案件編集フォームここから -->
-      <form class="pr-edit-form">
+	  <form method="POST" class="pr-edit-form" action="<c:url value='/Controller'/>">
         <input type="hidden" name="page-id" value="PR03">
         案件コード(必須)<br>
         <input type="text" class="pr-regist-input" name="project-code" placeholder="20文字以内" required max="20">
