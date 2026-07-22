@@ -1,5 +1,205 @@
 package action;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import model.UserDTO;
+import service.UserService;
+
+
 public class MemberAction {
+
+	HttpServletRequest request;
+
+	// コンストラクタ
+	public MemberAction(HttpServletRequest request) {
+		this.request = request;
+	}
+	
+	// ユーザー一覧を表示するメソッド（管理者）
+	public String memberSelectAll() throws UnsupportedEncodingException  {
+		
+		// 戻り値のページを定義
+		String page = null;
+		
+		// セッションからログイン中のユーザー情報を取得
+		HttpSession session = request.getSession();
+		UserDTO loginUser = (UserDTO) session.getAttribute("user");
+		
+		// セッションが切れている場合の安全対策
+		if (loginUser == null) {
+			page = "/WEB-INF/jsp/login.jsp";
+			return page;
+		}
+		
+		// Serviceを実体化して処理を依頼
+		UserService service = new UserService();
+		ArrayList<UserDTO> allUserList = service.userSelectAll();
+		
+		// リストが空ならエラーメッセージをセット
+		if (allUserList == null) {
+			
+			request.setAttribute("errMsg", "※一覧が取得できませんでした");
+			page = "/WEB-INF/jsp/member/member.jsp";
+			
+			return page;
+			
+			// ちゃんと入っていたらメンバー一覧をリクエストに保存
+		} else {
+			session.setAttribute("allUserList", allUserList);
+			
+			// 戻り値
+			return page;
+		}
+	}
+	
+	// ユーザー登録メソッド
+	public String memberRegist() throws UnsupportedEncodingException {
+		
+		// 戻り値のページを定義
+		String page = null;
+	
+		// 画面からの入力値を取得
+		request.setCharacterEncoding("UTF-8");
+		String loginId = request.getParameter("login-id");
+		String userName = request.getParameter("user-name");
+		String mail = request.getParameter("mail");
+		String password = request.getParameter("password");
+		int role = Integer.parseInt(request.getParameter("role"));
+		
+		// セッションからログイン中のユーザー情報を取得
+		HttpSession session = request.getSession();
+		UserDTO loginUser = (UserDTO) session.getAttribute("user");
+		
+		// セッションが切れている場合の安全対策
+		if (loginUser == null) {
+			page = "/WEB-INF/jsp/login.jsp";
+			return page;
+		}
+
+		// ログイン情報から権限を取り出す
+		int userRole = loginUser.getRole();
+		
+		// 管理者かどうか判定
+		if (userRole == 1) {
+			
+			// Serviceを実体化して処理を依頼
+			UserService service = new UserService();
+			int ans = service.userRegist(loginId, userName, mail, password, role);
+			
+			// 結果が取れたら
+			if (ans == 1) {
+				
+				request.setAttribute("msg", "登録に成功しました");
+				
+			// 全件表示
+				page = memberSelectAll();
+			} else {
+				
+				request.setAttribute("errMsg", "登録に失敗しました");
+				page = "/WEB-INF/jsp/member/member.jsp";
+			}
+			
+		}
+
+		return page;
+	}
+	
+	// メンバー編集メソッド
+	public String memberEdit() throws UnsupportedEncodingException {
+		
+		// 戻り値のページを定義
+		String page = null;
+		
+		// 画面からの入力値を取得
+		String userName = request.getParameter("user-name");
+		String mail = request.getParameter("mail");
+		int role = Integer.parseInt(request.getParameter("role"));
+		int sol = Integer.parseInt(request.getParameter("sol"));
+		
+		
+		
+		// セッションからログイン中のユーザー情報を取得
+		HttpSession session = request.getSession();
+		UserDTO loginUser = (UserDTO) session.getAttribute("user");
+		
+		// セッションが切れている場合の安全対策
+		if (loginUser == null) {
+			page = "/WEB-INF/jsp/login.jsp";
+			return page;
+		}
+
+		// ログイン情報から権限を取り出す
+		int userRole = loginUser.getRole();
+		
+		// 管理者かどうか判定
+		if (userRole == 1) {
+			
+			// Serviceを実体化して処理を依頼
+			UserService service = new UserService();
+			int ans = service.userEdit(userName, role, mail, sol);
+			
+			// 結果が取れたら
+			if (ans == 1) {
+				
+				request.setAttribute("msg", "保存に成功しました");
+				
+			// 全件表示
+				page = memberSelectAll();
+			} else {
+	
+				request.setAttribute("errMsg", "保存に失敗しました");
+				page = "/WEB-INF/jsp/member/member.jsp";
+			}
+			
+		}
+
+		return page;
+	}
+
+	
+	
+//	// ユーザー検索メソッド JSでやるかもなのでコメントアウト中
+//	public String userSearch() throws UnsupportedEncodingException {
+//		
+//		// 戻り値のページを定義
+//		String page = null;
+//		
+//		// 入力された語句を取得
+//		String keyword = request.getParameter("keyword");
+//		
+//		// セッションからログイン中のユーザー情報を取得
+//		HttpSession session = request.getSession();
+//		UserDTO loginUser = (UserDTO) session.getAttribute("user");
+//		
+//		// セッションが切れている場合の安全対策
+//		if (loginUser == null) {
+//			page = "/WEB-INF/jsp/login.jsp";
+//			return page;
+//		}
+//		
+//		// Serviceを実体化して処理を依頼
+//		UserService service = new UserService();
+//		ArrayList<UserDTO> searchUserList = service.userSearch(keyword);
+//		
+//		// リストが空ならエラーメッセージをセット
+//		if (searchUserList == null) {
+//
+//			request.setAttribute("errMsg", "※一覧が取得できませんでした");
+//			page = "/WEB-INF/jsp/home.jsp";
+//			
+//			return page;
+//
+//			// ちゃんと入っていたらログインできた人の情報をリクエストに保存
+//		} else {
+//		    request.setAttribute("homeTaskList", searchUserList);
+//		    
+//		    // 戻り値
+//		    return page;
+//		}
+//	}
 
 }

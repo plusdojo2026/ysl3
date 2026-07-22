@@ -59,14 +59,14 @@ public class UserDAO {
 		return ans;
 	}
 
-	//	案件に紐づけられてるユーザー取得メソッド
+	//	案件に紐づけられてるユーザー取得メソッド（案件登録の際の担当者選ぶ用）
 	public ArrayList<UserDTO> selectProjectUserName() {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
 		//	処理はのちに記述。今は返すだけ
 		return userList;
 	}
 	
-	//	タスクに紐づけられているユーザー取得メソッド
+	//	タスクに紐づけられているユーザー取得メソッド（タスク登録の際の担当者選ぶ用）
 	public ArrayList<UserDTO> selectTaskUserName(int projectId) {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
 		//	処理はのちに記述。今は返すだけ
