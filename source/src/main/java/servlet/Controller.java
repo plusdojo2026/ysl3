@@ -21,62 +21,62 @@ public class Controller extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		// ドロワーメニューなどから受け取る画面ID
-		String pageId = request.getParameter("page_id");
+		String pageId = request.getParameter("page-id");
 
 		// 指定なしの場合はホーム
 		String page = "/WEB-INF/jsp/home.jsp";
 
-		if (pageId == null || pageId.equals("toHome")) {
+		if (pageId == null || pageId.equals("HO01")) {
 			page = "/WEB-INF/jsp/home.jsp";
 
-		} else if (pageId.equals("projectList")) {
+		} else if (pageId.equals("PR01")) {
 			page = "/WEB-INF/jsp/project/project_list.jsp";
 
-		} else if (pageId.equals("projectDetail")) {
+		} else if (pageId.equals("PR04")) {
 			page = "/WEB-INF/jsp/project/project_detail.jsp";
 
-		} else if (pageId.equals("projectRegist")) {
+		} else if (pageId.equals("PR2")) {
 			page = "/WEB-INF/jsp/project/project_regist.jsp";
 
-		} else if (pageId.equals("projectEdit")) {
+		} else if (pageId.equals("PR03")) {
 			page = "/WEB-INF/jsp/project/project_edit.jsp";
 
 			// タスク
-		} else if (pageId.equals("taskList")) {
+		} else if (pageId.equals("TA01")) {
 			page = "/WEB-INF/jsp/task/task_list.jsp";
 
-		} else if (pageId.equals("taskDetail")) {
+		} else if (pageId.equals("TA04")) {
 			page = "/WEB-INF/jsp/task/task_detail.jsp";
 
-		} else if (pageId.equals("taskRegist")) {
+		} else if (pageId.equals("TA02")) {
 			page = "/WEB-INF/jsp/task/task_regist.jsp";
 
-		} else if (pageId.equals("taskEdit")) {
+		} else if (pageId.equals("TA03")) {
 			page = "/WEB-INF/jsp/task/task_edit.jsp";
 
 			// 工数
-		} else if (pageId.equals("workRegist")) {
+		} else if (pageId.equals("WO01")) {
 			page = "/WEB-INF/jsp/work_regist.jsp";
 
 			// 月次・マイページ
-		} else if (pageId.equals("month")) {
+		} else if (pageId.equals("MO01")) {
 			page = "/WEB-INF/jsp/month.jsp";
 
-		} else if (pageId.equals("mypage")) {
+		} else if (pageId.equals("MY01")) {
 			page = "/WEB-INF/jsp/mypage.jsp";
 
 			// メンバー管理
-		} else if (pageId.equals("memberList")) {
+		} else if (pageId.equals("AD01")) {
 			page = "/WEB-INF/jsp/member/member_list.jsp";
 
-		} else if (pageId.equals("memberRegist")) {
+		} else if (pageId.equals("AD02")) {
 			page = "/WEB-INF/jsp/member/member_regist.jsp";
 
-		} else if (pageId.equals("memberEdit")) {
+		} else if (pageId.equals("AD03")) {
 			page = "/WEB-INF/jsp/member/member_edit.jsp";
 
 			// ログイン
-		} else if (pageId.equals("login")) {
+		} else if (pageId.equals("LO01")) {
 			page = "/WEB-INF/jsp/login.jsp";
 		}
 
