@@ -27,7 +27,7 @@ public class TaskAction {
 		
 		
 		request.setCharacterEncoding("UTF-8");
-		int taskId =Integer.parseInt(request.getParameter("task_id"));
+		int taskId =Integer.parseInt(request.getParameter("task-id"));
 		
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();
@@ -45,7 +45,7 @@ public class TaskAction {
 		
 		// Serviceを実体化して処理を依頼
 		TaskService service = new TaskService();
-		ArrayList<TaskDTO> taskList = service.taskSelectAll(userId,taskId);
+		ArrayList<TaskDTO> taskList = service.taskSelectAll(userId);
 		
 		
 		 // タスク一覧画面にて表示する
@@ -62,10 +62,10 @@ public class TaskAction {
 		
 		
 		request.setCharacterEncoding("UTF-8");
-		int taskId =Integer.parseInt(request.getParameter("task_id"));
-		int projectId =Integer.parseInt(request.getParameter("project_id"));
-		int taskStatus =Integer.parseInt(request.getParameter("task_status"));
-		String task_name = request.getParameter("task_name");
+		int taskId =Integer.parseInt(request.getParameter("task-id"));
+		int projectId =Integer.parseInt(request.getParameter("project-id"));
+		int taskStatus =Integer.parseInt(request.getParameter("task-status"));
+		String taskName = request.getParameter("task-name");
 		
 		
 		// セッションからログイン中のユーザー情報を取得
@@ -84,7 +84,7 @@ public class TaskAction {
 		
 		// Serviceを実体化して処理を依頼
 		TaskService service = new TaskService();
-		ArrayList<TaskDTO> taskList = service.taskSearch(userId,taskId,projectId,taskStatus,task_name);
+		ArrayList<TaskDTO> taskList = service.taskSearch(userId,taskId,projectId,taskStatus,taskName);
 		
 		
 		 // タスク一覧画面にて表示する
@@ -104,16 +104,16 @@ public class TaskAction {
 		
 		//値の取得
 		request.setCharacterEncoding("UTF-8");	
-		int taskId =Integer.parseInt(request.getParameter("task_id"));
-		int projectId =Integer.parseInt(request.getParameter("project_id"));
-		String task_name = request.getParameter("task_name");
-		int taskStatus =Integer.parseInt(request.getParameter("task_status"));
-		int taskPriority =Integer.parseInt(request.getParameter("task_priority"));
+		int taskId =Integer.parseInt(request.getParameter("task-id"));
+		int projectId =Integer.parseInt(request.getParameter("project-id"));
+		String taskName = request.getParameter("task-name");
+		int taskStatus =Integer.parseInt(request.getParameter("task-status"));
+		int taskPriority =Integer.parseInt(request.getParameter("task-priority"));
 		int progress =Integer.parseInt(request.getParameter("progress"));
-		float taskEstimatedWorks =Float.parseFloat(request.getParameter("task_estimated_works"));
-		String task_start_date = request.getParameter("task_start_date");
-		String task_limit = request.getParameter("task_limit");
-		String task_explanation = request.getParameter("task_explanation");
+		float taskEstimatedWorks =Float.parseFloat(request.getParameter("task-estimated-works"));
+		String taskStartDate = request.getParameter("task-start-date");
+		String taskLimit = request.getParameter("task-limit");
+		String taskExplanation = request.getParameter("task-explanation");
 		
 		
 		// セッションからログイン中のユーザー情報を取得
@@ -132,8 +132,8 @@ public class TaskAction {
 		// Serviceを実体化して処理を依頼
 		TaskService service = new TaskService();
 		
-		int ans = service.taskRegist(userId,taskId,projectId,task_name, taskStatus, taskPriority,
-				progress,taskEstimatedWorks, task_start_date, task_limit, task_explanation);
+		int ans = service.taskRegist(userId,taskId,projectId,taskName, taskStatus, taskPriority,
+				progress,taskEstimatedWorks, taskStartDate, taskLimit, taskExplanation);
 
 		
 		//ちゃんと登録できたか確認
@@ -157,16 +157,16 @@ public class TaskAction {
 	
 	//値の取得
 	request.setCharacterEncoding("UTF-8");	
-	int taskId =Integer.parseInt(request.getParameter("task_id"));
-	int projectId =Integer.parseInt(request.getParameter("project_id"));
-	String task_name = request.getParameter("task_name");
-	int taskStatus =Integer.parseInt(request.getParameter("task_status"));
-	int taskPriority =Integer.parseInt(request.getParameter("task_priority"));
+	int taskId =Integer.parseInt(request.getParameter("task-id"));
+	int projectId =Integer.parseInt(request.getParameter("project-id"));
+	String taskName = request.getParameter("task-name");
+	int taskStatus =Integer.parseInt(request.getParameter("task-status"));
+	int taskPriority =Integer.parseInt(request.getParameter("task-priority"));
 	int progress =Integer.parseInt(request.getParameter("progress"));
-	float taskEstimatedWorks =Float.parseFloat(request.getParameter("task_estimated_works"));
-	String task_start_date = request.getParameter("task_start_date");
-	String task_limit = request.getParameter("task_limit");
-	String task_explanation = request.getParameter("task_explanation");
+	float taskEstimatedWorks =Float.parseFloat(request.getParameter("task-estimated-works"));
+	String taskStartDate = request.getParameter("task-start-date");
+	String taskLimit = request.getParameter("task-limit");
+	String taskExplanation = request.getParameter("task-explanation");
 	
 	// セッションからログイン中のユーザー情報を取得
 	HttpSession session = request.getSession();
@@ -183,8 +183,8 @@ public class TaskAction {
 
 	// Serviceを実体化して処理を依頼
 	TaskService service = new TaskService();
-	int ans = service.taskUpdate(userId ,taskId,projectId,task_name, taskStatus, taskPriority,
-			progress,taskEstimatedWorks, task_start_date, task_limit, task_explanation);
+	int ans = service.taskUpdate(userId ,taskId,projectId,taskName, taskStatus, taskPriority,
+			progress,taskEstimatedWorks, taskStartDate, taskLimit, taskExplanation);
 
 	
 	//ちゃんと登録できたか確認
@@ -209,7 +209,7 @@ public class TaskAction {
 	
 	//値の取得
 	request.setCharacterEncoding("UTF-8");	
-	int taskId =Integer.parseInt(request.getParameter("task_id"));
+	int taskId =Integer.parseInt(request.getParameter("task-id"));
 	
 	// セッションからログイン中のユーザー情報を取得
 	HttpSession session = request.getSession();
@@ -250,7 +250,7 @@ public class TaskAction {
 		//値の取得
 		request.setCharacterEncoding("UTF-8");	
 		
-		int taskId =Integer.parseInt(request.getParameter("task_id"));
+		int taskId =Integer.parseInt(request.getParameter("task-id"));
 		
 		
 		
@@ -269,7 +269,7 @@ public class TaskAction {
 
 		// Serviceを実体化して処理を依頼
 		TaskService service = new TaskService();
-		int ans = service.taskDelete(userId,taskId);
+		int ans = service.taskStatusChange(userId, taskId);
 
 		
 		//ボタン変更
@@ -290,7 +290,7 @@ public class TaskAction {
 		String page="/WEB-INF/jsp/task_detail.jsp";
 		
 		
-		int taskId =Integer.parseInt(request.getParameter("task_id"));
+		int taskId =Integer.parseInt(request.getParameter("task-id"));
 		
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();
@@ -308,11 +308,11 @@ public class TaskAction {
 		
 		// Serviceを実体化して処理を依頼
 		TaskService service = new TaskService();
-		int ans = service.taskDelete(userId,taskId);
+		TaskDTO taskDetail = service.taskDetail(userId,taskId);
 		
 		
 		 // タスク詳細画面にて表示する
-		request.setAttribute("taskdetail",ans);
+		request.setAttribute("TaskDetail", taskDetail);
 		return page;
 	}
 	
@@ -325,7 +325,7 @@ public class TaskAction {
 			String page="/WEB-INF/jsp/home.jsp";
 			
 	
-			int taskId =Integer.parseInt(request.getParameter("task_id"));
+			int taskId =Integer.parseInt(request.getParameter("task-id"));
 			
 			// セッションからログイン中のユーザー情報を取得
 			HttpSession session = request.getSession();
@@ -343,7 +343,7 @@ public class TaskAction {
 			
 			// Serviceを実体化して処理を依頼
 			TaskService service = new TaskService();
-			ArrayList<TaskDTO> taskList = service.taskSelectAll(userId,taskId);
+			ArrayList<TaskDTO> taskList = service.homeTaskList(taskId, userId);
 			
 			
 			 // タスク一覧画面にて表示する
@@ -358,8 +358,8 @@ public class TaskAction {
 			// 返却する次の飛び先のURLを定義
 			String page="/WEB-INF/jsp/project_list.jsp";
 			
-			Integer.parseInt(request.getParameter("user_id"));
-			int taskId =Integer.parseInt(request.getParameter("task_id"));
+			Integer.parseInt(request.getParameter("user-id"));
+			int taskId =Integer.parseInt(request.getParameter("task-id"));
 			
 			// セッションからログイン中のユーザー情報を取得
 			HttpSession session = request.getSession();
@@ -394,7 +394,7 @@ public class TaskAction {
 		
 		//値の取得
 		request.setCharacterEncoding("UTF-8");	
-		int taskId =Integer.parseInt(request.getParameter("task_id"));
+		int taskId =Integer.parseInt(request.getParameter("task-id"));
 		
 		
 		// セッションからログイン中のユーザー情報を取得
@@ -435,7 +435,7 @@ public class TaskAction {
 	
 	//値の取得
 	request.setCharacterEncoding("UTF-8");	
-	int taskId =Integer.parseInt(request.getParameter("task_id"));
+	int taskId =Integer.parseInt(request.getParameter("task-id"));
 	
 	
 	// セッションからログイン中のユーザー情報を取得
