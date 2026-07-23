@@ -22,77 +22,123 @@ public class ProjectAction {
 		
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
-		String ProjectId = request.getParameter("id");
+		ProjectService service = new ProjectService();
 	
-	ProjectService service = new ProjectService();
 	ArrayList<ProjectDTO> projectList = service.projectSelectAll();
 	request.setAttribute("projectList" , projectList);
 	return page;
 	}
 	//projectSearchメソッド
-	public ProjectDTO projectSearch() throws UnsupportedEncodingException{
-		ProjectDTO dto = null;
+	public String projectSearch() throws UnsupportedEncodingException{
+		String page="/WEB-INF/jsp/project_list.jsp";
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
-		String projectStatus = request.getParameter("id");
-		String projectPriority = request.getParameter("priority");
+		int projectStatus = Integer.parseInt(request.getParameter("projectStatus"));
+		int projectPriority = Integer.parseInt(request.getParameter("projectPriority"));
 		
-		return dto;
+		ProjectService service = new ProjectService();
+		
+		ArrayList<ProjectDTO> projectList = service.projectSearch(projectStatus,projectPriority);
+		request.setAttribute("projectList" , projectList);
+		return page;
 	}
 	//projectRegistメソッド
-	public  int projectRegist() throws UnsupportedEncodingException{
+	public  String projectRegist() throws UnsupportedEncodingException{
 		//返却する次の飛び先のURLをとりあえず定義
-		int ans = 0;
-		//下で使うのでDTOの箱だけ準備
-		ProjectDTO dto = null;
+		String page = "/WEB-INF/jsp/project_regist.jsp";
 		
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
-		String projectCode = request.getParameter("code");
-		String projectName = request.getParameter("name");
-		String pmId = request.getParameter("pmId");
-		String projectStatus = request.getParameter("status");
-		String projectPriority = request.getParameter("priority");
-		String projectStartDate = request.getParameter("startdate");
-		String projectEndDate = request.getParameter("enddate");
-		String projectExplain =  request.getParameter("explain");
+		String projectCode = request.getParameter("projectCode");
+		String projectName = request.getParameter("projectName");
+		int pmId = Integer.parseInt(request.getParameter("pmId"));
+		int projectStates = Integer.parseInt(request.getParameter("projectStates"));
+		int projectPriority = Integer.parseInt(request.getParameter("projectPriority"));
+		String projectStartDate = request.getParameter("projectStartDate");
+		String projectEndDate = request.getParameter("projectEndDate");
+		String projectExplain = request.getParameter("projectExplain");
 		
-		return ans;
+		ProjectService service = new ProjectService();
+		
+	
+		int ans = service.projectRegist(
+				projectCode,
+				projectName,
+				pmId,
+				projectStates,
+				projectPriority,
+				projectStartDate,
+				projectEndDate,
+				projectExplain);
+		
+		request.setAttribute("ans", ans);
+		
+		
+		return page;
 	}
 
 	//projectUpdateメソッド
-	public int projectUpdate() throws UnsupportedEncodingException{
-		int ans = 0 ;
-		ProjectDTO dto = null;
+	public String projectUpdate() throws UnsupportedEncodingException{
+		String page = "/WEB-INF/jsp/project_edit.jsp";
+
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
-		String projectCode = request.getParameter("code");
-		String projectName = request.getParameter("name");
-		String pmId = request.getParameter("pmId");
-		String projectStatus = request.getParameter("status");
-		String projectPriority = request.getParameter("priority");
-		String projectStartDate = request.getParameter("startdate");
-		String projectEndDate = request.getParameter("enddate");
-		String projectExplain =  request.getParameter("explain");
+		String projectCode = request.getParameter("projectCode");
+		String projectName = request.getParameter("projectname");
+		int pmId = Integer.parseInt(request.getParameter("pmId"));
+		int projectStates = Integer.parseInt(request.getParameter("projectStates"));
+		int projectPriority = Integer.parseInt(request.getParameter("projectPriority"));
+		String projectStartDate = request.getParameter("projectStartDate");
+		String projectEndDate = request.getParameter("projectEndDate");
+		String projectExplain = request.getParameter("projectExplain");
 		
-		return ans;
+		ProjectService service = new ProjectService();
+		
+		int ans = service.projectRegist(
+				projectCode,
+				projectName,
+				pmId,
+				projectStates,
+				projectPriority,
+				projectStartDate,
+				projectEndDate,
+				projectExplain);
+		
+		request.setAttribute("ans", ans);
+		
+		return page;
 		}
 	//projectStatusChangeメソッド
-	public int projectStatusChange() throws UnsupportedEncodingException{
-		int ans = 0 ;
-		ProjectDTO dto = null;
+	public String projectStatusChange() throws UnsupportedEncodingException{
+	
+		String page = "/WEB-INF/jsp/project_edit.jsp";
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
-		String projectStatus = request.getParameter("status");
-		return ans;
+		int projectId = Integer.parseInt(request.getParameter("projectId"));
+		int projectStatus = Integer.parseInt(request.getParameter("projectStatus"));
+		ProjectService service = new ProjectService();
+		
+		int ans = service.projectStatusChange (
+				projectId,
+				projectStatus
+				);
+		
+		request.setAttribute("ans", ans);
+		return page;
 	}
 	//projectdetailメソッド
-	public  ProjectDTO projectdetail() {
-		ProjectDTO dto = null;
+	public  String projectdetail() throws UnsupportedEncodingException {
+		String page = "/WEB-INF/jsp/project_list.jsp";
+		
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
-		String ProjectId = request.getParameter("id");
-		return dto;
+		int projectId = Integer.parseInt(request.getParameter("projectId"));
+		
+		ProjectService service = new ProjectService();
+		ProjectDTO dto= service.projectdetail (projectId);
+		request.setAttribute("project",dto);
+		
+		return page;
 	}}
 
 	

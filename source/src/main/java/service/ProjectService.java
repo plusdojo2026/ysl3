@@ -21,7 +21,8 @@ public class ProjectService {
 		}
 		//projectSelectAllメソッド
 		public ArrayList<ProjectDTO> projectSelectAll() {
-			public ArrayList<ProjectDTO> projectList = null;
+			ArrayList<ProjectDTO> projectList=null;
+			
 			// DB接続
 			access();
 
@@ -41,20 +42,20 @@ public class ProjectService {
 		}
 		
 		//projectSearchメソッド
-		public ProjectDTO projectSearch(int projectStatus , int projectPriority) {
-			ProjectDTO dto = null;
+		public ArrayList<ProjectDTO> projectSearch(int projectStatus , int projectPriority) {
+			ArrayList<ProjectDTO> projectList = null;
 			// DB接続
 			access();
 			try {// DAOを実体化
 				ProjectDAO dao = new ProjectDAO(this.conn);
 				
 				// ログイン処理を実施。DAOのメソッドを実行
-				dto = dao.projectSearch( projectStatus , projectPriority);
+				projectList = dao.projectSearch( projectStatus , projectPriority);
 				
 				}finally {
 					close();
 				}
-			return dto;
+			return projectList;
 		}
 		
 		//projectRegistメソッド
@@ -107,14 +108,14 @@ public class ProjectService {
 		}
 			
 		//projectStatusChangeメソッド
-		public int projectStatusChange(int projectStatus) {
+		public int projectStatusChange(int projectId,int projectStatus) {
 			int ans = 0;
 			
 			//DB接続
 			access();
 			try {
 				ProjectDAO dao = new ProjectDAO(conn);
-				ans = dao. projectStatusChange(projectStatus);
+				ans = dao. projectStatusChange(projectId,projectStatus);
 			}finally {
 				close();
 				}

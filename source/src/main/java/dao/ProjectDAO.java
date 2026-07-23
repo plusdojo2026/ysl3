@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import model.ProjectDTO;
 
@@ -12,15 +13,15 @@ import model.ProjectDTO;
 		
 		
 	//projectSelectAllメソッド
-		public ProjectDTO projectSelectAll(int userId ) {
-			ProjectDTO dto = null;
-			return dto;
+		public ArrayList<ProjectDTO> projectSelectAll() {
+			ArrayList<ProjectDTO> projectList = new ArrayList<>();
+			return projectList;
 		}
 
 		//projectSearchメソッド
-	public ProjectDTO projectSearch(int projectStatus , int projectPriority) {
-		ProjectDTO dto = null;
-		return dto;
+	public ArrayList<ProjectDTO> projectSearch(int projectStatus , int projectPriority) {
+		ArrayList<ProjectDTO> projectList  = new ArrayList<>();
+		return projectList;
 	}
 	//projectRegistメソッド
 	public int projectRegist(String projectCode, String projectName , int pmId , int projectStatus, int projectPriority, String projectStartDate , String projectEndDate , String projectExplain) {
@@ -33,7 +34,7 @@ import model.ProjectDTO;
 		return ans ; 
 	}
 	//projectStatusChangeメソッド
-	public int projectStatusChange(int projectStatus) {
+	public int projectStatusChange(int projectId,int projectStates) {
 		int ans = 0;
 		return ans;
 	}
