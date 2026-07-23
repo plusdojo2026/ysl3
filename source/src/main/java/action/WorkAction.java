@@ -116,12 +116,11 @@ public class WorkAction {
 		//値の取得
 		request.setCharacterEncoding("UTF-8");	
 		int workId = Integer.parseInt(request.getParameter("work-id"));
-		int taskId = Integer.parseInt(request.getParameter("task-id"));
 		
 	
 		// Serviceを実体化して処理を依頼
 		WorkService service = new WorkService();
-		int ans = service.workDelete(workId, taskId);	
+		int ans = service.workDelete(workId);	
 		
 		// 変更結果の判定
 		if (ans == 1) {
@@ -142,10 +141,11 @@ public class WorkAction {
 		//値の取得
 		request.setCharacterEncoding("UTF-8");	
 		int workId = Integer.parseInt(request.getParameter("work-id"));
+		int taskId = Integer.parseInt(request.getParameter("task-id"));
 		
 		// Serviceを実体化して処理を依頼
 		WorkService service = new WorkService();
-		int ans = service.workTally(workId);
+		int ans = service.workTally(workId, taskId);
 		
 		
 

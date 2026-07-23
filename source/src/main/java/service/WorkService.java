@@ -65,7 +65,7 @@ public class WorkService {
 	}
 
 	//工数を削除するメソッド
-	public int workDelete(int workId, int taskId) {
+	public int workDelete(int workId) {
 		int ans = 0;
 		// DB接続
 		access();
@@ -76,7 +76,7 @@ public class WorkService {
 			WorkDAO dao = new WorkDAO(conn);
 
 			// 工数削除処理を実施。DAOのメソッドを実行
-			ans = dao.workDelete(workId, taskId);
+			ans = dao.workDelete(workId);
 		} finally {
 
 			// DB接続解除
@@ -86,7 +86,7 @@ public class WorkService {
 	}
 
 	//工数を計算するメソッド
-	public int workTally(int workId) {
+	public int workTally(int workId, int taskId) {
 		int ans = 0;
 		// DB接続
 		access();
@@ -97,7 +97,7 @@ public class WorkService {
 			WorkDAO dao = new WorkDAO(conn);
 
 			// 工数計算処理を実施。DAOのメソッドを実行
-			ans = dao.workTally(workId);
+			ans = dao.workTally(workId, taskId);
 		} finally {
 
 			// DB接続解除

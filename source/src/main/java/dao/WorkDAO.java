@@ -28,7 +28,7 @@ public class WorkDAO {
 	}
 
 	//工数を削除するメソッド
-	public int workDelete(int workId, int taskId) {
+	public int workDelete(int workId) {
 		int ans = 0;
 	//処理はのちに記述。今は返すだけ
 		 return ans;
@@ -36,7 +36,7 @@ public class WorkDAO {
 	
 	
 	//工数を計算するメソッド
-	public int workTally(int workId) {
+	public int workTally(int workId, int tasklId) {
 		int ans = 0;
 	//処理はのちに記述。今は返すだけ
 		 return ans;
