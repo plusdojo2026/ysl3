@@ -5,15 +5,17 @@ import java.io.Serializable;
 public class UserDTO  implements Serializable{
 private int id;
 private String loginId;
+private String userName;
 private String password;
 private String mail;
 private int role;
 private int sol;
 
-public UserDTO(int id, String loginId, String password, String mail, int role, int sol) {	
+public UserDTO(int id, String loginId, String userName, String password, String mail, int role, int sol) {	
 	super();
 	this.id = id;
 	this.loginId = loginId;
+	this.userName = userName;
 	this.password = password;
 	this.mail = mail;
 	this.role = role;
@@ -35,6 +37,14 @@ public String getLoginId() {
 
 public void setLoginId(String loginId) {
 	this.loginId = loginId;
+}
+
+public String getUserName() {
+	return userName;
+}
+
+public void setUserName(String userName) {
+	this.userName = userName;
 }
 
 public String getPassword() {
@@ -73,6 +83,7 @@ public UserDTO() {
 	super();
 	this.id = 0;
 	this.loginId = "";
+	this.userName = "";
 	this.password = "";
 	this.mail = "";
 	this.role = 0;
