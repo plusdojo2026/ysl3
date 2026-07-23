@@ -27,10 +27,14 @@ public class HomeAction {
 	public String homeSelectAll() throws UnsupportedEncodingException {
 		
 		// 戻り値のページを定義
-		String page = null;
+		String page = "/WEB-INF/jsp/home.jsp";
 		
 		// セッションからログイン中のユーザー情報を取得
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
+		
+		if (session == null) {
+			return "/WEB-INF/jsp/login.jsp";
+		}
 		UserDTO loginUser = (UserDTO) session.getAttribute("user");
 		
 		// セッションが切れている場合の安全対策

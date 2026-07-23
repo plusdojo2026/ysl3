@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%
-String errorMsg = (String) request.getAttribute("errorMsg");
-%>
+
 <!doctype html>
 <html lang="ja">
 <head>
@@ -28,24 +26,23 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 			<h2 class="sub-title">案件・タスク・工数をまとめて管理</h2>
 			<h3 class="ad-msg">アカウントは管理者が発行します</h3>
 			<form method="POST"
-				action="${pageContext.request.contextPath}/Controller" />
-			<div class="mini-card">
-				<input type="hidden" name="page-id" value="L001" />
-				<div class="login-text">ログインID</div>
-				<input type="text" name="login-id" class="login-input"
-					value="${param.id }" required />
-				<div class="login-text">パスワード</div>
-				<input type="password" name="password" class="login-input" required />
-			</div>
+				action="${pageContext.request.contextPath}/Controller">
+				<div class="mini-card">
+					<input type="hidden" name="page-id" value="LO01" />
+					<div class="login-text">ログインID</div>
+					<input type="text" name="login-id" class="login-input"
+						value="${param.user-id }" required />
+					<div class="login-text">パスワード</div>
+					<input type="password" name="password" class="login-input" required />
+				</div>
 
 
 
-			<p class="error-message">
-				<%=errorMsg != null ? errorMsg : ""%>
-			</p>
-			<button type="submit" name="btn-id" value="login" class="login-btn">ログイン</button>
+				<p class="error-message">
+					${errMsg}
+				</p>
+				<button type="submit" name="btn-id" value="login" class="login-btn">ログイン</button>
 
-			<div class="msgArea">${errMsg}</div>
 
 			</form>
 			<div id="signup" class="signup">ログインID・パスワードを忘れた方はこちら</div>

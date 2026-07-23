@@ -1,6 +1,8 @@
 package service;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.UserDAO;
@@ -11,15 +13,41 @@ public class UserService {
 	// データベース接続を保持する変数
 	private Connection conn = null;
 
+	// データベース接続用
+	private static final String url ="jdbc:mysql://localhost:3306/test2?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
+	private static final String dbUser = "root";
+	private static final String dbPassword = "password";
+
+	
 	// データベースとの接続を行うメソッド
 	private void access() {
-		// のちに処理記述
-	}
+		   try {
+		       // MySQLドライバーを読み込む
+		       Class.forName(
+		               "com.mysql.cj.jdbc.Driver"
+		       );
+		       // DBへ接続
+		       conn = DriverManager.getConnection(url, dbUser, dbPassword);
+		   } catch (ClassNotFoundException e) {
+		       throw new RuntimeException("MySQLドライバーが見つかりません", e);
+		   } catch (SQLException e) {
+		       throw new RuntimeException("データベースへの接続に失敗しました", e);
+		   }
+		}
 
 	// データベースとの接続を切断するメソッド
 	private void close() {
-		// のちに処理記述	
-	}
+		   if (conn == null) {
+		       return;
+		   }
+		   try {
+		       conn.close();
+		   } catch (SQLException e) {
+		       throw new RuntimeException("データベースの切断に失敗しました", e);
+		   } finally {
+		       conn = null;
+		   }
+		}
 
 	// ログインメソッド
 	public UserDTO login(String loginId, String password) {
