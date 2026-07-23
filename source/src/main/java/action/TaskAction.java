@@ -334,7 +334,7 @@ public class TaskAction {
 
 		// Serviceを実体化して処理を依頼
 		TaskService service = new TaskService();
-		ArrayList<TaskDTO> taskList = service.taskSelectAll(userId, taskId);
+		ArrayList<TaskDTO> taskList = service.taskSelectAll(userId);
 
 		// タスク一覧画面にて表示する
 		request.setAttribute("task", taskList);
