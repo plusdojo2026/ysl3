@@ -17,7 +17,7 @@ public class UserDAO {
 		this.conn = conn;
 	}
 
-	//	ログインメソッド
+	//	ログインメソッド----------------------------------------------------------
 	public UserDTO login(String loginId, String password) {
 
 		// DTO実体化
@@ -25,15 +25,12 @@ public class UserDAO {
 
 		// SQL文準備
 		String sql = "SELECT user_id, login_id, user_name, mail, role, sol FROM users WHERE login_id = ? AND password = ? AND sol = 1";
-		try (
 
-				// いつものやつ
-				PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, loginId);
-			pstmt.setString(2, password);
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+			pStmt.setString(1, loginId);
+			pStmt.setString(2, password);
 
-			try (
-					ResultSet rs = pstmt.executeQuery()) {
+			try (ResultSet rs = pStmt.executeQuery()) {
 				if (rs.next()) {
 					dto = new UserDTO();
 					dto.setId(rs.getInt("user_id"));
@@ -52,60 +49,150 @@ public class UserDAO {
 		return dto;
 	}
 
-	//	パスワード変更メソッド
+	//	パスワード変更メソッド----------------------------------------------------------
 	public int passwordChange(int userId, String password, String newPassword) {
 		int ans = 0;
-		//	処理はのちに記述。今は返すだけ
+
+		// SQL文準備
+		String sql = "UPDATE users SET password = ? WHERE user_id = ? AND password = ?";
+
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+
+			// 変数を挿入
+			pStmt.setString(1, newPassword);
+			pStmt.setInt(2, userId);
+			pStmt.setString(3, password);
+
+			// SQLを実行して、更新されたかどうかを受け取る
+			ans = pStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			
+			throw new RuntimeException("パスワード変更処理中にDBエラーが発生しました", e);
+		}
+
+		// 戻り値
 		return ans;
 	}
 
-	//	ユーザー一覧を表示するメソッド（管理者）
+	//	ユーザー一覧を表示するメソッド（管理者）----------------------------------------------------------
 	public ArrayList<UserDTO> userSelectAll() {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
-		//	処理はのちに記述。今は返すだけ
-		return userList;
 
+		// DTO実体化
+		UserDTO dto = null;
+
+		// SQL文を準備する
+		String sql = "SELECT * FROM users";
+
+		try (
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				ResultSet rs = pStmt.executeQuery()) {
+
+			// 結果を格納
+			while (rs.next()) {
+				dto = new UserDTO();
+				dto.setId(rs.getInt("user_id"));
+				dto.setLoginId(rs.getString("login_id"));
+				dto.setUserName(rs.getString("user_name"));
+				dto.setMail(rs.getString("mail"));
+				dto.setRole(rs.getInt("role"));
+				dto.setSol(rs.getInt("sol"));
+
+				// リストに追加
+				userList.add(dto);
+			}
+
+		} catch (SQLException e) {
+
+			throw new RuntimeException("ユーザー一覧取得中にDBエラーが発生しました", e);
+		}
+		//serviceに返却する
+		return userList;
 	}
 
-	//	ユーザーを検索するメソッド（管理者）
-	public ArrayList<UserDTO> userSearch(String userName) {
-		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
-		//	処理はのちに記述。今は返すだけ
-		return userList;
-	}
+//	//	ユーザーを検索するメソッド（管理者）----------------------------------------------------------
+//	public ArrayList<UserDTO> userSearch(String keyword) {
+//		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
+//		//	処理はのちに記述。今は返すだけ
+//		return userList;
+//	}
 
-	//	ユーザー登録メソッド（管理者）
+	//	ユーザー登録メソッド（管理者）----------------------------------------------------------
 	public int userRegist(String loginId, String userName, String mail, String password, int role) {
 		int ans = 0;
-		//	処理はのちに記述。今は返すだけ
+		
+		// SQL文準備
+		String sql = "INSERT INTO users (login_id, user_name, password, mail, role, sol) VALUES(?, ?, ?, ?, ?, 1)";
+		
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+
+			// 変数を挿入
+			pStmt.setString(1, loginId);
+			pStmt.setString(2, userName);
+			pStmt.setString(3, password);
+			pStmt.setString(4, mail);
+			pStmt.setInt(5,  role);
+
+			// SQLを実行して、更新されたかどうかを受け取る
+			ans = pStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			
+			throw new RuntimeException("ユーザー登録処理中にDBエラーが発生しました", e);
+		}
+		
+		// 戻り値
 		return ans;
 	}
 
-	//	ユーザー編集メソッド（管理者）
-	public int userEdit(String userName, int role, String mail, int sol) {
+	//	ユーザー編集メソッド（管理者）----------------------------------------------------------
+	public int userEdit(int userId, String userName, int role, String mail, int sol) {
 		int ans = 0;
-		//	処理はのちに記述。今は返すだけ
+
+		// SQL文準備
+		String sql = "UPDATE users SET user_name = ?, role = ?, mail = ?, sol = ? WHERE user_id = ?";
+		
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+
+			// 変数を挿入
+			pStmt.setString(1, userName);
+			pStmt.setInt(2, role);
+			pStmt.setString(3, mail);
+			pStmt.setInt(4, sol);
+			pStmt.setInt(5, userId);
+
+			// SQLを実行して、更新されたかどうかを受け取る
+			ans = pStmt.executeUpdate();
+
+		} catch (SQLException e) {
+			
+			throw new RuntimeException("ユーザー編集処理中にDBエラーが発生しました", e);
+		}
+		
+		// 戻り値
 		return ans;
+
 	}
 
-	//	案件に紐づけられてるユーザー取得メソッド（案件登録の際の担当者選ぶ用）
+	//	案件に紐づけられてるユーザー取得メソッド（案件登録の際の担当者選ぶ用）----------------------------------------------------------
 	public ArrayList<UserDTO> selectProjectUserName() {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
 		//	処理はのちに記述。今は返すだけ
 		return userList;
 	}
 
-	//	タスクに紐づけられているユーザー取得メソッド（タスク登録の際の担当者選ぶ用）
+	//	タスクに紐づけられているユーザー取得メソッド（タスク登録の際の担当者選ぶ用）----------------------------------------------------------
 	public ArrayList<UserDTO> selectTaskUserName(int projectId) {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
 		//	処理はのちに記述。今は返すだけ
 		return userList;
 	}
-	
-	// マイページにユーザーの情報表示用メソッド
+
+	// マイページにユーザーの情報表示用メソッド----------------------------------------------------------
 	public UserDTO mypageSelect(int userId) {
 		UserDTO dto = null;
-		
+
 		return dto;
 	}
 }

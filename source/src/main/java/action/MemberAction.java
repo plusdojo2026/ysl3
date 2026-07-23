@@ -19,7 +19,7 @@ public class MemberAction {
 		this.request = request;
 	}
 	
-	// ユーザー一覧を表示するメソッド（管理者）
+	// ユーザー一覧を表示するメソッド（管理者）----------------------------------------------------------
 	public String memberSelectAll() throws UnsupportedEncodingException  {
 		
 		// 戻り値のページを定義
@@ -56,7 +56,7 @@ public class MemberAction {
 		}
 	}
 	
-	// ユーザー登録メソッド
+	// ユーザー登録メソッド----------------------------------------------------------
 	public String memberRegist() throws UnsupportedEncodingException {
 		
 		// 戻り値のページを定義
@@ -108,7 +108,7 @@ public class MemberAction {
 		return page;
 	}
 	
-	// メンバー編集メソッド
+	// メンバー編集メソッド----------------------------------------------------------
 	public String memberEdit() throws UnsupportedEncodingException {
 		
 		// 戻り値のページを定義
@@ -119,6 +119,7 @@ public class MemberAction {
 		String mail = request.getParameter("mail");
 		int role = Integer.parseInt(request.getParameter("role"));
 		int sol = Integer.parseInt(request.getParameter("sol"));
+		int userId = Integer.parseInt(request.getParameter("user-id"));
 		
 		
 		
@@ -140,7 +141,7 @@ public class MemberAction {
 			
 			// Serviceを実体化して処理を依頼
 			UserService service = new UserService();
-			int ans = service.userEdit(userName, role, mail, sol);
+			int ans = service.userEdit(userId, userName, role, mail, sol);
 			
 			// 結果が取れたら
 			if (ans == 1) {

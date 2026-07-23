@@ -17,7 +17,7 @@ public class UserAction {
 		this.request = request;
 	}
 
-	// ログインメソッド
+	// ログインメソッド----------------------------------------------------------
 	public String login() throws UnsupportedEncodingException {
 
 		// 返却する次の飛び先のURLを一旦定義
@@ -71,7 +71,7 @@ public class UserAction {
 
 	}
 
-	// パスワード変更メソッド
+	// パスワード変更メソッド----------------------------------------------------------
 	public String passwordChange() throws UnsupportedEncodingException {
 
 		// 返却する次の飛び先のURLを定義
@@ -110,7 +110,7 @@ public class UserAction {
 		return mypageSelect();
 	}
 
-	// ログアウトメソッド
+	// ログアウトメソッド----------------------------------------------------------
 	public String logout() {
 
 		// セッションを取得
@@ -131,7 +131,7 @@ public class UserAction {
 		return page;
 	}
 	
-	// マイページ表示用メソッド
+	// マイページ表示用メソッド----------------------------------------------------------
 	public String mypageSelect() {
 		String page = "/WEB-INF/jsp/mypage.jsp";
 		
