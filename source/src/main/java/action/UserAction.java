@@ -50,7 +50,9 @@ public class UserAction {
 		    session.setAttribute("user", dto);
 		    
 		    // ホームアクションに飛ばし、ホーム画面でタスクやログを表示する
-		    page = "home";
+		    HomeAction action = new HomeAction(request);
+		    page = action.homeSelectAll();
+		    
 		    return page;
 		}
 
