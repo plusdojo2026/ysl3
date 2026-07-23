@@ -13,7 +13,7 @@ public class UserService {
 	// データベース接続を保持する変数
 	private Connection conn = null;
 
-	// データベース接続用
+	// データベース接続用 ※「test2」は、データベース名
 	private static final String url ="jdbc:mysql://localhost:3306/test2?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
 	private static final String dbUser = "root";
 	private static final String dbPassword = "password";
@@ -244,5 +244,27 @@ public class UserService {
 		return userList;
 	}
 	
+	// マイページでユーザーの情報を表示するメソッド
+	public UserDTO mypageSelect(int userId) {
+		UserDTO dto = null;
+		
+		// DB接続
+		access();
+		
+		try {
+			
+			// DAOを実体化
+			UserDAO dao = new UserDAO(conn);
+			
+			// マイページ表示処理を実施。DAOのメソッドを実行
+			dto = dao.mypageSelect(userId);
+		} finally {
+			
+			// DB接続解除
+			close();
+		}
+		
+		return dto;
+	}
 	
 }
