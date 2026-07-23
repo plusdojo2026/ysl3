@@ -1,5 +1,6 @@
 package service;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import dao.ProjectDAO;
 import model.ProjectDTO;
@@ -18,17 +19,16 @@ public class ProjectService {
 		private void close() {
 			// のちに処理記述	
 		}
-		
-		public ProjectDTO projectSelectAll(int userId ) {
-			ProjectDTO dto = null;
+		//projectSelectAllメソッド
+		public ArrayList<ProjectDTO> projectSelectAll() {
+			public ArrayList<ProjectDTO> projectList = null;
 			// DB接続
 			access();
 
 			try {// DAOを実体化
 				ProjectDAO dao = new ProjectDAO(this.conn);
 				
-				// ログイン処理を実施。DAOのメソッドを実行
-				dto = dao.projectSelectAll(userId);
+			projectList  = dao.projectSelectAll();
 				
 			} finally {
 				
@@ -37,7 +37,7 @@ public class ProjectService {
 			}
 			
 			// 戻り値
-			return dto;
+			return projectList;
 		}
 		
 		//projectSearchメソッド
