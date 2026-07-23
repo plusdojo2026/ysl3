@@ -1,8 +1,6 @@
 package service;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.TaskDAO;
@@ -37,7 +35,10 @@ public class TaskService {
 			// タスク一覧取得処理を実施。DAOのメソッドを実行
 			taskList = dao.taskSelectAll(userId);
 
-		} finally {
+		} catch (Exception e) {
+			// TODO: handle exception
+		} 
+		finally {
 
 			// DB接続解除
 			close();
