@@ -2,6 +2,7 @@ package action;
 
 
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,7 @@ public class ProjectAction {
 		return page;
 	}
 	//projectRegistメソッド
-	public  String projectRegist() throws UnsupportedEncodingException{
+	public  String projectRegist() throws UnsupportedEncodingException ,SQLException{
 		//返却する次の飛び先のURLをとりあえず定義
 		String page = "/WEB-INF/jsp/project_regist.jsp";
 		
@@ -51,8 +52,9 @@ public class ProjectAction {
 		request.setCharacterEncoding("UTF-8");
 		String projectCode = request.getParameter("projectCode");
 		String projectName = request.getParameter("projectName");
+		String customer = request.getParameter("customer");
 		int pmId = Integer.parseInt(request.getParameter("pmId"));
-		int projectStates = Integer.parseInt(request.getParameter("projectStates"));
+		int projectStatus = Integer.parseInt(request.getParameter("projectStatus"));
 		int projectPriority = Integer.parseInt(request.getParameter("projectPriority"));
 		String projectStartDate = request.getParameter("projectStartDate");
 		String projectEndDate = request.getParameter("projectEndDate");
@@ -64,8 +66,9 @@ public class ProjectAction {
 		int ans = service.projectRegist(
 				projectCode,
 				projectName,
+				customer,
 				pmId,
-				projectStates,
+				projectStatus,
 				projectPriority,
 				projectStartDate,
 				projectEndDate,
@@ -85,8 +88,9 @@ public class ProjectAction {
 		request.setCharacterEncoding("UTF-8");
 		String projectCode = request.getParameter("projectCode");
 		String projectName = request.getParameter("projectname");
+		
 		int pmId = Integer.parseInt(request.getParameter("pmId"));
-		int projectStates = Integer.parseInt(request.getParameter("projectStates"));
+		int projectStatus = Integer.parseInt(request.getParameter("projectStatus"));
 		int projectPriority = Integer.parseInt(request.getParameter("projectPriority"));
 		String projectStartDate = request.getParameter("projectStartDate");
 		String projectEndDate = request.getParameter("projectEndDate");
@@ -94,11 +98,11 @@ public class ProjectAction {
 		
 		ProjectService service = new ProjectService();
 		
-		int ans = service.projectRegist(
+		int ans = service.projectUpdate(
 				projectCode,
 				projectName,
 				pmId,
-				projectStates,
+				projectStatus,
 				projectPriority,
 				projectStartDate,
 				projectEndDate,
@@ -137,7 +141,6 @@ public class ProjectAction {
 		ProjectService service = new ProjectService();
 		ProjectDTO dto= service.projectdetail (projectId);
 		request.setAttribute("project",dto);
-		
 		return page;
 	}}
 
