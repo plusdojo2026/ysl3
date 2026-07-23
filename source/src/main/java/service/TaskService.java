@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.TaskDAO;
@@ -49,7 +50,7 @@ public class TaskService {
 	}
 
 	// タスク検索をするメソッド
-	public ArrayList<TaskDTO> taskSearch(int taskId, int projectId, int taskStatus, int userId, String taskName) {
+	public ArrayList<TaskDTO> taskSearch(int taskId, int projectId, int status, int userId, String name) {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 
 		// DB接続
@@ -60,7 +61,7 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// タスク検索を実施。DAOのメソッドを実行
-			taskList = dao.taskSearch(taskId, projectId, taskStatus, taskName, userId);
+			taskList = dao.taskSearch(taskId, projectId, name, status, userId);
 
 		} finally {
 
@@ -73,8 +74,8 @@ public class TaskService {
 	}
 
 	// タスク登録メソッド
-	public int taskRegist(int taskId, int userId, int projectId, String taskName, int taskStatus, int taskPriority,
-			int progress, float taskEstimatedWorks, String taskStartDate, String taskLimit, String taskExplanation) {
+	public int taskRegist(int taskId, int userId,  String name, int status, int priority,
+			 String limitDate,String explainText,float estimatedWorks,int projectId, String startDate, int progress ) throws SQLException {
 		int ans = 0;
 
 		// DB接続
@@ -86,8 +87,8 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// ユーザー登録処理を実施。DAOのメソッドを実行
-			ans = dao.taskRegist(taskId, userId, projectId, taskName, taskStatus, taskPriority,
-					progress, taskEstimatedWorks, taskStartDate, taskLimit, taskExplanation);
+			ans = dao.taskRegist(taskId, userId, name, status, priority,
+					limitDate, explainText,estimatedWorks, projectId,  startDate, progress);
 		} finally {
 
 			// DB接続解除
@@ -99,8 +100,8 @@ public class TaskService {
 	}
 
 	// タスク編集メソッド
-	public int taskUpdate(int taskId, int userId, int projectId, String taskName, int taskStatus, int taskPriority,
-			int progress, float taskEstimatedWorks, String taskStartDate, String taskLimit, String taskExplanation) {
+	public int taskUpdate(int taskId, int userId,  String name, int status, int priority,
+			String explainText, String limitDate,float estimatedWorks, int projectId,String startDate, int progress) throws SQLException {
 		int ans = 0;
 
 		// DB接続
@@ -112,8 +113,8 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// ユーザー登録処理を実施。DAOのメソッドを実行
-			ans = dao.taskUpdate(taskId, userId, projectId, taskName, taskStatus, taskPriority,
-					progress, taskEstimatedWorks, taskStartDate, taskLimit, taskExplanation);
+			ans = dao.taskUpdate(taskId,userId,name, status, priority,
+					 explainText,limitDate,estimatedWorks, projectId, startDate,progress);
 		} finally {
 
 			// DB接続解除
@@ -125,7 +126,7 @@ public class TaskService {
 	}
 
 	// ユーザー削除メソッド
-	public int taskDelete(int userId, int taskId) {
+	public int taskDelete(int taskId,int userId) {
 		int ans = 0;
 
 		// DB接続
@@ -137,7 +138,7 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// ユーザー登録処理を実施。DAOのメソッドを実行
-			ans = dao.taskDelete(userId, taskId);
+			ans = dao.taskDelete(taskId,userId);
 		} finally {
 
 			// DB接続解除
@@ -149,7 +150,7 @@ public class TaskService {
 	}
 
 	// タスクステータス変更メソッド
-	public int taskStatusChange(int userId, int taskId) {
+	public int statusChange(int taskId,int userId) {
 		int ans = 0;
 
 		// DB接続
@@ -161,7 +162,7 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// ユーザー登録処理を実施。DAOのメソッドを実行
-			ans = dao.taskStatusChange(userId, taskId);
+			ans = dao.statusChange(taskId,userId);
 		} finally {
 
 			// DB接続解除
@@ -173,7 +174,7 @@ public class TaskService {
 	}
 
 	//タスク詳細を表示するメソッド
-	public TaskDTO taskDetail(int userId, int taskId) {
+	public TaskDTO taskDetail(int taskId,int userId) {
 		TaskDTO dto = null;
 
 		// DB接続
@@ -184,7 +185,7 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(this.conn);
 
 			// ログイン処理を実施。DAOのメソッドを実行
-			dto = dao.taskDetail(userId, taskId);
+			dto = dao.taskDetail(taskId,userId);
 
 		} finally {
 
@@ -245,7 +246,7 @@ public class TaskService {
 	}
 
 	//  案件詳細画面のタスク項目を削除するメソッド
-	public ArrayList<TaskDTO> projectDetailDelete(int userId, int taskId) {
+	public ArrayList<TaskDTO> projectDetailDelete(int taskId,int userId) {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 
 		// DB接続
@@ -256,7 +257,7 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// タスク一覧取得処理を実施。DAOのメソッドを実行
-			taskList = dao.projectDetailDelete(userId, taskId);
+			taskList = dao.projectDetailDelete(taskId, userId);
 
 		} finally {
 
@@ -269,7 +270,7 @@ public class TaskService {
 	}
 
 	//   工数を登録するメソッド
-	public int workRegist(int userId, int taskId) {
+	public int workRegist(int taskId,int userId) {
 		int ans = 0;
 		//	処理はのちに記述。今は返すだけ
 		return ans;

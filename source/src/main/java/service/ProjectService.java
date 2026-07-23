@@ -84,7 +84,8 @@ public class ProjectService {
 			return ans;
 		}
 		//projectUpdateメソッド
-		public int projectUpdate(String projectCode , String projectName , int pmId , int projectStatus , int projectPriority , String projectStartDate , String projectEndDate , String projectExplain) {
+		public int projectUpdate(String projectCode , String projectName , String customer,int pmId , int projectStatus , int projectPriority , String projectStartDate , String projectEndDate , String projectExplain)
+				throws SQLException {
 			int ans = 0 ;
 			
 			// DB接続
@@ -97,7 +98,7 @@ public class ProjectService {
 				// DAOを実体化
 				ProjectDAO dao = new ProjectDAO(conn);
 				// ユーザー登録処理を実施。DAOのメソッドを実行
-				ans = dao.projectUpdate(projectCode, projectName, pmId, projectStatus, projectPriority , projectStartDate ,  projectEndDate , projectExplain);
+				ans = dao.projectUpdate(projectCode, projectName,customer, pmId, projectStatus, projectPriority , projectStartDate ,  projectEndDate , projectExplain);
 			} finally {
 				
 				// DB接続解除
