@@ -199,7 +199,7 @@ public class UserService {
 	}
 	
 	
-	//	案件に紐づけられてるユーザー取得メソッド（案件登録の際の担当者選ぶ用）----------------------------------------------------------
+	//	案件に紐づけられてるユーザー取得メソッド（案件登録の際のPM選ぶ用）----------------------------------------------------------
 	public ArrayList<UserDTO> selectProjectUserName() {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
 		
