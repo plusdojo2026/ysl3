@@ -31,9 +31,9 @@
 					<input type="hidden" name="page-id" value="LO01" />
 					<div class="login-text">ログインID</div>
 					<input type="text" name="login-id" class="login-input"
-						value="${param.user-id }" required />
+						value="${param.user-id }" required placeholder="ログインIDを入力してください"/>
 					<div class="login-text">パスワード</div>
-					<input type="password" name="password" class="login-input" required />
+					<input type="password" name="password" class="login-input" required placeholder="パスワードを入力してください" id="password" />
 				</div>
 
 
@@ -41,7 +41,7 @@
 				<p class="error-message">
 					${errMsg}
 				</p>
-				<button type="submit" name="btn-id" value="login" class="login-btn">ログイン</button>
+				<button type="submit" name="btn-id" value="login" class="login-btn" id="login-btn">ログイン</button>
 
 
 			</form>
