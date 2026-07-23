@@ -1,5 +1,8 @@
 package dao;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.TaskDTO;
@@ -14,9 +17,28 @@ public class TaskDAO {
 	
 	
 	//	タスク一覧を表示するメソッド
-	public ArrayList<TaskDTO> taskSelectAll(int user_idx,int task_id) {
+	public ArrayList<TaskDTO> taskSelectAll(int user_id,int task_id) throws SQLException{
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
-		//	処理はのちに記述。今は返すだけ
+		//	(処理)s
+		// SELECT文を準備する
+				String sql ="SELECT * FROM task WHERE user_id = ?";
+				//デバッグ（SQL文の確認用）
+				System.out.println(sql);
+				
+		// まとめる
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		pStmt.setInt(1, user_id);
+		// SELECT文を実行し、結果表を取得する
+		ResultSet rs = pStmt.executeQuery();
+		
+		//移し替え
+		while(rs.next()) {
+		TaskDTO dto = new TaskDTO(user_id, task_id);			
+		dto.setUserId(rs.getInt("user_id"));
+		dto.setTaskId(rs.getInt("task_id"));
+		taskList.add(dto);
+				}
+		
 		return taskList;
 		
 	}

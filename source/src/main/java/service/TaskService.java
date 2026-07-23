@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.TaskDAO;
@@ -24,7 +25,7 @@ public class TaskService {
 		
 		
 		// タスク一覧を取得するメソッド
-		public ArrayList<TaskDTO> taskSelectAll(int task_id,int user_id) {
+		public ArrayList<TaskDTO> taskSelectAll(int task_id,int user_id) throws SQLException {
 			ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 			
 			// DB接続
@@ -244,7 +245,7 @@ public class TaskService {
 		
 			  
 	//  案件一覧画面のタスク項目を表示するメソッド
-			  public ArrayList<TaskDTO> projectTaskList(int task_id,int user_id) {
+			  public ArrayList<TaskDTO> projectList(int task_id,int user_id) {
 					ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 					
 					// DB接続

@@ -1,6 +1,7 @@
 package action;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ public class TaskAction {
 	
 	
 	// タスク一覧を取得するメソッド
-	public String taskSelectAll() throws UnsupportedEncodingException {
+	public String taskSelectAll() throws UnsupportedEncodingException, SQLException {
 		
 		// 返却する次の飛び先のURLを定義
 		String page="/WEB-INF/jsp/task_list.jsp";
@@ -319,7 +320,7 @@ public class TaskAction {
 	
 
 	//ホーム画面のタスク一覧を表示するメソッド
-		public String  homeTaskList() throws UnsupportedEncodingException {
+		public String  homeTaskList() throws UnsupportedEncodingException, SQLException {
 			
 			// 返却する次の飛び先のURLを定義
 			String page="/WEB-INF/jsp/home.jsp";
@@ -353,7 +354,7 @@ public class TaskAction {
 			
 
 	//案件一覧画面のタスク項目を表示するメソッド
-		public String  projectTaskList() throws UnsupportedEncodingException {
+		public String  projectTaskList() throws UnsupportedEncodingException, SQLException {
 			
 			// 返却する次の飛び先のURLを定義
 			String page="/WEB-INF/jsp/project_list.jsp";
