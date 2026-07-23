@@ -81,14 +81,14 @@ public class ProjectAction {
 	}
 
 	//projectUpdateメソッド
-	public String projectUpdate() throws UnsupportedEncodingException{
+	public String projectUpdate() throws UnsupportedEncodingException,SQLException{
 		String page = "/WEB-INF/jsp/project_edit.jsp";
 
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
 		String projectCode = request.getParameter("projectCode");
 		String projectName = request.getParameter("projectname");
-		
+		String customer = request.getParameter("customer");
 		int pmId = Integer.parseInt(request.getParameter("pmId"));
 		int projectStatus = Integer.parseInt(request.getParameter("projectStatus"));
 		int projectPriority = Integer.parseInt(request.getParameter("projectPriority"));
@@ -101,6 +101,7 @@ public class ProjectAction {
 		int ans = service.projectUpdate(
 				projectCode,
 				projectName,
+				customer,
 				pmId,
 				projectStatus,
 				projectPriority,
