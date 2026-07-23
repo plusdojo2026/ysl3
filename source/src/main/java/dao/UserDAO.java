@@ -101,4 +101,11 @@ public class UserDAO {
 		//	処理はのちに記述。今は返すだけ
 		return userList;
 	}
+	
+	// マイページにユーザーの情報表示用メソッド
+	public UserDTO mypageSelect(int userId) {
+		UserDTO dto = null;
+		
+		return dto;
+	}
 }
