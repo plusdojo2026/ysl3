@@ -3,7 +3,7 @@ package model;
 import java.io.Serializable;
 
 public class TaskDTO  implements Serializable{
-	private int id;
+	private int task_id;
 	private int userId;
 	private String name;
 	private int status;
@@ -20,11 +20,11 @@ public class TaskDTO  implements Serializable{
 	
 	
 	
-	public TaskDTO(int id, int userId, String name, int status, int priority, String limitDate, String explainText,
+	public TaskDTO(int task_id, int userId, String name, int status, int priority, String limitDate, String explainText,
 			float estimatedWork, int projectId, String startDate, String endDate, int progress, String userName,
 			float totalWork) {
 		super();
-		this.id = id;
+		this.task_id = task_id;
 		this.userId = userId;
 		this.name = name;
 		this.status = status;
@@ -40,10 +40,10 @@ public class TaskDTO  implements Serializable{
 		this.totalWork = totalWork;
 	}
 	public int getId() {
-		return id;
+		return task_id;
 	}
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int task_id) {
+		this.task_id = task_id;
 	}
 	public int getUserId() {
 		return userId;
