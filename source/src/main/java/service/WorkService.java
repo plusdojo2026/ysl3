@@ -12,8 +12,8 @@ public class WorkService {
 	// データベース接続を保持する変数
 	private Connection conn = null;
 
-	// データベース接続用 ※「test2」は、データベース名
-	private static final String url ="jdbc:mysql://localhost:3306/test2?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
+	// データベース接続用 ※「romance_magic」は、データベース名
+	private static final String url ="jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
 	private static final String dbUser = "root";
 	private static final String dbPassword = "password";
 
@@ -72,7 +72,7 @@ public class WorkService {
 	}
 
 	//工数登録するメソッド
-	public int workRegist(int userId, int projectId, int taskId, String workDate, String explainText, String work) {
+	public int workRegist(int userId, int taskId, String workDate, String explainText, String work) {
 		int ans = 0;
 		// DB接続
 		access();
@@ -83,7 +83,7 @@ public class WorkService {
 			WorkDAO dao = new WorkDAO(conn);
 
 			// 工数登録処理を実施。DAOのメソッドを実行
-			ans = dao.workRegist(userId, projectId, taskId, workDate, explainText, work);
+			ans = dao.workRegist(userId, taskId, workDate, explainText, work);
 		} finally {
 
 			// DB接続解除

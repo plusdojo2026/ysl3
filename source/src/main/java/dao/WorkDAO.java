@@ -21,7 +21,7 @@ public class WorkDAO {
 		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
 
 		// SELECT文を準備する
-		String sql = "SELECT * FROM work WHERE user_id = ?";
+		String sql = "SELECT * FROM works WHERE user_id = ?";
 
 		//デバッグ（SQL文の確認用）
 		System.out.println(sql);
@@ -50,19 +50,18 @@ public class WorkDAO {
 	}
 
 	//工数登録するメソッド
-	public int workRegist(int userId, int projectId, int taskId, String workDate, String explainText, String work) {
+	public int workRegist(int userId, int taskId, String workDate, String explainText, String work) {
 		int ans = 0;
 		//SQLを準備
-		String sql = "INSERT INTO works VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT INTO works VALUES (?,?,?,?,?)";
 
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 
 			pStmt.setInt(1, userId);
-			pStmt.setInt(2, projectId);
-			pStmt.setInt(3, taskId);
-			pStmt.setString(4, workDate);
-			pStmt.setString(5, explainText);
-			pStmt.setString(6, work);
+			pStmt.setInt(2, taskId);
+			pStmt.setString(3, workDate);
+			pStmt.setString(4, explainText);
+			pStmt.setString(5, work);
 
 			ans = pStmt.executeUpdate();
 		} catch (SQLException e) {

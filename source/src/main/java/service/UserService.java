@@ -13,8 +13,8 @@ public class UserService {
 	// データベース接続を保持する変数
 	private Connection conn = null;
 
-	// データベース接続用 ※「test2」は、データベース名
-	private static final String url ="jdbc:mysql://localhost:3306/test2?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
+	// データベース接続用 ※「romance_magic」は、データベース名
+	private static final String url ="jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
 	private static final String dbUser = "root";
 	private static final String dbPassword = "password";
 

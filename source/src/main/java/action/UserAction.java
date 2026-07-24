@@ -1,6 +1,7 @@
 package action;
 
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,7 +19,7 @@ public class UserAction {
 	}
 
 	// ログインメソッド----------------------------------------------------------
-	public String login() throws UnsupportedEncodingException {
+	public String login() throws UnsupportedEncodingException, SQLException {
 
 		// 返却する次の飛び先のURLを一旦定義
 		String page = null;
@@ -163,6 +164,7 @@ public class UserAction {
 		if (myDate == null) {
 			request.setAttribute("errMsg", "ユーザー情報の取得に失敗しました");
 		} else {
+			request.setAttribute("user", myDate);
 			request.setAttribute("msg", "成功");
 		}
 

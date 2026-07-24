@@ -1,6 +1,6 @@
 package action;
 
-import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +24,7 @@ public class HomeAction {
 	}
 	
 	// ホーム画面にタスク・ログを表示するメソッド
-	public String homeSelectAll() throws UnsupportedEncodingException {
+	public String homeSelectAll() throws SQLException {
 		
 		// 戻り値のページを定義
 		String page = "/WEB-INF/jsp/home.jsp";
@@ -49,6 +49,7 @@ public class HomeAction {
 		// Serviceを実体化して処理を依頼
 		TaskService taskService = new TaskService();
 		ArrayList<TaskDTO> homeTaskList = taskService.homeTaskList(userId);
+		
 		
 		// 工数ログも同様
 		WorkService workService = new WorkService();

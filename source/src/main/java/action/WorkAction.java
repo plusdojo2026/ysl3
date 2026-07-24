@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.ProjectDTO;
+import model.TaskDTO;
 import model.UserDTO;
 import model.WorkDTO;
 import service.ProjectService;
@@ -51,7 +52,7 @@ public class WorkAction {
 		if (allWorkList == null) {
 					
 		request.setAttribute("errMsg", "※一覧が取得できませんでした");
-			page = "/WEB-INF/jsp/member/work_regist.jsp";
+			page = "/WEB-INF/jsp/work_regist.jsp";
 					
 			return page;
 					
@@ -74,8 +75,7 @@ public class WorkAction {
 		String page = null;
 		
 		//値の取得
-		request.setCharacterEncoding("UTF-8");		
-		int projectId = Integer.parseInt(request.getParameter("project-id"));
+		request.setCharacterEncoding("UTF-8");
 		int taskId = Integer.parseInt(request.getParameter("task-id"));
 		String workDate = request.getParameter("work-date");
 		String explainText = request.getParameter("explain-text");
@@ -98,7 +98,7 @@ public class WorkAction {
 
 		// Serviceを実体化して処理を依頼
 		WorkService service = new WorkService();
-		int ans = service.workRegist(userId, projectId, taskId, workDate, explainText, work);
+		int ans = service.workRegist(userId, taskId, workDate, explainText, work);
 
 		// 変更結果の判定
 		if (ans == 1) {
@@ -114,7 +114,7 @@ public class WorkAction {
 	
 	//工数を削除する
 	public String delete() throws UnsupportedEncodingException {
-		String page="/WEB-INF/jsp/task_detail.jsp";
+		String page="/WEB-INF/jsp/task/task_detail.jsp";
 		
 		//値の取得
 		request.setCharacterEncoding("UTF-8");	
@@ -158,7 +158,7 @@ public class WorkAction {
 	public String workToRegist() throws UnsupportedEncodingException {
 		
 		// 戻り値のページを定義
-		String page = null;
+		String page="/WEB-INF/jsp/work_regist.jsp";
 				
 		// セッションを取得
 		HttpSession session = request.getSession(false);	
@@ -178,16 +178,34 @@ public class WorkAction {
 		request.setCharacterEncoding("UTF-8");	
 		int taskId = Integer.parseInt(request.getParameter("task-id"));
 		
-		// Serviceを実体化して処理を依頼
-		WorkService workService = new WorkService();
+		// Serviceを実体化
 		ProjectService projectService = new ProjectService();
 		TaskService taskService = new TaskService();
 		
-		WorkDTO workAns = workService.workToRegist(taskId);
-		ProjectDTO projectAns = projectService.workToRegist(projectId);
 		
-		//値を取得
-		int projectId = Integer.parseInt(request.getParameter("project-id"));
+		TaskDTO taskAns = taskService.taskDetail(taskId);
+		int projectId = taskAns.getProjectId();
+		
+		
+		ProjectDTO projectAns = projectService.projectDetail(projectId);
+		
+		
+		// リストが空ならエラーメッセージをセット
+		if (projectId == 0) {
+
+			request.setAttribute("errMsg", "値が取得できませんでした");
+			page = "/WEB-INF/jsp/home.jsp";
+			
+			return page;
+
+			// ちゃんと入っていたら案件・タスクの情報をリクエストに保存
+		} else {
+		    request.setAttribute("TaskShow", taskAns);
+		    request.setAttribute("ProjectShow", projectAns);
+		    
+		    // 戻り値
+		    return page;
+		}
 		
 		
 		// 戻り値

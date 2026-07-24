@@ -42,7 +42,7 @@ public class MemberAction {
 		if (allUserList == null) {
 
 			request.setAttribute("errMsg", "※一覧が取得できませんでした");
-			page = "/WEB-INF/jsp/member/member.jsp";
+			page = "/WEB-INF/jsp/member/member_list.jsp";
 
 			return page;
 
@@ -99,7 +99,7 @@ public class MemberAction {
 			} else {
 
 				request.setAttribute("errMsg", "登録に失敗しました");
-				page = "/WEB-INF/jsp/member/member.jsp";
+				page = "/WEB-INF/jsp/member/member_list.jsp";
 			}
 
 		}
@@ -151,7 +151,7 @@ public class MemberAction {
 			} else {
 
 				request.setAttribute("errMsg", "保存に失敗しました");
-				page = "/WEB-INF/jsp/member/member.jsp";
+				page = "/WEB-INF/jsp/member/member_list.jsp";
 			}
 
 		}
@@ -164,7 +164,7 @@ public class MemberAction {
 	public String memberToEdit() throws UnsupportedEncodingException {
 
 		// 戻り値のページを定義
-		String page = "/WEB-INF/jsp/member/memberEdit.jsp";
+		String page = "/WEB-INF/jsp/member/member_edit.jsp";
 
 		// UTF-8を指定
 		request.setCharacterEncoding("UTF-8");

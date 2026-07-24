@@ -41,7 +41,7 @@ public class TaskDAO {
 			dto.setProjectId(rs.getInt("project_id"));
 			dto.setPriority(rs.getInt("task_priority"));
 			dto.setLimitDate(rs.getString("task_limit"));
-			dto.setEstimatedWork(rs.getFloat("task_estimated_work"));
+			dto.setEstimatedWork(rs.getFloat("task_estimated_works"));
 			dto.setProgress(rs.getInt("progress"));
 			
 			taskList.add(dto);
@@ -59,7 +59,7 @@ public class TaskDAO {
 
 		// SELECT文を準備する
 		String sql = "SELECT task_id,user_id,task_name,task_status,project_id,task_priority,"
-				+ "task_limit,task_estimated_work,progress FROM tasks WHERE name LIKE ?";
+				+ "task_limit,task_estimated_work,progress FROM tasks WHERE task_name LIKE ?";
 
 		
 		//project_id
@@ -228,28 +228,37 @@ public class TaskDAO {
 	}
 
 	//	タスク削除メソッド
-	public int taskDelete(int taskId, int userId) throws SQLException {
+	public int taskDelete(int taskId) throws SQLException {
 		int ans = 0;
-		//	処理はのちに記述。今は返すだけ
+		
 		// SQL文を準備する
 		String sql = "DELETE FROM tasks WHERE task_id = ?";
-		PreparedStatement pStmt = conn.prepareStatement(sql);
+		
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+			pStmt.setInt(1, taskId);
+			
+			// SQLを実行して、削除されたかどうかを受け取る
+			ans = pStmt.executeUpdate();
+		} catch (Exception e) {
+			throw new RuntimeException("タスク削除処理中にDBエラーが発生しました", e);
+		}
 
-		// SQL文を完成させる
-		pStmt.setInt(1, taskId);
 
 		return ans;
 	}
+	
+	
+	
 
 	//	タスクステータス更新メソッド
-	public int statusChange(int taskId, int userId) {
+	public int statusChange(int taskId) {
 		int ans = 0;
 		//	処理はのちに記述。今は返すだけ
 		return ans;
 	}
 
 	//	タスク詳細を表示するメソッド
-	public TaskDTO taskDetail(int taskId, int userId) throws SQLException {
+	public TaskDTO taskDetail(int taskId) throws SQLException {
 		TaskDTO dto = null;
 		//	処理はのちに記述。今は返すだけ
 		String sql = "SELECT FROM tasks WHERE task_id = ? ";
@@ -279,13 +288,88 @@ public class TaskDAO {
 		return dto;
 	}
 
+
+
+
+	
+	// 新規登録初期表示用メソッド
+	public TaskDTO taskToEdit(int taskId) throws SQLException {
+		TaskDTO dto = null;
+
+		// SQL文準備
+		String sql = "SELECT FROM tasks WHERE task_id = ? ";
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		
+		// SQL文を完成させる
+		pStmt.setInt(1, taskId);
+		
+		// SELECT文を実行し、結果表を取得する
+		ResultSet rs = pStmt.executeQuery();
+
+		//移し替え
+		while (rs.next()) {
+		dto.setTaskId(rs.getInt("task_id"));
+		dto.setUserId(rs.getInt("user_id"));
+		dto.setName(rs.getString("task_name"));
+		dto.setStatus(rs.getInt("task_status"));
+		dto.setPriority(rs.getInt("task_priority"));
+		dto.setExplainText(rs.getString("task_explanation"));
+		dto.setLimitDate(rs.getString("task_limit"));
+		dto.setEstimatedWork(rs.getFloat("task_estimated_work"));
+		dto.setProjectId(rs.getInt("project_id"));
+		dto.setStartDate(rs.getString("task_start_date"));
+		dto.setProgress(rs.getInt("progress"));
+				}
+
+		// 戻り値
+		return dto;
+	}
+	
+	
+	
 	//  ホーム画面のタスク一覧を表示するメソッド
-	public ArrayList<TaskDTO> homeTaskList(int taskId, int userId) {
+	public ArrayList<TaskDTO> homeTaskList(int userId) throws SQLException {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
-		//	処理はのちに記述。今は返すだけ
+		//	(処理)s
+		// SELECT文を準備する
+		String sql = "SELECT * FROM tasks WHERE user_id = ? ORDER BY number";
+		//デバッグ（SQL文の確認用）
+		System.out.println(sql);
+
+		// まとめる
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		pStmt.setInt(1, userId);
+		// SELECT文を実行し、結果表を取得する
+		ResultSet rs = pStmt.executeQuery();
+
+		//移し替え
+		while (rs.next()) {
+			TaskDTO dto = new TaskDTO();
+			dto.setTaskId(rs.getInt("task_id"));
+			dto.setUserId(rs.getInt("user_id"));
+			dto.setName(rs.getString("task_name"));
+			dto.setStatus(rs.getInt("task_status"));
+			dto.setProjectId(rs.getInt("project_id"));
+			dto.setPriority(rs.getInt("task_priority"));
+			dto.setLimitDate(rs.getString("task_limit"));
+			dto.setEstimatedWork(rs.getFloat("task_estimated_work"));
+			dto.setProgress(rs.getInt("progress"));
+			
+			taskList.add(dto);
+		}
+
 		return taskList;
 
 	}
+	//   工数を登録するメソッド
+	public int workRegist(int taskId, int userId) {
+		int ans = 0;
+		//	処理はのちに記述。今は返すだけ
+		
+		
+		return ans;
+	}
+
 
 	//  案件一覧画面のタスク項目を表示するメソッド
 	public ArrayList<TaskDTO> projectList(int taskId, int userId) {
@@ -303,13 +387,8 @@ public class TaskDAO {
 
 	}
 
-	//   工数を登録するメソッド
-	public int workRegist(int taskId, int userId) {
-		int ans = 0;
-		//	処理はのちに記述。今は返すだけ
-		
-		
-		return ans;
-	}
+	
+	
+
 
 }
