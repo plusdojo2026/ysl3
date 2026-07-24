@@ -50,7 +50,7 @@ public class TaskService {
 	}
 
 	// タスク検索をするメソッド
-	public ArrayList<TaskDTO> taskSearch(int taskId, int projectId, int status, int userId, String name) {
+	public ArrayList<TaskDTO> taskSearch(int taskId, int projectId, int status, int userId, String name) throws SQLException {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 
 		// DB接続
@@ -126,7 +126,7 @@ public class TaskService {
 	}
 
 	// ユーザー削除メソッド
-	public int taskDelete(int taskId,int userId) {
+	public int taskDelete(int taskId,int userId) throws SQLException {
 		int ans = 0;
 
 		// DB接続
@@ -174,7 +174,7 @@ public class TaskService {
 	}
 
 	//タスク詳細を表示するメソッド
-	public TaskDTO taskDetail(int taskId,int userId) {
+	public TaskDTO taskDetail(int taskId,int userId) throws SQLException {
 		TaskDTO dto = null;
 
 		// DB接続
