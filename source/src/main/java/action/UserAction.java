@@ -17,7 +17,7 @@ public class UserAction {
 		this.request = request;
 	}
 
-	// ログインメソッド
+	// ログインメソッド----------------------------------------------------------
 	public String login() throws UnsupportedEncodingException {
 
 		// 返却する次の飛び先のURLを一旦定義
@@ -33,14 +33,13 @@ public class UserAction {
 
 		// パスワード形式チェック
 		if (password == null || password.length() < 6 || password.length() > 20) {
-			request.setAttribute("errMsg", "※パスワードは6文字以上20文字以内で入力してください");
+			request.setAttribute("errMsg", "パスワードは6文字以上20文字以内で入力してください");
 			page = "/WEB-INF/jsp/login.jsp";
 			return page;
 			
-		} else if (!password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$")) {
 			// 英字と数字がどちらも含まれており、かつ半角英数字のみであること
-			
-			request.setAttribute("errMsg", "※パスワードは半角英字と数字を組み合わせて入力してください");
+		} else if (!password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$")) {
+			request.setAttribute("errMsg", "パスワードは半角英字と数字を組み合わせて入力してください");
 			page = "/WEB-INF/jsp/login.jsp";
 			return page;
 		}
@@ -52,7 +51,7 @@ public class UserAction {
 		// DTOがnullなら
 		if (dto == null) {
 
-			request.setAttribute("errMsg", "※ID,またはPWが違います");
+			request.setAttribute("errMsg", "IDまたはパスワードが違います");
 			page = "/WEB-INF/jsp/login.jsp";
 			return page;
 
@@ -71,7 +70,7 @@ public class UserAction {
 
 	}
 
-	// パスワード変更メソッド
+	// パスワード変更メソッド----------------------------------------------------------
 	public String passwordChange() throws UnsupportedEncodingException {
 
 		// 返却する次の飛び先のURLを定義
@@ -81,7 +80,15 @@ public class UserAction {
 		request.setCharacterEncoding("UTF-8");
 		String password = request.getParameter("password");
 		String newPassword = request.getParameter("new-password");
-
+		String newPasswordConfirm = request.getParameter("new-password-confirm");
+		
+		// パスワードの入力値チェック
+		if (newPassword != newPasswordConfirm) {
+			request.setAttribute("errMsg", "パスワードが一致しません");
+			page = "/WEB-INF/jsp/mypage.jsp";
+			return page;
+		}
+		
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();
 		UserDTO loginUser = (UserDTO) session.getAttribute("user");
@@ -110,7 +117,7 @@ public class UserAction {
 		return mypageSelect();
 	}
 
-	// ログアウトメソッド
+	// ログアウトメソッド----------------------------------------------------------
 	public String logout() {
 
 		// セッションを取得
@@ -131,7 +138,7 @@ public class UserAction {
 		return page;
 	}
 	
-	// マイページ表示用メソッド
+	// マイページ表示用メソッド----------------------------------------------------------
 	public String mypageSelect() {
 		String page = "/WEB-INF/jsp/mypage.jsp";
 		
