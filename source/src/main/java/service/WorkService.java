@@ -155,5 +155,28 @@ public class WorkService {
 
 		return workList;
 	}
+	
+	//工数登録画面で案件名とタスク名を表示する
+	public WorkDTO workToRegist(int taskId) {
+		WorkDTO ans = null;
+		// DB接続
+		access();
+
+		try {
+
+		// DAOを実体化
+		WorkDAO dao = new WorkDAO(conn);
+
+		//DAOのメソッドを実行
+		ans = dao.workToRegist(taskId);
+		
+		} finally {
+
+		// DB接続解除
+		close();
+		}	
+		
+		return ans;
+	}
 
 }

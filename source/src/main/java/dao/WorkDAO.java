@@ -94,10 +94,24 @@ public class WorkDAO {
 	}
 
 	//工数を計算するメソッド
-	public int workTally(int workId, int tasklId) {
+	public int workTally(int workId, int taskId) {
 		int ans = 0;
-		//処理はのちに記述。今は返すだけ
 		
+		String sql = "SELECT ";
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+			
+			pStmt.setInt(1, workId);
+			pStmt.setInt(2, taskId);
+			
+			try (ResultSet rs = pStmt.executeQuery()) {
+	         if (rs.next()) {
+	        	 ans = rs.getInt(1);
+	            }
+	        }
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return ans;
 	}
 
@@ -132,4 +146,33 @@ public class WorkDAO {
 		}
 		return workList;
 	}
+
+	
+	//工数登録画面で案件名とタスク名を表示する	
+	public WorkDTO workToRegist(int taskId) {
+		WorkDTO ans = null;
+		
+		String sql = "SELECT * FROM work WHERE task_id = ?";
+		
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+
+			pStmt.setInt(1, taskId);
+
+			try (ResultSet rs = pStmt.executeQuery()) {
+				// 移し替え
+				while (rs.next()) {
+					WorkDTO dto = new WorkDTO();
+					dto.setId(rs.getInt("id"));
+					dto.setTaskId(rs.getInt("task_id"));
+	
+					
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
+		
+		return ans;
+	}
+
 }

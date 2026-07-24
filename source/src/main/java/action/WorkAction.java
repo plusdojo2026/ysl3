@@ -8,8 +8,11 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import model.ProjectDTO;
 import model.UserDTO;
 import model.WorkDTO;
+import service.ProjectService;
+import service.TaskService;
 import service.WorkService;
 
 public class WorkAction {
@@ -134,7 +137,7 @@ public class WorkAction {
 		return page;
 	}	
 	
-	//工数を計算する、わかりません
+	//工数を計算する
 	public String tally() throws UnsupportedEncodingException {
 		String page="/WEB-INF/jsp/work_regist.jsp";
 		
@@ -147,8 +150,45 @@ public class WorkAction {
 		WorkService service = new WorkService();
 		int ans = service.workTally(workId, taskId);
 		
+		// 戻り値
+		return page;
+	}
+	
+	//工数登録画面で案件名とタスク名を表示する
+	public String workToRegist() throws UnsupportedEncodingException {
 		
-
+		// 戻り値のページを定義
+		String page = null;
+				
+		// セッションを取得
+		HttpSession session = request.getSession(false);	
+				
+		UserDTO loginUser = (UserDTO) session.getAttribute("user");
+				
+		// セッションが切れている場合
+		if (loginUser == null) {
+			page = "/WEB-INF/jsp/login.jsp";
+		return page;
+		}
+				
+		// セッションからユーザーID取得
+		int userId = loginUser.getId();		
+		
+		//値の取得
+		request.setCharacterEncoding("UTF-8");	
+		int taskId = Integer.parseInt(request.getParameter("task-id"));
+		
+		// Serviceを実体化して処理を依頼
+		WorkService workService = new WorkService();
+		ProjectService projectService = new ProjectService();
+		TaskService taskService = new TaskService();
+		
+		WorkDTO workAns = workService.workToRegist(taskId);
+		ProjectDTO projectAns = projectService.workToRegist(projectId);
+		
+		//値を取得
+		int projectId = Integer.parseInt(request.getParameter("project-id"));
+		
 		
 		// 戻り値
 		return page;
