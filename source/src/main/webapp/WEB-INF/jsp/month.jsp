@@ -16,25 +16,96 @@
   <main class="main">
   
   <h1>月次集計</h1>
-
-<!-- 日付表示 -->
-<div class="calendar">
-</div>
+<form method="POST" action="<c:url value='/Controller'/>">
+<input type="hidden" name="page-id" value="MO01">
 
 <!-- 月切り替えボタン -->
-<div class="month_btn">
-  <button ><</button>
-  <button >></button>
-
+<div class="month-control">
+	<a href="month.action?month=${lastMonth}">
+        ＜
+    </a>
+    <span>
+        ${targetMonth}
+    </span>
+	<a href="month.action?month=${nextMonth}">
+        ＞
+    </a>
 </div>
 
+<!-- サマリーカード -->
+<table>
+    <tr>
+        <th>稼働メンバー</th>
+        <th>総工数</th>
+        <th>実績</th>
+        <th>予定</th>
+        <th>残工数</th>
+    </tr>
+		<c:forEach var="summary" items="${summaryList}">
+			<tr>
+				<td>${summary.member }</td><!-- 稼働メンバー -->
+				<td>${summary. }</td><!-- 総工数 -->
+				<td>${summary. }</td><!-- 実績 -->
+				<td>${summary. }</td><!-- 予定 -->
+				<td>${summary. }</td><!-- 残工数 -->
+			</tr>
+		</c:forEach>
+</table>
+	
 <!-- CSV出力ボタン -->
-<button id="csv_btn">CSV出力</button>
+	<form action="${pageContext.request.contextPath}/Controller" method="post">
+<!-- 多分EL式 -->	
+	<input type="hidden" name="month" >
+	<input type="submit" name="csv_btn" value="CSV出力">
+	</form>
 
 <h2>案件別実績</h2>
+<table>
+	<tr>
+         <th>案件名</th>
+         <th>実績工数</th>
+         <th>予定</th>
+         <th>進捗率</th>
+    </tr>
+        <c:forEach var="project" items="${projectSummaryList}">
+            <tr>
+                <td>${project.name}</td><!-- 案件名 -->
+                <td>${project.actualWork} h</td><!-- 実績工数 -->
+                <td>${project.plannedWork} h</td><!-- 予定 -->
+				<td><div class="progress">
+    					<div class="progress-bar" role="progressbar" 
+    							style="width:${project.progressRate}%;"><!-- 進捗率 -->
+    			                  ${project.progressRate}%
+			     </div>
+			    </div>
+			   </td>
+			</tr>
+	  	</c:forEach>
+</table>
 
 <h2>ユーザー別実績</h2>
-
+<table>
+    <tr>
+        <th>担当者名</th>
+        <th>実績工数</th>
+        <th>予定</th>
+        <th>進捗率</th>
+    </tr>
+   		<c:forEach var="user" items="${userSummaryList}">
+			<tr>
+                <td>${user.name}</td><!-- 担当者名 -->
+				<td>${user.actualWork} h</td><!-- 実績工数 -->
+				<td>${user.plannedWork} h</td><!-- 予定 -->
+				<td><div class="progress">
+                        <div class="progress-bar" role="progressbar"
+                             	style="width:${user.progressRate}%;"><!-- 進捗率 -->
+                            	  ${user.progressRate}%
+                   </div>
+                  </div>
+                </td>
+             </tr>
+         </c:forEach>
+</table>
   </main>
     <!---------- メインここまで ---------->
   <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
