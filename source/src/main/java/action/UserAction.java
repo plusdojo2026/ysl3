@@ -80,7 +80,15 @@ public class UserAction {
 		request.setCharacterEncoding("UTF-8");
 		String password = request.getParameter("password");
 		String newPassword = request.getParameter("new-password");
-
+		String newPasswordConfirm = request.getParameter("new-password-confirm");
+		
+		// パスワードの入力値チェック
+		if (newPassword != newPasswordConfirm) {
+			request.setAttribute("errMsg", "パスワードが一致しません");
+			page = "/WEB-INF/jsp/mypage.jsp";
+			return page;
+		}
+		
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();
 		UserDTO loginUser = (UserDTO) session.getAttribute("user");

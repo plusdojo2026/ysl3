@@ -257,6 +257,8 @@ public class UserDAO {
 		String sql = "SELECT user_id, login_id, user_name, mail, role, sol FROM users WHERE user_id = ?";
 
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+			
+			// 変数セット
 			pStmt.setInt(1, userId);
 
 			try (ResultSet rs = pStmt.executeQuery()) {
@@ -286,6 +288,8 @@ public class UserDAO {
 		String sql = "SELECT user_id, login_id, user_name, mail, role, sol FROM users WHERE user_id = ?";
 
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+			
+			// 変数セット
 			pStmt.setInt(1, userId);
 
 			try (ResultSet rs = pStmt.executeQuery()) {
