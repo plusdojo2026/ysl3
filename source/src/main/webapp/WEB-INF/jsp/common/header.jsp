@@ -1,10 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 
 <header class="header">
-	<a href="${pageContext.request.contextPath}/Controller?page-id=HO01"
-		class="system-title">TaskManager</a> <a
-		href="${pageContext.request.contextPath}/Controller?page-id=MY01"
-		class="user-name-view">${user.userName}</a>
+	<a href="${pageContext.request.contextPath}/Controller?page-id=HO01" class="system-title">TaskManager</a> 
+	<a href="${pageContext.request.contextPath}/Controller?page-id=MY01" class="user-name-view">${user.userName}</a>
 	<button id="menuButton" class="menu-button" type="button">☰</button>
 </header>
 
@@ -20,25 +18,16 @@
 
 	<%-- 今だけ --%>
 	<div class="now-menu">
-		<a href="${pageContext.request.contextPath}/Controller?page-id=PR04">
-			案件詳細 </a> <a
-			href="${pageContext.request.contextPath}/Controller?page-id=PR02">
-			案件登録 </a> <a
-			href="${pageContext.request.contextPath}/Controller?page-id=PR03">
-			案件編集 </a> <a
-			href="${pageContext.request.contextPath}/Controller?page-id=TA04">
-			タスク詳細 </a> <a
-			href="${pageContext.request.contextPath}/Controller?page-id=TA02">
-			タスク登録 </a> <a
-			href="${pageContext.request.contextPath}/Controller?page-id=TA03">
-			タスク編集 </a> <a
-			href="${pageContext.request.contextPath}/Controller?page-id=WO01">
-			工数登録 </a> <a
-			href="${pageContext.request.contextPath}/Controller?page-id=AD02">
-			メンバー登録 </a> <a
-			href="${pageContext.request.contextPath}/Controller?page-id=AD03">
-			メンバー編集 </a> <a
-			href="${pageContext.request.contextPath}/Controller?page-id=LO01">ログイン画面</a>
+		<a href="${pageContext.request.contextPath}/Controller?page-id=PR04">案件詳細</a>
+		<a href="${pageContext.request.contextPath}/Controller?page-id=PR02">案件登録</a>
+		<a href="${pageContext.request.contextPath}/Controller?page-id=PR03">案件編集</a>
+		<a href="${pageContext.request.contextPath}/Controller?page-id=TA04">タスク詳細</a>
+		<a href="${pageContext.request.contextPath}/Controller?page-id=TA02">タスク登録</a>
+		<a href="${pageContext.request.contextPath}/Controller?page-id=TA03">タスク編集</a>
+		<a href="${pageContext.request.contextPath}/Controller?page-id=WO01">工数登録</a>
+		<a href="${pageContext.request.contextPath}/Controller?page-id=AD02">メンバー登録</a>
+		<a href="${pageContext.request.contextPath}/Controller?page-id=AD03">メンバー編集</a>
+		<a href="${pageContext.request.contextPath}/Controller?page-id=LO01">ログイン画面</a>
 	</div>
 	<%-- 今だけ --%>
 

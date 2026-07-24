@@ -49,7 +49,7 @@ public class UserService {
 		   }
 		}
 
-	// ログインメソッド
+	// ログインメソッド----------------------------------------------------------
 	public UserDTO login(String loginId, String password) {
 		UserDTO dto = null;
 
@@ -73,7 +73,7 @@ public class UserService {
 		return dto;
 	}
 	
-	// パスワード変更メソッド
+	// パスワード変更メソッド----------------------------------------------------------
 	public int passwordChange(int userId, String password, String newPassword) {
 		int ans = 0;
 
@@ -97,7 +97,7 @@ public class UserService {
 		return ans;
 	}
 	
-	// ユーザー一覧を取得するメソッド（管理者）
+	// ユーザー一覧を取得するメソッド（管理者）----------------------------------------------------------
 	public ArrayList<UserDTO> userSelectAll() {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
 		
@@ -122,34 +122,34 @@ public class UserService {
 	}
 	
 	
-	//	ユーザーを検索するメソッド（管理者）
-	public ArrayList<UserDTO> userSearch(String userName) {
-		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
-		
-		// DB接続
-		access();
-		
-		try {
-			// DAOを実体化
-			UserDAO dao = new UserDAO(conn);
-			
-			// ユーザー検索処理を実施。DAOのメソッドを実行
-			userList = dao.userSearch(userName);
-			
-		} finally {
-			
-			// DB接続解除
-			close();
-		}
-		
-		
-		
-		// 戻り値
-		return userList;
-	}
+//	//	ユーザーを検索するメソッド（管理者）----------------------------------------------------------JSでやるかも
+//	public ArrayList<UserDTO> userSearch(String keyword) {
+//		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
+//		
+//		// DB接続
+//		access();
+//		
+//		try {
+//			// DAOを実体化
+//			UserDAO dao = new UserDAO(conn);
+//			
+//			// ユーザー検索処理を実施。DAOのメソッドを実行
+//			userList = dao.userSearch(keyword);
+//			
+//		} finally {
+//			
+//			// DB接続解除
+//			close();
+//		}
+//		
+//		
+//		
+//		// 戻り値
+//		return userList;
+//	}
 	
 	
-	// ユーザー登録メソッド（管理者）
+	// ユーザー登録メソッド（管理者）----------------------------------------------------------
 	public int userRegist(String loginId, String userName, String mail, String password, int role) {
 		int ans = 0;
 		
@@ -174,8 +174,8 @@ public class UserService {
 		return ans;
 	}
 	
-	// ユーザー編集メソッド（管理者）
-	public int userEdit(String userName, int role, String mail, int sol) {
+	// ユーザー編集メソッド（管理者）----------------------------------------------------------
+	public int userEdit(int userId, String userName, int role, String mail, int sol) {
 		int ans = 0;
 		
 		// DB接続
@@ -187,7 +187,7 @@ public class UserService {
 			UserDAO dao = new UserDAO(conn);
 			
 			// ユーザー編集処理を実施。DAOのメソッドを実行
-			ans = dao.userEdit(userName, role, mail, sol);
+			ans = dao.userEdit(userId, userName, role, mail, sol);
 		} finally {
 			
 			// DB接続解除
@@ -199,7 +199,7 @@ public class UserService {
 	}
 	
 	
-	//	案件に紐づけられてるユーザー取得メソッド（案件登録の際の担当者選ぶ用）
+	//	案件に紐づけられてるユーザー取得メソッド（案件登録の際のPM選ぶ用）----------------------------------------------------------
 	public ArrayList<UserDTO> selectProjectUserName() {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
 		
@@ -221,7 +221,7 @@ public class UserService {
 		return userList;
 	}
 	
-	//	タスクに紐づけられているユーザー取得メソッド（タスク登録の際の担当者選ぶ用）
+	//	タスクに紐づけられているユーザー取得メソッド（タスク登録の際の担当者選ぶ用）----------------------------------------------------------
 	public ArrayList<UserDTO> selectTaskUserName(int projectId) {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
 		
@@ -244,7 +244,7 @@ public class UserService {
 		return userList;
 	}
 	
-	// マイページでユーザーの情報を表示するメソッド
+	// マイページでユーザーの情報を表示するメソッド----------------------------------------------------------
 	public UserDTO mypageSelect(int userId) {
 		UserDTO dto = null;
 		
@@ -264,6 +264,31 @@ public class UserService {
 			close();
 		}
 		
+		// 戻り値
+		return dto;
+	}
+	
+	// ユーザー編集画面でユーザーの情報を表示するメソッド
+	public UserDTO memberToEdit(int userId) {
+		UserDTO dto = null;
+		
+		// DB接続
+		access();
+		
+		try {
+			
+			// DAOを実体化
+			UserDAO dao = new UserDAO(conn);
+			
+			// ユーザーの情報表示処理を実施。DAOのメソッドを実行
+			dto = dao.memberToEdit(userId);
+		} finally {
+			
+			// DB接続解除
+			close();
+		}
+		
+		// 戻り値
 		return dto;
 	}
 	

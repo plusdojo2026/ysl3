@@ -30,8 +30,7 @@
 				<div class="mini-card">
 					<input type="hidden" name="page-id" value="LO01" />
 					<div class="login-text">ログインID</div>
-					<input type="text" name="login-id" class="login-input"
-						value="${param.user-id }" required placeholder="ログインIDを入力してください"/>
+					<input type="text" name="login-id" class="login-input" required placeholder="ログインIDを入力してください"/>
 					<div class="login-text">パスワード</div>
 					<input type="password" name="password" class="login-input" required placeholder="パスワードを入力してください" id="password" />
 				</div>

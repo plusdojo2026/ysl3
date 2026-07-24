@@ -15,16 +15,15 @@ body {
 body {
   padding-top: 60px;
   padding-bottom: 60px;
-  overflow-x: hidden;
+  overflow-x: hidden; /* はみ出し防止 */
   color: #4e4d4c;
-  font-family: sans-serif;
 }
 
 /*------------------------*/
 /*--------ヘッダー--------*/
 /*------------------------*/
 .header {
-  position: fixed;
+  position: fixed; /* 固定 */
   top: 0;
   right: 0;
   left: 0;
@@ -34,7 +33,6 @@ body {
   padding: 0 24px;
   display: flex;
   align-items: center;
-
   background: #29988b;
   color: #fff;
 }
@@ -68,6 +66,8 @@ body {
   background: transparent;
   color: #fff;
   font-size: 28px;
+  
+/* ズレ防止 */
   line-height: 1;
   cursor: pointer;
 }
@@ -100,13 +100,14 @@ body {
 /*--------ドロワーメニュー--------*/
 /*--------------------------------*/
 
+/* メニュー自体 */
 .menu {
   position: fixed;
   top: 0;
   right: 0;
   z-index: 30;
-
-  width: 280px;
+  width: 260px;
+/* 画面いっぱい */
   height: 100vh;
   background: #fff;
   box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
@@ -131,6 +132,8 @@ body {
   background: #fff;
   color: #4e4d4c;
   font-size: 30px;
+  
+  /* ズレ防止 */
   line-height: 1;
   cursor: pointer;
 }
