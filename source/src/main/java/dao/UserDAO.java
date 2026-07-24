@@ -193,6 +193,40 @@ public class UserDAO {
 	public UserDTO mypageSelect(int userId) {
 		UserDTO dto = null;
 
+		// 戻り値
 		return dto;
 	}
+	
+	// ユーザー編集画面にユーザーの情報を表示するメソッド----------------------------------------------------------
+	public UserDTO memberToEdit(int userId) {
+		UserDTO dto = null;
+		
+		// SQL文準備
+		String sql = "SELECT user_id, login_id, user_name, mail, role, sol FROM users WHERE user_id = ?";
+
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+			pStmt.setInt(1, userId);
+
+			try (ResultSet rs = pStmt.executeQuery()) {
+				if (rs.next()) {
+					dto = new UserDTO();
+					dto.setId(rs.getInt("user_id"));
+					dto.setLoginId(rs.getString("login_id"));
+					dto.setUserName(rs.getString("user_name"));
+					dto.setMail(rs.getString("mail"));
+					dto.setRole(rs.getInt("role"));
+					dto.setSol(rs.getInt("sol"));
+				}
+			}
+		} catch (SQLException e) {
+
+			throw new RuntimeException("ログイン処理中にDBエラーが発生しました", e);
+		}
+		// 戻り値
+		return dto;
+	}
+	
+	
+	
+	
 }

@@ -264,6 +264,31 @@ public class UserService {
 			close();
 		}
 		
+		// 戻り値
+		return dto;
+	}
+	
+	// ユーザー編集画面でユーザーの情報を表示するメソッド
+	public UserDTO memberToEdit(int userId) {
+		UserDTO dto = null;
+		
+		// DB接続
+		access();
+		
+		try {
+			
+			// DAOを実体化
+			UserDAO dao = new UserDAO(conn);
+			
+			// ユーザーの情報表示処理を実施。DAOのメソッドを実行
+			dto = dao.memberToEdit(userId);
+		} finally {
+			
+			// DB接続解除
+			close();
+		}
+		
+		// 戻り値
 		return dto;
 	}
 	
