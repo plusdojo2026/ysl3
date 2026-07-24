@@ -30,16 +30,17 @@ public class ProjectAction {
 	return page;
 	}
 	//projectSearchメソッド
-	public String projectSearch() throws UnsupportedEncodingException{
+	public String projectSearch() throws UnsupportedEncodingException ,SQLException{
 		String page="/WEB-INF/jsp/project_list.jsp";
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
 		int projectStatus = Integer.parseInt(request.getParameter("projectStatus"));
 		int projectPriority = Integer.parseInt(request.getParameter("projectPriority"));
+		String projectName = request.getParameter("projectName");
 		
 		ProjectService service = new ProjectService();
 		
-		ArrayList<ProjectDTO> projectList = service.projectSearch(projectStatus,projectPriority);
+		ArrayList<ProjectDTO> projectList = service.projectSearch(projectStatus,projectPriority,projectName);
 		request.setAttribute("projectList" , projectList);
 		return page;
 	}
@@ -131,8 +132,8 @@ public class ProjectAction {
 		request.setAttribute("ans", ans);
 		return page;
 	}
-	//projectdetailメソッド
-	public  String projectdetail() throws UnsupportedEncodingException,SQLException {
+	//projectDetailメソッド
+	public  String projectDetail() throws UnsupportedEncodingException,SQLException {
 		String page = "/WEB-INF/jsp/project_list.jsp";
 		
 		//入力値の取得
@@ -140,13 +141,14 @@ public class ProjectAction {
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
 		
 		ProjectService service = new ProjectService();
-		ArrayList<ProjectDTO> projectList = service.projectdetail(projectId);
-		request.setAttribute("projectList" , projectList);
+		ProjectDTO project = service.projectDetail(projectId);
+		request.setAttribute("project" , project);
 		return page;
 	}}
 
 
 
-//追加メソッド
+//追加メソッドselectProjectUserName
+	
 
 	

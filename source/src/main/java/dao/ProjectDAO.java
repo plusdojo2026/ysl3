@@ -15,10 +15,10 @@ import model.ProjectDTO;
 	}
 		
 		
-	//projectSelectAllメソッド
+	//projectSelectAllメソッド完成（仮）
 		public ArrayList<ProjectDTO> projectSelectAll() {
 			ArrayList<ProjectDTO> projectList = new ArrayList<>();
-			String sql = "SELECT * FROM projects";
+			String sql = "SELECT DISTINCT projects.* FROM projects INNER JOIN tasks ON projects.project_id = tasks.project_id WHERE tasks.user_id = ? ;";
 			
 			try{PreparedStatement ps =conn.prepareStatement(sql);
 			
@@ -42,14 +42,15 @@ import model.ProjectDTO;
 				dto.setTotalWork(rs.getFloat("totalWork"));
 				
 				projectList.add(dto);
-				}rs.close();
-				ps.close();} catch (SQLException e) {
-				e.printStackTrace();
+				}
+				rs.close();
+				ps.close();} catch (SQLException e)
+				{e.printStackTrace();
 				
 				}return projectList;
 				}
 
-		//projectSearchメソッド
+		//projectSearchメソッド（保留）
 	public ArrayList<ProjectDTO> projectSearch(int projectStatus , int projectPriority , String projectName) throws SQLException {
 		
 		ArrayList<ProjectDTO> projectList  = new ArrayList<ProjectDTO>();
@@ -80,7 +81,7 @@ import model.ProjectDTO;
 			
 		return projectList;
 	}
-	//projectRegistメソッド 完成
+	//projectRegistメソッド （完成）
 	public int projectRegist(String projectCode, String projectName ,String customer , int pmId , int projectStatus, int projectPriority, String projectStartDate , String projectEndDate , String projectExplain)
 			throws SQLException{
 		// SELECT文を準備する
@@ -118,7 +119,7 @@ import model.ProjectDTO;
 			}
 		return ans;
 	}
-	//projectUpdateメソッド完了
+	//projectUpdateメソッド（完了）
 	public int projectUpdate(String projectCode , String projectName ,String customer, int pmId , int projectStatus , int projectPriority , String projectStartDate , String projectEndDate , String projectExplain)throws SQLException {
 		// SELECT文を準備する
 		String sql = "update projects SET project_code=?,project_name=?,customer=?,pm_Id=?,project_status=?,project_priority=?,project_startDate=?,project_end_date=?,project_explain=?  where project_id=?_";
@@ -159,7 +160,7 @@ import model.ProjectDTO;
 	
 	public int projectStatusChange(int projectId,int projectStatus) throws SQLException {
 		
-		// SELECT文を準備する
+		// SELECT文を準備する（仮）
 		String sql = "update projects set project_status=? where project_id=?";
 		int ans = 0;
 		PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -175,11 +176,12 @@ import model.ProjectDTO;
 		}
 		return ans;
 	}
-	//projectdetailメソッド
+	//projectdetailメソッド（完成）
 	// SELECT文を準備する
-	public ArrayList<ProjectDTO> projectdetail(int projecrId)throws SQLException  {
+	public ProjectDTO projectDetail(int projecrId)throws SQLException  {
 		
-		ArrayList<ProjectDTO> ProjectList = new ArrayList<ProjectDTO>();
+		//ProjectDTO Project = new ProjectDTO();
+		ProjectDTO dto = null;
 		
 		String sql =" SELECT * FROM projects where project_id=?";
 		
@@ -187,14 +189,16 @@ import model.ProjectDTO;
 		System.out.println(sql);
 				
 		// まとめる
-		PreparedStatement pStmt = conn.prepareStatement(sql);
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
+		ps.setInt(1,projecrId);
 		
 		// SELECT文を実行し、結果表を取得する
-		ResultSet rs = pStmt.executeQuery();
+		ResultSet rs = ps.executeQuery();
 		
 		//移し替え
-		while(rs.next()) {
-			ProjectDTO dto = new ProjectDTO();
+		if(rs.next()) {
+			 dto = new ProjectDTO();
 			dto.setCode(rs.getString("projectId"));
 			dto.setName(rs.getString("projectName"));
 			dto.setCustomer(rs.getString("customer"));
@@ -208,8 +212,10 @@ import model.ProjectDTO;
 			dto.setEstimatedWork(rs.getFloat("estimatedWork"));
 			dto.setPmName(rs.getString("pmName"));
 			dto.setTotalWork(rs.getFloat("totalWork"));
+		}
+			rs.close();
+			ps.close();
 			
-			}
-		return ProjectList;
+		return dto;
 	}
 }

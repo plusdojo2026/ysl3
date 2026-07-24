@@ -43,7 +43,7 @@ public class ProjectService {
 		}
 		
 		//projectSearchメソッド
-		public ArrayList<ProjectDTO> projectSearch(int projectStatus , int projectPriority) {
+		public ArrayList<ProjectDTO> projectSearch(int projectStatus , int projectPriority , String projectName) throws SQLException{
 			ArrayList<ProjectDTO> projectList = null;
 			// DB接続
 			access();
@@ -51,7 +51,7 @@ public class ProjectService {
 				ProjectDAO dao = new ProjectDAO(this.conn);
 				
 				// ログイン処理を実施。DAOのメソッドを実行
-				projectList = dao.projectSearch( projectStatus , projectPriority);
+				projectList = dao.projectSearch( projectStatus , projectPriority, projectName);
 				
 				}finally {
 					close();
@@ -126,21 +126,21 @@ public class ProjectService {
 			return ans;
 		}
 		
-		//projectdetailメソッド
-		public ArrayList<ProjectDTO>projectdetail(int projectId)throws SQLException {
-			ArrayList<ProjectDTO> projectList= null;
+		//projectDetailメソッド
+		public ProjectDTO projectDetail(int projectId)throws SQLException {
+			ProjectDTO dto = null;
 			// DB接続
 						access();
 						try {// DAOを実体化
 							ProjectDAO dao = new ProjectDAO(this.conn);
 							
 							// ログイン処理を実施。DAOのメソッドを実行
-							projectList = dao.projectdetail(projectId);
+							dto = dao.projectDetail(projectId);
 							
 							}finally {
 								close();
 							}
-			return projectList;
+			return dto;
 		}
 		
 }
