@@ -33,14 +33,13 @@ public class UserAction {
 
 		// パスワード形式チェック
 		if (password == null || password.length() < 6 || password.length() > 20) {
-			request.setAttribute("errMsg", "※パスワードは6文字以上20文字以内で入力してください");
+			request.setAttribute("errMsg", "パスワードは6文字以上20文字以内で入力してください");
 			page = "/WEB-INF/jsp/login.jsp";
 			return page;
 			
-		} else if (!password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$")) {
 			// 英字と数字がどちらも含まれており、かつ半角英数字のみであること
-			
-			request.setAttribute("errMsg", "※パスワードは半角英字と数字を組み合わせて入力してください");
+		} else if (!password.matches("^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$")) {
+			request.setAttribute("errMsg", "パスワードは半角英字と数字を組み合わせて入力してください");
 			page = "/WEB-INF/jsp/login.jsp";
 			return page;
 		}
@@ -52,7 +51,7 @@ public class UserAction {
 		// DTOがnullなら
 		if (dto == null) {
 
-			request.setAttribute("errMsg", "※ID,またはPWが違います");
+			request.setAttribute("errMsg", "IDまたはパスワードが違います");
 			page = "/WEB-INF/jsp/login.jsp";
 			return page;
 
