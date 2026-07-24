@@ -111,7 +111,7 @@ public class ProjectService {
 		}
 			
 		//projectStatusChangeメソッド
-		public int projectStatusChange(int projectId,int projectStatus) {
+		public int projectStatusChange(int projectId,int projectStatus) throws SQLException{
 			int ans = 0;
 			
 			//DB接続
@@ -127,20 +127,20 @@ public class ProjectService {
 		}
 		
 		//projectdetailメソッド
-		public ProjectDTO projectdetail(int projectId) {
-			ProjectDTO dto = null;
+		public ArrayList<ProjectDTO>projectdetail(int projectId)throws SQLException {
+			ArrayList<ProjectDTO> projectList= null;
 			// DB接続
 						access();
 						try {// DAOを実体化
 							ProjectDAO dao = new ProjectDAO(this.conn);
 							
 							// ログイン処理を実施。DAOのメソッドを実行
-							dto = dao.projectdetail(projectId);
+							projectList = dao.projectdetail(projectId);
 							
 							}finally {
 								close();
 							}
-			return dto;
+			return projectList;
 		}
 		
 }
