@@ -1,5 +1,7 @@
 package service;
+
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -9,138 +11,167 @@ import model.ProjectDTO;
 public class ProjectService {
 
 	// データベース接続を保持する変数
-		private Connection conn = null;
+	private Connection conn = null;
 
-		// データベースとの接続を行うメソッド
-		private void access() {
-			// のちに処理記述
+	// データベース接続用 ※「romance_magic」は、データベース名
+	private static final String url ="jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
+	private static final String dbUser = "root";
+	private static final String dbPassword = "password";
+
+	
+	// データベースとの接続を行うメソッド
+	private void access() {
+		   try {
+		       // MySQLドライバーを読み込む
+		       Class.forName(
+		               "com.mysql.cj.jdbc.Driver"
+		       );
+		       // DBへ接続
+		       conn = DriverManager.getConnection(url, dbUser, dbPassword);
+		   } catch (ClassNotFoundException e) {
+		       throw new RuntimeException("MySQLドライバーが見つかりません", e);
+		   } catch (SQLException e) {
+		       throw new RuntimeException("データベースへの接続に失敗しました", e);
+		   }
 		}
 
-		// データベースとの接続を切断するメソッド
-		private void close() {
-			// のちに処理記述	
+	// データベースとの接続を切断するメソッド
+	private void close() {
+		   if (conn == null) {
+		       return;
+		   }
+		   try {
+		       conn.close();
+		   } catch (SQLException e) {
+		       throw new RuntimeException("データベースの切断に失敗しました", e);
+		   } finally {
+		       conn = null;
+		   }
 		}
-		//projectSelectAllメソッド
-		public ArrayList<ProjectDTO> projectSelectAll() {
-			ArrayList<ProjectDTO> projectList=null;
-			
-			// DB接続
-			access();
 
-			try {// DAOを実体化
-				ProjectDAO dao = new ProjectDAO(this.conn);
-				
-			projectList  = dao.projectSelectAll();
-				
-			} finally {
-				
-				// DB接続解除
-				close();
-			}
-			
-			// 戻り値
-			return projectList;
-		}
-		
-		//projectSearchメソッド
-		public ArrayList<ProjectDTO> projectSearch(int projectStatus , int projectPriority , String projectName) throws SQLException{
-			ArrayList<ProjectDTO> projectList = null;
-			// DB接続
-			access();
-			try {// DAOを実体化
-				ProjectDAO dao = new ProjectDAO(this.conn);
-				
-				// ログイン処理を実施。DAOのメソッドを実行
-				projectList = dao.projectSearch( projectStatus , projectPriority, projectName);
-				
-				}finally {
-					close();
-				}
-			return projectList;
-		}
-		
-		//projectRegistメソッド
-		public int projectRegist(String projectCode , String projectName ,String customer, int pmId , int projectStatus , int projectPriority , String projectStartDate , String projectEndDate , String projectExplain)
-				throws SQLException{
-			int ans = 0; 
-			
-			// DB接続
-			access();
-			
-			try {
+	//projectSelectAllメソッド
+	public ArrayList<ProjectDTO> projectSelectAll() {
+		ArrayList<ProjectDTO> projectList = null;
 
-				// DAOを実体化
-				ProjectDAO dao = new ProjectDAO(conn);
-				// ユーザー登録処理を実施。DAOのメソッドを実行
-				ans = dao.projectRegist(projectCode, projectName, customer ,pmId, projectStatus, projectPriority , projectStartDate ,  projectEndDate , projectExplain);
-			} finally {
-				
-				// DB接続解除
-				close();
-			}
-			
-			
-			// 戻り値
-			return ans;
-		}
-		//projectUpdateメソッド
-		public int projectUpdate(String projectCode , String projectName , String customer,int pmId , int projectStatus , int projectPriority , String projectStartDate , String projectEndDate , String projectExplain)
-				throws SQLException {
-			int ans = 0 ;
-			
-			// DB接続
-			access();
-			
-			
-			 
-			try {
+		// DB接続
+		access();
 
-				// DAOを実体化
-				ProjectDAO dao = new ProjectDAO(conn);
-				// ユーザー登録処理を実施。DAOのメソッドを実行
-				ans = dao.projectUpdate(projectCode, projectName,customer, pmId, projectStatus, projectPriority , projectStartDate ,  projectEndDate , projectExplain);
-			} finally {
-				
-				// DB接続解除
-				close();
-			}
-			
-			
-			// 戻り値
-			return ans;
+		try {// DAOを実体化
+			ProjectDAO dao = new ProjectDAO(this.conn);
+
+			projectList = dao.projectSelectAll();
+
+		} finally {
+
+			// DB接続解除
+			close();
 		}
-			
-		//projectStatusChangeメソッド
-		public int projectStatusChange(int projectId,int projectStatus) throws SQLException{
-			int ans = 0;
-			
-			//DB接続
-			access();
-			try {
-				ProjectDAO dao = new ProjectDAO(conn);
-				ans = dao. projectStatusChange(projectId,projectStatus);
-			}finally {
-				close();
-				}
-			
-			return ans;
+
+		// 戻り値
+		return projectList;
+	}
+
+	//projectSearchメソッド
+	public ArrayList<ProjectDTO> projectSearch(int projectStatus, int projectPriority, String projectName)
+			throws SQLException {
+		ArrayList<ProjectDTO> projectList = null;
+		// DB接続
+		access();
+		try {// DAOを実体化
+			ProjectDAO dao = new ProjectDAO(this.conn);
+
+			// ログイン処理を実施。DAOのメソッドを実行
+			projectList = dao.projectSearch(projectStatus, projectPriority, projectName);
+
+		} finally {
+			close();
 		}
-		
-		//projectDetailメソッド
-		public ProjectDTO projectDetail(int projectId)throws SQLException {
-			ProjectDTO dto = null;
-			// DB接続
-						access();
-						try {// DAOを実体化
-							ProjectDAO dao = new ProjectDAO(this.conn);
-							
-							// ログイン処理を実施。DAOのメソッドを実行
-							dto = dao.projectDetail(projectId);
-							
-							}finally {
-								close();
-							}
-			return dto;
+		return projectList;
+	}
+
+	//projectRegistメソッド
+	public int projectRegist(String projectCode, String projectName, String customer, int pmId, int projectStatus,
+			int projectPriority, String projectStartDate, String projectEndDate, String projectExplain)
+			throws SQLException {
+		int ans = 0;
+
+		// DB接続
+		access();
+
+		try {
+
+			// DAOを実体化
+			ProjectDAO dao = new ProjectDAO(conn);
+			// ユーザー登録処理を実施。DAOのメソッドを実行
+			ans = dao.projectRegist(projectCode, projectName, customer, pmId, projectStatus, projectPriority,
+					projectStartDate, projectEndDate, projectExplain);
+		} finally {
+
+			// DB接続解除
+			close();
 		}
-		
+
+		// 戻り値
+		return ans;
+	}
+
+	//projectUpdateメソッド
+	public int projectUpdate(String projectCode, String projectName, String customer, int pmId, int projectStatus,
+			int projectPriority, String projectStartDate, String projectEndDate, String projectExplain)
+			throws SQLException {
+		int ans = 0;
+
+		// DB接続
+		access();
+
+		try {
+
+			// DAOを実体化
+			ProjectDAO dao = new ProjectDAO(conn);
+			// ユーザー登録処理を実施。DAOのメソッドを実行
+			ans = dao.projectUpdate(projectCode, projectName, customer, pmId, projectStatus, projectPriority,
+					projectStartDate, projectEndDate, projectExplain);
+		} finally {
+
+			// DB接続解除
+			close();
+		}
+
+		// 戻り値
+		return ans;
+	}
+
+	//projectStatusChangeメソッド
+	public int projectStatusChange(int projectId, int projectStatus) throws SQLException {
+		int ans = 0;
+
+		//DB接続
+		access();
+		try {
+			ProjectDAO dao = new ProjectDAO(conn);
+			ans = dao.projectStatusChange(projectId, projectStatus);
+		} finally {
+			close();
+		}
+
+		return ans;
+	}
+
+	//projectDetailメソッド
+	public ProjectDTO projectDetail(int projectId) throws SQLException {
+		ProjectDTO dto = null;
+		// DB接続
+		access();
+		try {// DAOを実体化
+			ProjectDAO dao = new ProjectDAO(this.conn);
+
+			// ログイン処理を実施。DAOのメソッドを実行
+			dto = dao.projectDetail(projectId);
+
+		} finally {
+			close();
+		}
+		return dto;
+	}
+
 }
