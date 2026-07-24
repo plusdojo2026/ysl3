@@ -50,7 +50,7 @@ public class TaskAction {
 	}
 
 	// タスク検索をするメソッド
-	public String taskSearch() throws UnsupportedEncodingException {
+	public String taskSearch() throws UnsupportedEncodingException, SQLException {
 
 		// 返却する次の飛び先のURLを定義
 		String page = "/WEB-INF/jsp/task_list.jsp";
@@ -58,8 +58,8 @@ public class TaskAction {
 		request.setCharacterEncoding("UTF-8");
 		int taskId = Integer.parseInt(request.getParameter("task-id"));
 		int projectId = Integer.parseInt(request.getParameter("project-id"));
-		int status = Integer.parseInt(request.getParameter("status"));
-		String name = request.getParameter("name");
+		int status = Integer.parseInt(request.getParameter("task_status"));
+		String name = request.getParameter("task_name");
 
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();
@@ -92,14 +92,14 @@ public class TaskAction {
 		//値の取得
 		request.setCharacterEncoding("UTF-8");
 		int taskId = Integer.parseInt(request.getParameter("task-id"));
-		String name = request.getParameter("name");
-		int status = Integer.parseInt(request.getParameter("status"));
-		int priority = Integer.parseInt(request.getParameter("priority"));
-		String limitDate = request.getParameter("limit");
-		String explanationText = request.getParameter("explanation-text");
-		float estimatedWorks = Float.parseFloat(request.getParameter("estimated-works"));
+		String name = request.getParameter("task_name");
+		int status = Integer.parseInt(request.getParameter("task_status"));
+		int priority = Integer.parseInt(request.getParameter("task_priority"));
+		String limitDate = request.getParameter("task_limit");
+		String explanationText = request.getParameter("task_explanation");
+		float estimatedWorks = Float.parseFloat(request.getParameter("task_estimated-works"));
 		int projectId = Integer.parseInt(request.getParameter("project-id"));
-		String startDate = request.getParameter("start-date");
+		String startDate = request.getParameter("task_start-date");
 		int progress = Integer.parseInt(request.getParameter("progress"));
 
 		// セッションからログイン中のユーザー情報を取得
@@ -141,14 +141,14 @@ public class TaskAction {
 		//値の取得
 		request.setCharacterEncoding("UTF-8");
 		int taskId = Integer.parseInt(request.getParameter("task-id"));
-		String name = request.getParameter("name");
-		int status = Integer.parseInt(request.getParameter("status"));
-		int priority = Integer.parseInt(request.getParameter("priority"));
-		String limitDate = request.getParameter("limit");
-		String explanationText = request.getParameter("explanation-text");
-		float estimatedWorks = Float.parseFloat(request.getParameter("estimated-works"));
+		String name = request.getParameter("task_name");
+		int status = Integer.parseInt(request.getParameter("task_status"));
+		int priority = Integer.parseInt(request.getParameter("task_priority"));
+		String limitDate = request.getParameter("task_limit");
+		String explanationText = request.getParameter("task_explanation");
+		float estimatedWorks = Float.parseFloat(request.getParameter("task_estimated-works"));
 		int projectId = Integer.parseInt(request.getParameter("project-id"));
-		String startDate = request.getParameter("start-date");
+		String startDate = request.getParameter("task_start-date");
 		int progress = Integer.parseInt(request.getParameter("progress"));
 		
 		// セッションからログイン中のユーザー情報を取得
@@ -180,7 +180,7 @@ public class TaskAction {
 	}
 
 	//タスク削除
-	public String taskDelete() throws UnsupportedEncodingException {
+	public String taskDelete() throws UnsupportedEncodingException, SQLException {
 
 		// 返却する次の飛び先のURLを定義
 		String page = "/WEB-INF/jsp/home.jsp";
@@ -253,7 +253,7 @@ public class TaskAction {
 	}
 
 	//タスク詳細を表示するメソッド
-	public String taskDetail() throws UnsupportedEncodingException {
+	public String taskDetail() throws UnsupportedEncodingException, SQLException {
 
 		// 返却する次の飛び先のURLを定義
 		String page = "/WEB-INF/jsp/task_detail.jsp";
@@ -344,7 +344,7 @@ public class TaskAction {
 	}
 
 	// 案件詳細画面のタスク項目を削除するメソッド
-	public String taskDetailDelete() throws UnsupportedEncodingException {
+	public String taskDetailDelete() throws UnsupportedEncodingException, SQLException {
 
 		// 返却する次の飛び先のURLを定義
 		String page = "/WEB-INF/jsp/home.jsp";
