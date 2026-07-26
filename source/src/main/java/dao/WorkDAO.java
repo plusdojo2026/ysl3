@@ -35,10 +35,10 @@ public class WorkDAO {
 		// 移し替え
 				while (rs.next()) {
 					WorkDTO dto = new WorkDTO();
-					dto.setId(rs.getInt("id"));
+					dto.setId(rs.getInt("work_id"));
 					dto.setTaskId(rs.getInt("task_id"));
 					dto.setWork(rs.getFloat("work"));
-					dto.setExplainText(rs.getString("explain_text"));
+					dto.setExplainText(rs.getString("work_explanation"));
 					dto.setWorkDate(rs.getString("work_date"));
 					workList.add(dto);
 				}
@@ -118,7 +118,7 @@ public class WorkDAO {
 	public ArrayList<WorkDTO> homeWorkList(int userId) {
 		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
 		// SELECT文を準備する
-		String sql = "SELECT * FROM work WHERE user_id = ?";
+		String sql = "SELECT * FROM works WHERE user_id = ?";
 
 		//デバッグ（SQL文の確認用）
 		System.out.println(sql);
@@ -132,10 +132,10 @@ public class WorkDAO {
 				// 移し替え
 				while (rs.next()) {
 					WorkDTO dto = new WorkDTO();
-					dto.setId(rs.getInt("id"));
+					dto.setId(rs.getInt("work_id"));
 					dto.setTaskId(rs.getInt("task_id"));
 					dto.setWork(rs.getFloat("work"));
-					dto.setExplainText(rs.getString("explain_text"));
+					dto.setExplainText(rs.getString("work_explanation"));
 					dto.setWorkDate(rs.getString("work_date"));
 					workList.add(dto);
 				}
@@ -151,7 +151,7 @@ public class WorkDAO {
 	public WorkDTO workToRegist(int taskId) {
 		WorkDTO ans = null;
 		
-		String sql = "SELECT * FROM work WHERE task_id = ?";
+		String sql = "SELECT * FROM works WHERE task_id = ?";
 		
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 
@@ -161,7 +161,7 @@ public class WorkDAO {
 				// 移し替え
 				while (rs.next()) {
 					WorkDTO dto = new WorkDTO();
-					dto.setId(rs.getInt("id"));
+					dto.setId(rs.getInt("work_id"));
 					dto.setTaskId(rs.getInt("task_id"));
 	
 					
