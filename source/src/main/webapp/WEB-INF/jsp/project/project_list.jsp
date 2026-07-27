@@ -113,13 +113,12 @@
    	</ul>
    	
    	<!-- 編集ボタン -->
-   	<form action="Controller" method="getname="page-id" value="PR03">
-   		<input type="hidden" name="action" value="projectToEdit">
-   	
-   		<!-- 編集対象案件ID -->
-   	
+   	<form method="post" action="${pageContext.request.contextPath}/Controller" style="display: inline;">
+   		
+   		
+   	 <input type="hidden" name="page-id" value="PR03">
    		<input type="hidden" name="projectId" value="${project.id}">
-   		<button type="submit" class="edit-btn">編集</button>
+   		<button type="submit" name="btn-id"  value="project-edit" >編集</button>
    	</form>
    </div>
   </c:forEach>

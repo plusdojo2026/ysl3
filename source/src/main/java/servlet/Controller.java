@@ -149,15 +149,13 @@ public class Controller extends HttpServlet {
 				// 実際のボタン・リンクからの画面遷移
 
 
-//				// 案件登録画面の初期表示
-//			} else if (pageId.equals("PR02")) {
-//				ProjectAction action = new ProjectAction(request);
-//				page = action.projectToRegist();
-//
-//				// 案件編集画面の初期表示
-//			} else if (pageId.equals("PR03")) {
-//				ProjectAction action = new ProjectAction(request);
-//				page = action.projectToEdit();
+				// 案件登録画面の初期表示
+			//} else if (pageId.equals("PR02")) {
+				//ProjectAction action = new ProjectAction(request);
+				//page = action.projectToRegist();
+
+				// 案件編集画面の初期表示
+			
 
 				// 案件詳細画面
 			} else if (pageId.equals("PR04")) {
@@ -269,6 +267,10 @@ public class Controller extends HttpServlet {
 					&& btnId.equals("password-change")) {
 				UserAction action = new UserAction(request);
 				page = action.passwordChange();
+				
+			} else if (pageId.equals("PR03")&& btnId.equals("project-edit")) {
+				ProjectAction action = new ProjectAction(request);
+			page = action.projectToEdit();
 
 				// 案件検索
 			} else if (pageId.equals("PR01")
