@@ -18,7 +18,7 @@ import model.ProjectDTO;
 	//projectSelectAllメソッド完成（仮）
 		public ArrayList<ProjectDTO> projectSelectAll() {
 			ArrayList<ProjectDTO> projectList = new ArrayList<>();
-			String sql = "SELECT DISTINCT projects.* FROM projects INNER JOIN tasks ON projects.project_id = tasks.project_id WHERE tasks.user_id = ? ;";
+			String sql = "SELECT DISTINCT projects. * users.user_name SUM(works.work) AS total_work FROM projects INNER JOIN tasks ON projects.project_id = tasks.project_id LEFT JOIN works ON tasks.task_id = works.work_id  LEFT JOIN users ON projects.pm_id = users.user_id ";
 			
 			try{PreparedStatement ps =conn.prepareStatement(sql);
 			
@@ -39,8 +39,8 @@ import model.ProjectDTO;
 				dto.setLimitDate(rs.getString("project_limit"));
 				dto.setEstimatedWork(rs.getFloat("project_estimated_works"));
 				dto.setPmName(rs.getString("pm_id"));
-				//dto.setTotalWork(rs.getFloat("total_work"));
-				
+				dto.setTotalWork(rs.getFloat("total_work"));
+				dto.setPmName(rs.getString("user_name"));
 				projectList.add(dto);
 				}
 				rs.close();

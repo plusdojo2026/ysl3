@@ -1,1 +1,133 @@
 @charset "UTF-8";
+
+/*-------------------------------*/
+/*--------work_regist.jsp--------*/
+/*-------------------------------*/
+
+
+.page-title {
+	margin: 4px 0 1px 0;
+}
+
+.input-title{
+	margin: 4px 0 1px 0;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.work-regist-area {
+	width: 900px;
+	margin: auto;
+}
+
+.form-area {
+	display: flex;
+}
+
+.form-group {
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+}
+
+.pr-ta-area {
+	width: 890px;
+	border: 5px solid #FBE3D6;
+	margin-top: 8px;
+	margin-bottom: 12px;
+	border-radius: 18px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	padding: 24px 0 24px 0;
+}
+
+.date-area {
+	width: 900px;
+	margin-top: 12px;
+	margin-bottom: 12px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	gap: 86px;
+	padding: 24px 0 24px 0;
+}
+
+.info {
+	font-size: 20px;
+	font-weight: 460;
+	border: none;
+	text-align: center;
+	margin: 20px 0 20px 0;
+}
+
+.info {
+	border: none;
+	outline: none;
+}
+
+/* 入力欄 */
+.date-input {
+	margin: 4px auto 12px auto;
+	width: 400px;
+	min-height: 75px;
+	border: 1px solid #bbb;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: 480;
+	text-align: right;
+	padding-right: 8px;
+}
+
+.date-input:focus {
+/*	outline: 1px solid #bbb;*/
+	outline: none;
+}
+
+
+
+
+
+
+
+
+
+
+/* 登録ボタンエリア */
+.btn-area {
+	text-align: center;
+	margin-top: 35px;
+}
+
+/* 登録ボタン */
+.regist-btn {
+	display: block;
+	background-color: #29988b;
+	color: #fff;
+	border-radius: 10px;
+	border: none;
+	height: 48px;
+	width: 320px;
+	font-size: 16px;
+	font-weight: bold;
+	margin: auto;
+	padding: 0;
+	box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.35);
+	cursor: pointer;
+}
+
+.regist-btn:hover {
+	opacity: 0.75;
+
+}
+
+/* エラーメッセージ */
+.error-message {
+	height: 18px;
+	margin: 12px 0 12px 0;
+	color: red;
+	text-align: center;
+	font-size: 13px;
+	line-height: 18px;
+	background-color: #ffffff;
+}

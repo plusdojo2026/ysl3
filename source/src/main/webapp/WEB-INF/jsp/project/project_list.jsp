@@ -49,25 +49,25 @@
    <c:forEach var="project" items="${projectList}">
    <div class="project-card">
    	<ul>
-   		<li>案件コード :${project.Id}</li>
+   		<li>案件コード :${project.code}</li>
    		
-   		<li>案件名 :${project.Name}<li>
+   		<li>案件名 :${project.name}<li>
    		
-   		<li>顧客名:${project.Customer}</li>
+   		<li>顧客名:${project.customer}</li>
    		
-   		<li>開始日:${project.StartDate}</li>
+   		<li>開始日:${project.startDate}</li>
    		
-   		<li>期限日:${project.EndDate}</li>
+   		<li>期限日:${project.endDate}</li>
    		
-   		<li>ステータス:${project.Status}
+   		<li>ステータス:${project.status}
    			<c:choose>
-   				<c:when test="${project.Status==0}">
+   				<c:when test="${project.status==0}">
    				開始前
    				</c:when>
-   				<c:when test="${project.Status==1}">
+   				<c:when test="${project.status==1}">
    				進行中
    				</c:when>
-   				<c:when test="${project.Status==2}">
+   				<c:when test="${project.status==2}">
    				完了
    				</c:when>
    				<c:otherwise>
@@ -78,10 +78,10 @@
    		
    		<li>優先度
    			<c:choose>
-   				<c:when test="${project.Priority ==0}">
+   				<c:when test="${project.priority ==0}">
    				低
    				</c:when>
-   				<c:when test="${project.Priority ==1}">
+   				<c:when test="${project.priority ==1}">
    				中
    				</c:when>
    				<c:when test="${project.priority ==2}">
@@ -93,12 +93,12 @@
    			</c:choose>
    		</li>
    		
-   		 <li>PM名:${project.PmName}</li>
+   		 <li>PM名:${project.pmName}</li>
    		 
    		 <li>進捗度:
    		 <c:choose>
-   		 	<c:when test="${project.TotalWork > 0 }">
-   		 		${(project.currentWorkHours * 100) / project.totalWorkHours}%
+   		 	<c:when test="${project.totalWork > 0 }">
+   		 		${(project.totalWork * 100) / project.estimatedWork}%
    		 	</c:when>
    		 	<c:otherwise>
 				0%
@@ -107,9 +107,9 @@
    		 
    		 </li> 
    		
-   		<li>総工数:${project.EstimatedWork}</li>
+   		<li>総工数:${project.estimatedWork}</li>
    		
-   		<li>現在までの工数:${project.TotalWork}</li>  
+   		<li>現在までの工数:${project.totalWork}</li>  
    	</ul>
    	
    	<!-- 編集ボタン -->
