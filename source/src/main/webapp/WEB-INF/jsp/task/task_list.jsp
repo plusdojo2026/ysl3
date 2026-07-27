@@ -118,11 +118,11 @@
                                     <c:out value="${task.progress}" />%
                                 </td>
                                 <td>
-                                    <c:url var="taskEditUrl" value="/Controller">
-                                        <c:param name="page-id" value="TA03" />
-                                        <c:param name="task-id" value="${task.taskId}" />
-                                    </c:url>
-                                    <a href="${taskEditUrl}">編集</a>
+                                        <form method="post" action="${pageContext.request.contextPath}/Controller" style="display: inline;">
+                                            <input type="hidden" name="page-id" value="TA01">
+                                            <input type="hidden" name="task-id" value="${task.taskId}">
+                                            <button type="submit" name="btn-id" value="task-update">編集</button>
+                                        </form>
                                 </td>
                             </tr>
                         </c:forEach>
