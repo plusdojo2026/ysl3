@@ -277,9 +277,9 @@ import model.ProjectDTO;
 	
 	//サマリーカード用
 	//総工数メソッド
-	public float gettotalWork()	{
+	public float getTotalWork()	{
 		//		
-		float totalWork = 0;
+		float TotalWork = 0;
 		
 		//SQL文
 		String sql =
@@ -296,7 +296,7 @@ import model.ProjectDTO;
 	        if (rs.next()) {
 
 	            // 総工数を取得
-	            totalWork = rs.getFloat("totalWork");
+	            TotalWork = rs.getFloat("TotalWork");
 	        }
 
 	    } catch (SQLException e) {
@@ -306,7 +306,7 @@ import model.ProjectDTO;
 	    }
 		
 	    // 総工数を返す
-	    return totalWork;
+	    return TotalWork;
 	}
 	
 }
