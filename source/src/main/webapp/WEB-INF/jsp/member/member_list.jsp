@@ -9,7 +9,7 @@
 <title>メンバー管理 | TaskManager</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/member.css">
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/member.js" defer></script>
@@ -19,7 +19,7 @@
 	<%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 
 	<main class="main">
-		<h1>メンバー管理</h1>
+		<h1 class="page-head-title">メンバー管理</h1>
 
 		<c:choose>
 			<c:when test="${sessionScope.user.role != 1}">
@@ -38,15 +38,17 @@
 						<c:out value="${errMsg}" />
 					</p>
 				</c:if>
-
-				<section class="search-area">
-					<div class="list-content">
-						<label id="key-word">
-							<input type="search" class="search-bar" id="search-bar" placeholder="キーワード検索" />
-							<input type="button" class="search-button" id="search-button" value="検索" />
-						</label>
+				<section class="member-top">
+					<div class="search-area">
+						<div class="list-content">
+							<label id="key-word"> <input type="search"
+								class="search-bar" id="search-bar" placeholder="キーワード検索" /> <input
+								type="button" class="search-button" id="search-button"
+								value="検索" />
+							</label>
+						</div>
 					</div>
-					<a href="${pageContext.request.contextPath}/Controller?page-id=AD02">メンバーを新規登録</a>
+					<a href="${pageContext.request.contextPath}/Controller?page-id=AD02" class="regist-btn">新規登録</a>
 				</section>
 
 				<section>
@@ -68,28 +70,29 @@
 										<th>操作</th>
 									</tr>
 								</thead>
-								<tbody>
-									<c:forEach var="member" items="${allUserList}">
-										<tr>
-											<td><c:out value="${member.id}" /></td>
-											<td><c:out value="${member.loginId}" /></td>
-											<td><c:out value="${member.userName}" /></td>
-											<td><c:choose>
-													<c:when test="${member.role == 1}">管理者</c:when>
-													<c:otherwise>一般</c:otherwise>
-												</c:choose></td>
-											<td><c:out value="${member.mail}" /></td>
-											<td><c:choose>
-													<c:when test="${member.sol == 1}">有効</c:when>
-													<c:otherwise>無効</c:otherwise>
-												</c:choose></td>
-											<td><c:url var="memberEditUrl" value="/Controller">
-													<c:param name="page-id" value="AD03" />
-													<c:param name="user-id" value="${member.id}" />
-												</c:url> <a href="${memberEditUrl}">編集</a></td>
-										</tr>
-									</c:forEach>
-								</tbody>
+									<tbody>
+										<c:forEach var="member" items="${allUserList}">
+											<!-- 修正：divを削除し、trにクラスを付与 -->
+											<tr class="member-row">
+												<td><c:out value="${member.id}" /></td>
+												<td><c:out value="${member.loginId}" /></td>
+												<td><c:out value="${member.userName}" /></td>
+												<td><c:choose>
+														<c:when test="${member.role == 1}">管理者</c:when>
+														<c:otherwise>一般</c:otherwise>
+													</c:choose></td>
+												<td><c:out value="${member.mail}" /></td>
+												<td><c:choose>
+														<c:when test="${member.sol == 1}">有効</c:when>
+														<c:otherwise>無効</c:otherwise>
+													</c:choose></td>
+												<td><c:url var="memberEditUrl" value="/Controller">
+														<c:param name="page-id" value="AD03" />
+														<c:param name="user-id" value="${member.id}" />
+													</c:url> <a href="${memberEditUrl}">編集</a></td>
+											</tr>
+										</c:forEach>
+									</tbody>
 							</table>
 						</c:otherwise>
 					</c:choose>
