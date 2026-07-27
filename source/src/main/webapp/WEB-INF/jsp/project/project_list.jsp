@@ -24,31 +24,51 @@
   <!-- 検索フォームここから -->
   <form class="project-search-form">
     <input type="hidden" name="page-id" value="PR01">
-    <select class="project-select">ステータス</select>
-    <select class="project-select">優先度</select>
+ 
+    <select class="project-select">
+    <option>ステータス</option>
+    <option>進行中</option>
+    <option>完了</option>
+    <option>保留</option>
+    </select>
+    <select class="project-select">
+    <option>優先度</option>
+    <option>低</option>
+    <option>中</option>
+    <option>高</option>
+    </select>
     <input type="text" class="project-search-text" value="キーワード検索" name="keyword">
     <input type="submit" class="search-btn" value="検索">
   </form>
   <!-- 検索フォームここまで -->
 
   <!-- 案件一覧ここから -->
-   <section class="project-list-view">
-    <div class="project-list-card">
-      <div>案件コード</div>
-      <div>案件名</div>
-      <div>顧客名</div>
-      <div>開始日</div>
-      <div>期限日</div>
-      <div>ステータス</div>
-      <div>優先度</div>
-      <div>PM名</div>
-      <div>工数</div>
-      <div>進捗度</div>
-      <div>総工数</div>
-      <div>現在までの工数</div>
-      <button class="edit-btn">編集ボタン</button>
-    </div>
-   </section>
+   <c:forEach var="project" items="${projectList}">
+   <div class="project-card">
+   	<ul>
+   		<li>案件コード :${project.Id}</li>
+   		<li>案件名 :${project.Name}<li>
+   		<li>顧客名</li>
+   		<li>開始日:${project.}</li>
+   		<li>期限日:${project.}</li>
+   		<li>ステータス:${project.}</li>
+   		<li>優先度:${project.}</li>
+   		<li>PM名:${project.}</li>
+   		<li>進捗度:${project.}</li>
+   		<li>総工数:${project.}</li>
+   		<li>現在までの工数:${project.}</li>
+   	</ul>
+   	
+   	<!-- 編集ボタン -->
+   	ProjectAction<input type="hidden" name="action" value="projectToEdit">
+   	
+   	<!-- 編集対象案件ID -->
+   	
+   	<input type="hidden" name="projectId" value="${project.projecrtId}">
+   	<button type="submit" class="edit-btn">編集</button>
+   	</form>
+   </div>
+  </c:forEach>
   <!-- 案件一覧ここまで -->
   </main>
     <!---------- メインここまで ---------->
