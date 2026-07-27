@@ -54,13 +54,13 @@ public class TaskAction {
 	public String taskSearch() throws UnsupportedEncodingException, SQLException {
 
 		// 返却する次の飛び先のURLを定義
-		String page = "/WEB-INF/jsp/task_list.jsp";
+		String page = "/WEB-INF/jsp/task/task_list.jsp";
 
 		request.setCharacterEncoding("UTF-8");
 		int taskId = Integer.parseInt(request.getParameter("task-id"));
 		int projectId = Integer.parseInt(request.getParameter("project-id"));
-		int status = Integer.parseInt(request.getParameter("task_status"));
-		String name = request.getParameter("task_name");
+		int status = Integer.parseInt(request.getParameter("task-status"));
+		String name = request.getParameter("task-name");
 
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();
@@ -85,22 +85,22 @@ public class TaskAction {
 	}
 
 	// タスク登録メソッド
-	public String taskregist() throws UnsupportedEncodingException, SQLException {
+	public String taskRegist() throws UnsupportedEncodingException, SQLException {
 
 		// 返却する次の飛び先のURLを定義
-		String page = "/WEB-INF/jsp/task_list.jsp";
+		String page = "/WEB-INF/jsp/task/task_list.jsp";
 
 		//値の取得
 		request.setCharacterEncoding("UTF-8");
 		int taskId = Integer.parseInt(request.getParameter("task-id"));
-		String name = request.getParameter("task_name");
-		int status = Integer.parseInt(request.getParameter("task_status"));
-		int priority = Integer.parseInt(request.getParameter("task_priority"));
-		String limitDate = request.getParameter("task_limit");
-		String explanationText = request.getParameter("task_explanation");
-		float estimatedWorks = Float.parseFloat(request.getParameter("task_estimated-works"));
+		String name = request.getParameter("task-name");
+		int status = Integer.parseInt(request.getParameter("task-status"));
+		int priority = Integer.parseInt(request.getParameter("task-priority"));
+		String limitDate = request.getParameter("task-limit");
+		String explanationText = request.getParameter("task-explanation");
+		float estimatedWorks = Float.parseFloat(request.getParameter("task-estimated-works"));
 		int projectId = Integer.parseInt(request.getParameter("project-id"));
-		String startDate = request.getParameter("task_start-date");
+		String startDate = request.getParameter("task-start-date");
 		int progress = Integer.parseInt(request.getParameter("progress"));
 
 		// セッションからログイン中のユーザー情報を取得
@@ -136,19 +136,19 @@ public class TaskAction {
 	public String taskUpdate() throws UnsupportedEncodingException, SQLException {
 
 		// 返却する次の飛び先のURLを定義
-		String page = "/WEB-INF/jsp/task_list.jsp";
+		String page = "/WEB-INF/jsp/task/task_list.jsp";
 
 		//値の取得
 		request.setCharacterEncoding("UTF-8");
 		int taskId = Integer.parseInt(request.getParameter("task-id"));
-		String name = request.getParameter("task_name");
-		int status = Integer.parseInt(request.getParameter("task_status"));
-		int priority = Integer.parseInt(request.getParameter("task_priority"));
-		String limitDate = request.getParameter("task_limit");
-		String explanationText = request.getParameter("task_explanation");
-		float estimatedWorks = Float.parseFloat(request.getParameter("task_estimated-works"));
+		String name = request.getParameter("task-name");
+		int status = Integer.parseInt(request.getParameter("task-status"));
+		int priority = Integer.parseInt(request.getParameter("task-priority"));
+		String limitDate = request.getParameter("task-limit");
+		String explanationText = request.getParameter("task-explanation");
+		float estimatedWorks = Float.parseFloat(request.getParameter("task-estimated-works"));
 		int projectId = Integer.parseInt(request.getParameter("project-id"));
-		String startDate = request.getParameter("task_start-date");
+		String startDate = request.getParameter("task-start-date");
 		int progress = Integer.parseInt(request.getParameter("progress"));
 
 		// セッションからログイン中のユーザー情報を取得
@@ -210,14 +210,17 @@ public class TaskAction {
 		} else {
 			request.setAttribute("msg", "削除失敗！");
 		}
-		return page;
+		
+		HomeAction homeAction = new HomeAction(request);
+		return homeAction.homeSelectAll();
+		
 	}
 
 	// タスクステータス変更メソッド
 	public String taskStatusChange() throws UnsupportedEncodingException {
 
 		// 返却する次の飛び先のURLを定義
-		String page = "/WEB-INF/jsp/task_detail.jsp";
+		String page = "/WEB-INF/jsp/task/task_detail.jsp";
 
 		//値の取得
 		request.setCharacterEncoding("UTF-8");
@@ -254,7 +257,7 @@ public class TaskAction {
 	public String taskDetail() throws UnsupportedEncodingException, SQLException {
 
 		// 返却する次の飛び先のURLを定義
-		String page = "/WEB-INF/jsp/task_detail.jsp";
+		String page = "/WEB-INF/jsp/task/task_detail.jsp";
 
 		int taskId = Integer.parseInt(request.getParameter("task-id"));
 
@@ -421,6 +424,7 @@ public class TaskAction {
 			
 			// 取得できたタスクの情報をsessionに保存
 			request.setAttribute("editTask", dto);
+			
 		}
 		// 戻り値
 		return page;

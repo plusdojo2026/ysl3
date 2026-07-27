@@ -332,7 +332,7 @@ public class TaskDAO {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		//	(処理)s
 		// SELECT文を準備する
-		String sql = "SELECT * FROM tasks WHERE user_id = ? ORDER BY number";
+		String sql = "SELECT * FROM tasks WHERE user_id = ? ORDER BY task_id";
 		//デバッグ（SQL文の確認用）
 		System.out.println(sql);
 
@@ -352,7 +352,7 @@ public class TaskDAO {
 			dto.setProjectId(rs.getInt("project_id"));
 			dto.setPriority(rs.getInt("task_priority"));
 			dto.setLimitDate(rs.getString("task_limit"));
-			dto.setEstimatedWork(rs.getFloat("task_estimated_work"));
+			dto.setEstimatedWork(rs.getFloat("task_estimated_works"));
 			dto.setProgress(rs.getInt("progress"));
 			
 			taskList.add(dto);
