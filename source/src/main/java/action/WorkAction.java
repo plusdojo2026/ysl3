@@ -183,7 +183,6 @@ public class WorkAction {
 		ProjectService projectService = new ProjectService();
 		TaskService taskService = new TaskService();
 		
-		
 		TaskDTO taskAns = taskService.taskDetail(taskId);
 		int projectId = taskAns.getProjectId();
 		
