@@ -46,7 +46,7 @@ public class TaskAction {
 		ArrayList<TaskDTO> taskList = service.taskSelectAll(userId);
 
 		// タスク一覧画面にて表示する
-		request.setAttribute("task", taskList);
+		request.setAttribute("taskList", taskList);
 		return page;
 	}
 
@@ -80,7 +80,7 @@ public class TaskAction {
 		ArrayList<TaskDTO> taskList = service.taskSearch(taskId, projectId, status, userId, name);
 
 		// タスク一覧画面にて表示する
-		request.setAttribute("task", taskList);
+		request.setAttribute("taskList", taskList);
 		return page;
 	}
 
