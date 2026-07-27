@@ -17,6 +17,7 @@
 	<!---------- メインここから ---------->
 	<main class="main">
 		<form method="POST" action="<c:url value='/Controller'/>">
+		<input type="hidden" name="task-id" value="${TaskShow.taskId}">
 			<div class="form-group">
 				<label>工数登録</label>
 				<input type="text" id="project-name" name="project" value="${ProjectShow.name}" readonly> / 
@@ -25,12 +26,13 @@
 
 			<div class="form-group">
 				<label for="day">日付（必須）</label>
-				<input type="date" id="day" name="day" value="<%=LocalDate.now()%>">
-			</div>
+					
+				<input type="date" id="day" name="work-date" value="<%=LocalDate.now()%>"> 
+		 		</div>
 
 			<div class="form-group">
 				<label for="work-explanation">作業内容</label>
-				<input type="text" id="work-explanation" name="work-explanation">
+				<input type="text" id="work-explanation" name="explain-text">
 			</div>
 
 			<div class="form-group container">
@@ -42,9 +44,18 @@
 			</div>
 
 			<div class="form-submit">
-				<input type="submit" value="登録">
+			<input type="hidden" name="page-id" value="WO01">
+				<button type="submit" name="btn-id" value="work-regist">登録</button>
 			</div>
 		</form>
+		 <c:if test="${not empty msg}">
+            <p><c:out value="${msg}" /></p>
+        </c:if>
+
+        <c:if test="${not empty errMsg}">
+            <p><c:out value="${errMsg}" /></p>
+        </c:if>
+		
 	</main>
 	<!---------- メインここまで ---------->
 

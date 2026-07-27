@@ -80,7 +80,7 @@ public class WorkAction {
 		int taskId = Integer.parseInt(request.getParameter("task-id"));
 		String workDate = request.getParameter("work-date");
 		String explainText = request.getParameter("explain-text");
-		String work = request.getParameter("work");
+		float work = Float.parseFloat(request.getParameter("work"));
 		
 		// セッションを取得
 		HttpSession session = request.getSession(false);	

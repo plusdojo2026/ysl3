@@ -72,7 +72,7 @@ public class WorkService {
 	}
 
 	//工数登録するメソッド
-	public int workRegist(int userId, int taskId, String workDate, String explainText, String work) {
+	public int workRegist(int userId, int taskId, String workDate, String explainText, Float work) {
 		int ans = 0;
 		// DB接続
 		access();
