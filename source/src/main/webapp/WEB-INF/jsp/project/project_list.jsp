@@ -15,14 +15,14 @@
 
 <body>
     <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
-  <!---------- メインここから ---------->
+  <!---------- メインここから value="selectProjectUserName" style="display: inline;"---------->
   <main class="main">
 
   <h2 class="page-title">案件一覧</h2>
   
-  <form action>
-  <input type="hidden" name="action" value="selectProjectUserName">
-  <button type="submit" class="project-regist-btn">新規登録</button>
+  <form  method="post" action="${pageContext.request.contextPath}/Controller" >
+  <input type="hidden"  name="page-id" value="PR02">  
+  <button type="submit" name="btn-id" value="project-to-regist" class="project-regist-btn">新規登録</button>
 </form>
   <!-- 検索フォームここから -->
   <form class="project-search-form">
