@@ -47,15 +47,6 @@
                 <option value="3">保留</option>
             </select>
 
-            <label for="user-id">担当者</label>
-            <select id="user-id" name="user-id">
-                <option value="-1">すべて</option>
-                <c:forEach var="user" items="${userList}">
-                    <option value="${user.id}">
-                        <c:out value="${user.userName}" />
-                    </option>
-                </c:forEach>
-            </select>
 
             <label for="keyword">キーワード</label>
             <input type="search" id="keyword" name="keyword" value="${fn:escapeXml(param.keyword)}" placeholder="タスク名">
