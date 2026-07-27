@@ -7,6 +7,8 @@ const searchBtn = document.getElementById("search-button");
 const searchBar = document.getElementById("search-bar");
 
 function executeSearch() {
+	
+	// 検索ワードを整形
 	const keyword = searchBar.value.toLowerCase().trim();
 	const memberRows = document.querySelectorAll(".member-row");
 
