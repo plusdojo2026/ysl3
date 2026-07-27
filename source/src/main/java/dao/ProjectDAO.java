@@ -274,4 +274,39 @@ import model.ProjectDTO;
 		
 	return dto;
 	}
+	
+	//サマリーカード用
+	//総工数メソッド
+	public float getTotalWork()	{
+		//		
+		float TotalWork = 0;
+		
+		//SQL文
+		String sql =
+				"SELECT SUM(work) AS total_work FROM works "
+				+ "WHERE DATE_FORMAT(work_date,'%Y-%m')=?";
+		
+		try (PreparedStatement ps = conn.prepareStatement(sql);) 
+			{
+			
+	        //SQL文を実行
+	        ResultSet rs = ps.executeQuery();
+	        
+	        // 取得結果が存在する場合
+	        if (rs.next()) {
+
+	            // 総工数を取得
+	            TotalWork = rs.getFloat("TotalWork");
+	        }
+
+	    } catch (SQLException e) {
+
+	        // SQL実行時のエラー表示
+	        e.printStackTrace();
+	    }
+		
+	    // 総工数を返す
+	    return TotalWork;
+	}
+	
 }

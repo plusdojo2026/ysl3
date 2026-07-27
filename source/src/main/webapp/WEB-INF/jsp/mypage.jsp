@@ -42,7 +42,7 @@
 	    <h2>パスワード変更</h2>
 	    <form method="POST" action="<c:url value='/Controller'/>">
 	      <input type="hidden" name="page-id" value="MY01" />
-	      <input type="text" name="password" />
+	      <input type="text" name="password" placeholder="既存" />
 	      <input type="text" name="new-password" />
 	      <input type="text" name="new-password-confirm" />
 	      <p class="error-message">${errMsg}</p>

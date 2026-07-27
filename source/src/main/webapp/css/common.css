@@ -18,6 +18,13 @@ body {
   overflow-x: hidden; /* はみ出し防止 */
   color: #4e4d4c;
 }
+.main {
+	margin: 72px 18px; 
+}
+
+.page-head-title {
+	margin: 14px 0 0 0;
+}
 
 /*------------------------*/
 /*--------ヘッダー--------*/

@@ -174,4 +174,41 @@ public class WorkDAO {
 		return ans;
 	}
 
+//サマリーカード
+//稼働メンバー
+public int getMemberCount(String month) {
+	
+	int MemberCount = 0;
+	
+	//SQL文
+	 String sql =
+	            "SELECT COUNT(DISTINCT user_id) AS memberCount "
+	          + "FROM works "
+	          + "WHERE DATE_FORMAT(work_date,'%Y-%m') = ?";
+	 try (PreparedStatement ps = conn.prepareStatement(sql);) 
+		{
+		
+     // 対象年月をセット
+	 ps.setString(1, month);
+	 
+     //SQL文を実行
+     ResultSet rs = ps.executeQuery();
+     
+     // 取得結果が存在する場合
+     if (rs.next()) {
+
+         // 稼働メンバーを取得
+         MemberCount = rs.getInt("MemberCount");
+     }
+
+		} catch (SQLException e) {
+
+	     // SQL実行時のエラー表示
+	     e.printStackTrace();
+	 }
+		
+	 // 稼働メンバーを返す
+	 return MemberCount;
+	}
+
 }
