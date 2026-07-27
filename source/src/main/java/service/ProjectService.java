@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import dao.ProjectDAO;
+import dao.TaskDAO;
+import dao.WorkDAO;
 import model.ProjectDTO;
 
 public class ProjectService {
@@ -191,4 +194,63 @@ public class ProjectService {
 		}return dto;
 		
 	}
+	
+	// サマリーカード表示用データ取得
+	//	 稼働メンバー数
+	//	 総工数
+	//	 予定工数
+	//	 残工数を取得する	
+	
+	public List<ProjectDTO> getSummaryCard(String month) {
+		
+		 // 各DAOを実体化
+	    ProjectDAO projectdao = new ProjectDAO(conn);
+	    TaskDAO taskdao = new TaskDAO(conn);
+	    WorkDAO workdao = new WorkDAO(conn);
+	    
+	    // 総工数を取得
+	    float TotalWork =
+	            projectdao.getTotalWork();
+
+
+	    // 対象月の予定工数を取得
+	    float PlannedWork =
+	            taskdao.getPlannedWork(month);
+
+
+	    // 対象月の稼働メンバーを取得
+	    int MemberCount =
+	            workdao.getMemberCount(month);
+
+
+	    // 残工数を計算
+	    // 残工数 = 総工数 - 予定工数
+	    float RemainWork =
+	            TotalWork - PlannedWork;
+	    
+	 // DTOへ取得結果を設定
+	    ProjectDTO dto = new ProjectDTO();
+
+	    // 稼働メンバー数
+	    dto.setMemberCount(MemberCount);
+
+	    // 総工数
+	    dto.setTotalWork(TotalWork);
+
+	    // 予定工数
+	    dto.setEstimatedWork(PlannedWork);
+
+	    // 残工数
+	    dto.setRemainWork(RemainWork);
+
+
+	    // Action側がListで受け取るためList化
+	    List<ProjectDTO> list = new ArrayList<>();
+
+	    list.add(dto);
+
+	    // サマリーカードを返却
+	    return list;
+	}
+	
 }
