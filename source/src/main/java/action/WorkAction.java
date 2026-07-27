@@ -3,6 +3,7 @@ package action;
 
 
 import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -72,7 +73,7 @@ public class WorkAction {
 		
 	
 		// 戻り値のページを定義
-		String page = null;
+		String page = "/WEB-INF/jsp/work_regist.jsp";
 		
 		//値の取得
 		request.setCharacterEncoding("UTF-8");
@@ -155,7 +156,7 @@ public class WorkAction {
 	}
 	
 	//工数登録画面で案件名とタスク名を表示する
-	public String workToRegist() throws UnsupportedEncodingException {
+	public String workToRegist() throws UnsupportedEncodingException, SQLException {
 		
 		// 戻り値のページを定義
 		String page="/WEB-INF/jsp/work_regist.jsp";
@@ -206,10 +207,6 @@ public class WorkAction {
 		    // 戻り値
 		    return page;
 		}
-		
-		
-		// 戻り値
-		return page;
 	}
 	
 //	//ホームに工数ログを表示

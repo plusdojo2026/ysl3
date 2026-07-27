@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -11,17 +13,21 @@
 </head>
 
 <body>
-    <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
+    <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 
     <main class="main">
         <h1>ホーム</h1>
 
         <c:if test="${not empty msg}">
-            <p><c:out value="${msg}" /></p>
+            <p>
+                <c:out value="${msg}" />
+            </p>
         </c:if>
 
         <c:if test="${not empty errMsg}">
-            <p><c:out value="${errMsg}" /></p>
+            <p>
+                <c:out value="${errMsg}" />
+            </p>
         </c:if>
 
         <!-- 各画面へのナビゲーション -->
@@ -74,7 +80,7 @@
                                 <tr>
                                     <td>
                                         <c:url var="taskDetailUrl" value="/Controller">
-                                            <c:param name="page-id" value="TA04" />
+                                            <c:param name="page-id" value="HO01" />
                                             <c:param name="task-id" value="${task.taskId}" />
                                         </c:url>
                                         <a href="${taskDetailUrl}"><c:out value="${task.name}" /></a>
@@ -107,23 +113,20 @@
                                         <c:out value="${task.estimatedWork}" />時間
                                     </td>
                                     <td>
-                                        <c:url var="taskEditUrl" value="/Controller">
-                                            <c:param name="page-id" value="TA03" />
-                                            <c:param name="task-id" value="${task.taskId}" />
-                                        </c:url>
-                                        <a href="${taskEditUrl}">編集</a>
-
-                                        <c:url var="workRegistUrl" value="/Controller">
-                                            <c:param name="page-id" value="WO01" />
-                                            <c:param name="task-id" value="${task.taskId}" />
-                                        </c:url>
-                                        <a href="${workRegistUrl}">工数登録</a>
-
-                                        <form method="post" action="${pageContext.request.contextPath}/Controller">
+                                        <!-- 工数登録ボタンここから -->
+                                        <form method="post" action="${pageContext.request.contextPath}/Controller" style="display: inline;">
+                                            <input type="hidden" name="page-id" value="HO01">
+                                            <input type="hidden" name="task-id" value="${task.taskId}">
+                                            <button type="submit" name="btn-id" value="work-regist">工数登録</button>
+                                        </form>
+                                        <!-- 工数登録ボタンここから -->
+                                        <!-- 削除ボタンここから -->
+                                        <form method="post" action="${pageContext.request.contextPath}/Controller" style="display: inline;">
                                             <input type="hidden" name="page-id" value="HO01">
                                             <input type="hidden" name="task-id" value="${task.taskId}">
                                             <button type="submit" name="btn-id" value="task-delete">削除</button>
                                         </form>
+                                        <!-- 削除ボタンここから -->
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -153,18 +156,10 @@
                         <tbody>
                             <c:forEach var="workLog" items="${homeWorkList}">
                                 <tr>
-                                    <td>
-                                        <c:out value="${workLog.taskName}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${workLog.workDate}" />
-                                    </td>
-                                    <td>
-                                        <c:out value="${workLog.work}" />時間
-                                    </td>
-                                    <td>
-                                        <c:out value="${workLog.explainText}" />
-                                    </td>
+                                    <td><c:out value="${workLog.taskName}" /></td>
+                                    <td><c:out value="${workLog.workDate}" /></td>
+                                    <td><c:out value="${workLog.work}" />時間</td>
+                                    <td><c:out value="${workLog.explainText}" /></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -174,6 +169,6 @@
         </section>
     </main>
 
-    <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
+    <%@ include file="/WEB-INF/jsp/common/footer.jsp"%>
 </body>
 </html>

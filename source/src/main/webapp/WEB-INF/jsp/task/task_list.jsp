@@ -29,14 +29,13 @@
         <form method="post" action="${pageContext.request.contextPath}/Controller">
             <input type="hidden" name="page-id" value="TA01">
 
-            <label for="project-id">案件</label>
-            <select id="project-id" name="project-id">
+            <label for="priority">優先度</label>
+            <select id="task-priority" name="task-priority">
                 <option value="-1">すべて</option>
-                <c:forEach var="project" items="${projectList}">
-                    <option value="${project.id}">
-                        <c:out value="${project.name}" />
-                    </option>
-                </c:forEach>
+                <option value="0">低</option>
+                <option value="1">中</option>
+                <option value="2">高</option>
+
             </select>
 
             <label for="task-status">ステータス</label>
@@ -48,15 +47,6 @@
                 <option value="3">保留</option>
             </select>
 
-            <label for="user-id">担当者</label>
-            <select id="user-id" name="user-id">
-                <option value="-1">すべて</option>
-                <c:forEach var="user" items="${userList}">
-                    <option value="${user.id}">
-                        <c:out value="${user.userName}" />
-                    </option>
-                </c:forEach>
-            </select>
 
             <label for="keyword">キーワード</label>
             <input type="search" id="keyword" name="keyword" value="${fn:escapeXml(param.keyword)}" placeholder="タスク名">

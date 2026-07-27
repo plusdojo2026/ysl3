@@ -347,6 +347,14 @@ public class Controller extends HttpServlet {
 					&& btnId.equals("work-delete")) {
 				WorkAction action = new WorkAction(request);
 				page = action.delete();
+				
+				// ホームから工数登録画面へ
+			} else if (pageId.equals("HO01")
+					&& btnId.equals("work-regist")) {
+				WorkAction action = new WorkAction(request);
+				page = action.regist();
+			}
+		
 
 				// 月次
 				// } else if ((pageId.equals("MO01")
@@ -373,7 +381,7 @@ public class Controller extends HttpServlet {
 //				}
 //
 //				// メンバー登録
-			} else if (pageId.equals("AD02")
+			 else if (pageId.equals("AD02")
 					&& btnId.equals("member-regist")) {
 				if (loginUser.getRole() != 1) {
 					HomeAction action = new HomeAction(request);
