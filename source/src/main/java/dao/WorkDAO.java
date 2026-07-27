@@ -50,25 +50,25 @@ public class WorkDAO {
 	}
 
 	//工数登録するメソッド
-	public int workRegist(int userId, int taskId, String workDate, String explainText, String work) {
+	public int workRegist(int userId, int taskId, String workDate, String explainText, float work) {
 		int ans = 0;
 		//SQLを準備
-		String sql = "INSERT INTO works VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO works VALUES (0,?,?,?,?,?)";
 
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 
-			pStmt.setInt(1, userId);
-			pStmt.setInt(2, taskId);
-			pStmt.setString(3, workDate);
-			pStmt.setString(4, explainText);
-			pStmt.setString(5, work);
+			pStmt.setInt(1, taskId);
+			pStmt.setFloat(2, work);
+			pStmt.setString(3, explainText);
+			pStmt.setInt(4, userId);
+			pStmt.setString(5, workDate);
 
 			ans = pStmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			}
+			return ans;
 		}
-		return ans;
-	}
 
 	//工数を削除するメソッド
 	public int workDelete(int workId) {
