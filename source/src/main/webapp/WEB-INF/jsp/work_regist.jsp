@@ -19,8 +19,8 @@
 		<form method="POST" action="<c:url value='/Controller'/>">
 			<div class="form-group">
 				<label>工数登録</label>
-				<input type="text" id="project-name" name="project" value="${project.name}" readonly> / 
-				<input type="text" id="task-name" name="task" value="${task.name}" readonly>
+				<input type="text" id="project-name" name="project" value="${ProjectShow.name}" readonly> / 
+				<input type="text" id="task-name" name="task" value="${TaskShow.name}" readonly>
 			</div>
 
 			<div class="form-group">

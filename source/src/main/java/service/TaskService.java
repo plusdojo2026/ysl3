@@ -64,7 +64,7 @@ public class TaskService {
 			taskList = dao.taskSelectAll(userId);
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		} 
 		finally {
 
@@ -234,6 +234,7 @@ public class TaskService {
 		try {
 			// DAOを実体化
 			TaskDAO dao = new TaskDAO(conn);
+			
 
 			// タスク一覧取得処理を実施。DAOのメソッドを実行
 			taskList = dao.homeTaskList(userId);

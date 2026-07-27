@@ -352,7 +352,7 @@ public class Controller extends HttpServlet {
 			} else if (pageId.equals("HO01")
 					&& btnId.equals("work-regist")) {
 				WorkAction action = new WorkAction(request);
-				page = action.regist();
+				page = action.workToRegist();
 			}
 		
 

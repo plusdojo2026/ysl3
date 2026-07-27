@@ -17,10 +17,13 @@ private String limitDate;
 private float estimatedWork;
 private String pmName;
 private float totalWork;
+private int memberCount; //稼働メンバー
+private float remainWork; //残り工数
+
 
 public ProjectDTO(int id, String code, String name, String customer, int status, int pmId, 
 int priority, String startDate, String endDate, String explainText,
-String limitDate, float estimatedWork, String pmName, float totalWork) {
+String limitDate, float estimatedWork, String pmName, float totalWork,int memberCount,float remainWork) {
 	super();
 	this.id = id;
 	this.code = code;
@@ -36,6 +39,8 @@ String limitDate, float estimatedWork, String pmName, float totalWork) {
 	this.estimatedWork = estimatedWork;
 	this.pmName = pmName;
 	this.totalWork = totalWork;
+	this.memberCount = memberCount; //稼働メンバー
+	this.remainWork = remainWork; //残り工数
 
 }
 
@@ -151,6 +156,22 @@ public void setTotalWork(float totalWork) {
 	this.totalWork = totalWork;
 }
 
+public int getMemberCount() { //稼働メンバー
+	return memberCount;
+}
+
+public void setMemberCount(int memberCount) {
+	this.memberCount = memberCount;
+}
+
+public float getRemainWork() { //残り工数
+	return remainWork;
+}
+
+public void setRemainWork(float remainWork) {
+	this.remainWork = remainWork;
+}
+
 public ProjectDTO() {
 	super();
 	this.id = 0;
@@ -167,6 +188,8 @@ public ProjectDTO() {
 	this.estimatedWork = 0;
 	this.pmName = "";
 	this.totalWork = 0;
+	this.memberCount = 0; //稼働メンバー
+	this.remainWork = 0; //残り工数
 
 }
 

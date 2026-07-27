@@ -1,1 +1,75 @@
 @charset "UTF-8";
+
+/*--------------------------*/
+/*--------３画面共通--------*/
+/*--------------------------*/
+
+
+
+/*-------------------------------*/
+/*--------member_list.jsp--------*/
+/*-------------------------------*/
+
+#key-word {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin: 12px auto 0 auto;
+}
+
+.search-bar {
+  width: 360px;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  border: 1px solid #ccc;
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  font-size: 14px;
+  margin: 0;
+}
+#search-bar-long {
+  width: 100%;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px 8px 8px 8px;
+  font-size: 14px;
+  margin: 0;
+}
+#search-bar:focus {
+  border-color: #1d6fb8;
+  outline: none;
+}
+
+.search-button {
+  width: 80px;
+  height: 40px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 0 8px 8px 0;
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0;
+}
+
+.search-button:hover {
+  background-color: #f0f4f8;
+}
+
+/*-------------------------------*/
+/*--------member_edit.jsp--------*/
+/*-------------------------------*/
+
+
+
+
+
+
+/*-------------------------------*/
+/*--------member_regist.jsp--------*/
+/*-------------------------------*/
