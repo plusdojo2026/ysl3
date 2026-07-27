@@ -397,8 +397,41 @@ public class TaskDAO {
 
 	}
 
-	
-	
+	//サマリーカード用
+	//予定工数
+	public float getPlannedWork(String month) {
+		float PlannedWork = 0;
+		
+	//SQL文
+		String sql =
+				"SELECT\r\n"
+				+ "SUM(task_estimated_works) AS planned_work\r\n"
+				+ "FROM tasks\r\n"
+				+ "WHERE DATE_FORMAT(task_start_date,'%Y-%m')=?";
+		
+		try (PreparedStatement ps = conn.prepareStatement(sql);) 
+		{
+		// 対象年月をセット
+		 ps.setString(1, month);
+		 
+		//SQL文を実行
+	     ResultSet rs = ps.executeQuery();
+	     
+	  // 取得結果が存在する場合
+	     if (rs.next()) {
 
+	         // 予定工数を取得
+	         PlannedWork = rs.getInt("PlannedWork");
+	     }
+	     
+		} catch (SQLException e) {
 
+		     // SQL実行時のエラー表示
+		     e.printStackTrace();
+		 }
+			
+		 // 予定工数を返す
+		 return PlannedWork;
+		}
+	
 }
