@@ -54,33 +54,57 @@ import model.ProjectDTO;
 	public ArrayList<ProjectDTO> projectSearch(int projectStatus , int projectPriority , String projectName) throws SQLException {
 		
 		ArrayList<ProjectDTO> projectList  = new ArrayList<ProjectDTO>();
-		String sql = "SELECT * FROM projects where project_name LIKE ? AND project_priority LIKE ? , project_states order by project_id";
-		
-		pStmt = conn.prepareStatement(sql);
-		
-		if (projects.getProjectName() != null && !projects.getProjectName().isEmpty()) {
-			pStmt.setString(1, "%" + projects.getName() + "%");
-		} else {
-			pStmt.setString(1, "%");
+		String sql = "SELECT * FROM projects where 1 = 1 ";
+
 			
-		if(projects.getProjectPriority() ! = null && ! projects.getProjectPriority().isEmpty()) {
-			pStmt.setInt(2,"%" + projects.getPriority() + "%");
-		}else {
-			pStmt.setInt(2,"%");
-			
-		if(projects.getProjectStates() ! = null && ! projects.getProjectPriority().isEmpty()) {
-			pStmt.setInt(3,"%"+ projects.getStates() + "%");
-		}else {
-			pStmt.setInt(3,"%");
+		if (projectStatus != 0 ) {
+			sql += " AND project_Status =  ?";
+		}
+		if (projectPriority != 0 ) {
+			sql +=  " AND project_priority =  ?";
+		} 
+		
+		if (projectName != null && ! projectName.isEmpty()) {
+			sql += " AND project_name Like ?";
 		}
 		
-			
-		rs = pStmt.executeQuery();
+		sql +="ORDER BY project_id";
 		
-		while (rs.next())
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		int index = 1;
+		
+		
+		if(projectStatus !=0) {
+			pStmt.setInt(index++,projectStatus);
+		}
+		
+		if(projectPriority != 0) {
+			pStmt.setInt(index++, projectPriority);
+		}
+		
+		if(projectName != null && !projectName.isEmpty());
+		{
+			pStmt.setString(index++, "%" + projectName + "%");
+		}
+		ResultSet rs = pStmt.executeQuery();
+		
+		while (rs.next()) {
+			ProjectDTO dto = new ProjectDTO();
+			
+			dto.setId(rs.getInt("project_id"));
+			dto.setStatus(rs.getInt("project_status"));
+			dto.setPriority(rs.getInt("project_priority"));
+			dto.setName(rs.getString("project_name"));
+			
+			projectList.add(dto);
+		}
+		
+		rs.close();
+		pStmt.close();
 			
 		return projectList;
 	}
+	
 	//projectRegistメソッド （完成）
 	public int projectRegist(String projectCode, String projectName ,String customer , int pmId , int projectStatus, int projectPriority, String projectStartDate , String projectEndDate , String projectExplain)
 			throws SQLException{

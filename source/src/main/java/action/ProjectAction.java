@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import model.ProjectDTO;
+import model.UserDTO;
 import service.ProjectService;
+import service.UserService;
 
 public class ProjectAction {
 	
@@ -34,9 +36,23 @@ public class ProjectAction {
 		String page="/WEB-INF/jsp/project_list.jsp";
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
-		int projectStatus = Integer.parseInt(request.getParameter("projectStatus"));
-		int projectPriority = Integer.parseInt(request.getParameter("projectPriority"));
+		
+		String statusStr = request.getParameter("projectStatus");
+		
+		String priorityStr = request.getParameter("projectPriority");
+		
 		String projectName = request.getParameter("projectName");
+		
+		int projectStatus = 0;
+		int projectPriority = 0;
+		
+		if (statusStr != null && !statusStr.isEmpty()) {
+			projectStatus = Integer.parseInt(statusStr);
+			}
+		
+		if(priorityStr != null && ! priorityStr.isEmpty()) {
+			projectPriority = Integer.parseInt(priorityStr);
+		}
 		
 		ProjectService service = new ProjectService();
 		
@@ -144,11 +160,28 @@ public class ProjectAction {
 		ProjectDTO project = service.projectDetail(projectId);
 		request.setAttribute("project" , project);
 		return page;
-	}}
+	}
 
 
 
 //追加メソッドselectProjectUserName
 	
-
-	
+//PM候補一覧取得
+	public String selectProjectUserName()
+	throws SQLException {
+	// 案件登録画面へ遷移
+	String page =
+	"/WEB-INF/jsp/project_regist.jsp";
+	// UserService生成
+	UserService service =
+	new UserService();
+	// PM候補一覧を取得
+	ArrayList<UserDTO> pmList =
+	service.selectProjectUserName();
+	// JSPで使用できるよう格納
+	request.setAttribute(
+	"pmList",
+	pmList);
+	// 案件登録画面へ遷移
+	return page;
+	}}
