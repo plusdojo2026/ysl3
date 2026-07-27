@@ -84,11 +84,12 @@ public class UserAction {
 		String newPasswordConfirm = request.getParameter("new-password-confirm");
 		
 		// パスワードの入力値チェック
-		if (newPassword != newPasswordConfirm) {
-			request.setAttribute("errMsg", "パスワードが一致しません");
-			page = "/WEB-INF/jsp/mypage.jsp";
-			return page;
+		if (!newPassword.equals(newPasswordConfirm)) {
+		    request.setAttribute("errMsg", "パスワードが一致しません");
+		    page = "/WEB-INF/jsp/mypage.jsp";
+		    return page;
 		}
+
 		
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();

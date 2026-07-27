@@ -21,7 +21,12 @@ public class TaskDAO {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		//	(処理)s
 		// SELECT文を準備する
-		String sql = "SELECT * FROM tasks WHERE user_id = ? ORDER BY number";
+		String sql ="SELECT tasks.*, users.user_name, projects.project_name FROM tasks "
+	            + "LEFT JOIN users ON tasks.user_id = users.user_id " 
+	            + "LEFT JOIN projects ON tasks.project_id = projects.project_id "
+	            + "WHERE tasks.user_id = ? "
+	            + "ORDER BY tasks.update_at DESC";
+		
 		//デバッグ（SQL文の確認用）
 		System.out.println(sql);
 
@@ -36,13 +41,16 @@ public class TaskDAO {
 			TaskDTO dto = new TaskDTO();
 			dto.setTaskId(rs.getInt("task_id"));
 			dto.setUserId(rs.getInt("user_id"));
-			dto.setName(rs.getString("task_name"));
+			dto.setName(rs.getString("task_name")); 
 			dto.setStatus(rs.getInt("task_status"));
 			dto.setProjectId(rs.getInt("project_id"));
 			dto.setPriority(rs.getInt("task_priority"));
 			dto.setLimitDate(rs.getString("task_limit"));
 			dto.setEstimatedWork(rs.getFloat("task_estimated_works"));
 			dto.setProgress(rs.getInt("progress"));
+			
+			dto.setProjectName(rs.getString("project_name")); 
+			dto.setUserName(rs.getString("user_name"));
 			
 			taskList.add(dto);
 		}
@@ -261,7 +269,7 @@ public class TaskDAO {
 	public TaskDTO taskDetail(int taskId) throws SQLException {
 		TaskDTO dto = null;
 		//	処理はのちに記述。今は返すだけ
-		String sql = "SELECT FROM tasks WHERE task_id = ? ";
+		String sql = "SELECT * FROM tasks WHERE task_id = ? ";
 		PreparedStatement pStmt = conn.prepareStatement(sql);
 		
 		// SQL文を完成させる
@@ -272,6 +280,7 @@ public class TaskDAO {
 
 		//移し替え
 		while (rs.next()) {
+		dto = new TaskDTO();
 		dto.setTaskId(rs.getInt("task_id"));
 		dto.setUserId(rs.getInt("user_id"));
 		dto.setName(rs.getString("task_name"));
@@ -279,7 +288,7 @@ public class TaskDAO {
 		dto.setPriority(rs.getInt("task_priority"));
 		dto.setExplainText(rs.getString("task_explanation"));
 		dto.setLimitDate(rs.getString("task_limit"));
-		dto.setEstimatedWork(rs.getFloat("task_estimated_work"));
+		dto.setEstimatedWork(rs.getFloat("task_estimated_works"));
 		dto.setProjectId(rs.getInt("project_id"));
 		dto.setStartDate(rs.getString("task_start_date"));
 		dto.setProgress(rs.getInt("progress"));
@@ -297,7 +306,7 @@ public class TaskDAO {
 		TaskDTO dto = null;
 
 		// SQL文準備
-		String sql = "SELECT FROM tasks WHERE task_id = ? ";
+		String sql = "SELECT * FROM tasks WHERE task_id = ? ";
 		PreparedStatement pStmt = conn.prepareStatement(sql);
 		
 		// SQL文を完成させる
@@ -308,6 +317,7 @@ public class TaskDAO {
 
 		//移し替え
 		while (rs.next()) {
+		dto = new TaskDTO();
 		dto.setTaskId(rs.getInt("task_id"));
 		dto.setUserId(rs.getInt("user_id"));
 		dto.setName(rs.getString("task_name"));
@@ -315,7 +325,7 @@ public class TaskDAO {
 		dto.setPriority(rs.getInt("task_priority"));
 		dto.setExplainText(rs.getString("task_explanation"));
 		dto.setLimitDate(rs.getString("task_limit"));
-		dto.setEstimatedWork(rs.getFloat("task_estimated_work"));
+		dto.setEstimatedWork(rs.getFloat("task_estimated_works"));
 		dto.setProjectId(rs.getInt("project_id"));
 		dto.setStartDate(rs.getString("task_start_date"));
 		dto.setProgress(rs.getInt("progress"));

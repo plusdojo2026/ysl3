@@ -38,17 +38,15 @@
     <tr>
         <th>稼働メンバー</th>
         <th>総工数</th>
-        <th>実績</th>
         <th>予定</th>
         <th>残工数</th>
     </tr>
 		<c:forEach var="summary" items="${summaryList}">
 			<tr>
-				<td>${summary.member }</td><!-- 稼働メンバー -->
-				<td>${summary. }</td><!-- 総工数 -->
-				<td>${summary. }</td><!-- 実績 -->
-				<td>${summary. }</td><!-- 予定 -->
-				<td>${summary. }</td><!-- 残工数 -->
+				<td>${summary.member }人</td><!-- 稼働メンバー -->
+				<td>${summary.totalwork h}</td><!-- 総工数 -->
+				<td>${summary.estimatedWork }h</td><!-- 予定 -->
+				<td>${summary.remainWork }h</td><!-- 残工数 -->
 			</tr>
 		</c:forEach>
 </table>
@@ -66,6 +64,7 @@
          <th>案件名</th>
          <th>実績工数</th>
          <th>予定</th>
+         <th>残り工数</th>
          <th>進捗率</th>
     </tr>
         <c:forEach var="project" items="${projectSummaryList}">
@@ -73,6 +72,8 @@
                 <td>${project.name}</td><!-- 案件名 -->
                 <td>${project.actualWork} h</td><!-- 実績工数 -->
                 <td>${project.plannedWork} h</td><!-- 予定 -->
+                <td>${project.remainWork}h</td><!-- 残り工数 -->
+                <td>${project.progressRate}%</td><!-- 進捗率 -->
 				<td><div class="progress">
     					<div class="progress-bar" role="progressbar" 
     							style="width:${project.progressRate}%;"><!-- 進捗率 -->
@@ -90,6 +91,7 @@
         <th>担当者名</th>
         <th>実績工数</th>
         <th>予定</th>
+        <th>残り工数</th>
         <th>進捗率</th>
     </tr>
    		<c:forEach var="user" items="${userSummaryList}">

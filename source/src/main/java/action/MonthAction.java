@@ -59,7 +59,7 @@ public class MonthAction {
 
 		ProjectService service = new ProjectService();
 
-		List<ProjectDTO> summaryList = ProjectService.getSummaryCard(month);
+		List<ProjectDTO> summaryList = service.getSummaryCard(month);
 
 		request.setAttribute("summaryList", summaryList);
 
@@ -72,7 +72,7 @@ public class MonthAction {
 
 		ProjectService service = new ProjectService();
 
-		List<ProjectDTO> projectSummaryList = ProjectService.getProjectSummary(month);
+		List<ProjectDTO> projectSummaryList = service.getProjectSummary(month);
 
 		request.setAttribute("projectSummaryList", projectSummaryList);
 
@@ -92,5 +92,5 @@ public class MonthAction {
 
 			return page;
 		}
-	}
-}
+			}
+				}

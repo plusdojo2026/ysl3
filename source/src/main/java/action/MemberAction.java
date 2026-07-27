@@ -22,7 +22,7 @@ public class MemberAction {
 	public String memberSelectAll() throws UnsupportedEncodingException {
 
 		// 戻り値のページを定義
-		String page = null;
+		String	page = "/WEB-INF/jsp/member/member_list.jsp";
 
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();

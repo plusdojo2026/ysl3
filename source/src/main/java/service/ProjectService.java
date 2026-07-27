@@ -174,4 +174,21 @@ public class ProjectService {
 		return dto;
 	}
 
+	
+	//追加メソッド
+	public ProjectDTO projectToEdit(int projectId)
+	throws SQLException{
+		
+		ProjectDTO dto = null;
+		
+		access();
+		try {
+			ProjectDAO dao = new ProjectDAO(conn);
+			
+			dto = dao.projectToEdit(projectId);
+		}finally {
+			close();
+		}return dto;
+		
+	}
 }
