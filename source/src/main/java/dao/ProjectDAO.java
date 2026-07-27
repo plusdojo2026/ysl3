@@ -242,4 +242,36 @@ import model.ProjectDTO;
 			
 		return dto;
 	}
+	//案件情報を取得する
+	public ProjectDTO projectToEdit(int projectId)throws SQLException{
+		
+		//案件情報を格納する箱
+		ProjectDTO dto = null;
+		
+		//SQL
+		String sql = "SELECT*FROM projects WHERE project_id = ?";
+		
+		//実行準備
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		//実行
+		pStmt.setInt(1,projectId);
+		ResultSet rs = pStmt.executeQuery();
+		
+		//結果をDTOに格納
+		if(rs.next()) {
+			dto = new ProjectDTO();
+			
+			dto.setId(rs.getInt("project_id"));
+			
+			dto.setName(rs.getString("project_name"));
+			
+			dto.setStatus(rs.getInt("project_status"));
+
+		    dto.setPriority(rs.getInt("project_priority"));	
+		}
+		rs.close();
+		pStmt.close();
+		
+	return dto;
+	}
 }

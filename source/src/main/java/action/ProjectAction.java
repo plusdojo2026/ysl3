@@ -184,4 +184,17 @@ public class ProjectAction {
 	pmList);
 	// 案件登録画面へ遷移
 	return page;
+	}
+
+//追加メソッド　projectToEdit
+	public String projectToEdit()
+	throws SQLException, UnsupportedEncodingException {
+		String page = "/WEB-INF/jsp/project_edit.jsp";
+		request.setCharacterEncoding("UTF-8");
+		int projectId = Integer.parseInt(request.getParameter("projectId"));
+		ProjectService service = new ProjectService();
+		ProjectDTO project = service.projectToEdit(projectId);
+		request.setAttribute("project", project);
+		return page;
+
 	}}
