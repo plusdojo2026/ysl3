@@ -22,6 +22,7 @@ public class TaskDTO implements Serializable {
 	private String userName;
 	private float totalWork;
 	
+    private String projectName; 
 	
 	public TaskDTO(int taskId, int userId, String name, int status, int priority, String limitDate, String explainText,
 			float estimatedWork, int projectId, String startDate, String endDate, int progress, String userName,
@@ -182,6 +183,13 @@ public class TaskDTO implements Serializable {
 	public void setTotalWork(float totalWork) {
 		this.totalWork = totalWork;
 	}
+	
+	 public void setProjectName(String projectName) {
+	        this.projectName = projectName;
+	    }
+	 public String getProjectName() {
+	        return this.projectName;
+	    }
 
 
 	public TaskDTO() {
