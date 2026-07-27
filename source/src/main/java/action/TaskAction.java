@@ -57,10 +57,12 @@ public class TaskAction {
 		String page = "/WEB-INF/jsp/task/task_list.jsp";
 
 		request.setCharacterEncoding("UTF-8");
+		
 		int taskId = Integer.parseInt(request.getParameter("task-id"));
-		int projectId = Integer.parseInt(request.getParameter("project-id"));
+		String projectName = request.getParameter("project-id");
 		int status = Integer.parseInt(request.getParameter("task-status"));
 		String name = request.getParameter("task-name");
+		String userName = request.getParameter("user-name");
 
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();
@@ -74,10 +76,11 @@ public class TaskAction {
 
 		// ログイン情報からユーザーIDを取り出す
 		int userId = loginUser.getId();
+		
 
 		// Serviceを実体化して処理を依頼
 		TaskService service = new TaskService();
-		ArrayList<TaskDTO> taskList = service.taskSearch(taskId, projectId, status, userId, name);
+		ArrayList<TaskDTO> taskList = service.taskSearch(userId,taskId, projectName, status, userName, name);
 
 		// タスク一覧画面にて表示する
 		request.setAttribute("taskList", taskList);
