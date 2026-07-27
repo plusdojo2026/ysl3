@@ -29,14 +29,13 @@
         <form method="post" action="${pageContext.request.contextPath}/Controller">
             <input type="hidden" name="page-id" value="TA01">
 
-            <label for="project-id">案件</label>
-            <select id="project-id" name="project-id">
+            <label for="priority">優先度</label>
+            <select id="task-priority" name="task-priority">
                 <option value="-1">すべて</option>
-                <c:forEach var="project" items="${projectList}">
-                    <option value="${project.id}">
-                        <c:out value="${project.name}" />
-                    </option>
-                </c:forEach>
+                <option value="0">低</option>
+                <option value="1">中</option>
+                <option value="2">高</option>
+
             </select>
 
             <label for="task-status">ステータス</label>
