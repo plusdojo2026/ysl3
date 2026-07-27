@@ -21,7 +21,7 @@ public class ProjectAction {
 }
 	//projectSelectAllメソッド
 	public String projectSelectAll() throws UnsupportedEncodingException{
-		String page="/WEB-INF/jsp/project_list.jsp";
+		String page="/WEB-INF/jsp/project/project_list.jsp";
 		
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
@@ -33,7 +33,7 @@ public class ProjectAction {
 	}
 	//projectSearchメソッド
 	public String projectSearch() throws UnsupportedEncodingException ,SQLException{
-		String page="/WEB-INF/jsp/project_list.jsp";
+		String page="/WEB-INF/jsp/project/project_list.jsp";
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
 		
@@ -63,7 +63,7 @@ public class ProjectAction {
 	//projectRegistメソッド
 	public  String projectRegist() throws UnsupportedEncodingException ,SQLException{
 		//返却する次の飛び先のURLをとりあえず定義
-		String page = "/WEB-INF/jsp/project_regist.jsp";
+		String page = "/WEB-INF/jsp/project/project_regist.jsp";
 		
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
@@ -99,7 +99,7 @@ public class ProjectAction {
 
 	//projectUpdateメソッド
 	public String projectUpdate() throws UnsupportedEncodingException,SQLException{
-		String page = "/WEB-INF/jsp/project_edit.jsp";
+		String page = "/WEB-INF/jsp/project/project_edit.jsp";
 
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
@@ -133,7 +133,7 @@ public class ProjectAction {
 	//projectStatusChangeメソッド
 	public String projectStatusChange() throws UnsupportedEncodingException,SQLException{
 	
-		String page = "/WEB-INF/jsp/project_edit.jsp";
+		String page = "/WEB-INF/jsp/project/project_edit.jsp";
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
@@ -150,7 +150,7 @@ public class ProjectAction {
 	}
 	//projectDetailメソッド
 	public  String projectDetail() throws UnsupportedEncodingException,SQLException {
-		String page = "/WEB-INF/jsp/project_list.jsp";
+		String page = "/WEB-INF/jsp/project/project_list.jsp";
 		
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
@@ -171,7 +171,7 @@ public class ProjectAction {
 	throws SQLException {
 	// 案件登録画面へ遷移
 	String page =
-	"/WEB-INF/jsp/project_regist.jsp";
+	"/WEB-INF/jsp/project/project_regist.jsp";
 	// UserService生成
 	UserService service =
 	new UserService();
@@ -189,7 +189,7 @@ public class ProjectAction {
 //追加メソッド　projectToEdit
 	public String projectToEdit()
 	throws SQLException, UnsupportedEncodingException {
-		String page = "/WEB-INF/jsp/project_edit.jsp";
+		String page = "/WEB-INF/jsp/project/project_edit.jsp";
 		request.setCharacterEncoding("UTF-8");
 		int projectId = Integer.parseInt(request.getParameter("projectId"));
 		ProjectService service = new ProjectService();
