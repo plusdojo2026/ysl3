@@ -51,7 +51,7 @@
    	<ul>
    		<li>案件コード :${project.code}</li>
    		
-   		<li>案件名 :${project.name}<li>
+   		<li>案件名 :${project.name}</li>
    		
    		<li>顧客名:${project.customer}</li>
    		
@@ -113,13 +113,13 @@
    	</ul>
    	
    	<!-- 編集ボタン -->
-   	<form ProjectAction>
-   	<input type="hidden" name="action" value="projectToEdit">
+   	<form action="Controller" method="getname="page-id" value="PR03">
+   		<input type="hidden" name="action" value="projectToEdit">
    	
-   	<!-- 編集対象案件ID -->
+   		<!-- 編集対象案件ID -->
    	
-   	<input type="hidden" name="projectId" value="${project.projecrtId}">
-   	<button type="submit" class="edit-btn">編集</button>
+   		<input type="hidden" name="projectId" value="${project.id}">
+   		<button type="submit" class="edit-btn">編集</button>
    	</form>
    </div>
   </c:forEach>
