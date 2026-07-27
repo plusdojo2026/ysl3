@@ -33,7 +33,7 @@
                 <li>
                     <a href="${pageContext.request.contextPath}/Controller?page-id=TA01">タスク一覧</a>
                 </li>
-                <%-- 月次担当のソースがマージされたら戻す
+                <%-- 月次
                 <li>
                     <a href="${pageContext.request.contextPath}/Controller?page-id=MO01">月次集計</a>
                 </li>

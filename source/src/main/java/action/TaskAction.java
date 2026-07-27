@@ -24,7 +24,7 @@ public class TaskAction {
 	public String taskSelectAll() throws UnsupportedEncodingException {
 
 		// 返却する次の飛び先のURLを定義
-		String page = "/WEB-INF/jsp/task_list.jsp";
+		String page = "/WEB-INF/jsp/task/task_list.jsp";
 
 		request.setCharacterEncoding("UTF-8");
 
@@ -286,7 +286,7 @@ public class TaskAction {
 	public String projectTaskList() throws UnsupportedEncodingException {
 
 		// 返却する次の飛び先のURLを定義
-		String page = "/WEB-INF/jsp/project_list.jsp";
+		String page = "/WEB-INF/jsp/project/project_list.jsp";
 
 		Integer.parseInt(request.getParameter("user-id"));
 		int taskId = Integer.parseInt(request.getParameter("task-id"));

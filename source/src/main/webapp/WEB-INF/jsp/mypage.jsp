@@ -24,16 +24,16 @@
 	  <!-- プロフィールカードここから -->
 	  <section class="profile-card">
 	    <div class="pr-card-name">${user.userName}</div>
-		<div class="pr-card-role">${user.userRole}</div>
+		<div class="pr-card-role">${user.role}</div>
 	  </section>
 	  <!-- プロフィールカードここまで -->
 	
 	  <!-- プロフィールエリアここから -->
 	  <section class="profile-area">
 	    <h2>プロフィール</h2>
-		<p>ID：${user.userId}</p>
-	    <p>名前：${user.username}</p>
-	    <p>Mail：${user.userMail}</p>
+		<p>ID：${user.loginId}</p>
+	    <p>名前：${user.userName}</p>
+	    <p>Mail：${user.mail}</p>
 	  </section>
 	  <!-- プロフィールエリアここまで -->
 	
