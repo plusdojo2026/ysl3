@@ -80,7 +80,7 @@
                                 <tr>
                                     <td>
                                         <c:url var="taskDetailUrl" value="/Controller">
-                                            <c:param name="page-id" value="TA04" />
+                                            <c:param name="page-id" value="HO01" />
                                             <c:param name="task-id" value="${task.taskId}" />
                                         </c:url>
                                         <a href="${taskDetailUrl}"><c:out value="${task.name}" /></a>
@@ -115,7 +115,7 @@
                                     <td>
                                         <!-- 工数登録ボタンここから -->
                                         <form method="post" action="${pageContext.request.contextPath}/Controller" style="display: inline;">
-                                            <input type="hidden" name="page-id" value="WO01">
+                                            <input type="hidden" name="page-id" value="HO01">
                                             <input type="hidden" name="task-id" value="${task.taskId}">
                                             <button type="submit" name="btn-id" value="work-regist">工数登録</button>
                                         </form>

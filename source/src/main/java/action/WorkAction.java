@@ -73,7 +73,7 @@ public class WorkAction {
 		
 	
 		// 戻り値のページを定義
-		String page = null;
+		String page = "/WEB-INF/jsp/work_regist.jsp";
 		
 		//値の取得
 		request.setCharacterEncoding("UTF-8");
