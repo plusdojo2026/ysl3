@@ -27,19 +27,19 @@ import model.ProjectDTO;
 			
 			while (rs.next()) {
 				ProjectDTO dto = new ProjectDTO();
-				dto.setCode(rs.getString("projectId"));
-				dto.setName(rs.getString("projectName"));
+				dto.setCode(rs.getString("project_id"));
+				dto.setName(rs.getString("project_name"));
 				dto.setCustomer(rs.getString("customer"));
-				dto.setStatus(rs.getInt("projectStatus"));
-				dto.setPriority(rs.getInt("projectPriority"));
-				dto.setPmId(rs.getInt("pmId"));
-				dto.setStartDate(rs.getString("projectStartDate"));
-				dto.setEndDate(rs.getString("projectEndDate"));
-				dto.setExplainText(rs.getString("explainText"));
-				dto.setLimitDate(rs.getString("limitDate"));
-				dto.setEstimatedWork(rs.getFloat("estimatedWork"));
-				dto.setPmName(rs.getString("pmName"));
-				dto.setTotalWork(rs.getFloat("totalWork"));
+				dto.setStatus(rs.getInt("project_status"));
+				dto.setPriority(rs.getInt("project_priority"));
+				dto.setPmId(rs.getInt("pm_id"));
+				dto.setStartDate(rs.getString("project_start_date"));
+				dto.setEndDate(rs.getString("project_end_date"));
+				dto.setExplainText(rs.getString("project_explanation"));
+				dto.setLimitDate(rs.getString("project_limit"));
+				dto.setEstimatedWork(rs.getFloat("project_estimated_works"));
+				dto.setPmName(rs.getString("pm_id"));
+				//dto.setTotalWork(rs.getFloat("total_work"));
 				
 				projectList.add(dto);
 				}
@@ -223,19 +223,19 @@ import model.ProjectDTO;
 		//移し替え
 		if(rs.next()) {
 			 dto = new ProjectDTO();
-			dto.setCode(rs.getString("projectId"));
-			dto.setName(rs.getString("projectName"));
+			dto.setCode(rs.getString("project_id"));
+			dto.setName(rs.getString("project_name"));
 			dto.setCustomer(rs.getString("customer"));
-			dto.setStatus(rs.getInt("projectStatus"));
-			dto.setPriority(rs.getInt("projectPriority"));
-			dto.setPmId(rs.getInt("pmId"));
-			dto.setStartDate(rs.getString("projectStartDate"));
-			dto.setEndDate(rs.getString("projectEndDate"));
-			dto.setExplainText(rs.getString("explainText"));
-			dto.setLimitDate(rs.getString("limitDate"));
-			dto.setEstimatedWork(rs.getFloat("estimatedWork"));
-			dto.setPmName(rs.getString("pmName"));
-			dto.setTotalWork(rs.getFloat("totalWork"));
+			dto.setStatus(rs.getInt("project_status"));
+			dto.setPriority(rs.getInt("project_priority"));
+			dto.setPmId(rs.getInt("pm_id"));
+			dto.setStartDate(rs.getString("project_start_date"));
+			dto.setEndDate(rs.getString("project_end_date"));
+			dto.setExplainText(rs.getString("project_explanation"));
+			dto.setLimitDate(rs.getString("project_limit"));
+			dto.setEstimatedWork(rs.getFloat("project_estimated_works"));
+			dto.setPmName(rs.getString("pm_id"));
+			//dto.setTotalWork(rs.getFloat("total_work"));
 		}
 			rs.close();
 			ps.close();
