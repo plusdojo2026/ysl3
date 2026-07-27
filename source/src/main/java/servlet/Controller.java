@@ -353,6 +353,11 @@ public class Controller extends HttpServlet {
 					&& btnId.equals("work-regist")) {
 				WorkAction action = new WorkAction(request);
 				page = action.workToRegist();
+				
+			} else if (pageId.equals("TA01")
+					&& btnId.equals("task-update")) {
+				TaskAction action = new TaskAction(request);
+				page = action.taskToEdit();
 			}
 		
 

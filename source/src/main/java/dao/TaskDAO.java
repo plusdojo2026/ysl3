@@ -19,7 +19,7 @@ public class TaskDAO {
 	//	タスク一覧を表示するメソッド
 	public ArrayList<TaskDTO> taskSelectAll(int userId) throws SQLException {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
-		//	(処理)s
+		//	(処理)
 		// SELECT文を準備する
 		String sql ="SELECT tasks.*, users.user_name, projects.project_name FROM tasks "
 	            + "LEFT JOIN users ON tasks.user_id = users.user_id " 
@@ -41,7 +41,7 @@ public class TaskDAO {
 			TaskDTO dto = new TaskDTO();
 			dto.setTaskId(rs.getInt("task_id"));
 			dto.setUserId(rs.getInt("user_id"));
-			dto.setName(rs.getString("task_name")); 
+			dto.setName(rs.getString("task_name"));
 			dto.setStatus(rs.getInt("task_status"));
 			dto.setProjectId(rs.getInt("project_id"));
 			dto.setPriority(rs.getInt("task_priority"));
@@ -49,7 +49,7 @@ public class TaskDAO {
 			dto.setEstimatedWork(rs.getFloat("task_estimated_works"));
 			dto.setProgress(rs.getInt("progress"));
 			
-			dto.setProjectName(rs.getString("project_name")); 
+			dto.setName(rs.getString("project_name"));
 			dto.setUserName(rs.getString("user_name"));
 			
 			taskList.add(dto);
@@ -288,7 +288,7 @@ public class TaskDAO {
 		dto.setPriority(rs.getInt("task_priority"));
 		dto.setExplainText(rs.getString("task_explanation"));
 		dto.setLimitDate(rs.getString("task_limit"));
-		dto.setEstimatedWork(rs.getFloat("task_estimated_works"));
+		dto.setEstimatedWork(rs.getFloat("task_estimated_work"));
 		dto.setProjectId(rs.getInt("project_id"));
 		dto.setStartDate(rs.getString("task_start_date"));
 		dto.setProgress(rs.getInt("progress"));
@@ -306,7 +306,10 @@ public class TaskDAO {
 		TaskDTO dto = null;
 
 		// SQL文準備
-		String sql = "SELECT * FROM tasks WHERE task_id = ? ";
+		String sql = "SELECT tasks.*, users.user_name, projects.project_name FROM tasks "
+	            + "LEFT JOIN users ON tasks.user_id = users.user_id " 
+	            + "LEFT JOIN projects ON tasks.project_id = projects.project_id "
+	            + "WHERE tasks.task_id = ? ";
 		PreparedStatement pStmt = conn.prepareStatement(sql);
 		
 		// SQL文を完成させる
@@ -329,6 +332,9 @@ public class TaskDAO {
 		dto.setProjectId(rs.getInt("project_id"));
 		dto.setStartDate(rs.getString("task_start_date"));
 		dto.setProgress(rs.getInt("progress"));
+		
+		dto.setProjectName(rs.getString("project_name"));
+		dto.setUserName(rs.getString("user_name"));
 				}
 
 		// 戻り値
