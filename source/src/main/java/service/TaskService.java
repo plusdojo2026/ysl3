@@ -75,7 +75,32 @@ public class TaskService {
 		// 戻り値
 		return taskList;
 	}
+	// ユーザーがタスクとして追加したprojectの一覧
+	public ArrayList<String> projectSelectAll(int userId) {
+		ArrayList<String> projectList = new ArrayList<String>();
 
+		// DB接続
+		access();
+
+		try {
+			// DAOを実体化
+			TaskDAO dao = new TaskDAO(conn);
+
+			// タスク一覧取得処理を実施。DAOのメソッドを実行
+			projectList = dao.projectSelectAll(userId);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		finally {
+
+			// DB接続解除
+			close();
+		}
+
+		// 戻り値
+		return projectList;
+	}
 	// タスク検索をするメソッド
 	public ArrayList<TaskDTO> taskSearch(int userId,String taskId, String name, int status, String projectName) throws SQLException {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
