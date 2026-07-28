@@ -111,7 +111,7 @@ import model.ProjectDTO;
 	public int projectRegist(String projectCode, String projectName ,String customer , int pmId , int projectStatus, int projectPriority, String projectStartDate , String projectEndDate , String projectExplain)
 			throws SQLException{
 		// SELECT文を準備する
-		String sql = "insert into projects(project_code,project_name,customer,pm_id,project_status,project_priority,project_dtart_date,project_end_date,project_explain)VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "insert into projects(project_code,project_name,customer,pm_id,project_status,project_priority,project_dtart_date,project_end_date,project_explain)VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
 		//デバッグ（SQL文の確認用）
 		System.out.println(sql);
 		// まとめる
