@@ -38,9 +38,7 @@
 
 
 
-				<p class="error-message">
-					${errMsg}
-				</p>
+				<p class="error-message">${errMsg}</p>
 				<button type="submit" name="btn-id" value="login" class="login-btn" id="login-btn">ログイン</button>
 
 

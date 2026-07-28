@@ -1,1 +1,234 @@
 @charset "UTF-8";
+
+/*------------------------*/
+/*--------home.css--------*/
+/*------------------------*/
+
+.title-area {
+	margin-bottom: 8px;
+	padding-bottom: 9px;
+	border-bottom: 4px solid #29988B;
+}
+
+.home-title {
+	margin: 0;
+	font-size: 29px;
+	color: #4E4D4C;
+}
+
+.sub-title-area {
+	margin-top: 12px;
+	margin-bottom: 18px;
+	padding-bottom: 9px;
+	border-bottom: 3px solid #29988B;
+}
+
+.sub-home-title {
+	margin: 0;
+	font-size: 18px;
+	color: #4E4D4C;
+}
+
+
+/* エラーメッセージ表示場所 */
+.msg-area {
+	min-height: 20px;
+	margin-bottom: 8px;
+	padding: 0 12px;
+	background-color: white;
+	color: #e33c6b;
+	font-weight: 500;
+}
+
+
+/* 画面配置を、左にナビ・タスク右に工数ログにする*/
+.home-layout {
+	display: flex;
+	align-items: flex-start;
+	gap: 22px;
+}
+
+.home-main {
+	width: 720px;
+	flex-grow: 1;
+}
+
+.home-side {
+	width: 360px;
+	padding-left: 18px;
+	border-left: 5px solid 5#29988B;
+}
+
+
+.nav-area {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.nav-card {
+	width: 310px;
+	min-height: 92px;
+	flex-grow: 1;
+	border-left: 8px solid #29988B;
+	transition: 0.2s;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.nav-card:hover {
+	opacity: 0.75;
+	scale: 1.025;
+}
+
+.nav-card a {
+	min-height: 92px;
+	padding: 16px 16px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	color: #4E4D4C;
+	font-size: 18px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.home-work-log {
+	padding: 10px 0;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	border-bottom: 1px solid #e1e5e3;
+}
+
+.home-work-log-time {
+	font-size: 14px;
+	font-weight: 650;
+	margin-left: 8px;
+}
+
+.home-work-log-name {
+	width: 150px;
+}
+
+.home-work-log-date {
+	color: #4E4D4C;
+	font-size: 12px;
+	margin-right: 8px;
+	text-align: right;
+}
+
+.card-area {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.task-card {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding: 16px;
+	background-color: #fff;
+	border-left: 8px solid #29988B;
+	border-radius: 4px;
+	transition: 0.2s;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+
+
+
+.task-title {
+	margin: 0;
+	font-size: 20px;
+}
+
+.task-link {
+	color: #4E4D4C;
+	text-decoration: none;
+	border: none;
+}
+
+.task-link:active {
+	text-decoration: none;
+	border: none;
+}
+
+.task-card-info {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 16px;
+	align-items: center;
+	font-size: 14px;
+	color: #666;
+}
+
+.status {
+	padding: 2px 6px;
+	width: 64px;
+
+	text-align: center;
+	border-radius: 12px;
+	font-size: 12px;
+	color: #fff;
+	background-color: #F07E9B;
+}
+
+.task-progress {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.progress-bar {
+	flex-grow: 1;
+
+	height: 12px;
+}
+
+.progress-text {
+	color: #4E4D4C;
+	font-size: 22px;
+	min-width: 35px;
+	text-align: right;
+	font-weight: 650;
+}
+
+.task-actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: 8px;
+	margin-top: 4px;
+}
+
+.btn {
+	padding: 6px 14px;
+	border-radius: 2px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 500;
+	transition: 0.2s;
+}
+
+.btn-work {
+	background-color: #29988B;
+	color: #fff;
+	border: 1px solid #29988B;
+}
+
+.btn-work:hover {
+	background-color: #fff;
+	color: #29988B;
+	border: 1px solid #29988B;
+}
+
+.btn-delete {
+	background-color: #fff;
+	color: #F39F59;
+	border: 1px solid #F39F59;
+}
+
+.btn-delete:hover {
+	background-color: #e74c3c;
+	color: #fff;
+}

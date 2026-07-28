@@ -9,10 +9,10 @@
 	margin: 24px auto 24px auto;
 	padding: 16px 22px 16px;
 	box-sizing: border-box;
-/*	border: 1px solid #29988b;*/
-/*	border-radius: 48px;*/
-/*	background-color: #fff;*/
-/*	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);*/
+	/*	border: 1px solid #29988b;*/
+	/*	border-radius: 48px;*/
+	/*	background-color: #fff;*/
+	/*	box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.35);*/
 }
 
 .login-title {
@@ -40,7 +40,7 @@
 
 /* 入力項目 */
 .mini-card {
-	width: 320px;
+	width: 380px;
 	margin: 0 auto;
 }
 
@@ -55,10 +55,10 @@
 /* 入力欄 */
 .login-input {
 	display: block;
-	width: 320px;
+	width: 380px;
 	margin: 0 auto 12px 0;
 	box-sizing: border-box;
-	border-radius: 8px;
+	border-radius: 4px;
 	border: 1px solid #bbb;
 	padding: 8px 10px;
 	font-size: 16px;
@@ -75,20 +75,23 @@
 	display: block;
 	background-color: #29988b;
 	color: #fff;
-	border-radius: 10px;
-	border: none;
+	border-radius: 4px;
+	border: 1px solid #29988b;
 	height: 48px;
-	width: 320px;
+	width: 380px;
 	font-size: 16px;
 	font-weight: bold;
 	margin: auto;
 	padding: 0;
 	box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.35);
 	cursor: pointer;
+	transition: 0.2s;
 }
 
 .login-btn:hover {
-	opacity: 0.75;
+	color: #29988b;
+	background-color: #fff;
+	border: 1px solid #29988b;
 
 }
 
