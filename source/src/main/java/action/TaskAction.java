@@ -44,9 +44,13 @@ public class TaskAction {
 		// Serviceを実体化して処理を依頼
 		TaskService service = new TaskService();
 		ArrayList<TaskDTO> taskList = service.taskSelectAll(userId);
+		//ユーザーがタスクとして追加したprojectの一覧
+		ArrayList<String> projectList = service.projectSelectAll(userId);
 
 		// タスク一覧画面にて表示する
 		request.setAttribute("taskList", taskList);
+		//projectの一覧を保存する
+		session.setAttribute("projectList", projectList);
 		return page;
 	}
 
