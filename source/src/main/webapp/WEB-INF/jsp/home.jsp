@@ -94,7 +94,7 @@
 								<c:otherwise>不明</c:otherwise>
 							</c:choose>
 						</span> <span class="meta-item time"> 見積: <c:out
-								value="${task.estimatedWork}" />時間
+								value="${task.estimatedWorks}" />時間
 						</span>
 
 						<!-- 進捗バー -->
