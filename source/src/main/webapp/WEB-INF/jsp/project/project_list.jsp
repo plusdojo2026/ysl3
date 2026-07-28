@@ -1,26 +1,29 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>ホーム | TaskManager</title>
+ <meta charset="UTF-8">
+ <title>ホーム | TaskManager</title>
 
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/home.css">
+  <link rel="stylesheet" 
+  href="${pageContext.request.contextPath}/css/common.css">
+  <link rel="stylesheet"
+   href="${pageContext.request.contextPath}/css/home.css">
   <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
   <script src="${pageContext.request.contextPath}/js/home.js" defer></script>
 </head>
 
 <body>
-    <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
+<%@ include file="/WEB-INF/jsp/common/header.jsp" %>
   <!---------- メインここから value="selectProjectUserName" style="display: inline;"---------->
   <main class="main">
 
   <h2 class="page-title">案件一覧</h2>
   
-  <form  method="post" action="${pageContext.request.contextPath}/Controller" >
+  <form  method="post" 
+  	action="${pageContext.request.contextPath}/Controller">
   <input type="hidden"  name="page-id" value="PR02">  
   <button type="submit" name="btn-id" value="project-to-regist" class="project-regist-btn">新規登録</button>
 </form>
@@ -50,6 +53,12 @@
    <div class="project-card">
    	<ul>
    		<li>案件コード :${project.code}</li>
+   		
+   		<li><c:url var="projectDetailUrl" value="/Controller">
+							<c:param name="page-id" value="PR04" />
+							<c:param name="project-id" value="${project.id}" />
+						</c:url> <a href="${projectDetailUrl}"> <c:out value="${project.name}" />
+					</a></li>
    		
    		<li>案件名 :${project.name}</li>
    		
