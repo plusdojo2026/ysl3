@@ -117,11 +117,11 @@ import model.ProjectDTO;
 		// まとめる
 		int ans = 0 ;
 		PreparedStatement pStmt = conn.prepareStatement(sql);
-		pStmt.setString(1,  projectCode);
-		pStmt.setString(2, projectName);
-		pStmt.setString(3, customer);
-		pStmt.setInt(4, pmId);
-		pStmt.setInt(5, projectStatus);
+		pStmt.setString(1,projectCode);
+		pStmt.setString(2,projectName);
+		pStmt.setString(3,customer);
+		pStmt.setInt(4,pmId);
+		pStmt.setInt(5,projectStatus);
 		pStmt.setInt(6,  projectPriority);
 		pStmt.setString(7, projectStartDate);
 		pStmt.setString(8, projectEndDate);
@@ -135,9 +135,9 @@ import model.ProjectDTO;
 			ps.setInt(4,pmId);
 			ps.setInt(5, projectStatus);
 			ps.setInt(6,projectPriority );
-			ps.setString(7, projectStartDate);
-			ps.setString(8, projectEndDate);
-			ps.setString(9, projectExplain);
+			ps.setString(7,projectStartDate);
+			ps.setString(8,projectEndDate);
+			ps.setString(9,projectExplain);
 			
 			ans=ps.executeUpdate();
 		} catch (SQLException e) {	
