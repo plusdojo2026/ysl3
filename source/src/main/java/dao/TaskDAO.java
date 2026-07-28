@@ -49,7 +49,7 @@ public class TaskDAO {
 			dto.setEstimatedWorks(rs.getFloat("task_estimated_works"));
 			dto.setProgress(rs.getInt("progress"));
 			
-			dto.setName(rs.getString("project_name"));
+			dto.setProjectName(rs.getString("project_name"));
 			dto.setUserName(rs.getString("user_name"));
 			
 			taskList.add(dto);
@@ -60,34 +60,27 @@ public class TaskDAO {
 	}
 
 	//	タスクを検索するメソッド
-	public ArrayList<TaskDTO> taskSearch(int user_id, int taskId, String userName, String name, int status, String projectName)
+	public ArrayList<TaskDTO> taskSearch(int user_id, String taskId,String name, int status, String projectName)
 			throws SQLException {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		//	処理はのちに記述。今は返すだけ
 
 		// SELECT文を準備する
-		String sql = "SELECT task_id,user_name,task_name,task_status,project_name,task_priority,"
-				+ "task_limit,task_estimated_works,progress FROM tasks "
-				+ "LEFT JOIN users ON tasks.user_id = users.user_id "
+		String sql = "SELECT task_id,task_name,task_status,project_name,task_priority,"
+				+ "task_limit,task_estimated_works,progress,user_id, tasks.project_id FROM tasks "
 				+ "LEFT JOIN projects ON tasks.project_id = projects.project_id "
 				+ "WHERE task_name LIKE ?";
 
 		
 		//projectName
-		if (projectName != null) {
+		if (projectName != null && !projectName.equals("")) {
 
-			sql += " AND project_id = ?";
+			sql += " AND project_name = ?";
 		}
 		//status
-		if ((Integer) status != null) {
+		if ((Integer) status != 0)  {
 			
 			sql += " AND task_status = ?";
-		}
-		
-		//user_name,
-		if (userName != null) {
-			
-			sql += " AND user_name = ?";
 		}
 						
 		PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -101,24 +94,19 @@ public class TaskDAO {
 		}
 
 		//project_name
-		int index = 1;
+		int index = 2;
 		
-		if (projectName != null) {
+		if (projectName != null && !projectName.equals("")) {
 
-			pStmt.setString(index++, projectName);
+			pStmt.setString(index, projectName);
+			index++;
 		}
 
 		//status
-		if ((Integer) status != null) {
+		if ((Integer) status != 0){
 
-			pStmt.setInt(index++, status);
-		}
-		
-		
-		//user_id,
-		if (userName != null) {
-
-			pStmt.setString(index++, userName);
+			pStmt.setInt(index, status);
+			index++;
 		}
 		
 		
@@ -135,11 +123,10 @@ public class TaskDAO {
 			dto.setProjectId(rs.getInt("project_id"));
 			dto.setPriority(rs.getInt("task_priority"));
 			dto.setLimitDate(rs.getString("task_limit"));
-			dto.setEstimatedWorks(rs.getFloat("task_estimateds"));
+			dto.setEstimatedWorks(rs.getFloat("task_estimated_works"));
 			dto.setProgress(rs.getInt("progress"));
 			
 			dto.setProjectName(rs.getString("project_name"));
-			dto.setUserName(rs.getString("user_name"));
 
 			taskList.add(dto);
 		}
@@ -259,7 +246,10 @@ public class TaskDAO {
 		TaskDTO dto = null;
 		//	処理はのちに記述。今は返すだけ
 		String sql = "SELECT project_name,task_name,task_status,task_priority,task_estimated_works,"
-				+ "progress,task_start_date,task_limit,user_name,task_explanation FROM tasks WHERE task_id = ? ";
+				+ "progress,task_start_date,task_limit,task_explanation,user_name FROM tasks "
+				+ "LEFT JOIN users ON tasks.user_id = users.user_id "
+				+ "LEFT JOIN projects ON tasks.project_id = projects.project_id "
+				+ "WHERE task_id = ? ";
 		PreparedStatement pStmt = conn.prepareStatement(sql);
 		
 		// SQL文を完成させる
@@ -269,8 +259,8 @@ public class TaskDAO {
 		ResultSet rs = pStmt.executeQuery();
 
 		//移し替え
-		while (rs.next()) {
 		dto = new TaskDTO();
+		if (rs.next()) {
 		dto.setName(rs.getString("task_name"));
 		dto.setStatus(rs.getInt("task_status"));
 		dto.setPriority(rs.getInt("task_priority"));
@@ -283,6 +273,15 @@ public class TaskDAO {
 		dto.setProjectName(rs.getString("project_name"));
 		dto.setUserName(rs.getString("user_name"));
 				}
+		
+		 int count = dto != null ? 1 : 0;
+		    while(rs.next()) {
+		        count++; // 2行目以降があればカウントアップ
+		    }
+		    System.out.println("--- [DEBUG] DBから取得できた行数: " + count + " 行 ---");
+
+		    rs.close();
+		    pStmt.close();
 
 		return dto;
 	}

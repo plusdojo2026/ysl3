@@ -77,7 +77,7 @@ public class TaskService {
 	}
 
 	// タスク検索をするメソッド
-	public ArrayList<TaskDTO> taskSearch(int userId,int taskId, String projectName, int status, String userName, String name) throws SQLException {
+	public ArrayList<TaskDTO> taskSearch(int userId,String taskId, String name, int status, String projectName) throws SQLException {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 
 		// DB接続
@@ -88,7 +88,7 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// タスク検索を実施。DAOのメソッドを実行
-			taskList = dao.taskSearch(userId,taskId, projectName, name, status, userName);
+			taskList = dao.taskSearch(userId,taskId, name, status,projectName);
 
 		} finally {
 

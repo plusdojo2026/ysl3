@@ -179,4 +179,50 @@ public class WorkService {
 		return ans;
 	}
 
-}
+
+//タスク詳細に工数ログを表示するメソッド
+	public ArrayList<WorkDTO> TaskWorkList(int userId,int taskId) {
+		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
+		// DB接続
+		access();
+
+		try {
+			// DAOを実体化
+			WorkDAO dao = new WorkDAO(conn);
+
+			// ホームに工数ログを表示。DAOのメソッドを実行
+			workList = dao.TaskWorkList(userId,taskId);
+
+		} finally {
+
+			// DB接続解除
+			close();
+		}
+
+		return workList;
+	}
+	
+//案件詳細に工数ログを表示するメソッド
+	public ArrayList<WorkDTO> ProjectWorkList(int userId,int projectId) {
+		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
+		// DB接続
+		access();
+
+		try {
+		// DAOを実体化
+			WorkDAO dao = new WorkDAO(conn);
+
+			// ホームに工数ログを表示。DAOのメソッドを実行
+			workList = dao.ProjectWorkList(userId,projectId);
+
+		} finally {
+
+			// DB接続解除
+			close();
+		}
+
+		return workList;
+		}
+		
+	}
+
