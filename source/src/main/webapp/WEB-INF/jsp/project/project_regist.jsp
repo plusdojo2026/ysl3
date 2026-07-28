@@ -59,7 +59,10 @@
         <input type="number" class="pr-regist-input" name="project-work"><br>
         説明<br>
         <input type="text" class="pr-regist-input" name="project-explain" max="1000">
-        <br><br>
+        <br>
+        期限<br>
+        <input type="date" class="pr-regist-input pr-regist-date" name="project-finish">
+        <br>
         <input type="submit" class="regist-btn" name="btn-id"  value="登録">
       </form>
     <!-- 案件登録フォームここまで -->

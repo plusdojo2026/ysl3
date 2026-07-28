@@ -76,6 +76,9 @@ public class ProjectAction {
 		String projectStartDate = request.getParameter("project-start-date");
 		String projectEndDate = request.getParameter("project-end-date");
 		String projectExplain = request.getParameter("project-explain");
+		String projectLimit = request.getParameter("project-limit");
+		float projectEstimatedWorks = float.parseFloat(request.getParameter("project-estimated-works"));
+		
 		
 		ProjectService service = new ProjectService();
 		
@@ -89,7 +92,11 @@ public class ProjectAction {
 				projectPriority,
 				projectStartDate,
 				projectEndDate,
-				projectExplain);
+				projectExplain,
+				projectLimit,
+				projectEstimatedWorks
+				
+				);
 		
 		request.setAttribute("ans", ans);
 		
