@@ -9,8 +9,10 @@ import javax.servlet.http.HttpSession;
 
 import model.TaskDTO;
 import model.UserDTO;
+import model.WorkDTO;
 import service.TaskService;
 import service.UserService;
+import service.WorkService;
 
 public class TaskAction {
 	HttpServletRequest request;
@@ -270,20 +272,28 @@ public class TaskAction {
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();
 		UserDTO loginUser = (UserDTO) session.getAttribute("user");
-
+		
 		// セッションが切れている場合の安全対策
 		if (loginUser == null) {
 			page = "/WEB-INF/jsp/login.jsp";
 			return page;
 		}
-
+		int userId = loginUser.getId();
 
 		// Serviceを実体化して処理を依頼
 		TaskService service = new TaskService();
 		TaskDTO taskDetail = service.taskDetail(taskId);
-
+		
+		
+		//workの一覧をtask_idから取得するサービス」DAOを実行する
+		WorkService workService = new WorkService();
+		ArrayList<WorkDTO> taskWorkList = workService.TaskWorkList(userId,taskId);
+		
 		// タスク詳細画面にて表示する
 		request.setAttribute("taskDetail", taskDetail);
+		
+		//workのリストをスコープ（taskWorkList）にいれる
+		request.setAttribute("taskWorkList", taskWorkList);
 		return page;
 	}
 

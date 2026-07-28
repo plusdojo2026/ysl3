@@ -150,7 +150,8 @@ public class WorkDAO {
 		public ArrayList<WorkDTO> TaskWorkList(int userId,int taskId) {
 			ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
 			// SELECT文を準備する
-			String sql = "SELECT * FROM works WHERE user_id = ? AND task_id = ?";
+			String sql = "\r\n"
+					+ "SELECT work_explanation,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id FROM works as w join tasks  AS t on w.task_id = t.task_id WHERE w.user_id = ? AND w.task_id = ?;";
 
 			//デバッグ（SQL文の確認用）
 			System.out.println(sql);
@@ -159,15 +160,17 @@ public class WorkDAO {
 			try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 
 				pStmt.setInt(1, userId);
+				pStmt.setInt(2, taskId);
 
 				try (ResultSet rs = pStmt.executeQuery()) {
 					// 移し替え
 					while (rs.next()) {
 						WorkDTO dto = new WorkDTO();
+						dto.setExplainText("work_explanation");
 						dto.setId(rs.getInt("work_id"));
 						dto.setTaskId(rs.getInt("task_id"));
 						dto.setTaskName(rs.getString("task_name"));
-						dto.setUserName(rs.getString("user_name"));
+//						dto.setUserName(rs.getString("user_name"));
 						dto.setWorkDate(rs.getString("work_date"));
 						dto.setWork(rs.getFloat("work"));
 						workList.add(dto);

@@ -39,9 +39,9 @@
    
    <!--工数ログ一覧-->
  	<h3>工数ログ一覧</h3>
- 	<c:forEach var="e" items="${workList}" >
- 	  <p>工数ログ名：${workName}</p>
- 	  <p>時間：${work}</p>
+ 	<c:forEach var="e" items="${taskWorkList}" >
+ 	  <p>工数ログ名：${e.explainText}</p>
+ 	  <p>時間：${e.work}</p>
  	 
  	 <input type="submit" name="work-delete-btn" value="削除" onclick="return delete()">
    </c:forEach><br>
