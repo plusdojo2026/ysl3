@@ -22,15 +22,9 @@
 
 <!-- 月切り替えボタン -->
 <div class="month-control">
-	<a href="month.action?month=${lastMonth}">
-        ＜
-    </a>
-    <span>
-        ${targetMonth}
-    </span>
-	<a href="month.action?month=${nextMonth}">
-        ＞
-    </a>
+	<a href="month.action?month=${lastMonth}">＜</a>
+    <span>${targetMonth}</span>
+	<a href="month.action?month=${nextMonth}">＞</a>
 </div>
 
 <!-- サマリーカード -->
@@ -43,10 +37,10 @@
     </tr>
 		<c:forEach var="summary" items="${summaryList}">
 			<tr>
-				<td>${summary.member }人</td><!-- 稼働メンバー -->
-				<td>${summary.totalwork h}</td><!-- 総工数 -->
-				<td>${summary.estimatedWork }h</td><!-- 予定 -->
-				<td>${summary.remainWork }h</td><!-- 残工数 -->
+				<td>${summary.MemberCount}人</td><!-- 稼働メンバー -->
+				<td>${summary.TotalWork }h</td><!-- 総工数 -->
+				<td>${summary.PlannedWork }h</td><!-- 予定 -->
+				<td>${summary.RemainWork }h</td><!-- 残工数 -->
 			</tr>
 		</c:forEach>
 </table>
@@ -69,11 +63,10 @@
     </tr>
         <c:forEach var="project" items="${projectSummaryList}">
             <tr>
-                <td>${project.name}</td><!-- 案件名 -->
-                <td>${project.actualWork} h</td><!-- 実績工数 -->
+                <td>${project.projectName}</td><!-- 案件名 -->
+                <td>${project.totalWork} h</td><!-- 実績工数 -->
                 <td>${project.plannedWork} h</td><!-- 予定 -->
                 <td>${project.remainWork}h</td><!-- 残り工数 -->
-                <td>${project.progressRate}%</td><!-- 進捗率 -->
 				<td><div class="progress">
     					<div class="progress-bar" role="progressbar" 
     							style="width:${project.progressRate}%;"><!-- 進捗率 -->
@@ -90,15 +83,16 @@
     <tr>
         <th>担当者名</th>
         <th>実績工数</th>
-        <th>予定</th>
+        <th>予定工数</th>
         <th>残り工数</th>
         <th>進捗率</th>
     </tr>
    		<c:forEach var="user" items="${userSummaryList}">
 			<tr>
-                <td>${user.name}</td><!-- 担当者名 -->
-				<td>${user.actualWork} h</td><!-- 実績工数 -->
+                <td>${user.userName}</td><!-- 担当者名 -->
+				<td>${user.totalWork} h</td><!-- 実績工数 -->
 				<td>${user.plannedWork} h</td><!-- 予定 -->
+				<td>${user.remainWork} h</td><!-- 残り工数 -->
 				<td><div class="progress">
                         <div class="progress-bar" role="progressbar"
                              	style="width:${user.progressRate}%;"><!-- 進捗率 -->

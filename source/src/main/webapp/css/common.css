@@ -16,7 +16,7 @@ body {
 	min-width: 1100px;
 	padding-top: 68px;
 	padding-bottom: 54px;
-	background-color: #ffffff;
+	background-color: #fdfdfd;
 	color: #303532;
 	font-size: 14px;
 	line-height: 1.6;
@@ -40,7 +40,7 @@ main {
   right: 0;
   left: 0;
   z-index: 20;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
   height: 72px;
   padding: 0 24px;
   display: flex;
@@ -95,7 +95,7 @@ main {
   bottom: 0;
   left: 0;
   z-index: 20;
-  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.4);
   height: 60px;
   display: flex;
   align-items: center;
@@ -122,7 +122,7 @@ main {
 /* 画面いっぱい */
   height: 100vh;
   background: #fff;
-  box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: -3px 0 10px rgba(0, 0, 0, 0.4);
 
   transform: translateX(100%);
   transition: transform 0.3s ease;
@@ -154,8 +154,10 @@ main {
   display: block;
   padding: 16px 24px;
   color: #4e4d4c;
+  font-weight: 550;
   text-decoration: none;
   border-bottom: 1px solid #eeeeee;
+  transition: 0.15s;
 }
 
 .menu a:hover {

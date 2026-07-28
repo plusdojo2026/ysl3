@@ -41,7 +41,7 @@
 								
 									<!-- タスクメイン情報 -->
 									<c:url var="taskDetailUrl" value="/Controller">
-										<c:param name="page-id" value="HO01" />
+										<c:param name="page-id" value="TA04" />
 										<c:param name="task-id" value="${task.taskId}" />
 									</c:url>
 									<h3 class="task-title">
