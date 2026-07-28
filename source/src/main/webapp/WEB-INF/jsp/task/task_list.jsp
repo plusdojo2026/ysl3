@@ -31,18 +31,18 @@
 
             <label for="project-name">案件名</label>
             
-            <select id="project-name" name="project-name">
+            <select id="project-name" name="project-id">
             
                 <option value="-1">すべて</option>
                 <c:forEach var="task" items="${taskList}">
-                 <option value="${task.projectId}">${task.projectName}</option>
+                 <option value="${task.projectName}">${task.projectName}</option>
                 </c:forEach>
 
             </select>
 
             <label for="task-status">ステータス</label>
             <select id="task-status" name="task-status">
-                <option value="-1">すべて</option>
+                <option value="">すべて</option>
                 <option value="0">未着手</option>
                 <option value="1">進行中</option>
                 <option value="2">完了</option>
@@ -51,7 +51,7 @@
 
 
             <label for="keyword">キーワード</label>
-            <input type="search" id="keyword" name="keyword" value="${fn:escapeXml(param.keyword)}" placeholder="タスク名">
+            <input type="search" id="keyword" name="task-name" value="${fn:escapeXml(param.keyword)}" placeholder="タスク名">
 
             <button type="submit" name="btn-id" value="task-search">検索</button>
         </form>

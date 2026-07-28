@@ -377,7 +377,81 @@ import model.ProjectDTO;
 			//リストを返す	
 	    	return list;
 		}
+
+	
+	//	ユーザー別実績
+	public List<ProjectDTO> getUserSummary(String month) {
+		
+		List<ProjectDTO> list = new ArrayList<>();
+		
+		String sql=
+				 "SELECT "
+				+ " u.user_name, "
+				+ " COALESCE(t.plannedWork,0) AS plannedWork, "
+			    + " COALESCE(w.totalWork,0) AS totalWork, "
+				+ " COALESCE(t.progressRate,0) AS progressRate "
+				+ " FROM users u "
+				+ " LEFT JOIN ( "
+			    + " SELECT "
+				+ " user_id, "
+			    + " SUM(task_estimated_works) AS plannedWork, "
+				+ " AVG(progress) AS progressRate "
+			    + " FROM tasks "
+				+ " GROUP BY user_id "
+			    + ") t "
+				+ " ON u.user_id = t.user_id "
+				+ " LEFT JOIN ( "
+				+ " SELECT "
+			    + " user_id, "
+			    + " SUM(work) AS totalWork "
+			    + " FROM works "
+			    + " WHERE DATE_FORMAT(work_date,'%Y-%m') = ? "
+			    + " GROUP BY user_id "
+			    + ") w "
+			    + "ON u.user_id = w.user_id "
+			    + "WHERE u.role = 0 "
+			    + "ORDER BY u.user_id";
+		
+		try (PreparedStatement ps = conn.prepareStatement(sql);)
+		{
+			// 対象年月を設定
+	        ps.setString(1, month);
+	        
+	        //SQL文を実行
+			ResultSet rs = ps.executeQuery();
 			
-	}
+			while (rs.next()) {
+
+	            ProjectDTO dto = new ProjectDTO();
+
+	            // ユーザー名
+	            dto.setUserName(rs.getString("user_name"));
+
+	            // 実績工数
+	            dto.setTotalWork(rs.getFloat("totalWork"));
+
+	            // 予定工数
+	            dto.setPlannedWork(rs.getFloat("plannedWork"));
+
+	            // 残工数
+	            dto.setRemainWork(
+	                dto.getPlannedWork() - dto.getTotalWork()
+	            );
+
+	            // 進捗率
+	            dto.setProgressRate(rs.getFloat("progressRate"));
+
+	            list.add(dto);
+	        }
+
+	    	} catch (SQLException e) {
+	    		e.printStackTrace();
+	    	}
+
+	    	return list;
+		}
+			
+		}
+	
 	
 

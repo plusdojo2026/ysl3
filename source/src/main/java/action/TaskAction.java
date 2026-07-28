@@ -58,11 +58,10 @@ public class TaskAction {
 
 		request.setCharacterEncoding("UTF-8");
 		
-		int taskId = Integer.parseInt(request.getParameter("task-id"));
+		String taskId = request.getParameter("task-id");
 		String projectName = request.getParameter("project-id");
 		int status = Integer.parseInt(request.getParameter("task-status"));
 		String name = request.getParameter("task-name");
-		String userName = request.getParameter("user-name");
 
 		// セッションからログイン中のユーザー情報を取得
 		HttpSession session = request.getSession();
@@ -80,7 +79,7 @@ public class TaskAction {
 
 		// Serviceを実体化して処理を依頼
 		TaskService service = new TaskService();
-		ArrayList<TaskDTO> taskList = service.taskSearch(userId,taskId, projectName, status, userName, name);
+		ArrayList<TaskDTO> taskList = service.taskSearch(userId,taskId, name, status, projectName);
 
 		// タスク一覧画面にて表示する
 		request.setAttribute("taskList", taskList);

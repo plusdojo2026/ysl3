@@ -261,4 +261,14 @@ public class ProjectService {
 	    
 	    return dao.getProjectSummary(month);
 	}
+	
+	//	ユーザー別実績
+	public List<ProjectDTO> getUserSummary(String month){
+		
+		//	DAO実体化	
+	    ProjectDAO dao = new ProjectDAO(conn);
+	    
+	    return dao.getUserSummary(month);
+	}
+	
 }

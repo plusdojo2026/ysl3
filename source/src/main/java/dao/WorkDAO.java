@@ -145,7 +145,72 @@ public class WorkDAO {
 		}
 		return workList;
 	}
+	
+	//タスク詳細に工数ログを表示するメソッド
+		public ArrayList<WorkDTO> TaskWorkList(int userId,int taskId) {
+			ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
+			// SELECT文を準備する
+			String sql = "SELECT * FROM works WHERE user_id = ? AND task_id = ?";
 
+			//デバッグ（SQL文の確認用）
+			System.out.println(sql);
+
+			// まとめる
+			try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+
+				pStmt.setInt(1, userId);
+
+				try (ResultSet rs = pStmt.executeQuery()) {
+					// 移し替え
+					while (rs.next()) {
+						WorkDTO dto = new WorkDTO();
+						dto.setId(rs.getInt("work_id"));
+						dto.setTaskId(rs.getInt("task_id"));
+						dto.setWork(rs.getFloat("work"));
+						dto.setExplainText(rs.getString("work_explanation"));
+						dto.setWorkDate(rs.getString("work_date"));
+						workList.add(dto);
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return workList;
+		}	
+
+	//案件詳細に工数ログを表示するメソッド
+		public ArrayList<WorkDTO> ProjectWorkList(int userId,int project_id) {
+			ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
+			// SELECT文を準備する
+			String sql = "SELECT * FROM works WHERE user_id = ? AND project_id = ?";
+
+			//デバッグ（SQL文の確認用）
+			System.out.println(sql);
+
+			// まとめる
+			try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+
+				pStmt.setInt(1, userId);
+
+				try (ResultSet rs = pStmt.executeQuery()) {
+					// 移し替え
+					while (rs.next()) {
+						WorkDTO dto = new WorkDTO();
+						dto.setId(rs.getInt("work_id"));
+						dto.setTaskId(rs.getInt("task_id"));
+						dto.setWork(rs.getFloat("work"));
+						dto.setExplainText(rs.getString("work_explanation"));
+						dto.setWorkDate(rs.getString("work_date"));
+						workList.add(dto);
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			return workList;
+		}		
+		
+		
 	
 	//工数登録画面で案件名とタスク名を表示する	
 	public WorkDTO workToRegist(int taskId) {

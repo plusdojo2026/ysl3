@@ -19,14 +19,15 @@ private String pmName;
 private float totalWork;
 private int memberCount; //稼働メンバー
 private float remainWork; //残り工数
-private float plannedWork;//予定工数
-private float progressRate;//進捗率
+private float plannedWork; //予定工数(案件別実績)
+private float progressRate; //進捗率(案件別実績)
+private String userName; //ユーザー名(ユーザー別実績)
 
 
 public ProjectDTO(int id, String code, String name, String customer, int status, int pmId, 
 int priority, String startDate, String endDate, String explainText,
 String limitDate, float estimatedWork, String pmName, float totalWork,int memberCount,float remainWork,
-float plannedWork,float progressRate) {
+float plannedWork,float progressRate, String userName) {
 	super();
 	this.id = id;
 	this.code = code;
@@ -46,6 +47,7 @@ float plannedWork,float progressRate) {
 	this.remainWork = remainWork; //残り工数
 	this.plannedWork = plannedWork; //予定工数(案件別実績)
 	this.progressRate = progressRate; //進捗率(案件別実績)
+	this.userName = userName; //ユーザー名(ユーザー別実績)
 
 }
 
@@ -177,20 +179,28 @@ public void setRemainWork(float remainWork) {
 	this.remainWork = remainWork;
 }
 
-public float getPlannedWork() {
+public float getPlannedWork() { //予定工数(案件別実績)
 	return plannedWork;
 }
 
-public void setPlannedWork(float plannedWork) { //予定工数(案件別実績)
+public void setPlannedWork(float plannedWork) { 
 	this.plannedWork = plannedWork;
 }
 
-public float getProgressRate() {
+public float getProgressRate() { //進捗率(案件別実績)
 	return progressRate;
 }
 
-public void setProgressRate(float progressRate) { //進捗率(案件別実績)
+public void setProgressRate(float progressRate) { 
 	this.progressRate = progressRate;
+}
+
+public String getUserName() { //ユーザー名(ユーザー別実績)
+	return userName;
+}
+
+public void setUserName(String userName) {
+	this.userName = userName;
 }
 
 public ProjectDTO() {
@@ -213,7 +223,7 @@ public ProjectDTO() {
 	this.remainWork = 0; //残り工数
 	this.plannedWork = 0;//予定工数(案件別実績)
 	this.progressRate = 0;//進捗率(案件別実績)
-
+	this.userName = "";//ユーザー名(ユーザー別実績)
 }
 
 }

@@ -22,17 +22,33 @@
       <!-- 案件詳細ここから -->
       <section class="pr-detail-view">
         <div class="project-list-card">
+    <input type="text" id="project-id" name="project-id" value="${project.code}" readonly>
+    <input type="text" id="project-name" name="project" value="${project.name}" readonly>
+    <input type="text" id="customer" name="customer" value="${project.customer}" readonly>
+    <input type="text" id="project-start_date" name="project-start-date" value="${project.startDate}" readonly>
+    <input type="text" id="project-limit" name="project-limit" value="${project.limitDate}" readonly>
+    <input type="text" id="project-status" name="project-status" value="${project.status}" readonly>
+    <input type="text" id="project-priority" name="project-priority" value="${project.priority}" readonly>
+    <input type="text" id="pm-id" name="pm-id" value="${project.pmId}" readonly>
+    <input type="text" id="project-end_date" name="project-end-date" value="${project.endDate}" readonly>
+    <input type="text" id="explain-text" name="explain-text" value="${project.explainText}" readonly>
+    <input type="text" id="estimated-work" name="estimated-work" value="${project.estimatedWork}" readonly>
+    <input type="text" id="pm-name" name="pm-name" value="${project.pmName}" readonly>
+    <input type="text" id="total-work" name="total-work" value="${project.totalWork}" readonly>
+    <input type="text" id="member-count" name="member-count" value="${project.memberCount}" readonly>
+    <input type="text" id="remain-work" name="remain-work" value="${project.remainWork}" readonly>
           <div>案件コード</div>
           <div>案件名</div>
           <div>顧客名</div>
+          <div>工数</div>
+          <div>ステータス</div>
+          <div>進捗度</div>
           <div>開始日</div>
           <div>期限日</div>
-          <div>ステータス</div>
+          
           <div>優先度</div>
           <div>PM名</div>
-          <div>工数</div>
-          <div>進捗度</div>
-          <div>総工数</div>
+          
           <div>現在までの工数</div>
         </div>
       </section>
@@ -42,6 +58,14 @@
       <section class="task-view">
         <h3 class="view-title">タスク一覧</h3>
         <div class="task-log-card">
+        
+        <c:forEach var="task" items="${taskList}">
+            <tr>
+                <td><c:out value="${task.id}" /></td>
+                <td><c:out value="${task.taskName}" /></td>
+            </tr>
+        </c:forEach>
+        
           <div>タスク名</div>
           <div>担当者</div>
           <div>期限：</div>
@@ -57,6 +81,8 @@
       <section class="log-view">
         <h3 class="view-title">工数ログ</h3>
         <div class="work-log-card">
+        <input type="text" id="task-name" name="task" value="${TaskShow.name}" readonly>
+          
           <div>タスク名</div>
           <div>担当者</div>
           <div>実施日</div>
