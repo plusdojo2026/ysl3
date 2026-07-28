@@ -17,7 +17,6 @@ public class MonthAction {
 	public MonthAction(HttpServletRequest request) {
 		this.request = request;
 	}
-
 	
 	public String month() throws UnsupportedEncodingException {
 		String page = "/WEB-INF/jsp/month.jsp";
@@ -28,7 +27,7 @@ public class MonthAction {
 		if (month == null || month.isEmpty()) {
 			month = getCurrentMonth();
 		}
-
+	
 		// 対象月表示用
 		request.setAttribute("targetMonth", month);
 
