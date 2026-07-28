@@ -46,7 +46,7 @@ public class TaskDAO {
 			dto.setProjectId(rs.getInt("project_id"));
 			dto.setPriority(rs.getInt("task_priority"));
 			dto.setLimitDate(rs.getString("task_limit"));
-			dto.setEstimatedWork(rs.getFloat("task_estimated_works"));
+			dto.setEstimatedWorks(rs.getFloat("task_estimated_works"));
 			dto.setProgress(rs.getInt("progress"));
 			
 			dto.setName(rs.getString("project_name"));
@@ -60,18 +60,21 @@ public class TaskDAO {
 	}
 
 	//	タスクを検索するメソッド
-	public ArrayList<TaskDTO> taskSearch(int taskId, int userId, String name, int status, int projectId)
+	public ArrayList<TaskDTO> taskSearch(int user_id, int taskId, String userName, String name, int status, String projectName)
 			throws SQLException {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		//	処理はのちに記述。今は返すだけ
 
 		// SELECT文を準備する
-		String sql = "SELECT task_id,user_id,task_name,task_status,project_id,task_priority,"
-				+ "task_limit,task_estimated_work,progress FROM tasks WHERE task_name LIKE ?";
+		String sql = "SELECT task_id,user_name,task_name,task_status,project_name,task_priority,"
+				+ "task_limit,task_estimated_works,progress FROM tasks "
+				+ "LEFT JOIN users ON tasks.user_id = users.user_id "
+				+ "LEFT JOIN projects ON tasks.project_id = projects.project_id "
+				+ "WHERE task_name LIKE ?";
 
 		
-		//project_id
-		if ((Integer) projectId != null) {
+		//projectName
+		if (projectName != null) {
 
 			sql += " AND project_id = ?";
 		}
@@ -81,10 +84,10 @@ public class TaskDAO {
 			sql += " AND task_status = ?";
 		}
 		
-		//user_id,
-		if ((Integer) userId != null) {
+		//user_name,
+		if (userName != null) {
 			
-			sql += " AND task_status = ?";
+			sql += " AND user_name = ?";
 		}
 						
 		PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -97,12 +100,12 @@ public class TaskDAO {
 			pStmt.setString(1, "%");
 		}
 
-		//project_id
+		//project_name
 		int index = 1;
 		
-		if ((Integer) projectId != null) {
+		if (projectName != null) {
 
-			pStmt.setInt(index++, projectId);
+			pStmt.setString(index++, projectName);
 		}
 
 		//status
@@ -113,9 +116,9 @@ public class TaskDAO {
 		
 		
 		//user_id,
-		if ((Integer) userId != null) {
+		if (userName != null) {
 
-			pStmt.setInt(index++, userId);
+			pStmt.setString(index++, userName);
 		}
 		
 		
@@ -132,8 +135,12 @@ public class TaskDAO {
 			dto.setProjectId(rs.getInt("project_id"));
 			dto.setPriority(rs.getInt("task_priority"));
 			dto.setLimitDate(rs.getString("task_limit"));
-			dto.setEstimatedWork(rs.getFloat("task_estimated_work"));
+			dto.setEstimatedWorks(rs.getFloat("task_estimateds"));
 			dto.setProgress(rs.getInt("progress"));
+			
+			dto.setProjectName(rs.getString("project_name"));
+			dto.setUserName(rs.getString("user_name"));
+
 			taskList.add(dto);
 		}
 
@@ -179,7 +186,7 @@ public class TaskDAO {
 			dto.setPriority(rs.getInt("task_priority"));
 			dto.setExplainText(rs.getString("task_explanation"));
 			dto.setLimitDate(rs.getString("task_limit"));
-			dto.setEstimatedWork(rs.getFloat("task_estimated_work"));
+			dto.setEstimatedWorks(rs.getFloat("task_estimated_works"));
 			dto.setProjectId(rs.getInt("project_id"));
 			dto.setStartDate(rs.getString("task_start_date"));
 			dto.setProgress(rs.getInt("progress"));
@@ -227,7 +234,7 @@ public class TaskDAO {
 			dto.setPriority(rs.getInt("task_priority"));
 			dto.setExplainText(rs.getString("task_explanation"));
 			dto.setLimitDate(rs.getString("task_limit"));
-			dto.setEstimatedWork(rs.getFloat("task_estimated_work"));
+			dto.setEstimatedWorks(rs.getFloat("task_estimated_works"));
 			dto.setProjectId(rs.getInt("project_id"));
 			dto.setStartDate(rs.getString("task_start_date"));
 			dto.setProgress(rs.getInt("progress"));
@@ -288,7 +295,7 @@ public class TaskDAO {
 		dto.setPriority(rs.getInt("task_priority"));
 		dto.setExplainText(rs.getString("task_explanation"));
 		dto.setLimitDate(rs.getString("task_limit"));
-		dto.setEstimatedWork(rs.getFloat("task_estimated_work"));
+		dto.setEstimatedWorks(rs.getFloat("task_estimated_works"));
 		dto.setProjectId(rs.getInt("project_id"));
 		dto.setStartDate(rs.getString("task_start_date"));
 		dto.setProgress(rs.getInt("progress"));
@@ -328,7 +335,7 @@ public class TaskDAO {
 		dto.setPriority(rs.getInt("task_priority"));
 		dto.setExplainText(rs.getString("task_explanation"));
 		dto.setLimitDate(rs.getString("task_limit"));
-		dto.setEstimatedWork(rs.getFloat("task_estimated_works"));
+		dto.setEstimatedWorks(rs.getFloat("task_estimated_works"));
 		dto.setProjectId(rs.getInt("project_id"));
 		dto.setStartDate(rs.getString("task_start_date"));
 		dto.setProgress(rs.getInt("progress"));
@@ -368,7 +375,7 @@ public class TaskDAO {
 			dto.setProjectId(rs.getInt("project_id"));
 			dto.setPriority(rs.getInt("task_priority"));
 			dto.setLimitDate(rs.getString("task_limit"));
-			dto.setEstimatedWork(rs.getFloat("task_estimated_works"));
+			dto.setEstimatedWorks(rs.getFloat("task_estimated_works"));
 			dto.setProgress(rs.getInt("progress"));
 			
 			taskList.add(dto);

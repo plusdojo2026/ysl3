@@ -14,19 +14,18 @@ public class TaskDTO implements Serializable {
 	private int priority;
 	private String limitDate;
 	private String explainText;
-	private float estimatedWork;
+	private float estimatedWorks;
 	private int projectId;
 	private String startDate;
 	private String endDate;
 	private int progress;
 	private String userName;
-	private float totalWork;
 	
     private String projectName; 
 	
 	public TaskDTO(int taskId, int userId, String name, int status, int priority, String limitDate, String explainText,
-			float estimatedWork, int projectId, String startDate, String endDate, int progress, String userName,
-			float totalWork) {
+			float estimatedWorks, int projectId, String startDate, String endDate, int progress, String userName
+			) {
 		super();
 		this.taskId = taskId;
 		this.userId = userId;
@@ -35,13 +34,12 @@ public class TaskDTO implements Serializable {
 		this.priority = priority;
 		this.limitDate = limitDate;
 		this.explainText = explainText;
-		this.estimatedWork = estimatedWork;
+		this.estimatedWorks = estimatedWorks;
 		this.projectId = projectId;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.progress = progress;
 		this.userName = userName;
-		this.totalWork = totalWork;
 	}
 
 
@@ -115,13 +113,13 @@ public class TaskDTO implements Serializable {
 	}
 
 
-	public float getEstimatedWork() {
-		return estimatedWork;
+	public float getEstimatedWorks() {
+		return estimatedWorks;
 	}
 
 
-	public void setEstimatedWork(float estimatedWork) {
-		this.estimatedWork = estimatedWork;
+	public void setEstimatedWorks(float estimatedWork) {
+		this.estimatedWorks = estimatedWork;
 	}
 
 
@@ -175,14 +173,6 @@ public class TaskDTO implements Serializable {
 	}
 
 
-	public float getTotalWork() {
-		return totalWork;
-	}
-
-
-	public void setTotalWork(float totalWork) {
-		this.totalWork = totalWork;
-	}
 	
 	 public void setProjectName(String projectName) {
 	        this.projectName = projectName;
@@ -201,13 +191,12 @@ public class TaskDTO implements Serializable {
 		this.priority = 0;
 		this.limitDate = "";
 		this.explainText = "";
-		this.estimatedWork = 0;
+		this.estimatedWorks = 0;
 		this.projectId = 0;
 		this.startDate = "";
 		this.endDate = "";
 		this.progress = 0;
 		this.userName = "";
-		this.totalWork = 0;
 	}
 	
 	
