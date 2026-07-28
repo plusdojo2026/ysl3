@@ -208,6 +208,85 @@ public class WorkAction {
 		}
 	}
 	
+	// 案件詳細に工数ログを表示するメソッド
+		public String ProjectWorkList () throws SQLException {
+
+			// 戻り値のページを定義
+			String page = "/WEB-INF/jsp/home.jsp";
+
+			// セッションからログイン中のユーザー情報を取得
+			HttpSession session = request.getSession(false);
+
+			if (session == null) {
+				return "/WEB-INF/jsp/login.jsp";
+			}
+			UserDTO loginUser = (UserDTO) session.getAttribute("user");
+
+			// セッションが切れている場合の安全対策
+			if (loginUser == null) {
+				page = "/WEB-INF/jsp/login.jsp";
+				return page;
+			}
+
+			// ログイン情報からユーザーIDを取り出す
+			int userId = loginUser.getId();
+
+
+			// 工数ログ実体化
+			WorkService workService = new WorkService();
+			ArrayList<WorkDTO> projectWorkList = workService.homeWorkList(userId);
+
+			request.setAttribute("errMsg", "※一覧が取得できませんでした");
+
+			// ちゃんと入っていたらログインできた人の情報をリクエストに保存
+
+			request.setAttribute("projectWorkList", projectWorkList);
+
+			// 戻り値
+			return page;
+
+		}
+	
+	
+
+	// タスク詳細に工数ログを表示するメソッド
+		public String TaskWorkList() throws SQLException {
+
+			// 戻り値のページを定義
+			String page = "/WEB-INF/jsp/home.jsp";
+
+			// セッションからログイン中のユーザー情報を取得
+			HttpSession session = request.getSession(false);
+
+			if (session == null) {
+				return "/WEB-INF/jsp/login.jsp";
+			}
+			UserDTO loginUser = (UserDTO) session.getAttribute("user");
+
+			// セッションが切れている場合の安全対策
+			if (loginUser == null) {
+				page = "/WEB-INF/jsp/login.jsp";
+				return page;
+			}
+
+			// ログイン情報からユーザーIDを取り出す
+			int userId = loginUser.getId();
+
+			// 工数ログも同様
+			WorkService workService = new WorkService();
+			ArrayList<WorkDTO> taskWorkList = workService.homeWorkList(userId);
+
+			request.setAttribute("errMsg", "※一覧が取得できませんでした");
+
+			// ちゃんと入っていたらログインできた人の情報をリクエストに保存
+
+			request.setAttribute("taskWorkList", taskWorkList);
+
+			// 戻り値
+			return page;
+
+		}		
+		
 //	//ホームに工数ログを表示
 //	public String homework() throws UnsupportedEncodingException {
 //	String page="/WEB-INF/jsp/home.jsp";
