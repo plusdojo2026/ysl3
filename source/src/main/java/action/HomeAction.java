@@ -44,6 +44,12 @@ public class HomeAction {
 		// ログイン情報からユーザーIDを取り出す
 		int userId = loginUser.getId();
 
+		// 管理者かどうか判定
+		int role = loginUser.getRole();
+		if (role == 1) {
+			userId = 0;
+		}
+
 		// Serviceを実体化して処理を依頼
 		TaskService taskService = new TaskService();
 		ArrayList<TaskDTO> homeTaskList = taskService.homeTaskList(userId);
@@ -52,8 +58,17 @@ public class HomeAction {
 		WorkService workService = new WorkService();
 		ArrayList<WorkDTO> homeWorkList = workService.homeWorkList(userId);
 
-		request.setAttribute("errMsg", "※一覧が取得できませんでした");
-
+		if (homeTaskList == null && homeWorkList == null) {
+			request.setAttribute("errMsg", "※どちらの一覧も取得できませんでした");
+			return page;
+		} else if (homeTaskList == null) {
+			request.setAttribute("errMsg", "※担当タスクが取得できませんでした");
+			return page;
+		} else if (homeWorkList == null) {
+			request.setAttribute("errMsg", "※工数ログが取得できませんでした");
+			return page;
+		}
+		
 		// ちゃんと入っていたらログインできた人の情報をリクエストに保存
 
 		request.setAttribute("homeTaskList", homeTaskList);
