@@ -194,51 +194,33 @@ public class TaskDAO {
 		return ans;
 	}
 
-	//	タスク編集メソッド
+	// タスク編集メソッド
 	public int taskUpdate(int taskId, int userId, String name, int status, int priority,
 			String explainText, String limitDate, float estimatedWorks, int projectId, String startDate, int progress)
 			throws SQLException {
 		int ans = 0;
-		//	処理はのちに記述。今は返すだけ
-		// SELECT文を準備する
-		String sql = "UPDATE task SET taskId=?,userId=?,name=?, status=?, priority=?,"
-				+ "limitDate=?, explanationText=? ,estimatedWorks=?, projectId=?,"
-				+ "startDate=?,progress=? WHERE user_id = ?";
-		//デバッグ（SQL文の確認用）
-		System.out.println(sql);
+		
+		String sql = "UPDATE tasks SET user_id=?, task_name=?, task_status=?, task_priority=?,"
+				+ " task_limit=?, task_explanation=?, task_estimated_works=?, project_id=?,"
+				+ " task_start_date=?, progress=? WHERE task_id = ?";
+		
 
 		// まとめる
 		PreparedStatement pStmt = conn.prepareStatement(sql);
-		pStmt.setInt(1, taskId);
-		pStmt.setInt(2, userId);
-		pStmt.setString(3, name);
-		pStmt.setInt(4, status);
-		pStmt.setInt(5, priority);
-		pStmt.setString(6, limitDate);
-		pStmt.setString(7, explainText);
-		pStmt.setFloat(8, estimatedWorks);
-		pStmt.setInt(9, projectId);
-		pStmt.setString(10, startDate);
-		pStmt.setInt(11, progress);
+		pStmt.setInt(1, userId);
+		pStmt.setString(2, name);
+		pStmt.setInt(3, status);
+		pStmt.setInt(4, priority);
+		pStmt.setString(5, limitDate);
+		pStmt.setString(6, explainText);
+		pStmt.setFloat(7, estimatedWorks);
+		pStmt.setInt(8, projectId);
+		pStmt.setString(9, startDate);
+		pStmt.setInt(10, progress);
+		pStmt.setInt(11, taskId); 
+		
+		ans = pStmt.executeUpdate();
 
-		// SELECT文を実行し、結果表を取得する
-		ResultSet rs = pStmt.executeQuery();
-
-		//移し替え
-		while (rs.next()) {
-			TaskDTO dto = new TaskDTO();
-			dto.setTaskId(rs.getInt("task_id"));
-			dto.setUserId(rs.getInt("user_id"));
-			dto.setName(rs.getString("task_name"));
-			dto.setStatus(rs.getInt("task_status"));
-			dto.setPriority(rs.getInt("task_priority"));
-			dto.setExplainText(rs.getString("task_explanation"));
-			dto.setLimitDate(rs.getString("task_limit"));
-			dto.setEstimatedWorks(rs.getFloat("task_estimated_works"));
-			dto.setProjectId(rs.getInt("project_id"));
-			dto.setStartDate(rs.getString("task_start_date"));
-			dto.setProgress(rs.getInt("progress"));
-		}
 		return ans;
 	}
 
