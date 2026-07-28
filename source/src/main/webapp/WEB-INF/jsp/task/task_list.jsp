@@ -114,7 +114,7 @@
                                     <c:out value="${task.limitDate}" />
                                 </td>
                                 <td>
-                                    <c:out value="${task.estimatedWork}" />時間
+                                    <c:out value="${task.estimatedWorks}" />時間
                                 </td>
                                 <td>
                                     <progress value="${task.progress}" max="100"></progress>
