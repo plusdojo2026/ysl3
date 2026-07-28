@@ -199,7 +199,7 @@ public String getUserName() { //ユーザー名(ユーザー別実績)
 	return userName;
 }
 
-public void setUserNmae(String userName) {
+public void setUserName(String userName) {
 	this.userName = userName;
 }
 
