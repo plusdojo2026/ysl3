@@ -253,4 +253,12 @@ public class ProjectService {
 	    return list;
 	}
 	
+	//	案件別実績
+	public List<ProjectDTO> getProjectSummary(String month){
+		
+		//	DAO実体化	
+	    ProjectDAO dao = new ProjectDAO(conn);
+	    
+	    return dao.getProjectSummary(month);
+	}
 }
