@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import action.HomeAction;
 import action.MemberAction;
-// import action.MonthAction;
+import action.MonthAction;
 import action.ProjectAction;
 import action.TaskAction;
 import action.UserAction;
@@ -65,9 +65,7 @@ public class Controller extends HttpServlet {
 			} else if (loginUser == null) {
 				page = "/WEB-INF/jsp/login.jsp";
 
-
 				// ドロワーメニューからの遷移
-
 
 				// ホーム
 			} else if (pageId.equals("HO01")) {
@@ -84,13 +82,11 @@ public class Controller extends HttpServlet {
 				TaskAction action = new TaskAction(request);
 				page = action.taskSelectAll();
 
-				// 月次
-				// } else if (pageId.equals("MO01")
-				// || pageId.equals("MO02")) {
-				// MonthAction action = new MonthAction(request);
-				// page = action.monthSelect();
-
-				// マイページ
+//				// 月次
+//			} else if (pageId.equals("MO01") || pageId.equals("MO02")) {
+//			 MonthAction action = new MonthAction(request);
+//			 page = action.monthSelect();
+//				// マイページ
 			} else if (pageId.equals("MY01")) {
 				UserAction action = new UserAction(request);
 				page = action.mypageSelect();
@@ -104,7 +100,6 @@ public class Controller extends HttpServlet {
 					MemberAction action = new MemberAction(request);
 					page = action.memberSelectAll();
 				}
-
 
 				// 今だけ
 
@@ -145,14 +140,7 @@ public class Controller extends HttpServlet {
 					page = action.homeSelectAll();
 				}
 
-
 				// 実際のボタン・リンクからの画面遷移
-
-
-				
-
-				 
-			
 
 				// 案件詳細画面
 			} else if (pageId.equals("PR04")) {
@@ -215,7 +203,6 @@ public class Controller extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
-
 	@Override
 	protected void doPost(
 			HttpServletRequest request,
@@ -245,8 +232,7 @@ public class Controller extends HttpServlet {
 				}
 
 				// ログイン
-			} else if (pageId.equals("LO01")
-					&& btnId.equals("login")) {
+			} else if (pageId.equals("LO01") && btnId.equals("login")) {
 				UserAction action = new UserAction(request);
 				page = action.login();
 
@@ -260,139 +246,106 @@ public class Controller extends HttpServlet {
 				page = "/WEB-INF/jsp/login.jsp";
 
 				// パスワード変更
-			} else if (pageId.equals("MY01")
-					&& btnId.equals("password-change")) {
+			} else if (pageId.equals("MY01") && btnId.equals("password-change")) {
 				UserAction action = new UserAction(request);
 				page = action.passwordChange();
 				
 			} else if (pageId.equals("PR03")&& btnId.equals("project-edit")) {
 				ProjectAction action = new ProjectAction(request);
-			page = action.projectToEdit();
+				page = action.projectToEdit();
 			
 			// 案件登録画面の初期表示
-						} else if (pageId.equals("PR02")
-								&& btnId.equals("project-to-regist")) {
-							ProjectAction action = new ProjectAction(request);
-							page = action.selectProjectUserName();
+			} else if (pageId.equals("PR02") && btnId.equals("project-to-regist")) {
+				ProjectAction action = new ProjectAction(request);
+				page = action.selectProjectUserName();
 
 				// 案件検索
-			} else if (pageId.equals("PR01")
-					&& btnId.equals("project-search")) {
+			} else if (pageId.equals("PR01") && btnId.equals("project-search")) {
 				ProjectAction action = new ProjectAction(request);
 				page = action.projectSearch();
 
 				// 案件登録
-			} else if (pageId.equals("PR02")
-					&& btnId.equals("登録")) {
+			} else if (pageId.equals("PR02") && btnId.equals("登録")) {
 				ProjectAction action = new ProjectAction(request);
 				page = action.projectRegist();
 
 				// 案件更新
-			} else if (pageId.equals("PR03")
-					&& btnId.equals("project-update")) {
+			} else if (pageId.equals("PR03") && btnId.equals("project-update")) {
 				ProjectAction action = new ProjectAction(request);
 				page = action.projectUpdate();
 
 				// 案件ステータス変更
-			} else if (pageId.equals("PR04")
-					&& btnId.equals("project-status-change")) {
+			} else if (pageId.equals("PR04") && btnId.equals("project-status-change")) {
 				ProjectAction action = new ProjectAction(request);
 				page = action.projectStatusChange();
 
 				// タスク検索
-			} else if (pageId.equals("TA01")
-					&& btnId.equals("task-search")) {
+			} else if (pageId.equals("TA01") && btnId.equals("task-search")) {
 				TaskAction action = new TaskAction(request);
 				page = action.taskSearch();
 
 				// タスク登録
-			} else if (pageId.equals("TA02")
-					&& btnId.equals("task-regist")) {
+			} else if (pageId.equals("TA02") && btnId.equals("task-regist")) {
 				TaskAction action = new TaskAction(request);
 				page = action.taskRegist();
 
 				// タスク更新
-			} else if (pageId.equals("TA03")
-					&& btnId.equals("task-update")) {
+			} else if (pageId.equals("TA03") && btnId.equals("task-update")) {
 				TaskAction action = new TaskAction(request);
 				page = action.taskUpdate();
 
 				// ホーム画面からタスク削除
-			} else if (pageId.equals("HO01")
-					&& btnId.equals("task-delete")) {
+			} else if (pageId.equals("HO01") && btnId.equals("task-delete")) {
 				TaskAction action = new TaskAction(request);
 				page = action.taskDelete();
 
 				// 案件詳細画面からタスク削除
-			} else if (pageId.equals("PR04")
-					&& btnId.equals("task-delete")) {
+			} else if (pageId.equals("PR04") && btnId.equals("task-delete")) {
 				TaskAction action = new TaskAction(request);
 				page = action.taskDelete();
 
 				// タスク詳細画面からタスク削除
-			} else if (pageId.equals("TA04")
-					&& btnId.equals("task-delete")) {
+			} else if (pageId.equals("TA04") && btnId.equals("task-delete")) {
 				TaskAction action = new TaskAction(request);
 				page = action.taskDetailDelete();
 
 				// タスクステータス変更
-			} else if (pageId.equals("TA04")
-					&& btnId.equals("task-status-change")) {
+			} else if (pageId.equals("TA04") && btnId.equals("task-status-change")) {
 				TaskAction action = new TaskAction(request);
 				page = action.taskStatusChange();
 
 				// 工数登録
-			} else if (pageId.equals("WO01")
-					&& btnId.equals("work-regist")) {
+			} else if (pageId.equals("WO01") && btnId.equals("work-regist")) {
 				WorkAction action = new WorkAction(request);
 				page = action.regist();
 
 				// 工数削除
-			} else if (pageId.equals("TA04")
-					&& btnId.equals("work-delete")) {
+			} else if (pageId.equals("TA04") && btnId.equals("work-delete")) {
 				WorkAction action = new WorkAction(request);
 				page = action.delete();
 				
 				// ホームから工数登録画面へ
-			} else if (pageId.equals("HO01")
-					&& btnId.equals("work-regist")) {
+			} else if (pageId.equals("HO01") && btnId.equals("work-regist")) {
 				WorkAction action = new WorkAction(request);
 				page = action.workToRegist();
-				
-			} else if (pageId.equals("TA01")
-					&& btnId.equals("task-update")) {
+		
+			} else if (pageId.equals("TA01") && btnId.equals("task-update")) {
 				TaskAction action = new TaskAction(request);
 				page = action.taskToEdit();
-			}
-		
+				
+				
+			} else if ((pageId.equals("MO01") || pageId.equals("MO02")) && btnId.equals("month-change")) {
+				 MonthAction action = new MonthAction(request);
+				 page = action.month();
+				 
+//	
+//			} else if ((pageId.equals("MO01") || pageId.equals("MO02")) && btnId.equals("csv-output")) {
+//				 MonthAction action = new MonthAction(request);
+//				 page = action.monthCsv();
 
-				// 月次
-				// } else if ((pageId.equals("MO01")
-				// || pageId.equals("MO02"))
-				// && btnId.equals("month-change")) {
-				// MonthAction action = new MonthAction(request);
-				// page = action.monthTally();
 
-				// } else if ((pageId.equals("MO01")
-				// || pageId.equals("MO02"))
-				// && btnId.equals("csv-output")) {
-				// MonthAction action = new MonthAction(request);
-				// page = action.monthCsv();
-
-//				// メンバー検索
-//			} else if (pageId.equals("AD01")
-//					&& btnId.equals("member-search")) {
-//				if (loginUser.getRole() != 1) {
-//					HomeAction action = new HomeAction(request);
-//					page = action.homeSelectAll();
-//				} else {
-//					MemberAction action = new MemberAction(request);
-//					page = action.memberSearch();
-//				}
-//
-//				// メンバー登録
-			 else if (pageId.equals("AD02")
-					&& btnId.equals("member-regist")) {
+				// メンバー登録
+			} else if (pageId.equals("AD02") && btnId.equals("member-regist")) {
 				if (loginUser.getRole() != 1) {
 					HomeAction action = new HomeAction(request);
 					page = action.homeSelectAll();
@@ -402,8 +355,7 @@ public class Controller extends HttpServlet {
 				}
 
 				// メンバー更新
-			} else if (pageId.equals("AD03")
-					&& btnId.equals("member-update")) {
+			} else if (pageId.equals("AD03") && btnId.equals("member-update")) {
 				if (loginUser.getRole() != 1) {
 					HomeAction action = new HomeAction(request);
 					page = action.homeSelectAll();
