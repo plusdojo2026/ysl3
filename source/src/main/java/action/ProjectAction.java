@@ -67,15 +67,15 @@ public class ProjectAction {
 		
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
-		String projectCode = request.getParameter("projectCode");
-		String projectName = request.getParameter("projectName");
+		String projectCode = request.getParameter("project-code");
+		String projectName = request.getParameter("project-name");
 		String customer = request.getParameter("customer");
-		int pmId = Integer.parseInt(request.getParameter("pmId"));
-		int projectStatus = Integer.parseInt(request.getParameter("projectStatus"));
-		int projectPriority = Integer.parseInt(request.getParameter("projectPriority"));
-		String projectStartDate = request.getParameter("projectStartDate");
-		String projectEndDate = request.getParameter("projectEndDate");
-		String projectExplain = request.getParameter("projectExplain");
+		int pmId = Integer.parseInt(request.getParameter("pm-id"));
+		int projectStatus = Integer.parseInt(request.getParameter("project-status"));
+		int projectPriority = Integer.parseInt(request.getParameter("project-priority"));
+		String projectStartDate = request.getParameter("project-start-date");
+		String projectEndDate = request.getParameter("project-end-date");
+		String projectExplain = request.getParameter("project-explain");
 		
 		ProjectService service = new ProjectService();
 		

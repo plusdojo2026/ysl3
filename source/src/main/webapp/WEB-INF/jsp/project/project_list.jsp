@@ -79,6 +79,9 @@
    				<c:when test="${project.status==2}">
    				完了
    				</c:when>
+   				<c:when test="${project.status==3}">
+   				保留
+   				</c:when>
    				<c:otherwise>
    				不明
    				</c:otherwise>

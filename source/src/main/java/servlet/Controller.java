@@ -283,7 +283,7 @@ public class Controller extends HttpServlet {
 
 				// 案件登録
 			} else if (pageId.equals("PR02")
-					&& btnId.equals("project-regist")) {
+					&& btnId.equals("登録")) {
 				ProjectAction action = new ProjectAction(request);
 				page = action.projectRegist();
 

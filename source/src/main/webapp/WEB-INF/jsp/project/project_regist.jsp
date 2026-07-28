@@ -27,10 +27,10 @@
         顧客名<br>
         <input type="text" class="pr-regist-input" name="project-customer" placeholder="顧客名を入力してください" required max="50"><br>
         担当PM<br>
-        <select class="pr-regist-input pr-regist-select" name="project-manager">
+        <select class="pr-regist-input pr-regist-select" name="pm-id">
         <option value="" disabled selected style="display:none;">選択してください</option>
         <c:forEach var="user" items="${pmList}">
-         <option value="${user.userName}">${user.userName}</option>
+         <option value="${user.id}">${user.userName}</option>
     	</c:forEach>
        
         </select>
@@ -38,17 +38,18 @@
         ステータス（必須）<br>
         <select class="pr-regist-input pr-regist-select" name="project-status">
          <option value="" disabled selected style="display:none;">選択してください</option>
-   		 <option>進行中</option>
-   		 <option>完了</option>
-    	 <option>保留</option>
+         <option value="0">開始前</option>
+   		 <option value="1">進行中</option>
+   		 <option value="2">完了</option>
+    	 <option value="3">保留</option>
    		</select>
    		<br>
         優先度(必須)<br>
         <select class="pr-regist-input pr-regist-select" name="project-priority">
         <option value="" disabled selected style="display:none;">選択してください</option>
-   		<option>低</option>
-    	<option>中</option>
-    	<option>高</option>
+   		<option value="0">低</option>
+    	<option value="1">中</option>
+    	<option value="2">高</option>
         </select>
         <br>開始日<br>
         <input type="date" class="pr-regist-input pr-regist-date" name="project-start"><br>
