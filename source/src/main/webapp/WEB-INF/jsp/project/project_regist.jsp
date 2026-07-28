@@ -30,9 +30,9 @@
         <select class="pr-regist-input pr-regist-select" name="project-manager">
         <option value="" disabled selected style="display:none;">選択してください</option>
         <c:forEach var="user" items="${pmList}">
-         <option value="${user.id}">${user.id}</option>
+         <option value="${user.userName}">${user.userName}</option>
     	</c:forEach>
-        
+       
         </select>
         <br>
         ステータス（必須）<br>
