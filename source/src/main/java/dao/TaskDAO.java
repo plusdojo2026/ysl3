@@ -21,7 +21,7 @@ public class TaskDAO {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		//	(処理)
 		// SELECT文を準備する
-		String sql ="SELECT tasks.*, users.user_name, projects.project_name FROM tasks "
+		String sql ="SELECT tasks.*, user_name, project_name FROM tasks "
 	            + "LEFT JOIN users ON tasks.user_id = users.user_id " 
 	            + "LEFT JOIN projects ON tasks.project_id = projects.project_id "
 	            + "WHERE tasks.user_id = ? "

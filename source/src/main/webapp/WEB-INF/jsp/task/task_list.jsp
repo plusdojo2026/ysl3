@@ -34,9 +34,8 @@
             <select id="project-name" name="project-name">
             
                 <option value="-1">すべて</option>
-                <c:forEach var="project" items="${projectList}">
-                <option value="${project.projectId}">
-                 <c:out value="${project.projectName}" /></option>
+                <c:forEach var="task" items="${taskList}">
+                 <option value="${task.projectId}">${task.projectName}</option>
                 </c:forEach>
 
             </select>
