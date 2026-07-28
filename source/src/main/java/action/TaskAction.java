@@ -280,7 +280,7 @@ public class TaskAction {
 		TaskDTO taskDetail = service.taskDetail(taskId);
 
 		// タスク詳細画面にて表示する
-		request.setAttribute("TaskDetail", taskDetail);
+		request.setAttribute("taskDetail", taskDetail);
 		return page;
 	}
 

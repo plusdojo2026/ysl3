@@ -62,7 +62,7 @@
     			<option value="95" label="95%"></option>
     			<option value="100" label="100%"></option>
 			</datalist>
-			予算工数 <input type="text" name="budget-works" value="${editTask.estimatedWork}"><br>
+			予算工数 <input type="text" name="budget-works" value="${editTask.estimatedWorks}"><br>
 			開始日/期限<input type="text" name="task-start-date" value="${editTask.startDate}">ー
 			 <input type="text" name="task-limit" value="${editTask.limitDate}"><br> 
 			 

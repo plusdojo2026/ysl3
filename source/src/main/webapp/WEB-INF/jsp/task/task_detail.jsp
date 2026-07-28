@@ -21,20 +21,21 @@
   <!--タスク詳細-->
   
   <h2>タスク詳細/工数登録</h2>
-   <p>案件名：${projectTable.projectName}</p>
-   <p>タスク名：${taskTable.taskName}</p>
-   <p>ステータス：${taskTable.taskStatus}</p>
-   <p>見積工数：${taskTable.task_estimatedWorks}</p> 
-   <p>進捗度：<progress value="${taskTable.progress}" max="100" style="width: 200px; height: 20px;"></progress></p>
-   <p>開始日：${taskTable.taskStartDate}～</p>
-   <p>期限：${taskTable.taskLimit}</p>
-   <p>担当者：${userTable.userName}</p>
+   <p>案件名：${taskDetail.projectName}</p>
+   <p>タスク名：${taskDetail.name}</p>
+   <p>ステータス：${taskDetail.status}</p>
+   <p>見積工数：${taskDetail.estimatedWorks}</p> 
+   <p>進捗度：<progress value="${taskDetail.progress}" max="100" style="width: 200px; height: 20px;"></progress></p>
+   <p>開始日：${taskDetail.startDate}～</p>
+   <p>期限：${taskDetail.limitDate}</p>
+   <p>担当者：${taskDetail.userName}</p>
    
    <!--タスク編集ボタン-->
    <input type="submit" name="task-edit-btn" value="編集">
    
    <!--タスク概要-->
     <h3>タスク概要</h3>
+     <p>${taskDetail.explainText}</p>
    
    <!--工数ログ一覧-->
  	<h3>工数ログ一覧</h3>

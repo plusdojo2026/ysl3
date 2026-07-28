@@ -118,8 +118,8 @@ public class TaskDTO implements Serializable {
 	}
 
 
-	public void setEstimatedWorks(float estimatedWork) {
-		this.estimatedWorks = estimatedWork;
+	public void setEstimatedWorks(float estimatedWorks) {
+		this.estimatedWorks = estimatedWorks;
 	}
 
 
