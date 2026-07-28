@@ -19,7 +19,7 @@ import model.ProjectDTO;
 	//projectSelectAllメソッド完成（仮）
 		public ArrayList<ProjectDTO> projectSelectAll() {
 			ArrayList<ProjectDTO> projectList = new ArrayList<>();
-			String sql = "SELECT DISTINCT projects.* ,users.user_name, SUM(works.work) AS total_work FROM projects INNER JOIN tasks ON projects.project_id = tasks.project_id LEFT JOIN works  ON tasks.task_id = works.task_id  LEFT JOIN users ON projects.pm_id = users.user_id GROUP BY projects.project_id ";
+			String sql = "SELECT DISTINCT projects.* ,users.user_name, SUM(works.work) AS total_work FROM projects LEFT JOIN tasks ON projects.project_id = tasks.project_id LEFT JOIN works  ON tasks.task_id = works.task_id  LEFT JOIN users ON projects.pm_id = users.user_id GROUP BY projects.project_id ";
 			
 			try{PreparedStatement ps =conn.prepareStatement(sql);
 			
