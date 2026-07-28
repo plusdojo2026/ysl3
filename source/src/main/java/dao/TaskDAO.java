@@ -58,7 +58,36 @@ public class TaskDAO {
 		return taskList;
 
 	}
+	//	ユーザーがタスクとして追加したprojectの一覧
+	public ArrayList<String> projectSelectAll(int userId) throws SQLException {
+		ArrayList<String> projectList = new ArrayList<String>();
+		//	(処理)
+		// SELECT文を準備する
+		String sql ="SELECT distinct project_name FROM tasks "
+	            + "LEFT JOIN users ON tasks.user_id = users.user_id " 
+	            + "LEFT JOIN projects ON tasks.project_id = projects.project_id "
+	            + "WHERE tasks.user_id = ? ";
+		
+		//デバッグ（SQL文の確認用）
+		System.out.println(sql);
 
+		// まとめる
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		pStmt.setInt(1, userId);
+		// SELECT文を実行し、結果表を取得する
+		ResultSet rs = pStmt.executeQuery();
+
+		//移し替え
+		while (rs.next()) {
+			
+		
+			projectList.add(rs.getString("project_name"));
+
+		}
+
+		return projectList;
+
+	}
 	//	タスクを検索するメソッド
 	public ArrayList<TaskDTO> taskSearch(int user_id, String taskId,String name, int status, String projectName)
 			throws SQLException {
