@@ -25,7 +25,7 @@
         案件名(必須)<br>
         <input type="text" class="pr-regist-input" name="project-name" placeholder="案件名を入力してください" required max="100"><br>
         顧客名<br>
-        <input type="text" class="pr-regist-input" name="project-customer" placeholder="顧客名を入力してください" required max="50"><br>
+        <input type="text" class="pr-regist-input" name="customer" placeholder="顧客名を入力してください" required max="50"><br>
         担当PM<br>
         <select class="pr-regist-input pr-regist-select" name="pm-id">
         <option value="" disabled selected style="display:none;">選択してください</option>
@@ -52,17 +52,18 @@
     	<option value="2">高</option>
         </select>
         <br>開始日<br>
-        <input type="date" class="pr-regist-input pr-regist-date" name="project-start"><br>
+        <input type="date" class="pr-regist-input pr-regist-date" name="project-start-date"><br>
         終了予定日<br>
-        <input type="date" class="pr-regist-input pr-regist-date" name="project-finish"><br>
+        <input type="date" class="pr-regist-input pr-regist-date" name="project-end-date"><br>
         予算工数(h)<br>
-        <input type="number" class="pr-regist-input" name="project-work"><br>
+        <input type="number" class="pr-regist-input" name="project-estimated-works"><br>
         説明<br>
         <input type="text" class="pr-regist-input" name="project-explain" max="1000">
         <br>
         期限<br>
-        <input type="date" class="pr-regist-input pr-regist-date" name="project-finish">
+        <input type="date" class="pr-regist-input pr-regist-date" name="project-limit">
         <br>
+        
         <input type="submit" class="regist-btn" name="btn-id"  value="登録">
       </form>
     <!-- 案件登録フォームここまで -->

@@ -94,7 +94,7 @@ public class ProjectService {
 
 	//projectRegistメソッド
 	public int projectRegist(String projectCode, String projectName, String customer, int pmId, int projectStatus,
-			int projectPriority, String projectStartDate, String projectEndDate, String projectExplain,String projectLimit,float projectEstimatedWorks)
+			int projectPriority, String projectStartDate, String projectEndDate,float projectEstimatedWorks ,String projectExplain,String projectLimit)
 			throws SQLException {
 		int ans = 0;
 
@@ -107,7 +107,7 @@ public class ProjectService {
 			ProjectDAO dao = new ProjectDAO(conn);
 			// ユーザー登録処理を実施。DAOのメソッドを実行
 			ans = dao.projectRegist(projectCode, projectName, customer, pmId, projectStatus, projectPriority,
-					projectStartDate, projectEndDate, projectExplain,projectLimit,projectEstimatedWorks);
+					projectStartDate, projectEndDate,projectEstimatedWorks, projectExplain,projectLimit);
 		} finally {
 
 			// DB接続解除

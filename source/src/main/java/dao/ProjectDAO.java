@@ -108,10 +108,10 @@ import model.ProjectDTO;
 	}
 	
 	//projectRegistメソッド （完成）
-	public int projectRegist(String projectCode, String projectName ,String customer , int pmId , int projectStatus, int projectPriority, String projectStartDate , String projectEndDate , String projectExplain)
+	public int projectRegist(String projectCode, String projectName ,String customer , int pmId , int projectStatus, int projectPriority, String projectStartDate , String projectEndDate , float projectEstimatedWorks,String projectExplain,String projectLimit)
 			throws SQLException{
 		// SELECT文を準備する
-		String sql = "insert into projects(project_code,project_name,customer,pm_id,project_status,project_priority,project_start_date,project_end_date,project_explanation)VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)";
+		String sql = "insert into projects(project_code,project_name,customer,pm_id,project_status,project_priority,project_start_date,project_end_date,project_estimated_works,project_explanation,project_limit)VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
 		//デバッグ（SQL文の確認用）
 		System.out.println(sql);
 		// まとめる
@@ -125,7 +125,10 @@ import model.ProjectDTO;
 		pStmt.setInt(6,  projectPriority);
 		pStmt.setString(7, projectStartDate);
 		pStmt.setString(8, projectEndDate);
-		pStmt.setString(9, projectExplain);
+		pStmt.setFloat(9, projectEstimatedWorks);
+		pStmt.setString(10, projectExplain);
+		pStmt.setString(11,projectLimit);
+		
 		
 		try(
 			PreparedStatement ps =conn.prepareStatement(sql);){
@@ -137,7 +140,10 @@ import model.ProjectDTO;
 			ps.setInt(6,projectPriority );
 			ps.setString(7,projectStartDate);
 			ps.setString(8,projectEndDate);
-			ps.setString(9,projectExplain);
+			ps.setFloat(9,projectEstimatedWorks );
+			ps.setString(10,projectExplain);
+			ps.setString(11, projectLimit);
+			
 			
 			ans=ps.executeUpdate();
 		} catch (SQLException e) {	
