@@ -19,11 +19,14 @@ private String pmName;
 private float totalWork;
 private int memberCount; //稼働メンバー
 private float remainWork; //残り工数
+private float plannedWork;//予定工数
+private float progressRate;//進捗率
 
 
 public ProjectDTO(int id, String code, String name, String customer, int status, int pmId, 
 int priority, String startDate, String endDate, String explainText,
-String limitDate, float estimatedWork, String pmName, float totalWork,int memberCount,float remainWork) {
+String limitDate, float estimatedWork, String pmName, float totalWork,int memberCount,float remainWork,
+float plannedWork,float progressRate) {
 	super();
 	this.id = id;
 	this.code = code;
@@ -41,6 +44,8 @@ String limitDate, float estimatedWork, String pmName, float totalWork,int member
 	this.totalWork = totalWork;
 	this.memberCount = memberCount; //稼働メンバー
 	this.remainWork = remainWork; //残り工数
+	this.plannedWork = plannedWork; //予定工数(案件別実績)
+	this.progressRate = progressRate; //進捗率(案件別実績)
 
 }
 
@@ -172,6 +177,22 @@ public void setRemainWork(float remainWork) {
 	this.remainWork = remainWork;
 }
 
+public float getPlannedWork() {
+	return plannedWork;
+}
+
+public void setPlannedWork(float plannedWork) { //予定工数(案件別実績)
+	this.plannedWork = plannedWork;
+}
+
+public float getProgressRate() {
+	return progressRate;
+}
+
+public void setProgressRate(float progressRate) { //進捗率(案件別実績)
+	this.progressRate = progressRate;
+}
+
 public ProjectDTO() {
 	super();
 	this.id = 0;
@@ -190,6 +211,8 @@ public ProjectDTO() {
 	this.totalWork = 0;
 	this.memberCount = 0; //稼働メンバー
 	this.remainWork = 0; //残り工数
+	this.plannedWork = 0;//予定工数(案件別実績)
+	this.progressRate = 0;//進捗率(案件別実績)
 
 }
 

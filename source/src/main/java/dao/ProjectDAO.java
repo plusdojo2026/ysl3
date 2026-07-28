@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.ProjectDTO;
 
@@ -116,11 +117,11 @@ import model.ProjectDTO;
 		// まとめる
 		int ans = 0 ;
 		PreparedStatement pStmt = conn.prepareStatement(sql);
-		pStmt.setString(1,  projectCode);
-		pStmt.setString(2, projectName);
-		pStmt.setString(3, customer);
-		pStmt.setInt(4, pmId);
-		pStmt.setInt(5, projectStatus);
+		pStmt.setString(1,projectCode);
+		pStmt.setString(2,projectName);
+		pStmt.setString(3,customer);
+		pStmt.setInt(4,pmId);
+		pStmt.setInt(5,projectStatus);
 		pStmt.setInt(6,  projectPriority);
 		pStmt.setString(7, projectStartDate);
 		pStmt.setString(8, projectEndDate);
@@ -134,9 +135,9 @@ import model.ProjectDTO;
 			ps.setInt(4,pmId);
 			ps.setInt(5, projectStatus);
 			ps.setInt(6,projectPriority );
-			ps.setString(7, projectStartDate);
-			ps.setString(8, projectEndDate);
-			ps.setString(9, projectExplain);
+			ps.setString(7,projectStartDate);
+			ps.setString(8,projectEndDate);
+			ps.setString(9,projectExplain);
 			
 			ans=ps.executeUpdate();
 		} catch (SQLException e) {	
@@ -310,4 +311,73 @@ import model.ProjectDTO;
 	    return TotalWork;
 	}
 	
-}
+	//案件別実績
+	//
+	public List<ProjectDTO> getProjectSummary(String month) {
+		
+		List<ProjectDTO> list = new ArrayList<>();
+		
+		String sql =
+		          "SELECT "
+		        + " p.project_name, "
+		        + " p.project_estimated_works, "
+		        + " COALESCE(SUM(w.work),0) AS totalWork, "
+		        + " COALESCE(SUM(t.task_estimated_works),0) AS plannedWork, "
+		        + " COALESCE(AVG(t.progress),0) AS progressRate "
+		        + "FROM projects p "
+		        + "LEFT JOIN tasks t "
+		        + "ON p.project_id = t.project_id "
+		        + "LEFT JOIN works w "
+		        + "ON t.task_id = w.task_id "
+		        + "AND DATE_FORMAT(w.work_date,'%Y-%m') = ? "
+		        + "GROUP BY "
+		        + "p.project_id, "
+		        + "p.project_name, "
+		        + "p.project_estimated_works "
+		        + "ORDER BY p.project_code";
+		
+		try (PreparedStatement ps = conn.prepareStatement(sql);)
+			{
+			
+			// 対象年月を設定
+	        ps.setString(1, month);
+	        
+	        //SQL文を実行
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+
+	            ProjectDTO dto = new ProjectDTO();
+
+	            // 案件名
+	            dto.setName(rs.getString("project_name"));
+
+	            // 実績工数
+	            dto.setTotalWork(rs.getFloat("totalWork"));
+
+	            // 予定工数
+	            dto.setPlannedWork(rs.getFloat("plannedWork"));
+
+	            // 残工数（見積工数－実績工数)
+	            float estimatedWork = rs.getFloat("project_estimated_works");
+	            dto.setRemainWork(estimatedWork - dto.getTotalWork());
+
+	            // 進捗率
+	            // 工数ベースの進捗率
+	            dto.setProgressRate(rs.getFloat("progressRate"));
+
+	            list.add(dto);
+	        }
+
+	    } catch (SQLException e) {
+	    	
+	    	// SQL実行時のエラー表示
+	        e.printStackTrace();
+	    }
+			//リストを返す	
+	    	return list;
+		}
+			
+	}
+	
+
