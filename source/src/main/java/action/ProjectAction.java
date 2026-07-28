@@ -103,15 +103,15 @@ public class ProjectAction {
 
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
-		String projectCode = request.getParameter("projectCode");
-		String projectName = request.getParameter("projectName");
+		String projectCode = request.getParameter("project-code");
+		String projectName = request.getParameter("project-name");
 		String customer = request.getParameter("customer");
 		int pmId = Integer.parseInt(request.getParameter("pmId"));
-		int projectStatus = Integer.parseInt(request.getParameter("projectStatus"));
-		int projectPriority = Integer.parseInt(request.getParameter("projectPriority"));
-		String projectStartDate = request.getParameter("projectStartDate");
-		String projectEndDate = request.getParameter("projectEndDate");
-		String projectExplain = request.getParameter("projectExplain");
+		int projectStatus = Integer.parseInt(request.getParameter("project-status"));
+		int projectPriority = Integer.parseInt(request.getParameter("project-priority"));
+		String projectStartDate = request.getParameter("project-start-date");
+		String projectEndDate = request.getParameter("project-end-date");
+		String projectExplain = request.getParameter("project-explain");
 		
 		ProjectService service = new ProjectService();
 		
@@ -136,8 +136,8 @@ public class ProjectAction {
 		String page = "/WEB-INF/jsp/project/project_edit.jsp";
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
-		int projectId = Integer.parseInt(request.getParameter("projectId"));
-		int projectStatus = Integer.parseInt(request.getParameter("projectStatus"));
+		int projectId = Integer.parseInt(request.getParameter("project-id"));
+		int projectStatus = Integer.parseInt(request.getParameter("project-status"));
 		ProjectService service = new ProjectService();
 		
 		int ans = service.projectStatusChange (
@@ -154,7 +154,7 @@ public class ProjectAction {
 		
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
-		int projectId = Integer.parseInt(request.getParameter("projectId"));
+		int projectId = Integer.parseInt(request.getParameter("project-id"));
 		
 		ProjectService service = new ProjectService();
 		ProjectDTO project = service.projectDetail(projectId);
@@ -191,7 +191,7 @@ public class ProjectAction {
 	throws SQLException, UnsupportedEncodingException {
 		String page = "/WEB-INF/jsp/project/project_edit.jsp";
 		request.setCharacterEncoding("UTF-8");
-		int projectId = Integer.parseInt(request.getParameter("projectId"));
+		int projectId = Integer.parseInt(request.getParameter("project-id"));
 		ProjectService service = new ProjectService();
 		ProjectDTO project = service.projectToEdit(projectId);
 		request.setAttribute("project", project);

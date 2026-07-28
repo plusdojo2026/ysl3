@@ -166,9 +166,10 @@ public class WorkDAO {
 						WorkDTO dto = new WorkDTO();
 						dto.setId(rs.getInt("work_id"));
 						dto.setTaskId(rs.getInt("task_id"));
-						dto.setWork(rs.getFloat("work"));
-						dto.setExplainText(rs.getString("work_explanation"));
+						dto.setTaskName(rs.getString("task_name"));
+						dto.setUserName(rs.getString("user_name"));
 						dto.setWorkDate(rs.getString("work_date"));
+						dto.setWork(rs.getFloat("work"));
 						workList.add(dto);
 					}
 				}
@@ -198,9 +199,10 @@ public class WorkDAO {
 						WorkDTO dto = new WorkDTO();
 						dto.setId(rs.getInt("work_id"));
 						dto.setTaskId(rs.getInt("task_id"));
-						dto.setWork(rs.getFloat("work"));
-						dto.setExplainText(rs.getString("work_explanation"));
+						dto.setTaskName(rs.getString("task_name"));
+						dto.setUserName(rs.getString("user_name"));
 						dto.setWorkDate(rs.getString("work_date"));
+						dto.setWork(rs.getFloat("work"));
 						workList.add(dto);
 					}
 				}
