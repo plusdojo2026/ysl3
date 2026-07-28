@@ -59,7 +59,7 @@
    		
    		<li>期限日:${project.endDate}</li>
    		
-   		<li>ステータス:${project.status}
+   		<li>ステータス:
    			<c:choose>
    				<c:when test="${project.status==0}">
    				開始前
@@ -76,7 +76,7 @@
    			</c:choose>
    		</li>
    		
-   		<li>優先度
+   		<li>優先度:
    			<c:choose>
    				<c:when test="${project.priority ==0}">
    				低
