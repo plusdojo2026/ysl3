@@ -89,7 +89,7 @@ public class TaskDAO {
 
 	}
 
-	//	タスクを検索するメソッド
+	//検索メソッド
 	public ArrayList<TaskDTO> taskSearch(int user_id, String taskId, String name, int status, String projectName)
 			throws SQLException {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
@@ -102,7 +102,7 @@ public class TaskDAO {
 				+ "WHERE task_name LIKE ?";
 
 		//projectName
-		if (projectName != "-1") {
+		if (!projectName.equals("-1")){
 
 			sql += " AND project_name = ?";
 		}
@@ -126,7 +126,7 @@ public class TaskDAO {
 		//project_name
 		int index = 2;
 
-		if (projectName != "-1" ) {
+		if (!projectName.equals("-1") ) {
 
 			pStmt.setString(index, projectName);
 			index++;
@@ -137,11 +137,11 @@ public class TaskDAO {
 //		}
 
 		//status
-		int status_int = (Integer)status;
-		if (status_int != -1) {
 
-			pStmt.setInt(index, status_int);
-			index++;
+		if (status != -1) {
+
+			pStmt.setInt(index, status);
+//			index++;
 		}
 //		else {
 //			pStmt.setString(index, "%");
