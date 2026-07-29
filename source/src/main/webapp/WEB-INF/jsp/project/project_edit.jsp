@@ -28,10 +28,10 @@
         <input type="text" class="pr-regist-input" name="customer" placeholder="顧客名を入力してください" required max="50" value="${project.customer}"><br>
         担当PM<br>
         <select class="pr-regist-input pr-regist-select" name="pm-id" >
-        <option value="" disabled selected style="display:none;">選択してください</option>
         <c:forEach var="user" items="${pmList}">
-         <option value="${user.id}">${user.userName}</option>
-    	</c:forEach>
+        <option value="${user.id}"
+        <c:if test="${user.id == project.pmId}">selected</c:if>> ${user.userName} </option>
+        </c:forEach>
        
         </select>
         <br>
