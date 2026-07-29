@@ -93,13 +93,15 @@
 				<!-- 自分の工数ログ一覧ここから -->
 				<section class="home-side">
 					<div class="sub-title-area"><h1 class="sub-home-title">工数ログ履歴</h1></div>
-					<c:forEach var="workLog" items="${homeWorkList}">
-						<div class="home-work-log">
-							<div class="home-work-log-time"><c:out value="${workLog.work}" />時間</div>
-							<div class="home-work-log-name"><c:out value="${workLog.taskName}" /> /　<c:out value="${workLog.explainText}" /></div>
-							<div class="home-work-log-date"><c:out value="${workLog.workDate}" /></div>
-						</div>
-					</c:forEach>
+					<div class="home-work-log">
+						<c:forEach var="workLog" items="${homeWorkList}">
+							<div class="work-log-card">
+								<div class="home-work-log-time"><c:out value="${workLog.work}" />時間</div>
+								<div class="home-work-log-name"><c:out value="${workLog.taskName}" /> /　<c:out value="${workLog.explainText}" /></div>
+								<div class="home-work-log-date"><c:out value="${workLog.workDate}" /></div>
+							</div>
+						</c:forEach>
+					</div>
 				</section>
 				<!-- 自分の工数ログ一覧ここまで -->
 

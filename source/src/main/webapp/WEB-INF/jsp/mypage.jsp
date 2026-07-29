@@ -19,7 +19,7 @@
 	<%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 	<!---------- メインここから ---------->
 	<main class="main">
-	  <h1>マイページ</h1>
+	<div class="title-area"><h1 class="home-title">マイページ</h1></div>
 	
 	  <!-- プロフィールカードここから -->
 	  <section class="profile-card">
