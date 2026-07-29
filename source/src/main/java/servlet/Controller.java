@@ -233,7 +233,7 @@ public class Controller extends HttpServlet {
 				page = action.projectRegist();
 
 				// 案件更新
-			} else if (pageId.equals("PR03") && btnId.equals("project-edit")) {
+			} else if (pageId.equals("PR03") && btnId.equals("更新")) {
 				ProjectAction action = new ProjectAction(request);
 				page = action.projectUpdate();
 

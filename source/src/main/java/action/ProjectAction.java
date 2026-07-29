@@ -117,7 +117,7 @@ public class ProjectAction {
 		String projectCode = request.getParameter("project-code");
 		String projectName = request.getParameter("project-name");
 		String customer = request.getParameter("customer");
-		int pmId = Integer.parseInt(request.getParameter("pmId"));
+		int pmId = Integer.parseInt(request.getParameter("pm-id"));
 		int projectStatus = Integer.parseInt(request.getParameter("project-status"));
 		int projectPriority = Integer.parseInt(request.getParameter("project-priority"));
 		String projectStartDate = request.getParameter("project-start-date");
@@ -125,7 +125,7 @@ public class ProjectAction {
 		Float projectEstimatedWorks = Float.parseFloat(request.getParameter("project-estimated-works"));
 		String projectExplain = request.getParameter("project-explain");
 		String projectLimit = request.getParameter("project-limit");
-		int projectId = Integer.parseInt(request.getParameter("project_id"));
+		int projectId = Integer.parseInt(request.getParameter("project-id"));
 		
 		
 		ProjectService service = new ProjectService();
