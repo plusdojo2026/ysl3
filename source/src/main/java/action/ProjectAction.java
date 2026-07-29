@@ -193,6 +193,26 @@ public class ProjectAction {
 	// 案件登録画面へ遷移
 	return page;
 	}
+	
+	//PM候補一覧取得
+	public String selectProjectUserNamePlus()
+	throws SQLException {
+	// 案件登録画面へ遷移
+	String page =
+	"/WEB-INF/jsp/project/project_edit.jsp";
+	// UserService生成
+	UserService service =
+	new UserService();
+	// PM候補一覧を取得
+	ArrayList<UserDTO> pmList =
+	service.selectProjectUserName();
+	// JSPで使用できるよう格納
+	request.setAttribute(
+	"pmList",
+	pmList);
+	// 案件登録画面へ遷移
+	return page;
+	}
 
 //追加メソッド　projectToEdit
 	public String projectToEdit()
