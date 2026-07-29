@@ -22,29 +22,15 @@
       <!-- 案件詳細ここから -->
       <section class="pr-detail-view">
         <div class="project-list-card">
-    <input type="text" id="project-id" name="project-id" value="${project.code}" readonly>
-    <input type="text" id="project-name" name="project" value="${project.name}" readonly>
-    <input type="text" id="customer" name="customer" value="${project.customer}" readonly>
-    <input type="text" id="project-start_date" name="project-start-date" value="${project.startDate}" readonly>
-    <input type="text" id="project-limit" name="project-limit" value="${project.limitDate}" readonly>
-    <input type="text" id="project-status" name="project-status" value="${project.status}" readonly>
-    <input type="text" id="project-priority" name="project-priority" value="${project.priority}" readonly>
-    <input type="text" id="pm-id" name="pm-id" value="${project.pmId}" readonly>
-    <input type="text" id="project-end_date" name="project-end-date" value="${project.endDate}" readonly>
-    <input type="text" id="explain-text" name="explain-text" value="${project.explainText}" readonly>
-    <input type="text" id="estimated-work" name="estimated-work" value="${project.estimatedWork}" readonly>
-    <input type="text" id="pm-name" name="pm-name" value="${project.pmName}" readonly>
-    <input type="text" id="total-work" name="total-work" value="${project.totalWork}" readonly>
-    <input type="text" id="member-count" name="member-count" value="${project.memberCount}" readonly>
-    <input type="text" id="remain-work" name="remain-work" value="${project.remainWork}" readonly>
-          <div>案件コード</div>
-          <div>案件名</div>
-          <div>顧客名</div>
-          <div>工数</div>
-          <div>ステータス</div>
-          <div>進捗度</div>
-          <div>開始日</div>
-          <div>期限日</div>
+   
+          <p>案件コード${projectDetail. projectId}</p>
+          <p>案件名${projectDetail.name}</p>
+          <p>顧客名${projectDetail.customer}</p>
+          <p>工数${projectDetail.work}</p>
+          <p>ステータス${projectDetail.status}</p>
+          <p>進捗度${projectDetail.progressRate}</p>
+          <p>開始日${projectDetail.startDate}</p>
+          <p>期限日${projectDetail.limitDate}</
           
           <div>優先度</div>
           <div>PM名</div>
