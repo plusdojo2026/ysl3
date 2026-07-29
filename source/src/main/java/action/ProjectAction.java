@@ -6,11 +6,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import model.ProjectDTO;
 import model.UserDTO;
+import model.WorkDTO;
 import service.ProjectService;
 import service.UserService;
+import service.WorkService;
 
 public class ProjectAction {
 	
@@ -157,18 +160,36 @@ public class ProjectAction {
 		return page;
 	}
 	//projectDetailメソッド
-	public  String projectDetail() throws UnsupportedEncodingException,SQLException {
-		String page = "/WEB-INF/jsp/project/project_list.jsp";
-		
-		//入力値の取得
-		request.setCharacterEncoding("UTF-8");
-		int projectId = Integer.parseInt(request.getParameter("project-id"));
-		
-		ProjectService service = new ProjectService();
-		ProjectDTO project = service.projectDetail(projectId);
-		request.setAttribute("project" , project);
-		return page;
-	}
+		public  String projectDetail() throws UnsupportedEncodingException,SQLException {
+			String page = "/WEB-INF/jsp/project/project_list.jsp";
+			
+			//入力値の取得
+			request.setCharacterEncoding("UTF-8");
+			int projectId = Integer.parseInt(request.getParameter("project-id"));
+			
+			// セッションからログイン中のユーザー情報を取得
+			HttpSession session = request.getSession();
+			UserDTO loginUser = (UserDTO) session.getAttribute("user");
+					
+			// セッションが切れている場合の安全対策
+			if (loginUser == null) {
+				page = "/WEB-INF/jsp/login.jsp";
+				return page;
+			}
+			
+			int userId = loginUser.getId();
+			
+			// Serviceを実体化して処理を依頼	
+			ProjectService service = new ProjectService();
+			ProjectDTO project = service.projectDetail(projectId);
+			
+			//workの一覧をtask_idから取得するサービス」DAOを実行する
+			WorkService workService = new WorkService();
+			ArrayList<WorkDTO> projectWorkList = workService.ProjectWorkList(userId,projectId);
+			
+			request.setAttribute("projectWorkList" , projectWorkList);
+			return page;
+		}
 
 
 
@@ -194,25 +215,6 @@ public class ProjectAction {
 	return page;
 	}
 	
-	//PM候補一覧取得
-	public String selectProjectUserNamePlus()
-	throws SQLException {
-	// 案件登録画面へ遷移
-	String page =
-	"/WEB-INF/jsp/project/project_edit.jsp";
-	// UserService生成
-	UserService service =
-	new UserService();
-	// PM候補一覧を取得
-	ArrayList<UserDTO> pmList =
-	service.selectProjectUserName();
-	// JSPで使用できるよう格納
-	request.setAttribute(
-	"pmList",
-	pmList);
-	// 案件登録画面へ遷移
-	return page;
-	}
 
 //追加メソッド　projectToEdit
 	public String projectToEdit()
@@ -225,4 +227,25 @@ public class ProjectAction {
 		request.setAttribute("project", project);
 		return page;
 
-	}}
+	}
+	//PM候補一覧取得
+		public String selectProjectUserNamePlus()
+		throws SQLException {
+		// 案件登録画面へ遷移
+		String page =
+		"/WEB-INF/jsp/project/project_edit.jsp";
+		// UserService生成
+		UserService service =
+		new UserService();
+		// PM候補一覧を取得
+		ArrayList<UserDTO> pmList =
+		service.selectProjectUserNamePlus();
+		// JSPで使用できるよう格納
+		request.setAttribute(
+		"pmList",
+		pmList);
+		// 案件登録画面へ遷移
+		return page;
+		}
+
+}
