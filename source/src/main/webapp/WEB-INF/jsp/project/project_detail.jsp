@@ -81,13 +81,11 @@
       <section class="log-view">
         <h3 class="view-title">工数ログ</h3>
         <div class="work-log-card">
-        <input type="text" id="task-name" name="task" value="${TaskShow.name}" readonly>
-          
-          <div>タスク名</div>
-          <div>担当者</div>
-          <div>実施日</div>
-          <div>工数</div>
-          <div>▼</div>
+        <c:forEach var="e" items="${projectWorkList}" >
+ 	  <p>工数ログ名：${e.explainText}</p>
+ 	  <p>時間：${e.work}</p>
+ 	 <input type="submit" name="work-delete-btn" value="削除" onclick="return delete()">
+   </c:forEach><br>
         </div>
       </section>
       <!-- 工数ログ表示ここまで -->

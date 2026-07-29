@@ -234,13 +234,13 @@ public class WorkAction {
 
 			// 工数ログ実体化
 			WorkService workService = new WorkService();
-			ArrayList<WorkDTO> projectWorkList = workService.homeWorkList(userId);
+			//ArrayList<WorkDTO> projectWorkList = workService.homeWorkList(userId);
 
 			request.setAttribute("errMsg", "※一覧が取得できませんでした");
 
 			// ちゃんと入っていたらログインできた人の情報をリクエストに保存
 
-			request.setAttribute("projectWorkList", projectWorkList);
+			//request.setAttribute("projectWorkList", projectWorkList);
 
 			// 戻り値
 			return page;
