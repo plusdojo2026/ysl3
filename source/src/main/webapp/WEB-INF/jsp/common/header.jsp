@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 
 <header class="header">
-	<a href="${pageContext.request.contextPath}/Controller?page-id=HO01" class="system-title">TaskManager</a> 
+	<a href="${pageContext.request.contextPath}/Controller?page-id=HO01" class="system-title">
+		<img src="${pageContext.request.contextPath}/images/logo/logo.jpg"alt="ロゴ" class="logo">
+	</a> 
 	<a href="${pageContext.request.contextPath}/Controller?page-id=MY01" class="user-name-view">${user.userName}</a>
 	<button id="menuButton" class="menu-button" type="button">☰</button>
 </header>
