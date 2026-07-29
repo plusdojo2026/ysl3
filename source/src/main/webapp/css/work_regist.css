@@ -37,6 +37,7 @@
 /* 案件名・タスク名表示 */
 .work-target-card {
 	height: 96px;
+	margin-top: 24px;
 	margin-bottom: 20px;
 	padding: 16px 24px;
 	align-items: center;
