@@ -17,8 +17,9 @@
 
 <body>
 	<header class="header">
-		<a href="${pageContext.request.contextPath}/Controller?page-id=HO01"
-			class="system-title">TaskManager</a>
+	<a href="${pageContext.request.contextPath}/Controller?page-id=HO01" class="system-title">
+		<img src="${pageContext.request.contextPath}/images/logo/logo.jpg"alt="ロゴ" class="logo">
+	</a> 
 	</header>
 	<!---------- メインここから ---------->
 	<main class="main">
