@@ -101,44 +101,7 @@ public class Controller extends HttpServlet {
 					page = action.memberSelectAll();
 				}
 
-				// 今だけ
-
-			} else if (preview != null
-					&& preview.equals("true")) {
-
-				if (pageId.equals("PR02")) {
-					page = "/WEB-INF/jsp/project/project_regist.jsp";
-
-				} else if (pageId.equals("PR03")) {
-					page = "/WEB-INF/jsp/project/project_edit.jsp";
-
-				} else if (pageId.equals("PR04")) {
-					page = "/WEB-INF/jsp/project/project_detail.jsp";
-
-				} else if (pageId.equals("TA02")) {
-					page = "/WEB-INF/jsp/task/task_regist.jsp";
-
-				} else if (pageId.equals("TA03")) {
-					page = "/WEB-INF/jsp/task/task_edit.jsp";
-
-				} else if (pageId.equals("TA04")) {
-					page = "/WEB-INF/jsp/task/task_detail.jsp";
-
-				} else if (pageId.equals("WO01")) {
-					page = "/WEB-INF/jsp/work_regist.jsp";
-
-				} else if (pageId.equals("AD02")
-						&& loginUser.getRole() == 1) {
-					page = "/WEB-INF/jsp/member/member_regist.jsp";
-
-				} else if (pageId.equals("AD03")
-						&& loginUser.getRole() == 1) {
-					page = "/WEB-INF/jsp/member/member_edit.jsp";
-
-				} else {
-					HomeAction action = new HomeAction(request);
-					page = action.homeSelectAll();
-				}
+				
 
 				// 実際のボタン・リンクからの画面遷移
 
