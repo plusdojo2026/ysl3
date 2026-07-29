@@ -269,13 +269,29 @@ import model.ProjectDTO;
 		if(rs.next()) {
 			dto = new ProjectDTO();
 			
-			dto.setId(rs.getInt("project_id"));
+			dto.setCode(rs.getString("project_code"));
 			
 			dto.setName(rs.getString("project_name"));
 			
 			dto.setStatus(rs.getInt("project_status"));
 
 		    dto.setPriority(rs.getInt("project_priority"));	
+		    
+		    dto.setCustomer(rs.getString("customer"));
+		    
+		    dto.setPmId(rs.getInt("pm_id"));
+		    
+		    dto.setStartDate(rs.getString("project_start_date"));
+		    
+		    dto.setEndDate(rs.getString("project_end_date"));
+		    
+		    dto.setExplainText(rs.getString("project_explamation"));
+		    
+		    dto.setLimitDate(rs.getString("project_limit"));
+		    
+		    dto.setEstimatedWork(rs.getFloat("project_estimated_works"));
+		    
+
 		}
 		rs.close();
 		pStmt.close();
