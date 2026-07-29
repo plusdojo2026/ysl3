@@ -102,12 +102,12 @@ public class TaskDAO {
 				+ "WHERE task_name LIKE ?";
 
 		//projectName
-		if (projectName != null && !projectName.equals("")) {
+		if (projectName != "-1") {
 
 			sql += " AND project_name = ?";
 		}
 		//status
-		if ((Integer) status != 0) {
+		if ((Integer) status != -1) {
 
 			sql += " AND task_status = ?";
 		}
@@ -117,6 +117,7 @@ public class TaskDAO {
 		// SQL文を完成させる	
 		//name
 		if (name != null) {
+//		if (!name.equals("")) {		
 			pStmt.setString(1, "%" + name + "%");
 		} else {
 			pStmt.setString(1, "%");
@@ -125,18 +126,27 @@ public class TaskDAO {
 		//project_name
 		int index = 2;
 
-		if (projectName != null && !projectName.equals("")) {
+		if (projectName != "-1" ) {
 
 			pStmt.setString(index, projectName);
 			index++;
 		}
+//		else {
+//			pStmt.setString(index, "%");
+//			index++;
+//		}
 
 		//status
-		if ((Integer) status != 0) {
+		int status_int = (Integer)status;
+		if (status_int != -1) {
 
-			pStmt.setInt(index, status);
+			pStmt.setInt(index, status_int);
 			index++;
 		}
+//		else {
+//			pStmt.setString(index, "%");
+//			index++;
+//		}
 
 		// SELECT文を実行し、結果表を取得する
 		ResultSet rs = pStmt.executeQuery();

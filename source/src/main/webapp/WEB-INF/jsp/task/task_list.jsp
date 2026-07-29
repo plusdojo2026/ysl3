@@ -42,7 +42,7 @@
 
             <label for="task-status">ステータス</label>
             <select id="task-status" name="task-status">
-                <option value="">すべて</option>
+                <option value="-1">すべて</option>
                 <option value="0">未着手</option>
                 <option value="1">進行中</option>
                 <option value="2">完了</option>
