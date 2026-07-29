@@ -18,9 +18,11 @@ public class MonthAction {
 		this.request = request;
 	}
 	
+	//	月次画面の初期表示
 	public String month() throws UnsupportedEncodingException {
 		String page = "/WEB-INF/jsp/month.jsp";
-				
+		
+		//	値の取得			
 		String month=request.getParameter("month");
 
 		// URLから取得
@@ -29,7 +31,7 @@ public class MonthAction {
 		}
 	
 		// 対象月表示用
-		request.setAttribute("targetMonth", month);
+		request.setAttribute("targetMonth",month);
 
 		// 前月
 		request.setAttribute("lastMonth", getLastMonth(month));
