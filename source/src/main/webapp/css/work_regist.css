@@ -4,130 +4,217 @@
 /*--------work_regist.jsp--------*/
 /*-------------------------------*/
 
-
-.page-title {
-	margin: 4px 0 1px 0;
-}
-
-.input-title{
-	margin: 4px 0 1px 0;
-	font-size: 20px;
-	font-weight: 700;
-}
-
-.work-regist-area {
-	width: 900px;
-	margin: auto;
-}
-
-.form-area {
-	display: flex;
-}
-
-.form-group {
-	text-align: left;
-	display: flex;
-	flex-direction: column;
-}
-
-.pr-ta-area {
-	width: 890px;
-	border: 5px solid #FBE3D6;
-	margin-top: 8px;
-	margin-bottom: 12px;
-	border-radius: 18px;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	padding: 24px 0 24px 0;
-}
-
-.date-area {
-	width: 900px;
-	margin-top: 12px;
-	margin-bottom: 12px;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	gap: 86px;
-	padding: 24px 0 24px 0;
-}
-
-.info {
-	font-size: 20px;
-	font-weight: 460;
-	border: none;
-	text-align: center;
-	margin: 20px 0 20px 0;
-}
-
-.info {
-	border: none;
-	outline: none;
-}
-
-/* 入力欄 */
-.date-input {
-	margin: 4px auto 12px auto;
-	width: 400px;
-	min-height: 75px;
-	border: 1px solid #bbb;
-	border-radius: 8px;
-	font-size: 14px;
-	font-weight: 480;
-	text-align: right;
-	padding-right: 8px;
-}
-
-.date-input:focus {
-/*	outline: 1px solid #bbb;*/
-	outline: none;
-}
-
-
-
-
-
-
-
-
-
-
-/* 登録ボタンエリア */
-.btn-area {
-	text-align: center;
-	margin-top: 35px;
-}
-
 /* 登録ボタン */
 .regist-btn {
 	display: block;
 	background-color: #29988b;
 	color: #fff;
-	border-radius: 10px;
-	border: none;
+	border-radius: 2px;
+	border: 1px solid #29988b;
 	height: 48px;
-	width: 320px;
+	width: 380px;
 	font-size: 16px;
 	font-weight: bold;
-	margin: auto;
+	margin: 24px auto 0 auto;
 	padding: 0;
-	box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.35);
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
 	cursor: pointer;
+	transition: 0.2s;
 }
 
 .regist-btn:hover {
-	opacity: 0.75;
-
+	color: #29988b;
+	background-color: #fff;
+	border: 1px solid #29988b;
 }
 
-/* エラーメッセージ */
-.error-message {
-	height: 18px;
-	margin: 12px 0 12px 0;
-	color: red;
+.work-regist-area {
+	width: 900px;
+	margin: 0 auto;
+}
+
+
+/* 案件名・タスク名表示 */
+.work-target-card {
+	height: 96px;
+	margin-bottom: 20px;
+	padding: 16px 24px;
+	align-items: center;
+	gap: 24px;
+	background-color: #fff;
+	border-left: 14px solid #F39F59;
+	border-radius: 4px;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.work-project-name {
+	min-width: 0;
+	font-size: 20px;
+	font-weight: 650;
 	text-align: center;
-	font-size: 13px;
-	line-height: 18px;
-	background-color: #ffffff;
+	color: #4E4D4C;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+.work-task-name {
+	min-width: 0;
+	font-size: 20px;
+	font-weight: 650;
+	text-align: center;
+	color: #4E4D4C;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+/* 日付・作業内容入力 */
+.work-input-row {
+	margin-bottom: 20px;
+	display: flex;
+	gap: 20px;
+}
+
+.work-input-group {
+	min-width: 0;
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	width: 440px;
+}
+
+.work-input-title {
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 650;
+	color: #4E4D4C;
+}
+
+.work-input {
+	width: 100%;
+	height: 48px;
+	margin: 0;
+	padding: 0 14px;
+	background-color: #fff;
+	color: #4E4D4C;
+	border: 1px solid #bbb;
+	border-radius: 4px;
+	font-size: 14px;
+	outline: none;
+	transition: 0.2s;
+}
+
+.work-input:hover {
+	border-color: #4E4D4C;
+}
+
+.work-input:focus {
+	border-color: #29988B;
+}
+
+/* 案件名・タスク名表示 */
+.work-target-card {
+	min-height: 96px;
+	margin-bottom: 20px;
+	padding: 16px 24px;
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	align-items: center;
+	gap: 24px;
+	background-color: #fff;
+	border-left: 14px solid #F39F59;
+	border-radius: 4px;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.work-project-name {
+	min-width: 0;
+	font-size: 20px;
+	font-weight: 650;
+	text-align: right;
+	color: #4E4D4C;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.work-target-slash {
+	font-size: 24px;
+	font-weight: 650;
+	text-align: center;
+	color: #4E4D4C;
+}
+
+.work-task-name {
+	min-width: 0;
+	font-size: 20px;
+	font-weight: 650;
+	text-align: left;
+	color: #4E4D4C;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* 工数入力カード */
+.work-slider-card {
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 1fr auto;
+
+	/* タイトル右上、工数時間左、バーを下にバーっと配置 */
+	grid-template-areas:
+		"title time"
+		"slider slider";
+	gap: 14px 20px;
+	background-color: #fff;
+	border-left: 14px solid #29988B;
+	border-radius: 4px;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.work-slider-title {
+	grid-area: title;
+	align-self: center;
+	margin: 0;
+	font-size: 16px;
+	color: #4E4D4C;
+}
+
+.work-slider {
+	grid-area: slider;
+	width: 100%;
+	height: 12px;
+	margin: 7px 0;
+	accent-color: #29988B;
+	cursor: pointer;
+}
+
+.work-time-display {
+	grid-area: time;
+	padding: 2px 6px;
+	width: 84px;
+
+	text-align: center;
+	border-radius: 45px;
+	font-size: 16px;
+	color: #fff;
+	background-color: #F07E9B;
+}
+
+
+/* メッセージ表示場所 */
+.work-message-area {
+	height: 28px;
+	margin-top: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.work-error-message {
+	margin: 0;
+	color: #e33c6b;
+	font-weight: 500;
 }

@@ -18,56 +18,66 @@
 
 	<!---------- メインここから ---------->
 	<main class="main">
-        <section class="work-regist-area">
-            <h2 class="page-title">工数登録</h2>
-            <form method="POST" action="<c:url value='/Controller'/>">
-                <input type="hidden" name="task-id" value="${TaskShow.taskId}">
-                    <input type="hidden" id="project-name" name="project" value="${ProjectShow.name}" readonly>
-                    <input type="hidden" id="task-name" name="task" value="${TaskShow.name}" readonly>
-                <div class="form-area pr-ta-area">
-                	<div class="info">${ProjectShow.name} / ${TaskShow.name}</div>
+		<section class="work-regist-area">
+			<div class="title-area">
+				<h1 class="home-title">工数登録</h1>
+			</div>
 
-                </div>
+			<form method="POST" action="<c:url value='/Controller'/>">
+				<input type="hidden" name="task-id" value="${TaskShow.taskId}">
+				<input type="hidden" id="project-name" name="project"
+					value="${ProjectShow.name}" readonly> <input type="hidden"
+					id="task-name" name="task" value="${TaskShow.name}" readonly>
 
-                <div class="form-area date-area">
-                    <div class="form-group">
-                        <div class="input-title">日付（必須）</div>
-                        <input type="date" id="day"name="work-date" value="<%=LocalDate.now()%>" class="date-input">
-                    </div>
+				<!-- 案件名・タスク名 -->
+				<div class="work-target-card">
+					<div class="work-project-name">${ProjectShow.name}</div>
+					<div class="work-task-name">${TaskShow.name}</div>
+				</div>
+				<!-- 日付・作業内容 -->
+				<div class="work-input-row">
+					<div class="work-input-group">
+						<div class="work-input-title">日付（必須）</div>
+						<input type="date" id="day" name="work-date"
+							value="<%=LocalDate.now()%>" class="work-input">
+					</div>
+					<div class="work-input-group">
+						<div class="work-input-title">作業内容</div>
+						<input type="text" id="work-explanation" name="explain-text"
+							class="work-input">
+					</div>
+				</div>
 
-                    <div class="form-group">
-                        <div class="input-title">作業内容</div>
-                        <input type="text" id="work-explanation" name="explain-text" class="date-input">
-                    </div>
-                </div>
+				<!-- 工数 -->
+				<div class="work-slider-card">
+					<h2 class="work-slider-title">実施工数（必須、0.5時間刻み）</h2>
+					<div class="work-time-display">
+						<span id="time-label">0.5時間</span>
+					</div>
+					<input type="range" id="work" name="work" min="0.5" max="24"
+						step="0.5" value="0.5" class="work-slider"
+						oninput="updateTime(this.value)">
+				</div>
 
-                <div class="form-area">
-                    <h2>工数（必須、0.5時間刻み)</h2>
-                    <input type="range" id="work" class="progress-bar" name="work" min="0.5" max="24" step="0.5" class="slider" value="0.5" oninput="updateTime(this.value)">
-                    <div class="time-display">
-                        <span id="time-label">0.5時間</span>
-                    </div>
-                </div>
+				<!-- 登録ボタン -->
+				<div class="work-btn-area">
+					<input type="hidden" name="page-id" value="WO01">
+					<button type="submit" name="btn-id" value="work-regist"
+						class="regist-btn">登録</button>
+				</div>
+			</form>
 
-                <div class="btn-area">
-                    <input type="hidden" name="page-id" value="WO01">
-                    <button type="submit" name="btn-id" class="regist-btn" value="work-regist">登録</button>
-                </div>
-            </form>
-
-            <c:if test="${not empty msg}">
-                <p>
-                    <c:out value="${msg}" />
-                </p>
-            </c:if>
-
-            <c:if test="${not empty errMsg}">
-                <p>
-                    <c:out value="${errMsg}" />
-                </p>
-            </c:if>
-        </section>
+			<!-- メッセージ表示場所 -->
+			<div class="work-message-area">
+				<c:if test="${not empty errMsg}">
+					<p class="work-error-message">
+						<c:out value="${errMsg}" />
+					</p>
+				</c:if>
+			</div>
+		</section>
 	</main>
+
 	<!---------- メインここまで ---------->
 
 	<%@ include file="/WEB-INF/jsp/common/footer.jsp"%>

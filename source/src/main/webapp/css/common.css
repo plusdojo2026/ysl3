@@ -14,6 +14,19 @@
 	color: #4E4D4C;
 }
 
+.sub-title-area {
+	margin-top: 12px;
+	margin-bottom: 18px;
+	padding-bottom: 9px;
+	border-bottom: 3px solid #29988B;
+}
+
+.sub-home-title {
+	margin: 0;
+	font-size: 18px;
+	color: #4E4D4C;
+}
+
 * {
 	box-sizing: border-box;
 }

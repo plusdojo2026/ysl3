@@ -1,1 +1,166 @@
 @charset "UTF-8";
+
+/*--------------------------*/
+/*--------マイページ--------*/
+/*--------------------------*/
+.mypage-page {
+	width: 900px;
+	margin: 0 auto;
+}
+
+
+.mypage-message-area {
+	min-height: 28px;
+	margin-bottom: 10px;
+	padding: 0 12px;
+	color: #e33c6b;
+	font-weight: 500;
+}
+
+.mypage-profile-card {
+	height: 120px;
+	margin-bottom: 24px;
+	padding: 24px 28px;
+	display: flex;
+	
+	align-items: center;
+	border-left: 14px solid #29988B;
+	border-radius: 4px;
+	background-color: #fff;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.mypage-profile-main {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.mypage-profile-name {
+	margin: 0;
+	color: #4E4D4C;
+	font-size: 26px;
+	font-weight: 650;
+}
+
+.mypage-profile-id {
+	margin: 0;
+	color: #4E4D4C;
+	font-size: 14px;
+}
+
+.mypage-role {
+	margin-left: auto;
+	width: 100px;
+	padding: 5px 14px;
+	border-radius: 20px;
+	background-color: #F07E9B;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 650;
+	text-align: center;
+}
+
+.mypage-content {
+	display: flex;
+	gap: 24px;
+}
+
+.mypage-card {
+	flex: 1;
+	padding: 24px 24px;
+	border-left: 12px solid #29988B;
+	border-radius: 4px;
+	background-color: #fff;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.mypage-section-title-area {
+	margin-bottom: 22px;
+	padding-bottom: 8px;
+	border-bottom: 3px solid #29988B;
+}
+
+.mypage-section-title {
+	margin: 0;
+	color: #4E4D4C;
+	font-size: 18px;
+}
+
+.mypage-profile-row {
+	height: 56px;
+	padding: 12px 4px;
+	display: grid;
+	grid-template-columns: 110px 200px;
+	align-items: center;
+	border-bottom: 1px solid #eee;
+}
+
+.mypage-profile-label {
+	color: #4E4D4C;
+	font-size: 14px;
+	font-weight: 650;
+}
+
+.mypage-profile-value {
+	color: #303532;
+	font-size: 15px;
+}
+
+.mypage-password-form {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.mypage-field {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+.mypage-label {
+	color: #4E4D4C;
+	font-size: 13px;
+	font-weight: 650;
+}
+
+.mypage-input {
+	width: 100%;
+	height: 40px;
+	padding: 7px 10px;
+	border: 1px solid #e1e5e3;
+	border-radius: 3px;
+	background-color: #fff;
+	color: #303532;
+	font-size: 14px;
+}
+
+.mypage-input:focus {
+	border-color: #29988B;
+	outline: none;
+}
+
+.mypage-btn-area {
+	margin-top: 8px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.pw-change-btn {
+	width: 100%;
+	padding: 9px 20px;
+	border: 1px solid #29988B;
+	border-radius: 3px;
+	background-color: #29988B;
+	color: #fff;
+	font-size: 14px;
+	font-weight: 650;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.pw-change-btn:hover {
+	background-color: #fff;
+	color: #29988B;
+}
