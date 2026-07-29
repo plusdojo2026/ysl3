@@ -285,7 +285,7 @@ import model.ProjectDTO;
 		    
 		    dto.setEndDate(rs.getString("project_end_date"));
 		    
-		    dto.setExplainText(rs.getString("project_explamation"));
+		    dto.setExplainText(rs.getString("project_explanation"));
 		    
 		    dto.setLimitDate(rs.getString("project_limit"));
 		    

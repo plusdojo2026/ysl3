@@ -213,7 +213,7 @@ public class Controller extends HttpServlet {
 				UserAction action = new UserAction(request);
 				page = action.passwordChange();
 				
-			} else if (pageId.equals("PR03")&& btnId.equals("project-edit")) {
+			} else if (pageId.equals("PR03")&& btnId.equals("project-to-edit")) {
 				ProjectAction action = new ProjectAction(request);
 				page = action.projectToEdit();
 			
@@ -233,7 +233,7 @@ public class Controller extends HttpServlet {
 				page = action.projectRegist();
 
 				// 案件更新
-			} else if (pageId.equals("PR03") && btnId.equals("project-update")) {
+			} else if (pageId.equals("PR03") && btnId.equals("project-edit")) {
 				ProjectAction action = new ProjectAction(request);
 				page = action.projectUpdate();
 
