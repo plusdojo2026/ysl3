@@ -21,7 +21,7 @@ public class WorkDAO {
 		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
 
 		// SELECT文を準備する
-		String sql = "SELECT * FROM works WHERE user_id = ?";
+		String sql = "SELECT * FROM works WHERE user_id = ? limit 10";
 
 		//デバッグ（SQL文の確認用）
 		System.out.println(sql);
@@ -32,7 +32,7 @@ public class WorkDAO {
 
 			try (
 					ResultSet rs = pStmt.executeQuery()) {
-		// 移し替え
+				// 移し替え
 				while (rs.next()) {
 					WorkDTO dto = new WorkDTO();
 					dto.setId(rs.getInt("work_id"));
@@ -66,9 +66,9 @@ public class WorkDAO {
 			ans = pStmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			}
-			return ans;
 		}
+		return ans;
+	}
 
 	//工数を削除するメソッド
 	public int workDelete(int workId) {
@@ -95,19 +95,19 @@ public class WorkDAO {
 	//工数を計算するメソッド
 	public int workTally(int workId, int taskId) {
 		int ans = 0;
-		
+
 		String sql = "SELECT ";
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
-			
+
 			pStmt.setInt(1, workId);
 			pStmt.setInt(2, taskId);
-			
+
 			try (ResultSet rs = pStmt.executeQuery()) {
-	         if (rs.next()) {
-	        	 ans = rs.getInt(1);
-	            }
-	        }
-		
+				if (rs.next()) {
+					ans = rs.getInt(1);
+				}
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -115,10 +115,47 @@ public class WorkDAO {
 	}
 
 	//ホームに工数ログを表示するメソッド
-	public ArrayList<WorkDTO> homeWorkList(int userId) {
+	public ArrayList<WorkDTO> homeWorkList(int userId) throws SQLException {
+		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
+
+		// 定義
+		String sql = null;
+		PreparedStatement pStmt = null;
+
+		if (userId == 0) {
+
+			sql = "SELECT * FROM works LIMIT 10";
+			pStmt = conn.prepareStatement(sql);
+		} else {
+			// SELECT文を準備する
+			sql = "SELECT * FROM works WHERE user_id = ? limit 10";
+
+			// まとめる
+			pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, userId);
+		}
+
+		ResultSet rs = pStmt.executeQuery();
+
+		// 移し替え
+		while (rs.next()) {
+			WorkDTO dto = new WorkDTO();
+			dto.setId(rs.getInt("work_id"));
+			dto.setTaskId(rs.getInt("task_id"));
+			dto.setWork(rs.getFloat("work"));
+			dto.setExplainText(rs.getString("work_explanation"));
+			dto.setWorkDate(rs.getString("work_date"));
+			workList.add(dto);
+		}
+
+		return workList;
+	}
+
+	//タスク詳細に工数ログを表示するメソッド
+	public ArrayList<WorkDTO> TaskWorkList(int userId, int taskId) {
 		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
 		// SELECT文を準備する
-		String sql = "SELECT * FROM works WHERE user_id = ?";
+		String sql = "SELECT work_explanation,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id FROM works as w join tasks  AS t on w.task_id = t.task_id WHERE w.user_id = ? AND w.task_id = ?;";
 
 		//デバッグ（SQL文の確認用）
 		System.out.println(sql);
@@ -127,16 +164,19 @@ public class WorkDAO {
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 
 			pStmt.setInt(1, userId);
+			pStmt.setInt(2, taskId);
 
 			try (ResultSet rs = pStmt.executeQuery()) {
 				// 移し替え
 				while (rs.next()) {
 					WorkDTO dto = new WorkDTO();
+					dto.setExplainText(rs.getString("work_explanation"));
 					dto.setId(rs.getInt("work_id"));
 					dto.setTaskId(rs.getInt("task_id"));
-					dto.setWork(rs.getFloat("work"));
-					dto.setExplainText(rs.getString("work_explanation"));
+					dto.setTaskName(rs.getString("task_name"));
+					//						dto.setUserName(rs.getString("user_name"));
 					dto.setWorkDate(rs.getString("work_date"));
+					dto.setWork(rs.getFloat("work"));
 					workList.add(dto);
 				}
 			}
@@ -145,86 +185,48 @@ public class WorkDAO {
 		}
 		return workList;
 	}
-	
-	//タスク詳細に工数ログを表示するメソッド
-		public ArrayList<WorkDTO> TaskWorkList(int userId,int taskId) {
-			ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
-			// SELECT文を準備する
-			String sql = "SELECT work_explanation,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id FROM works as w join tasks  AS t on w.task_id = t.task_id WHERE w.user_id = ? AND w.task_id = ?;";
-
-			//デバッグ（SQL文の確認用）
-			System.out.println(sql);
-
-			// まとめる
-			try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
-
-				pStmt.setInt(1, userId);
-				pStmt.setInt(2, taskId);
-
-				try (ResultSet rs = pStmt.executeQuery()) {
-					// 移し替え
-					while (rs.next()) {
-						WorkDTO dto = new WorkDTO();
-						dto.setExplainText(rs.getString("work_explanation"));
-						dto.setId(rs.getInt("work_id"));
-						dto.setTaskId(rs.getInt("task_id"));
-						dto.setTaskName(rs.getString("task_name"));
-//						dto.setUserName(rs.getString("user_name"));
-						dto.setWorkDate(rs.getString("work_date"));
-						dto.setWork(rs.getFloat("work"));
-						workList.add(dto);
-					}
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			return workList;
-		}	
 
 	//案件詳細に工数ログを表示するメソッド
-		public ArrayList<WorkDTO> ProjectWorkList(int userId,int projectId) {
-			ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
-			// SELECT文を準備する
-			String sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id FROM works as w join tasks  AS t on w.task_id = t.task_id WHERE w.user_id = ? AND t.project_id = ?;";
+	public ArrayList<WorkDTO> ProjectWorkList(int userId, int projectId) {
+		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
+		// SELECT文を準備する
+		String sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id FROM works as w join tasks  AS t on w.task_id = t.task_id WHERE w.user_id = ? AND t.project_id = ?;";
 
-			//デバッグ（SQL文の確認用）
-			System.out.println(sql);
+		//デバッグ（SQL文の確認用）
+		System.out.println(sql);
 
-			// まとめる
-			try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+		// まとめる
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 
-				pStmt.setInt(1, userId);
-				pStmt.setInt(2, projectId);
-				
+			pStmt.setInt(1, userId);
+			pStmt.setInt(2, projectId);
 
-				try (ResultSet rs = pStmt.executeQuery()) {
-					// 移し替え
-					while (rs.next()) {
-						WorkDTO dto = new WorkDTO();
-						dto.setExplainText(rs.getString("work_explanation"));
-						dto.setId(rs.getInt("work_id"));
-						dto.setTaskId(rs.getInt("task_id"));
-						dto.setTaskName(rs.getString("task_name"));
-//						dto.setUserName(rs.getString("user_name"));
-						dto.setWorkDate(rs.getString("work_date"));
-						dto.setWork(rs.getFloat("work"));
-						workList.add(dto);
-					}
+			try (ResultSet rs = pStmt.executeQuery()) {
+				// 移し替え
+				while (rs.next()) {
+					WorkDTO dto = new WorkDTO();
+					dto.setExplainText(rs.getString("work_explanation"));
+					dto.setId(rs.getInt("work_id"));
+					dto.setTaskId(rs.getInt("task_id"));
+					dto.setTaskName(rs.getString("task_name"));
+					//						dto.setUserName(rs.getString("user_name"));
+					dto.setWorkDate(rs.getString("work_date"));
+					dto.setWork(rs.getFloat("work"));
+					workList.add(dto);
 				}
-			} catch (SQLException e) {
-				e.printStackTrace();
 			}
-			return workList;
-		}		
-		
-		
-	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return workList;
+	}
+
 	//工数登録画面で案件名とタスク名を表示する	
 	public WorkDTO workToRegist(int taskId) {
 		WorkDTO ans = null;
-		
+
 		String sql = "SELECT * FROM works WHERE task_id = ?";
-		
+
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 
 			pStmt.setInt(1, taskId);
@@ -235,52 +237,49 @@ public class WorkDAO {
 					WorkDTO dto = new WorkDTO();
 					dto.setId(rs.getInt("work_id"));
 					dto.setTaskId(rs.getInt("task_id"));
-	
-					
+
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}		
-		
+		}
+
 		return ans;
 	}
 
-//サマリーカード
-//稼働メンバー
-public int getMemberCount(String month) {
-	
-	int MemberCount = 0;
-	
-	//SQL文
-	 String sql =
-	            "SELECT COUNT(DISTINCT user_id) AS memberCount "
-	          + "FROM works "
-	          + "WHERE DATE_FORMAT(work_date,'%Y-%m') = ?";
-	 try (PreparedStatement ps = conn.prepareStatement(sql);) 
-		{
-		
-     // 対象年月をセット
-	 ps.setString(1, month);
-	 
-     //SQL文を実行
-     ResultSet rs = ps.executeQuery();
-     
-     // 取得結果が存在する場合
-     if (rs.next()) {
+	//サマリーカード
+	//稼働メンバー
+	public int getMemberCount(String month) {
 
-         // 稼働メンバーを取得
-         MemberCount = rs.getInt("MemberCount");
-     }
+		int MemberCount = 0;
+
+		//SQL文
+		String sql = "SELECT COUNT(DISTINCT user_id) AS memberCount "
+				+ "FROM works "
+				+ "WHERE DATE_FORMAT(work_date,'%Y-%m') = ?";
+		try (PreparedStatement ps = conn.prepareStatement(sql);) {
+
+			// 対象年月をセット
+			ps.setString(1, month);
+
+			//SQL文を実行
+			ResultSet rs = ps.executeQuery();
+
+			// 取得結果が存在する場合
+			if (rs.next()) {
+
+				// 稼働メンバーを取得
+				MemberCount = rs.getInt("MemberCount");
+			}
 
 		} catch (SQLException e) {
 
-	     // SQL実行時のエラー表示
-	     e.printStackTrace();
-	 }
-		
-	 // 稼働メンバーを返す
-	 return MemberCount;
+			// SQL実行時のエラー表示
+			e.printStackTrace();
+		}
+
+		// 稼働メンバーを返す
+		return MemberCount;
 	}
 
 }

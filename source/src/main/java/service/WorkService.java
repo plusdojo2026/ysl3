@@ -135,7 +135,7 @@ public class WorkService {
 	}
 
 	//ホームに工数ログを表示するメソッド
-	public ArrayList<WorkDTO> homeWorkList(int userId) {
+	public ArrayList<WorkDTO> homeWorkList(int userId) throws SQLException {
 		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
 		// DB接続
 		access();
@@ -145,7 +145,7 @@ public class WorkService {
 			WorkDAO dao = new WorkDAO(conn);
 
 			// ホームに工数ログを表示。DAOのメソッドを実行
-			workList = dao.workSelectAll(userId);
+			workList = dao.homeWorkList(userId);
 
 		} finally {
 
