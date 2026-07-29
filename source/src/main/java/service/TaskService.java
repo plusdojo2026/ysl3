@@ -14,40 +14,38 @@ public class TaskService {
 	private Connection conn = null;
 
 	// データベース接続用 ※「romance_magic」は、データベース名
-	private static final String url ="jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
+	private static final String url = "jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
 	private static final String dbUser = "root";
 	private static final String dbPassword = "password";
 
-	
 	// データベースとの接続を行うメソッド
 	private void access() {
-		   try {
-		       // MySQLドライバーを読み込む
-		       Class.forName(
-		               "com.mysql.cj.jdbc.Driver"
-		       );
-		       // DBへ接続
-		       conn = DriverManager.getConnection(url, dbUser, dbPassword);
-		   } catch (ClassNotFoundException e) {
-		       throw new RuntimeException("MySQLドライバーが見つかりません", e);
-		   } catch (SQLException e) {
-		       throw new RuntimeException("データベースへの接続に失敗しました", e);
-		   }
+		try {
+			// MySQLドライバーを読み込む
+			Class.forName(
+					"com.mysql.cj.jdbc.Driver");
+			// DBへ接続
+			conn = DriverManager.getConnection(url, dbUser, dbPassword);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("MySQLドライバーが見つかりません", e);
+		} catch (SQLException e) {
+			throw new RuntimeException("データベースへの接続に失敗しました", e);
 		}
+	}
 
 	// データベースとの接続を切断するメソッド
 	private void close() {
-		   if (conn == null) {
-		       return;
-		   }
-		   try {
-		       conn.close();
-		   } catch (SQLException e) {
-		       throw new RuntimeException("データベースの切断に失敗しました", e);
-		   } finally {
-		       conn = null;
-		   }
+		if (conn == null) {
+			return;
 		}
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			throw new RuntimeException("データベースの切断に失敗しました", e);
+		} finally {
+			conn = null;
+		}
+	}
 
 	// タスク一覧を取得するメソッド
 	public ArrayList<TaskDTO> taskSelectAll(int userId) {
@@ -65,8 +63,7 @@ public class TaskService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		finally {
+		} finally {
 
 			// DB接続解除
 			close();
@@ -75,6 +72,7 @@ public class TaskService {
 		// 戻り値
 		return taskList;
 	}
+
 	// ユーザーがタスクとして追加したprojectの一覧
 	public ArrayList<String> projectSelectAll(int userId) {
 		ArrayList<String> projectList = new ArrayList<String>();
@@ -91,8 +89,7 @@ public class TaskService {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-		} 
-		finally {
+		} finally {
 
 			// DB接続解除
 			close();
@@ -101,8 +98,10 @@ public class TaskService {
 		// 戻り値
 		return projectList;
 	}
+
 	// タスク検索をするメソッド
-	public ArrayList<TaskDTO> taskSearch(int userId,String taskId, String name, int status, String projectName) throws SQLException {
+	public ArrayList<TaskDTO> taskSearch(int userId, String taskId, String name, int status, String projectName)
+			throws SQLException {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 
 		// DB接続
@@ -113,7 +112,7 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// タスク検索を実施。DAOのメソッドを実行
-			taskList = dao.taskSearch(userId,taskId, name, status,projectName);
+			taskList = dao.taskSearch(userId, taskId, name, status, projectName);
 
 		} finally {
 
@@ -126,8 +125,9 @@ public class TaskService {
 	}
 
 	// タスク登録メソッド
-	public int taskRegist(int taskId, int userId,  String name, int status, int priority,
-			 String limitDate,String explainText,float estimatedWorks,int projectId, String startDate, int progress ) throws SQLException {
+	public int taskRegist(int taskId, int userId, String name, int status, int priority,
+			String limitDate, String explainText, float estimatedWorks, int projectId, String startDate, int progress)
+			throws SQLException {
 		int ans = 0;
 
 		// DB接続
@@ -140,7 +140,7 @@ public class TaskService {
 
 			// ユーザー登録処理を実施。DAOのメソッドを実行
 			ans = dao.taskRegist(taskId, userId, name, status, priority,
-					limitDate, explainText,estimatedWorks, projectId,  startDate, progress);
+					limitDate, explainText, estimatedWorks, projectId, startDate, progress);
 		} finally {
 
 			// DB接続解除
@@ -152,8 +152,9 @@ public class TaskService {
 	}
 
 	// タスク編集メソッド
-	public int taskUpdate(int taskId, int userId,  String name, int status, int priority,
-			String explainText, String limitDate,float estimatedWorks, int projectId,String startDate, int progress) throws SQLException {
+	public int taskUpdate(int taskId, int userId, String name, int status, int priority,
+			String explainText, String limitDate, float estimatedWorks, int projectId, String startDate, int progress)
+			throws SQLException {
 		int ans = 0;
 
 		// DB接続
@@ -165,8 +166,8 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// ユーザー登録処理を実施。DAOのメソッドを実行
-			ans = dao.taskUpdate(taskId,userId,name, status, priority,
-					 explainText,limitDate,estimatedWorks, projectId, startDate,progress);
+			ans = dao.taskUpdate(taskId, userId, name, status, priority,
+					explainText, limitDate, estimatedWorks, projectId, startDate, progress);
 		} finally {
 
 			// DB接続解除
@@ -176,9 +177,6 @@ public class TaskService {
 		// 戻り値
 		return ans;
 	}
-	
-	
-
 
 	// ユーザー削除メソッド
 	public int taskDelete(int taskId) throws SQLException {
@@ -262,7 +260,6 @@ public class TaskService {
 		try {
 			// DAOを実体化
 			TaskDAO dao = new TaskDAO(conn);
-			
 
 			// タスク一覧取得処理を実施。DAOのメソッドを実行
 			taskList = dao.homeTaskList(userId);
@@ -278,7 +275,7 @@ public class TaskService {
 	}
 
 	//  案件一覧画面のタスク項目を表示するメソッド
-	public ArrayList<TaskDTO> projectTaskList(int taskId, int userId) {
+	public ArrayList<TaskDTO> projectTaskList(int projectId, int userId) {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 
 		// DB接続
@@ -289,8 +286,11 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// タスク一覧取得処理を実施。DAOのメソッドを実行
-			taskList = dao.projectList(taskId, userId);
+			taskList = dao.projectList(projectId, userId);
 
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
 		} finally {
 
 			// DB接続解除
@@ -302,7 +302,7 @@ public class TaskService {
 	}
 
 	//  案件詳細画面のタスク項目を削除するメソッド
-	public ArrayList<TaskDTO> projectDetailDelete(int taskId,int userId) {
+	public ArrayList<TaskDTO> projectDetailDelete(int taskId, int userId) {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 
 		// DB接続
@@ -326,12 +326,12 @@ public class TaskService {
 	}
 
 	//   工数を登録するメソッド
-	public int workRegist(int taskId,int userId) {
+	public int workRegist(int taskId, int userId) {
 		int ans = 0;
 		//	処理はのちに記述。今は返すだけ
 		return ans;
 	}
-	
+
 	// 新規登録初期表示用メソッド
 	public TaskDTO taskToEdit(int taskId) throws SQLException {
 		TaskDTO dto = null;

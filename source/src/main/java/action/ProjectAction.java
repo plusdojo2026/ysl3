@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import model.ProjectDTO;
+import model.TaskDTO;
 import model.UserDTO;
 import model.WorkDTO;
 import service.ProjectService;
+import service.TaskService;
 import service.UserService;
 import service.WorkService;
 
@@ -168,36 +170,46 @@ public class ProjectAction {
 		return page;
 	}
 	//projectDetailメソッド
-		public  String projectDetail() throws UnsupportedEncodingException,SQLException {
-			String page = "/WEB-INF/jsp/project/project_list.jsp";
-			
-			//入力値の取得
-			request.setCharacterEncoding("UTF-8");
-			int projectId = Integer.parseInt(request.getParameter("project-id"));
-			
-			// セッションからログイン中のユーザー情報を取得
-			HttpSession session = request.getSession();
-			UserDTO loginUser = (UserDTO) session.getAttribute("user");
-					
-			// セッションが切れている場合の安全対策
-			if (loginUser == null) {
-				page = "/WEB-INF/jsp/login.jsp";
-				return page;
-			}
-			
-			int userId = loginUser.getId();
-			
-			// Serviceを実体化して処理を依頼	
-			ProjectService service = new ProjectService();
-			ProjectDTO project = service.projectDetail(projectId);
-			
-			//workの一覧をtask_idから取得するサービス」DAOを実行する
-			WorkService workService = new WorkService();
-			ArrayList<WorkDTO> projectWorkList = workService.ProjectWorkList(userId,projectId);
-			
-			request.setAttribute("projectWorkList" , projectWorkList);
+	public  String projectDetail() throws UnsupportedEncodingException,SQLException {
+		String page = "/WEB-INF/jsp/project/project_detail.jsp";
+		
+		//入力値の取得
+		request.setCharacterEncoding("UTF-8");
+		int projectId = Integer.parseInt(request.getParameter("project-id"));
+		
+		// セッションからログイン中のユーザー情報を取得
+		HttpSession session = request.getSession();
+		UserDTO loginUser = (UserDTO) session.getAttribute("user");
+				
+		// セッションが切れている場合の安全対策
+		if (loginUser == null) {
+			page = "/WEB-INF/jsp/login.jsp";
 			return page;
 		}
+		
+		int userId = loginUser.getId();
+		
+		// Serviceを実体化して処理を依頼	
+		ProjectService service = new ProjectService();
+		ProjectDTO projectDetail = service.projectDetail(projectId);
+		
+		//taskの一覧をprojectDetailから取得するサービスDAOを実行する
+		TaskService taskService = new TaskService();
+		ArrayList<TaskDTO> ProjectTaskList = taskService.projectTaskList(userId,projectId);
+		
+		//workの一覧をprojectDetailから取得するサービスDAOを実行する
+		WorkService workService = new WorkService();
+		ArrayList<WorkDTO> projectWorkList = workService.ProjectWorkList(userId,projectId);
+		
+		// タスク詳細画面にて表示する
+		request.setAttribute("projectDetail", projectDetail);
+		
+		request.setAttribute("projectWorkList" , projectWorkList);
+		
+		request.setAttribute("projectTaskList" , ProjectTaskList);
+		
+		return page;
+	}
 
 
 

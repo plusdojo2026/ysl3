@@ -406,13 +406,60 @@ public class TaskDAO {
 		return ans;
 	}
 
-	//  案件一覧画面のタスク項目を表示するメソッド
-	public ArrayList<TaskDTO> projectList(int taskId, int userId) {
-		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
-		//	処理はのちに記述。今は返すだけ
-		return taskList;
+//  案件一覧画面のタスク項目を表示するメソッド
+		public ArrayList<TaskDTO> projectList(int projectId, int userId) throws SQLException {
+			ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
+			//	(処理)
+			// SELECT文を準備する
+			String sql = "SELECT tasks.*, user_name, project_name FROM tasks "
+					+ "LEFT JOIN users ON tasks.user_id = users.user_id "
+					+ "LEFT JOIN projects ON tasks.project_id = projects.project_id "
+					+ "WHERE tasks.user_id = ? AND projects.project_id = ?"
+					+ "ORDER BY tasks.update_at DESC";
 
-	}
+			//デバッグ（SQL文の確認用）
+			System.out.println(sql);
+
+			// まとめる
+			PreparedStatement pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, userId);
+			pStmt.setInt(2, projectId);
+			
+			
+			// SELECT文を実行し、結果表を取得する
+			ResultSet rs = pStmt.executeQuery();
+
+			//移し替え
+			while (rs.next()) {
+				TaskDTO dto = new TaskDTO();
+				dto.setTaskId(rs.getInt("task_id"));
+				dto.setUserId(rs.getInt("user_id"));
+				dto.setName(rs.getString("task_name"));
+				dto.setStatus(rs.getInt("task_status"));
+				dto.setProjectId(rs.getInt("project_id"));
+				dto.setPriority(rs.getInt("task_priority"));
+				dto.setLimitDate(rs.getString("task_limit"));
+				dto.setEstimatedWorks(rs.getFloat("task_estimated_works"));
+				dto.setProgress(rs.getInt("progress"));
+
+				dto.setProjectName(rs.getString("project_name"));
+				dto.setUserName(rs.getString("user_name"));
+
+				taskList.add(dto);
+			}
+
+			return taskList;
+
+		}
+
+	//  案件詳細画面のタスク項目を削除するメソッド
+	//public ArrayList<TaskDTO> projectDetailDelete(int taskId, int userId) throws SQLException {
+		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
+		//	(処理)
+
+		//return taskList;
+
+	//}
 
 	//  案件詳細画面のタスク項目を削除するメソッド
 	public ArrayList<TaskDTO> projectDetailDelete(int taskId, int userId) {

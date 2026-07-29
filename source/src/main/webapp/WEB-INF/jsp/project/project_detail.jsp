@@ -23,10 +23,10 @@
       <section class="pr-detail-view">
         <div class="project-list-card">
    
-          <p>案件コード${projectDetail. projectId}</p>
+          <p>案件コード${projectDetail. code}</p>
           <p>案件名${projectDetail.name}</p>
           <p>顧客名${projectDetail.customer}</p>
-          <p>工数${projectDetail.work}</p>
+          <p>工数${projectDetail.totalWork}</p>
           <p>ステータス${projectDetail.status}</p>
           <p>進捗度${projectDetail.progressRate}</p>
           <p>開始日${projectDetail.startDate}</p>
@@ -45,12 +45,14 @@
         <h3 class="view-title">タスク一覧</h3>
         <div class="task-log-card">
         
+        <table>
         <c:forEach var="task" items="${taskList}">
             <tr>
                 <td><c:out value="${task.id}" /></td>
                 <td><c:out value="${task.taskName}" /></td>
             </tr>
         </c:forEach>
+        </table>
         
           <div>タスク名</div>
           <div>担当者</div>
