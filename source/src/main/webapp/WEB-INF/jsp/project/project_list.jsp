@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -108,15 +108,8 @@
    		 <li>PM名:${project.pmName}</li>
    		 
    		 <li>進捗度:
-   		 <c:choose>
-   		 	<c:when test="${project.totalWork > 0 }">
-   		 		${(project.totalWork * 100) / project.estimatedWork}%
-   		 	</c:when>
-   		 	<c:otherwise>
-				0%
-			</c:otherwise>
-		</c:choose>
-   		 
+   		  <progress value="${(project.totalWork * 100) / project.estimatedWork }" max="100"></progress>
+   		 <fmt:formatNumber value="${(project.totalWork * 100) / project.estimatedWork }" maxFractionDigits="1" />%
    		 </li> 
    		
    		<li>総工数:${project.estimatedWork}</li>
