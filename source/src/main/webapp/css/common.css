@@ -9,7 +9,7 @@
 	border-bottom: 4px solid #29988B;
 }
 
-.home-title {
+.page-title {
 	margin: 0;
 	font-size: 29px;
 	color: #4E4D4C;
@@ -22,7 +22,7 @@
 	border-bottom: 3px solid #29988B;
 }
 
-.sub-home-title {
+.sub-page-title {
 	margin: 0;
 	font-size: 18px;
 	color: #4E4D4C;
@@ -43,14 +43,14 @@ body {
 	padding-top: 68px;
 	padding-bottom: 54px;
 	background-color: #fdfdfd;
-	color: #303532;
+	color: #4E4D4C;
 	font-size: 14px;
 	line-height: 1.6;
 }
 
 
 a {
-	color: #237c72;
+	color: #4E4D4C;
 }
 
 main {
@@ -82,7 +82,7 @@ main {
 }
 
 .logo:hover {
-/*	transform: translateY(-2px);*/
+	/*	transform: translateY(-2px);*/
 }
 
 .system-title:hover {

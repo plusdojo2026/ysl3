@@ -20,7 +20,7 @@
 	<main class="main">
 		<section class="work-regist-area">
 			<div class="title-area">
-				<h1 class="home-title">工数登録</h1>
+				<h1 class="page-title">工数登録</h1>
 			</div>
 
 			<form method="POST" action="<c:url value='/Controller'/>">
@@ -31,9 +31,18 @@
 
 				<!-- 案件名・タスク名 -->
 				<div class="work-target-card">
-					<div class="work-project-name">${ProjectShow.name}</div>
-					<div class="work-task-name">${TaskShow.name}</div>
+					<div class="work-target-area">
+						<p class="work-target-label">案件名</p>
+						<p class="work-project-name" title="${ProjectShow.name }">
+						<c:out value="${ProjectShow.name }" /></p>
+					</div>
+					<div class="work-target-area work-target-task-area">
+						<p class="work-target-label">タスク名</p>
+						<p class="work-task-name" title="${TaskShow.name }">
+						<c:out value="${TaskShow.name }" /></p>
+					</div>
 				</div>
+
 				<!-- 日付・作業内容 -->
 				<div class="work-input-row">
 					<div class="work-input-group">

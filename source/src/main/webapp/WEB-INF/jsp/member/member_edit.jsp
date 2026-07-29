@@ -15,7 +15,9 @@
     <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
 
     <main class="main">
-        <h1>メンバー編集</h1>
+		<div class="title-area">
+			<h1 class="page-title">メンバー編集</h1>
+		</div>
 
         <c:choose>
             <c:when test="${sessionScope.user.role != 1}">

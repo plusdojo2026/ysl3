@@ -19,7 +19,9 @@
 	<%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 
 	<main class="main">
-		<h1 class="page-head-title">メンバー管理</h1>
+		<div class="title-area">
+			<h1 class="page-title">メンバー一覧</h1>
+		</div>
 
 		<c:choose>
 			<c:when test="${sessionScope.user.role != 1}">

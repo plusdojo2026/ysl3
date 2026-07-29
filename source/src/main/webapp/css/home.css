@@ -31,7 +31,6 @@
 .home-side {
 	width: 360px;
 	padding-left: 18px;
-	border-left: 5px solid 5#29988B;
 }
 
 
@@ -65,21 +64,23 @@
 	gap: 16px;
 	color: #4E4D4C;
 	font-size: 18px;
-	font-weight: bold;
+	font-weight: 650;
 	text-decoration: none;
 }
 
 .home-work-log {
 	display: grid;
 	gap: 8px;
-	border-bottom: 2px solid #e1e5e3;
 }
+
+
+
+
+
 
 .work-log-card {
 	cursor: pointer;
-	padding: 10px 0;
-	display: flex;
-	align-items: center;
+	display: block;
 	border-radius: 4px;
 	border-left: 6px solid #F39F59;
 	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
@@ -89,40 +90,112 @@
 
 .work-log-card:hover {
 	scale: 1.0125;
-
 }
 
-
+.work-log-summary {
+	width: 100%;
+	min-height: 52px;
+	padding: 8px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	border: none;
+	background-color: transparent;
+	color: #4E4D4C;
+	text-align: left;
+	cursor: pointer;
+}
 
 .home-work-log-time {
+	width: 58px;
+	flex-shrink: 0;
 	font-size: 14px;
 	font-weight: 650;
-	margin-left: 8px;
 }
 
 .home-work-log-name {
-	width: 200px;
+	min-width: 0;
+	flex-grow: 1;
+	overflow: hidden;
+	font-size: 12px;
+	font-weight: 650;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .home-work-log-date {
+	width: 70px;
+	flex-shrink: 0;
 	color: #4E4D4C;
 	font-size: 12px;
-	margin-right: 8px;
 	text-align: right;
+}
+
+.work-log-open-label {
+	width: 38px;
+	flex-shrink: 0;
+	color: #29988B;
+	font-size: 10px;
+	font-weight: 650;
+	text-align: right;
+}
+
+.work-log-arrow {
+	display: inline-block;
+	margin-left: 2px;
+	font-size: 16px;
+	transition: 0.15s;
+}
+
+.work-log-card.open .work-log-arrow {
+	transform: rotate(90deg);
+}
+
+.work-log-detail {
+	padding: 8px 10px 10px 10px;
+	border-top: 1px dashed #ddd;
+	background-color: #fff;
+}
+
+.work-log-detail-row {
+	margin: 0;
+	display: flex;
+	gap: 8px;
+	font-size: 11px;
+}
+
+.work-log-detail-row+.work-log-detail-row {
+	margin-top: 4px;
+}
+
+.work-log-detail-label {
+	width: 54px;
+	flex-shrink: 0;
+	color: #777;
+	font-weight: 650;
+}
+
+.work-log-detail-value {
+	margin: 0;
 }
 
 .card-area {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: 10px;
+}
+
+.home-regist-form,
+.home-delete-form {
+	display: inline;
 }
 
 .task-card {
 	cursor: pointer;
 	display: flex;
 	flex-direction: column;
-	gap: 2px;
-	padding: 8px 16px;
+	gap: 1px;
+	padding: 6px 14px;
 	background-color: #fff;
 	border-left: 14px solid #29988B;
 	border-radius: 4px;
@@ -145,7 +218,7 @@
 	color: #4E4D4C;
 	text-decoration: none;
 	border: none;
-	font-size: 22px;
+	font-size: 18px;
 }
 
 .task-link:active {
@@ -156,10 +229,20 @@
 .task-card-info {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 16px;
+	gap: 12px;
 	align-items: center;
-	font-size: 14px;
+	font-size: 12px;
 	color: #4E4D4C;
+}
+
+.task-assignee {
+	font-weight: 650;
+}
+
+.time {
+	display: flex;
+	align-items: center;
+	gap: 4px;
 }
 
 .status {
@@ -196,11 +279,11 @@
 	display: flex;
 	justify-content: flex-end;
 	gap: 8px;
-	margin-top: 4px;
+	margin-top: 2px;
 }
 
 .btn {
-	padding: 4px 14px;
+	padding: 3px 12px;
 	border-radius: 2px;
 	cursor: pointer;
 	font-size: 14px;
@@ -240,25 +323,21 @@
 
 /* 優先度：低 */
 .task-card.priority-low {
-    border-left: 14px solid #356899;
+	border-left: 14px solid #356899;
 }
 
 /* 優先度：中 */
 .task-card.priority-medium {
-    border-left: 14px solid #F1C24A;
+	border-left: 14px solid #F1C24A;
 }
 
 /* 優先度：高 */
 .task-card.priority-high {
-    border-left: 14px solid #D84343;
+	border-left: 14px solid #D84343;
 }
 
 
 .font-big {
-	font-size: 28px;
+	font-size: 20px;
 	font-weight: 650;
 }
-
-
-
-

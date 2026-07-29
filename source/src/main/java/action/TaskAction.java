@@ -180,6 +180,9 @@ public class TaskAction {
 		//ちゃんと登録できたか確認
 		if (ans == 1) {
 			request.setAttribute("msg", "編集完了！");
+			
+			page = taskSelectAll();
+			
 		} else {
 			request.setAttribute("msg", "編集失敗！");
 		}

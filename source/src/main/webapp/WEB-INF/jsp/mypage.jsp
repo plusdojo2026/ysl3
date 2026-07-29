@@ -21,7 +21,7 @@
 	<main class="main">
 		<div class="mypage-page">
 			<div class="title-area">
-				<h1 class="home-title">ホーム</h1>
+				<h1 class="page-title">マイページ</h1>
 			</div>
 			<div class="mypage-message-area">
 				<c:if test="${not empty errMsg}">
