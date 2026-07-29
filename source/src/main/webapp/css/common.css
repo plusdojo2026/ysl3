@@ -2,6 +2,18 @@
 /*--------------------------*/
 /*--------ページ全体--------*/
 /*--------------------------*/
+.title-area {
+	margin-bottom: 8px;
+	padding-bottom: 9px;
+	border-bottom: 4px solid #29988B;
+}
+
+.home-title {
+	margin: 0;
+	font-size: 29px;
+	color: #4E4D4C;
+}
+
 * {
 	box-sizing: border-box;
 }
