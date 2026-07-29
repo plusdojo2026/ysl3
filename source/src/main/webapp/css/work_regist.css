@@ -45,7 +45,7 @@
 	background-color: #fff;
 	border-left: 14px solid #F39F59;
 	border-radius: 4px;
-	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
 }
 
 .work-project-name {
@@ -125,7 +125,7 @@
 	background-color: #fff;
 	border-left: 14px solid #F39F59;
 	border-radius: 4px;
-	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
 }
 
 .work-target-area {
@@ -146,17 +146,17 @@
 }
 
 .work-project-name,
- .work-task-name {
-	 width: 100%;
-	 margin: 0;
-	 overflow: hidden;
-	 color: #4E4D4C;
-	 font-size: 20px;
-	 font-weight: 650;
-	 text-align: center;
-	 text-overflow: ellipsis;
-	 white-space: nowrap;	 
- }
+.work-task-name {
+	width: 100%;
+	margin: 0;
+	overflow: hidden;
+	color: #4E4D4C;
+	font-size: 20px;
+	font-weight: 650;
+	text-align: center;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 
 
 /* 工数入力カード */
