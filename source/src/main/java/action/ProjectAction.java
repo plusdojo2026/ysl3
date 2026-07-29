@@ -225,8 +225,13 @@ public class ProjectAction {
 		ProjectService service = new ProjectService();
 		ProjectDTO project = service.projectToEdit(projectId);
 		request.setAttribute("project", project);
-		return page;
-
+		UserService userService =
+				
+		new UserService();		
+		ArrayList<UserDTO> pmList =
+		userService.selectProjectUserName();
+		request.setAttribute("pmList", pmList);
+	return page;
 	}
 	//PM候補一覧取得
 		public String selectProjectUserNamePlus()
