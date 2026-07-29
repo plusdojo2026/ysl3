@@ -210,6 +210,42 @@ public class UserDAO {
 		//serviceに返却する
 		return userList;
 	}
+	
+//	案件に紐づけられてるユーザー取得メソッド（案件登録の際の選ぶ用）----------------------------------------------------------
+	public ArrayList<UserDTO> selectProjectUserNamePlus() {
+		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
+		
+		// DTO実体化
+		UserDTO dto = null;
+
+		// SQL文を準備する：有効なメンバー全員から選ぶ
+		String sql = "SELECT * FROM users WHERE sol = 1";
+
+		try (
+				PreparedStatement pStmt = conn.prepareStatement(sql);
+				ResultSet rs = pStmt.executeQuery()) {
+
+			// 結果を格納
+			while (rs.next()) {
+				dto = new UserDTO();
+				dto.setId(rs.getInt("user_id"));
+				dto.setLoginId(rs.getString("login_id"));
+				dto.setUserName(rs.getString("user_name"));
+				dto.setMail(rs.getString("mail"));
+				dto.setRole(rs.getInt("role"));
+				dto.setSol(rs.getInt("sol"));
+
+				// リストに追加
+				userList.add(dto);
+			}
+
+		} catch (SQLException e) {
+
+			throw new RuntimeException("ユーザー一覧取得中にDBエラーが発生しました", e);
+		}
+		//serviceに返却する
+		return userList;
+	}
 
 	//	タスクに紐づけられているユーザー取得メソッド（タスク登録の際の担当者選ぶ用）----------------------------------------------------------
 	public ArrayList<UserDTO> selectTaskUserName(int projectId) {
@@ -248,6 +284,8 @@ public class UserDAO {
 		//serviceに返却する
 		return userList;
 	}
+	
+	
 
 	// マイページにユーザーの情報表示用メソッド----------------------------------------------------------
 	public UserDTO mypageSelect(int userId) {

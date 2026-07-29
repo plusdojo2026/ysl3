@@ -221,6 +221,28 @@ public class UserService {
 		return userList;
 	}
 	
+//	案件に紐づけられてるユーザー取得メソッド（案件編集の際のPM選ぶ用）----------------------------------------------------------
+	public ArrayList<UserDTO> selectProjectUserNamePlus() {
+		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
+		
+		// DB接続
+		access();
+		
+		try {
+			
+			// DAOを実体化
+			UserDAO dao = new UserDAO(conn);
+			
+			// ユーザー取得処理を実施。DAOのメソッドを実行
+			userList = dao.selectProjectUserNamePlus();
+		} finally {
+			
+			// DB接続解除
+			close();
+		}
+		return userList;
+	}
+	
 	//	タスクに紐づけられているユーザー取得メソッド（タスク登録の際の担当者選ぶ用）----------------------------------------------------------
 	public ArrayList<UserDTO> selectTaskUserName(int projectId) {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
