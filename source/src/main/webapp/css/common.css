@@ -82,7 +82,7 @@ main {
 }
 
 .logo:hover {
-	transform: translateY(-2px);
+/*	transform: translateY(-2px);*/
 }
 
 .system-title:hover {

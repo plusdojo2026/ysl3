@@ -347,15 +347,24 @@ public class TaskDAO {
 	//  ホーム画面のタスク一覧を表示するメソッド
 	public ArrayList<TaskDTO> homeTaskList(int userId) throws SQLException {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
-		//	(処理)s
-		// SELECT文を準備する
-		String sql = "SELECT * FROM tasks WHERE user_id = ? ORDER BY task_id";
-		//デバッグ（SQL文の確認用）
-		System.out.println(sql);
+		
+		// SQL文準備
+		String sql = null;
+		PreparedStatement pStmt = null;
+		
+		// 管理者かどうかチェック
+		if (userId == 0) {
+			sql = "SELECT * FROM tasks";
+			pStmt = conn.prepareStatement(sql);
+		} else {
+			// SELECT文を準備する
+			sql = "SELECT * FROM tasks WHERE user_id = ? ORDER BY task_id";
 
-		// まとめる
-		PreparedStatement pStmt = conn.prepareStatement(sql);
-		pStmt.setInt(1, userId);
+			// まとめる
+			pStmt = conn.prepareStatement(sql);
+			pStmt.setInt(1, userId);
+		}
+		
 		// SELECT文を実行し、結果表を取得する
 		ResultSet rs = pStmt.executeQuery();
 
