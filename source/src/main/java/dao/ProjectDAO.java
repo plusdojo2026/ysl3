@@ -152,9 +152,9 @@ import model.ProjectDTO;
 		return ans;
 	}
 	//projectUpdateメソッド（完了）
-	public int projectUpdate(String projectCode , String projectName ,String customer, int pmId , int projectStatus , int projectPriority , String projectStartDate , String projectEndDate ,Float projectEstimatedWorks , String projectExplain,String projectLimit)throws SQLException {
+	public int projectUpdate(String projectCode , String projectName ,String customer, int pmId , int projectStatus , int projectPriority , String projectStartDate , String projectEndDate ,Float projectEstimatedWorks , String projectExplain,String projectLimit, int projectId )throws SQLException {
 		// SELECT文を準備する
-		String sql = "update projects SET project_code=?,project_name=?,customer=?,pm_Id=?,project_status=?,project_priority=?,project_startDate=?,project_end_date=?,project_explain=?  where project_id=?_";
+		String sql = "update projects SET project_code=?,project_name=?,customer=?,pm_Id=?,project_status=?,project_priority=?,project_start_date=?,project_end_date=?, project_estimated_works=? ,project_explanation=? ,project_limit=?  where project_id=?";
 		int ans = 0 ;
 		
 		PreparedStatement pStmt = conn.prepareStatement(sql);
@@ -169,6 +169,7 @@ import model.ProjectDTO;
 		pStmt.setFloat(9, projectEstimatedWorks);
 		pStmt.setString(10, projectExplain);
 		pStmt.setString(11,projectLimit);
+		pStmt.setInt(12,  projectId);
 		
 		try(
 				PreparedStatement ps =conn.prepareStatement(sql);){
@@ -183,6 +184,7 @@ import model.ProjectDTO;
 			ps.setFloat(9,projectEstimatedWorks );
 			ps.setString(10, projectExplain);
 			ps.setString(11, projectLimit);
+			ps.setInt(12, projectId);
 			
 			ans=ps.executeUpdate();
 		} catch (SQLException e) {	
