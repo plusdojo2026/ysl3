@@ -110,7 +110,7 @@ public class ProjectAction {
 
 	//projectUpdateメソッド
 	public String projectUpdate() throws UnsupportedEncodingException,SQLException{
-		String page = "/WEB-INF/jsp/project/project_edit.jsp";
+		String page = "/WEB-INF/jsp/home.jsp";
 
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");

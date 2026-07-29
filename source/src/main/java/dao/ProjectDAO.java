@@ -275,6 +275,8 @@ import model.ProjectDTO;
 		if(rs.next()) {
 			dto = new ProjectDTO();
 			
+			dto.setId(rs.getInt("project_id"));
+			
 			dto.setCode(rs.getString("project_code"));
 			
 			dto.setName(rs.getString("project_name"));
