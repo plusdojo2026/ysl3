@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/project.css"/>
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/project.js" defer></script>
+<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico">
 </head>
 
 <body>

@@ -3,12 +3,13 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>案件編集 | TaskManager</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/task.css">
-    <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
-    <script src="${pageContext.request.contextPath}/js/project.js" defer></script>
+<meta charset="UTF-8">
+<title>案件編集 | TaskManager</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/task.css">
+<script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+<script src="${pageContext.request.contextPath}/js/project.js" defer></script>
+<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico">
 </head>
 <body>
     <%@ include file="/WEB-INF/jsp/common/header.jsp"%>

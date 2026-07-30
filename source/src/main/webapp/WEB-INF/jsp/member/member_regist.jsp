@@ -7,9 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>メンバー新規登録 | TaskManager</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet"href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet"href="${pageContext.request.contextPath}/css/member.css">
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+<script src="${pageContext.request.contextPath}/js/member.js" defer></script>
+<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico">
 </head>
 
 <body>

@@ -7,11 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>タスク一覧 | TaskManager</title>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/common.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/task.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/task.css">
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico">
 </head>
 
 <body>

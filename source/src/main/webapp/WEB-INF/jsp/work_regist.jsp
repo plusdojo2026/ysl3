@@ -12,6 +12,7 @@
 	href="${pageContext.request.contextPath}/css/work_regist.css">
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/work_regist.js" defer></script>
+<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico">
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/common/header.jsp"%>

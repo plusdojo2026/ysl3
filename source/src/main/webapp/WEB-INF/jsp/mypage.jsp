@@ -29,7 +29,10 @@
 				</c:if>
 			</div>
 			<section class="mypage-profile-card">
+				<img src="${pageContext.request.contextPath}/images/user_icon.png"
+					alt="ロゴ" class="account">
 				<div class="mypage-profile-main">
+
 					<p class="mypage-profile-name">
 						<c:out value="${user.userName}" />
 					</p>
@@ -74,22 +77,27 @@
 					<div class="mypage-section-title-area">
 						<h2 class="mypage-section-title">パスワード変更</h2>
 					</div>
-					<form class="mypage-password-form" method="POST" action="<c:url value='/Controller'/>">
+					<form class="mypage-password-form" method="POST"
+						action="<c:url value='/Controller'/>">
 						<input type="hidden" name="page-id" value="MY01">
 						<div class="mypage-field">
-							<label class="mypage-label">現在のパスワード</label>
-							<input class="mypage-input" type="password" name="password" placeholder="現在のパスワード">
+							<label class="mypage-label">現在のパスワード</label> <input
+								class="mypage-input" type="password" name="password"
+								placeholder="現在のパスワード">
 						</div>
 						<div class="mypage-field">
-							<label class="mypage-label">新しいパスワード</label>
-							<input class="mypage-input" type="password" name="new-password" placeholder="新しいパスワード">
+							<label class="mypage-label">新しいパスワード</label> <input
+								class="mypage-input" type="password" name="new-password"
+								placeholder="新しいパスワード">
 						</div>
 						<div class="mypage-field">
-							<label class="mypage-label">新しいパスワード（確認）</label>
-							<input class="mypage-input" type="password" name="new-password-confirm" placeholder="もう一度入力してください">
+							<label class="mypage-label">新しいパスワード（確認）</label> <input
+								class="mypage-input" type="password" name="new-password-confirm"
+								placeholder="もう一度入力してください">
 						</div>
 						<div class="mypage-button-area">
-							<button class="pw-change-btn" type="submit" name="btn-id" value="password-change">変更</button>
+							<button class="pw-change-btn" type="submit" name="btn-id"
+								value="password-change">変更</button>
 						</div>
 					</form>
 				</section>
