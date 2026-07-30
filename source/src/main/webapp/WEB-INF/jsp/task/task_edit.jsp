@@ -7,10 +7,8 @@
 <meta charset="UTF-8">
 <title>タスク編集 | TaskManager</title>
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/common.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/task.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/task.css" />
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/task.js" defer></script>
 </head>
@@ -20,9 +18,7 @@
 	<!---------- メインここから ---------->
 	<main class="main">
 		<div class="management-page">
-			<div class="management-title-area">
-				<h1 class="management-title">タスク編集</h1>
-			</div>
+			<div class="title-area"><h1 class="page-title">タスク編集</h1></div>
 			<div class="management-message-area">
 				<c:if test="${not empty msg}">
 					<c:out value="${msg}" />
@@ -31,8 +27,7 @@
 					<c:out value="${errMsg}" />
 				</c:if>
 			</div>
-			<form class="management-form-card" method="POST"
-				action="<c:url value='/Controller'/>">
+			<form class="management-form-card" method="POST" action="<c:url value='/Controller'/>">
 				<input type="hidden" name="task-id" value="${editTask.taskId}">
 				<input type="hidden" name="project-id" value="${editTask.projectId}">
 				<input type="hidden" name="page-id" value="TA03">
@@ -130,8 +125,8 @@
 					</div>
 				</div>
 				<div class="management-btn-area">
-					<button class="management-submit-btn" type="submit"
-						name="btn-id" value="task-update">保存</button>
+					<button class="management-submit-btn" type="submit" name="btn-id"
+						value="task-update">保存</button>
 				</div>
 			</form>
 		</div>

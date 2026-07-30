@@ -77,11 +77,11 @@ public class ProjectService {
 	//projectSearchメソッド
 	public ArrayList<ProjectDTO> projectSearch(int projectStatus, int projectPriority, String projectName)
 			throws SQLException {
-		ArrayList<ProjectDTO> projectList = null;
+		ArrayList<ProjectDTO> projectList = new ArrayList<ProjectDTO>();
 		// DB接続
 		access();
 		try {// DAOを実体化
-			ProjectDAO dao = new ProjectDAO(this.conn);
+			ProjectDAO dao = new ProjectDAO(conn);
 
 			// ログイン処理を実施。DAOのメソッドを実行
 			projectList = dao.projectSearch(projectStatus, projectPriority, projectName);

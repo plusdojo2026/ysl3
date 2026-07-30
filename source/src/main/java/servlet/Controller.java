@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import action.HomeAction;
 import action.MemberAction;
-import action.MonthAction;
 import action.ProjectAction;
 import action.TaskAction;
 import action.UserAction;
@@ -116,7 +115,7 @@ public class Controller extends HttpServlet {
 				page = action.taskToRegist();
 
 				// タスク編集画面の初期表示
-			} else if (pageId.equals("TA03")) {
+			} else if (pageId.equals("TA01")) {
 				TaskAction action = new TaskAction(request);
 				page = action.taskToEdit();
 
@@ -297,10 +296,14 @@ public class Controller extends HttpServlet {
 				page = action.taskToEdit();
 				
 				
-			} else if ((pageId.equals("MO01") || pageId.equals("MO02")) && btnId.equals("month-change")) {
-				 MonthAction action = new MonthAction(request);
-				 page = action.month();
+//			} else if ((pageId.equals("MO01") || pageId.equals("MO02")) && btnId.equals("month-change")) {
+//				 MonthAction action = new MonthAction(request);
+//				 page = action.month();
 				 
+				// タスク編集画面の初期表示
+			} else if (pageId.equals("TA01") && btnId.equals("task-regist")) {
+				TaskAction action = new TaskAction(request);
+				page = action.taskToRegist();
 //	
 //			} else if ((pageId.equals("MO01") || pageId.equals("MO02")) && btnId.equals("csv-output")) {
 //				 MonthAction action = new MonthAction(request);

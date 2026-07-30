@@ -44,8 +44,8 @@
 				<option>中</option>
 				<option>高</option>
 			</select> <input type="text" class="project-search-text" placeholder="キーワード検索"
-				name="keyword"> <input type="submit" class="search-btn"
-				value="検索">
+				name="keyword"><button type="submit" name="btn-id" value="project-search"
+					class="project-search-btn">検索</button>
 		</form>
 		<!-- 検索フォームここまで -->
 

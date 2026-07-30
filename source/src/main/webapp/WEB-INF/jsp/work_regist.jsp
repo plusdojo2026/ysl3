@@ -24,10 +24,9 @@
 			</div>
 
 			<form method="POST" action="<c:url value='/Controller'/>">
-				<input type="hidden" name="task-id" value="${TaskShow.taskId}">
-				<input type="hidden" id="project-name" name="project"
-					value="${ProjectShow.name}" readonly> <input type="hidden"
-					id="task-name" name="task" value="${TaskShow.name}" readonly>
+			    <!-- これだけ残す -->
+			    <input type="hidden" name="task-id" value="${TaskShow.taskId}">
+
 
 				<!-- 案件名・タスク名 -->
 				<div class="work-target-card">
