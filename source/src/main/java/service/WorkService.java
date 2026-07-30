@@ -72,7 +72,7 @@ public class WorkService {
 	}
 
 	//工数登録するメソッド
-	public int workRegist(int userId, int taskId, String workDate, String explainText, Float work) {
+	public int workRegist(int userId,int taskId, float work, String explainText,String workDate) {
 		int ans = 0;
 		// DB接続
 		access();
@@ -83,7 +83,7 @@ public class WorkService {
 			WorkDAO dao = new WorkDAO(conn);
 
 			// 工数登録処理を実施。DAOのメソッドを実行
-			ans = dao.workRegist(userId, taskId, workDate, explainText, work);
+			ans = dao.workRegist(userId,taskId, work, explainText, workDate);
 		} finally {
 
 			// DB接続解除
@@ -181,7 +181,7 @@ public class WorkService {
 
 
 //タスク詳細に工数ログを表示するメソッド
-	public ArrayList<WorkDTO> TaskWorkList(int userId,int taskId) {
+	public ArrayList<WorkDTO> taskWorkList(int userId,int taskId) {
 		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
 		// DB接続
 		access();

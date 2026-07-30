@@ -101,7 +101,7 @@ public class WorkAction {
 
 		// Serviceを実体化して処理を依頼
 		WorkService service = new WorkService();
-		int ans = service.workRegist(userId, taskId, workDate, explainText, work);
+		int ans = service.workRegist(userId, taskId, work, explainText, workDate);
 
 		// 変更結果の判定
 		if (ans == 1) {
@@ -274,16 +274,18 @@ public class WorkAction {
 
 			// ログイン情報からユーザーIDを取り出す
 			int userId = loginUser.getId();
-
+			
+			int taskId = Integer.parseInt(request.getParameter("task-id"));
+			
 			// 工数ログも同様
 			WorkService workService = new WorkService();
-//			ArrayList<WorkDTO> taskWorkList = workService.taskWorkList(userId,taskId);
+			ArrayList<WorkDTO> taskWorkList = workService.taskWorkList(userId,taskId);
 
 			request.setAttribute("errMsg", "※一覧が取得できませんでした");
 
 			// ちゃんと入っていたらログインできた人の情報をリクエストに保存
 
-//			request.setAttribute("taskWorkList", taskWorkList);
+			request.setAttribute("taskWorkList", taskWorkList);
 
 			// 戻り値
 			return page;

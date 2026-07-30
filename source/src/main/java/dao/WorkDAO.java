@@ -50,17 +50,17 @@ public class WorkDAO {
 	}
 
 	//工数登録するメソッド
-	public int workRegist(int userId, int taskId, String workDate, String explainText, float work) {
+	public int workRegist(int userId,int taskId,float work,String explainText,String workDate) {
 		int ans = 0;
 		//SQLを準備
-		String sql = "INSERT INTO works VALUES (0,?,?,?,?,?)";
+		String sql = "INSERT INTO works VALUES (0,?, ?, ?, ?, ?)";
 
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
-
-			pStmt.setInt(1, taskId);
-			pStmt.setFloat(2, work);
-			pStmt.setString(3, explainText);
-			pStmt.setInt(4, userId);
+			
+			pStmt.setInt(1, userId);
+			pStmt.setInt(2, taskId);
+			pStmt.setFloat(3, work);
+			pStmt.setString(4, explainText);
 			pStmt.setString(5, workDate);
 
 			ans = pStmt.executeUpdate();
@@ -175,7 +175,7 @@ public class WorkDAO {
 					dto.setId(rs.getInt("work_id"));
 					dto.setTaskId(rs.getInt("task_id"));
 					dto.setTaskName(rs.getString("task_name"));
-					dto.setUserName(rs.getString("user_name"));
+//					dto.setUserName(rs.getString("user_name"));
 					dto.setWorkDate(rs.getString("work_date"));
 					dto.setWork(rs.getFloat("work"));
 					workList.add(dto);
@@ -191,7 +191,7 @@ public class WorkDAO {
 	public ArrayList<WorkDTO> ProjectWorkList(int userId, int projectId) {
 		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
 		// SELECT文を準備する
-		String sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id FROM works as w join tasks  AS t on w.task_id = t.task_id WHERE w.user_id = ? AND t.project_id = ?;";
+		String sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE w.user_id = ? AND t.project_id = ?";
 
 		//デバッグ（SQL文の確認用）
 		System.out.println(sql);
@@ -210,7 +210,7 @@ public class WorkDAO {
 					dto.setId(rs.getInt("work_id"));
 					dto.setTaskId(rs.getInt("task_id"));
 					dto.setTaskName(rs.getString("task_name"));
-					//						dto.setUserName(rs.getString("user_name"));
+					dto.setUserName(rs.getString("user_name"));
 					dto.setWorkDate(rs.getString("work_date"));
 					dto.setWork(rs.getFloat("work"));
 					workList.add(dto);

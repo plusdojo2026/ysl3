@@ -145,6 +145,10 @@
 									<c:out value="${workLog.work}" />
 									時間
 								</p>
+								<p>
+								名前：
+								<c:out value="${workLog.userName}" />
+								</p>
 								<!-- 工数削除 -->
 								<form method="post"
 									action="${pageContext.request.contextPath}/Controller">

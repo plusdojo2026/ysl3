@@ -290,8 +290,11 @@ public class TaskAction {
 		
 		//workの一覧をtask_idから取得するサービス」DAOを実行する
 		WorkService workService = new WorkService();
-		ArrayList<WorkDTO> taskWorkList = workService.TaskWorkList(userId,taskId);
+		ArrayList<WorkDTO> taskWorkList = workService.taskWorkList(userId,taskId);
 		
+		if (taskWorkList == null) {
+			System.out.println("NO");
+		}
 		// タスク詳細画面にて表示する
 		request.setAttribute("taskDetail", taskDetail);
 		
