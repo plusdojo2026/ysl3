@@ -17,21 +17,21 @@ public class MonthAction {
 	public MonthAction(HttpServletRequest request) {
 		this.request = request;
 	}
-	
+
 	//	月次画面の初期表示
 	public String monthSelect() throws UnsupportedEncodingException {
 		String page = "/WEB-INF/jsp/month.jsp";
-		
+
 		//	値の取得			
-		String month=request.getParameter("month");
+		String month = request.getParameter("month");
 
 		// URLから取得
 		if (month == null || month.isEmpty()) {
 			month = getCurrentMonth();
 		}
-	
+
 		// 対象月表示用
-		request.setAttribute("targetMonth",month);
+		request.setAttribute("targetMonth", month);
 
 		// 前月
 		request.setAttribute("lastMonth", getLastMonth(month));
@@ -54,7 +54,7 @@ public class MonthAction {
 
 		return ym.plusMonths(1).toString();
 	}
-	
+
 	private String getCurrentMonth() {
 		return YearMonth.now().toString();
 	}
@@ -65,9 +65,11 @@ public class MonthAction {
 		String page = "/WEB-INF/jsp/month.jsp";
 
 		ProjectService service = new ProjectService();
-		
-		String month = request.getParameter("month");
 
+		String month = request.getParameter("month");
+		if (month == null || month.isEmpty()) {
+			month = (String) request.getAttribute("targetMonth");
+		}
 		List<ProjectDTO> summaryList = service.getSummaryCard(month);
 
 		request.setAttribute("summaryList", summaryList);
@@ -81,9 +83,11 @@ public class MonthAction {
 		String page = "/WEB-INF/jsp/month.jsp";
 
 		ProjectService service = new ProjectService();
-		
-		String month = request.getParameter("month");
 
+		String month = request.getParameter("month");
+		if (month == null || month.isEmpty()) {
+			month = (String) request.getAttribute("targetMonth");
+		}
 		List<ProjectDTO> projectSummaryList = service.getProjectSummary(month);
 
 		request.setAttribute("projectSummaryList", projectSummaryList);
@@ -98,9 +102,11 @@ public class MonthAction {
 		{
 
 			ProjectService service = new ProjectService();
-			
-			String month = request.getParameter("month");
 
+			String month = request.getParameter("month");
+			if (month == null || month.isEmpty()) {
+				month = (String) request.getAttribute("targetMonth");
+			}
 			List<ProjectDTO> userSummaryList = service.getUserSummary(month);
 
 			request.setAttribute("userSummaryList", userSummaryList);

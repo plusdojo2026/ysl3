@@ -1,1 +1,230 @@
 @charset "UTF-8";
+
+
+/*-------------------------*/
+/*--------month.jsp--------*/
+/*-------------------------*/
+
+.month-page {
+	width: 900px;
+	margin: 0 auto;
+}
+
+
+.month-message-area {
+	min-height: 30px;
+	margin-bottom: 8px;
+	padding: 2px 12px;
+}
+
+.month-success-message,
+.month-error-message {
+	margin: 0;
+}
+
+.month-success-message {
+	color: #29988B;
+}
+
+.month-error-message {
+	color: #D84343;
+}
+
+.month-control-area {
+	width: 520px;
+	height: 64px;
+	margin: 0 auto 20px auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 24px;
+	border-left: 14px solid #F07E9B;
+	border-radius: 4px;
+
+	background-color: #fff;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.month-change-btn {
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #29988B;
+	border-radius: 2px;
+	background-color: #29988B;
+	color: #fff;
+	font-size: 18px;
+	font-weight: 650;
+	text-decoration: none;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.month-change-btn:hover {
+	background-color: #fff;
+	color: #29988B;
+}
+
+
+.month-change-btn:active {
+	transform: translateY(1px);
+}
+
+.target-month-area {
+	width: 240px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.target-month-label {
+	color: #777;
+	font-size: 11px;
+	line-height: 1.2;
+}
+
+.target-month {
+	color: #4E4D4C;
+	font-size: 24px;
+	font-weight: 650;
+	line-height: 1.4;
+}
+
+.month-summary-area,
+.project-summary-area,
+.user-summary-area {
+	margin-top: 20px;
+}
+
+.month-summary-grid {
+	display: grid;
+	/*均等4つ並べ*/
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	gap: 12px;
+}
+
+.month-summary-card {
+	min-height: 104px;
+	padding: 16px 18px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	border-left: 10px solid #29988B;
+	border-radius: 4px;
+	background-color: #fff;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.member-summary-card {
+	border-left-color: #356899;
+}
+
+
+.total-summary-card {
+	border-left-color: #29988B;
+}
+
+.plan-summary-card {
+	border-left-color: #F1C24A;
+}
+
+.remain-summary-card {
+	border-left-color: #F39F59;
+}
+
+.month-summary-label {
+	color: #777;
+	font-size: 12px;
+	font-weight: 650;
+}
+
+.month-summary-value {
+	color: #4E4D4C;
+	font-size: 28px;
+	font-weight: 650;
+	line-height: 1.4;
+	text-align: right;
+}
+
+.month-summary-value small {
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.month-table-area {
+	border-radius: 4px;
+	background-color: #fff;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+	overflow: hidden;
+}
+
+.month-table {
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+.month-table th {
+	height: 44px;
+	padding: 8px 12px;
+	border-bottom: 2px solid #29988B;
+	background-color: #e7f5f2;
+	color: #4E4D4C;
+	font-size: 12px;
+	font-weight: 650;
+	text-align: center;
+}
+
+.month-table td {
+	height: 48px;
+	padding: 8px 12px;
+	border-bottom: 1px solid #eee;
+	color: #4E4D4C;
+	text-align: right;
+}
+
+.month-table tbody tr {
+	transition: 0.2s;
+}
+
+.month-table tbody tr:hover {
+	background-color: #fff8f2;
+}
+
+.month-name-column {
+	width: 240px;
+	text-align: left;
+}
+
+.month-progress-column {
+	width: 208px;
+}
+
+.month-name-cell {
+	overflow: hidden;
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.month-progress {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.month-progress-bar {
+	width: 140px;
+	height: 12px;
+	accent-color: #29988B;
+}
+
+.month-progress-value {
+	width: 44px;
+	flex-shrink: 0;
+	font-size: 12px;
+	font-weight: 650;
+	text-align: right;
+}

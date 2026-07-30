@@ -57,9 +57,18 @@
 	transition: 0.2s;
 	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
 	background-color: #fff;
-	transition: 0.1s;
 	display: flex;
 	cursor: pointer;
+	position: relative;
+}
+
+.nav-card a::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .nav-card:hover {
@@ -173,7 +182,26 @@
 	transition: 0.15s;
 }
 
-.work-log-card.open .work-log-arrow {
+.work-log-card {
+	interpolate-size: allow-keywords;
+}
+
+.work-log-card::details-content {
+	height: 0;
+	opacity: 0;
+	overflow: clip;
+	transition:
+		height 0.24s ease,
+		opacity 0.2s ease,
+		content-visibility 0.24s ease allow-discrete;
+}
+
+.work-log-card[open]::details-content {
+	height: auto;
+	opacity: 1;
+}
+
+.work-log-card[open] .work-log-arrow {
 	transform: rotate(90deg);
 }
 

@@ -13,14 +13,17 @@
 	href="${pageContext.request.contextPath}/css/home.css">
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/home.js" defer></script>
-<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico">
+<link rel="icon"
+	href="${pageContext.request.contextPath}/images/favicon.ico">
 </head>
 
 <body>
 	<%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 
 	<main class="main">
-		<div class="title-area"><h1 class="page-title">ホーム</h1></div>
+		<div class="title-area">
+			<h1 class="page-title">ホーム</h1>
+		</div>
 		<div class="msg-area">
 			<c:if test="${not empty errMsg}">
 				<div>
@@ -34,22 +37,26 @@
 				<!-- ナビゲーションここから -->
 				<section class="nav-area">
 					<div class="nav-card">
-					<img class="nav-icon" alt="案件一覧" src="${pageContext.request.contextPath}/images/icon/project_icon.jpg">
+						<img class="nav-icon" alt="案件一覧"
+							src="${pageContext.request.contextPath}/images/icon/project_icon.jpg">
 						<a
 							href="${pageContext.request.contextPath}/Controller?page-id=PR01">案件一覧</a>
 					</div>
 					<div class="nav-card">
-					<img class="nav-icon" alt="タスク一覧" src="${pageContext.request.contextPath}/images/icon/task_icon.jpg">
+						<img class="nav-icon" alt="タスク一覧"
+							src="${pageContext.request.contextPath}/images/icon/task_icon.jpg">
 						<a
 							href="${pageContext.request.contextPath}/Controller?page-id=TA01">タスク一覧</a>
 					</div>
 					<div class="nav-card">
-					<img class="nav-icon" alt="月次集計" src="${pageContext.request.contextPath}/images/icon/month_icon.jpg">
+						<img class="nav-icon" alt="月次集計"
+							src="${pageContext.request.contextPath}/images/icon/month_icon.jpg">
 						<a
 							href="${pageContext.request.contextPath}/Controller?page-id=MO01">月次集計</a>
 					</div>
 					<div class="nav-card">
-					<img class="nav-icon" alt="マイページ" src="${pageContext.request.contextPath}/images/icon/mypage_icon.jpg">
+						<img class="nav-icon" alt="マイページ"
+							src="${pageContext.request.contextPath}/images/icon/mypage_icon.jpg">
 						<a
 							href="${pageContext.request.contextPath}/Controller?page-id=MY01">マイページ</a>
 					</div>
@@ -168,10 +175,15 @@
 								</span> <span class="home-work-log-date"> <c:out
 										value="${workLog.workDate}" />
 								</span> <span class="work-log-open-label"><span
-									class="work-log-arrow"></span>
-								</span>
+									class="work-log-arrow"></span> </span>
 							</summary>
 							<div class="work-log-detail">
+								<p class="work-log-detail-row">
+									<span class="work-log-detail-label">案件名</span> <span
+										class="work-log-detail-value"> <c:out
+											value="${workLog.projectName}" />
+									</span>
+								</p>
 								<p class="work-log-detail-row">
 									<span class="work-log-detail-label">作業内容</span> <span
 										class="work-log-detail-value"> <c:out

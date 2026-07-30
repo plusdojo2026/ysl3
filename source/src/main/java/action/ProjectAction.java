@@ -104,10 +104,6 @@ public class ProjectAction {
 
 		);
 
-		ArrayList<ProjectDTO> projectList =service.projectSelectAll();
-		
-		request.setAttribute("projectList", projectList);
-		
 		request.setAttribute("ans", ans);
 
 		return page;
@@ -192,6 +188,10 @@ public class ProjectAction {
 		}
 
 		int userId = loginUser.getId();
+
+		if (loginUser.getRole() == 1) {
+			userId = 0;
+		}
 
 		// Serviceを実体化して処理を依頼	
 		ProjectService service = new ProjectService();

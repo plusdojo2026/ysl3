@@ -249,7 +249,7 @@ public class UserService {
 	}
 	
 	//	タスクに紐づけられているユーザー取得メソッド（タスク登録の際の担当者選ぶ用）----------------------------------------------------------
-	public ArrayList<UserDTO> selectTaskUserName(int projectId) {
+	public ArrayList<UserDTO> selectTaskUserName() {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
 		
 		// DB接続
@@ -261,7 +261,7 @@ public class UserService {
 			UserDAO dao = new UserDAO(conn);
 			
 			// ユーザー編集処理を実施。DAOのメソッドを実行
-			userList = dao.selectTaskUserName(projectId);
+			userList = dao.selectTaskUserName();
 		} finally {
 			
 			// DB接続解除

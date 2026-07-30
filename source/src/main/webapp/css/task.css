@@ -8,7 +8,7 @@
 	margin: 0 auto;
 }
 
-.management-message-area {
+.management-msg-area {
 	min-height: 30px;
 	margin-bottom: 10px;
 	padding: 2px 12px;
@@ -95,7 +95,6 @@
 	border-color: #29988B;
 }
 
-
 .management-select:focus {
 	border-color: #29988B;
 	outline: none;
@@ -157,21 +156,15 @@
 }
 
 
-
-
-
 /*--------------------------------------*/
 /*--------タスク一覧画面----------------*/
 /*--------------------------------------*/
-
 .task-page {
 	width: 900px;
 	margin: 0 auto;
 }
 
-
-
-.task-message-area {
+.task-msg-area {
 	min-height: 30px;
 	margin-bottom: 10px;
 	padding: 2px 12px;
@@ -249,12 +242,11 @@
 	cursor: pointer;
 	transition: 0.2s;
 }
+
 .task-regist-btn:hover {
 	background-color: #fff;
 	color: #F07E9B;
 }
-
-
 
 .task-search-btn {
 	width: 120px;
@@ -272,8 +264,6 @@
 	background-color: #fff;
 	color: #29988B;
 }
-
-
 
 .card-area {
 	display: flex;
@@ -302,8 +292,6 @@
 .task-card:hover {
 	scale: 1.0125;
 }
-
-
 
 .task-title {
 	margin: 0;
@@ -344,7 +332,6 @@
 .status {
 	padding: 2px 6px;
 	width: 64px;
-
 	text-align: center;
 	border-radius: 45px;
 	font-size: 12px;
@@ -411,11 +398,9 @@
 	color: #fff;
 }
 
-
 .hidden {
 	opacity: 0;
 }
-
 
 /* 優先度：低 */
 .task-card.priority-low {
@@ -432,8 +417,296 @@
 	border-left: 14px solid #D84343;
 }
 
-
 .font-big {
 	font-size: 20px;
 	font-weight: 650;
+}
+
+/*--------------------------------------*/
+/*--------タスク詳細画面----------------*/
+/*--------------------------------------*/
+.task-success-msg,
+.task-error-msg {
+	margin: 0;
+}
+
+.task-success-msg {
+	color: #29988B;
+}
+
+.task-error-msg {
+	color: #D84343;
+}
+
+.task-detail-card {
+	padding: 20px 24px;
+	border-left: 14px solid #29988B;
+	border-radius: 4px;
+	background-color: #fff;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.task-detail-card.priority-low {
+	border-left-color: #356899;
+}
+
+.task-detail-card.priority-medium {
+	border-left-color: #F1C24A;
+}
+
+.task-detail-card.priority-high {
+	border-left-color: #D84343;
+}
+
+.task-detail-heading {
+	padding-bottom: 12px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	border-bottom: 1px solid #ddd;
+}
+
+.task-detail-name-area {
+	min-width: 0;
+	flex-grow: 1;
+}
+
+.task-detail-project-name {
+	margin: 0 0 2px 0;
+	color: #777;
+	font-size: 12px;
+}
+
+.task-detail-name {
+	margin: 0;
+	color: #4E4D4C;
+	font-size: 22px;
+	line-height: 1.4;
+	overflow-wrap: anywhere;
+}
+
+.task-edit-btn {
+	width: 104px;
+	height: 36px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #29988B;
+	border-radius: 2px;
+	background-color: #29988B;
+	color: #fff;
+	font-weight: 650;
+	text-decoration: none;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.task-edit-btn:hover {
+	background-color: #fff;
+	color: #29988B;
+}
+
+.task-edit-btn:active {
+	transform: translateY(1px);
+}
+
+.task-detail-grid {
+	margin-top: 16px;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px 24px;
+}
+
+.task-detail-item {
+	min-height: 32px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.task-detail-item-wide {
+	grid-column: 1 / 3;
+}
+
+.task-detail-label {
+	width: 96px;
+	flex-shrink: 0;
+	color: #777;
+	font-size: 12px;
+	font-weight: 650;
+}
+
+.task-detail-value {
+	min-width: 0;
+	color: #4E4D4C;
+	overflow-wrap: anywhere;
+}
+
+.task-detail-work {
+	font-size: 18px;
+	font-weight: 650;
+}
+
+.task-detail-status {
+	width: 72px;
+	padding: 2px 8px;
+	border-radius: 44px;
+	color: #fff;
+	font-size: 12px;
+	text-align: center;
+}
+
+.task-detail-status.status-not-started {
+	background-color: #356899;
+}
+
+.task-detail-status.status-in-progress {
+	background-color: #F39F59;
+}
+
+.task-detail-status.status-completed {
+	background-color: #29988B;
+}
+
+.task-detail-status.status-on-hold {
+	background-color: #4E4D4C;
+}
+
+.task-detail-progress {
+	margin-top: 16px;
+	display: flex;
+	align-items: center;
+}
+
+.task-detail-progress .task-progress {
+	flex-grow: 1;
+}
+
+.task-detail-explanation {
+	margin-top: 16px;
+	padding-top: 12px;
+	display: flex;
+	border-top: 1px dashed #ddd;
+}
+
+.task-detail-explanation-text {
+	min-height: 44px;
+	margin: 0;
+	flex-grow: 1;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+.task-status-area {
+	margin-top: 20px;
+}
+
+.task-status-btn-area {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.task-status-btn {
+	width: 148px;
+	height: 40px;
+	border-radius: 2px;
+	color: #fff;
+	font-size: 13px;
+	font-weight: 650;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.task-status-btn.status-not-started {
+	border: 1px solid #356899;
+	background-color: #356899;
+}
+
+.task-status-btn.status-not-started:hover {
+	background-color: #fff;
+	color: #356899;
+}
+
+.task-status-btn.status-in-progress {
+	border: 1px solid #F39F59;
+	background-color: #F39F59;
+}
+
+.task-status-btn.status-in-progress:hover {
+	background-color: #fff;
+	color: #F39F59;
+}
+
+.task-status-btn.status-completed {
+	border: 1px solid #29988B;
+	background-color: #29988B;
+}
+
+.task-status-btn.status-completed:hover {
+	background-color: #fff;
+	color: #29988B;
+}
+
+.task-status-btn.status-on-hold {
+	border: 1px solid #4E4D4C;
+	background-color: #4E4D4C;
+}
+
+.task-status-btn.status-on-hold:hover {
+	background-color: #fff;
+	color: #4E4D4C;
+}
+
+.task-status-btn:active {
+	transform: translateY(1px);
+}
+
+.task-work-title-area {
+	display: flex;
+	align-items: center;
+}
+
+.task-work-title-area .sub-page-title {
+	flex-grow: 1;
+}
+
+.task-work-regist-btn {
+	width: 88px;
+	height: 32px;
+	margin-left: 8px;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #F07E9B;
+	border-radius: 2px;
+	background-color: #F07E9B;
+	color: #fff;
+
+	font-size: 12px;
+	font-weight: 650;
+	text-decoration: none;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+.task-work-regist-btn:hover {
+	background-color: #fff;
+	color: #F07E9B;
+}
+
+.task-work-regist-btn:active {
+	transform: translateY(1px);
+}
+
+.task-work-delete-form {
+	margin-top: 8px;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.task-work-delete-btn {
+	width: 72px;
 }

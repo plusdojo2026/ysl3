@@ -57,10 +57,10 @@ public class WorkDAO {
 
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 
-			pStmt.setInt(1, userId);
-			pStmt.setInt(2, taskId);
-			pStmt.setFloat(3, work);
-			pStmt.setString(4, explainText);
+			pStmt.setInt(1, taskId);
+			pStmt.setFloat(2, work);
+			pStmt.setString(3, explainText);
+			pStmt.setInt(4, userId);
 			pStmt.setString(5, workDate);
 
 			ans = pStmt.executeUpdate();
@@ -71,21 +71,27 @@ public class WorkDAO {
 	}
 
 	//工数を削除するメソッド
-	public int workDelete(int workId) {
+	public int workDelete(int workId, int userId) {
 		int ans = 0;
 
 		String sql = "DELETE FROM works WHERE work_id = ?";
 
-		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+		if (userId != 0) {
+			sql += " AND user_id = ?";
+		}
 
-			// ?に値をセット   
+		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+			
 			pStmt.setInt(1, workId);
 
+			if (userId != 0) {
+				pStmt.setInt(2, userId);
+			}
 			// DELETE文を実行し、削除された行数を取得する
 			ans = pStmt.executeUpdate();
 
 		} catch (SQLException e) {
-
+			e.printStackTrace();
 		}
 
 		return ans;
@@ -114,95 +120,95 @@ public class WorkDAO {
 		return ans;
 	}
 
-	//ホームに工数ログを表示するメソッド
+	// ホームに工数ログを表示するメソッド
 	public ArrayList<WorkDTO> homeWorkList(int userId) throws SQLException {
+
 		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
+		String sql = "SELECT w.work_id, w.task_id, w.work, w.work_explanation, w.user_id, w.work_date, t.task_name, p.project_name, u.user_name FROM works AS w LEFT JOIN tasks AS t ON w.task_id = t.task_id LEFT JOIN projects AS p ON t.project_id = p.project_id LEFT JOIN users AS u ON w.user_id = u.user_id";
 
-		// 定義
-		String sql = null;
-		PreparedStatement pStmt = null;
+		// 一般ユーザーは自分の工数ログだけ取得
+		if (userId != 0) {
+			sql += " WHERE w.user_id = ?";
+		}
 
-		if (userId == 0) {
+		// 登録順の最新10件
+		sql += " ORDER BY w.work_id DESC LIMIT 10";
 
-			sql = "SELECT * FROM works join users on works.user_id = users.user_id LIMIT 10";
-			pStmt = conn.prepareStatement(sql);
-		} else {
-			// SELECT文を準備する
-			sql = "SELECT * FROM works WHERE user_id = ? limit 10";
+		PreparedStatement pStmt = conn.prepareStatement(sql);
 
-			// まとめる
-			pStmt = conn.prepareStatement(sql);
+		if (userId != 0) {
 			pStmt.setInt(1, userId);
 		}
 
 		ResultSet rs = pStmt.executeQuery();
-		WorkDTO dto = new WorkDTO();
-		if (userId == 0) {
-			while (rs.next()) {
-				
-				dto.setWork(rs.getFloat("work"));
-				dto.setExplainText(rs.getString("work_explanation"));
-				dto.setWorkDate(rs.getString("work_date"));
-				dto.setUserName(rs.getString("user_name"));
-				workList.add(dto);
-			}
-		} else {
-
-			// 移し替え
-			while (rs.next()) {
-
-				dto.setId(rs.getInt("work_id"));
-				dto.setTaskId(rs.getInt("task_id"));
-				dto.setWork(rs.getFloat("work"));
-				dto.setExplainText(rs.getString("work_explanation"));
-				dto.setWorkDate(rs.getString("work_date"));
-				workList.add(dto);
-			}
-		}
-		return workList;
-	}
-
-	//タスク詳細に工数ログを表示するメソッド
-	public ArrayList<WorkDTO> TaskWorkList(int userId, int taskId) throws SQLException {
-		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
-
-		String sql = null;
-		PreparedStatement pStmt = null;
-
-		if (userId == 0) {
-			sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE t.project_id = ? LIMIT 10";
-
-			pStmt = conn.prepareStatement(sql);
-
-			pStmt.setInt(1, taskId);
-		} else {
-			// SELECT文を準備する
-			sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE w.user_id = ? AND t.project_id = ? LIMIT 10";
-
-			// まとめる
-			pStmt = conn.prepareStatement(sql);
-
-			pStmt.setInt(1, userId);
-			pStmt.setInt(2, taskId);
-
-		}
-
-		System.out.println(userId);
-
-		ResultSet rs = pStmt.executeQuery();
-		// 移し替え
 		while (rs.next()) {
 			WorkDTO dto = new WorkDTO();
-			dto.setExplainText(rs.getString("work_explanation"));
 			dto.setId(rs.getInt("work_id"));
 			dto.setTaskId(rs.getInt("task_id"));
-			dto.setTaskName(rs.getString("task_name"));
-			dto.setUserName(rs.getString("user_name"));
-			dto.setWorkDate(rs.getString("work_date"));
 			dto.setWork(rs.getFloat("work"));
+			dto.setExplainText(rs.getString("work_explanation"));
+			dto.setUserId(rs.getInt("user_id"));
+			dto.setWorkDate(rs.getString("work_date"));
+			dto.setTaskName(rs.getString("task_name"));
+			dto.setProjectName(rs.getString("project_name"));
+			dto.setUserName(rs.getString("user_name"));
 			workList.add(dto);
 		}
 
+		rs.close();
+		pStmt.close();
+		return workList;
+	}
+
+	// タスク詳細に工数ログを表示するメソッド
+	public ArrayList<WorkDTO> TaskWorkList(
+			int userId,
+			int taskId) throws SQLException {
+		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
+		String sql = "SELECT "
+				+ "w.work_id, "
+				+ "w.task_id, "
+				+ "w.work, "
+				+ "w.work_explanation, "
+				+ "w.work_date, "
+				+ "w.user_id, "
+				+ "t.task_name, "
+				+ "u.user_name "
+				+ "FROM works AS w "
+				+ "LEFT JOIN tasks AS t "
+				+ "ON w.task_id = t.task_id "
+				+ "LEFT JOIN users AS u "
+				+ "ON w.user_id = u.user_id "
+				+ "WHERE ";
+		// 管理者は、そのタスクに登録された全員の工数ログ
+		if (userId == 0) {
+			sql += "w.task_id = ? ";
+		} else {
+			// 一般ユーザーは、自分が登録した工数ログだけ
+			sql += "w.user_id = ? AND w.task_id = ? ";
+		}
+		sql += "ORDER BY w.work_id DESC LIMIT 10";
+		PreparedStatement pStmt = conn.prepareStatement(sql);
+		if (userId == 0) {
+			pStmt.setInt(1, taskId);
+		} else {
+			pStmt.setInt(1, userId);
+			pStmt.setInt(2, taskId);
+		}
+		ResultSet rs = pStmt.executeQuery();
+		while (rs.next()) {
+			WorkDTO dto = new WorkDTO();
+			dto.setId(rs.getInt("work_id"));
+			dto.setTaskId(rs.getInt("task_id"));
+			dto.setTaskName(rs.getString("task_name"));
+			dto.setWork(rs.getFloat("work"));
+			dto.setExplainText(rs.getString("work_explanation"));
+			dto.setWorkDate(rs.getString("work_date"));
+			dto.setUserName(rs.getString("user_name"));
+			workList.add(dto);
+		}
+		rs.close();
+		pStmt.close();
 		return workList;
 	}
 
@@ -215,7 +221,7 @@ public class WorkDAO {
 
 		if (userId == 0) {
 			// SELECT文を準備する
-			sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE t.project_id = ? LIMIT 10";
+			sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE t.project_id = ? ORDER BY w.work_id DESC  LIMIT 10";
 
 			// まとめる
 			pStmt = conn.prepareStatement(sql);
@@ -223,7 +229,7 @@ public class WorkDAO {
 			pStmt.setInt(1, projectId);
 		} else {
 			// SELECT文を準備する
-			sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE w.user_id = ? AND t.project_id = ? LIMIT 10";
+			sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE w.user_id = ? AND t.project_id = ? ORDER BY w.work_id DESC LIMIT 10";
 
 			// まとめる
 			pStmt = conn.prepareStatement(sql);

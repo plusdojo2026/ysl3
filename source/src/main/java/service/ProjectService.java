@@ -208,14 +208,14 @@ public class ProjectService {
 
 	public List<ProjectDTO> getSummaryCard(String month) {
 
-		// 【修正】DB接続を開始する（これを忘れていたため null になっていました）
+
 		access();
 
-		// 念のため、戻り値用のリストをtryの外で定義
+
 		List<ProjectDTO> list = new ArrayList<>();
 
 		try {
-			// 各DAOを実体化（access() の後なので conn に接続情報が入っています）
+
 			ProjectDAO projectdao = new ProjectDAO(conn);
 			TaskDAO taskdao = new TaskDAO(conn);
 			WorkDAO workdao = new WorkDAO(conn);
@@ -231,7 +231,7 @@ public class ProjectService {
 
 			// 残工数を計算
 			// 残工数 = 総工数 - 予定工数
-			float RemainWork = TotalWork - PlannedWork;
+			float RemainWork = PlannedWork - TotalWork;
 
 			// DTOへ取得結果を設定
 			ProjectDTO dto = new ProjectDTO();

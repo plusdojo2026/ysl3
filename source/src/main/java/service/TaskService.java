@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.TaskDAO;
+import model.ProjectDTO;
 import model.TaskDTO;
 
 public class TaskService {
@@ -14,15 +15,15 @@ public class TaskService {
 	private Connection conn = null;
 
 	// データベース接続用 ※「romance_magic」は、データベース名
-//	private static final String url = "jdbc:mysql://localhost:3306/ysl3?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
-//	private static final String dbUser = "ysl3";
-//	private static final String dbPassword = "Kz3Dvi22zPhkEzDg";
-	
+	//	private static final String url = "jdbc:mysql://localhost:3306/ysl3?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
+	//	private static final String dbUser = "ysl3";
+	//	private static final String dbPassword = "Kz3Dvi22zPhkEzDg";
+
 	// ローカル接続用 ※「romance_magic」は、データベース名
 	private static final String url = "jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
 	private static final String dbUser = "root";
 	private static final String dbPassword = "password";
-	
+
 	// データベースとの接続を行うメソッド
 	private void access() {
 		try {
@@ -79,8 +80,8 @@ public class TaskService {
 	}
 
 	// ユーザーがタスクとして追加したprojectの一覧
-	public ArrayList<String> projectSelectAll(int userId) {
-		ArrayList<String> projectList = new ArrayList<String>();
+	public ArrayList<ProjectDTO> projectSelectAll(int userId) {
+		ArrayList<ProjectDTO> projectList = new ArrayList<ProjectDTO>();
 
 		// DB接続
 		access();
@@ -105,7 +106,7 @@ public class TaskService {
 	}
 
 	// タスク検索をするメソッド
-	public ArrayList<TaskDTO> taskSearch(int userId, String taskId, String name, int status, String projectName)
+	public ArrayList<TaskDTO> taskSearch(int userId, String name, int status, int projectId)
 			throws SQLException {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 
@@ -117,7 +118,7 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// タスク検索を実施。DAOのメソッドを実行
-			taskList = dao.taskSearch(userId, taskId, name, status, projectName);
+			taskList = dao.taskSearch(userId, name, status, projectId);
 
 		} finally {
 
@@ -130,7 +131,7 @@ public class TaskService {
 	}
 
 	// タスク登録メソッド
-	public int taskRegist(int taskId, int userId, String name, int status, int priority,
+	public int taskRegist(int userId, String name, int status, int priority,
 			String limitDate, String explainText, float estimatedWorks, int projectId, String startDate, int progress)
 			throws SQLException {
 		int ans = 0;
@@ -144,7 +145,7 @@ public class TaskService {
 			TaskDAO dao = new TaskDAO(conn);
 
 			// ユーザー登録処理を実施。DAOのメソッドを実行
-			ans = dao.taskRegist(taskId, userId, name, status, priority,
+			ans = dao.taskRegist(userId, name, status, priority,
 					limitDate, explainText, estimatedWorks, projectId, startDate, progress);
 		} finally {
 
@@ -208,26 +209,23 @@ public class TaskService {
 	}
 
 	// タスクステータス変更メソッド
-	public int statusChange(int taskId) {
+	public int statusChange(int taskId, int taskStatus, int userId) {
 		int ans = 0;
-
+				
+		// ステータスの値が不正な場合は更新しない
+		if (taskStatus < 0 || taskStatus > 3) {
+			return ans;
+		}
 		// DB接続
 		access();
-
 		try {
-
-			// DAOを実体化
+			
 			TaskDAO dao = new TaskDAO(conn);
-
-			// ユーザー登録処理を実施。DAOのメソッドを実行
-			ans = dao.statusChange(taskId);
+			ans = dao.statusChange(taskId, taskStatus, userId);
 		} finally {
 
-			// DB接続解除
 			close();
 		}
-
-		// 戻り値
 		return ans;
 	}
 

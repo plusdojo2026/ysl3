@@ -267,6 +267,10 @@ public class Controller extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
 		dispatcher.forward(request, response);
 	}
+	
+	
+	
+	
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -384,9 +388,15 @@ public class Controller extends HttpServlet {
 
 				// タスク登録画面
 			} else if (pageId.equals("TA01") && btnId.equals("task-regist")) {
-				
-				TaskAction action = new TaskAction(request);
-				page = action.taskToRegist();
+				   // 案件が選択されていない場合
+				   if (!isActive(request, "project-id")) {
+				       request.setAttribute("errMsg", "案件を選択してください");
+				       TaskAction action = new TaskAction(request);
+				       page = action.taskSelectAll();
+				   } else {
+				       TaskAction action = new TaskAction(request);
+				       page = action.taskToRegist();
+				   }
 				
 
 				// タスク登録

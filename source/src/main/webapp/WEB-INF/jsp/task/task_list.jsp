@@ -41,8 +41,8 @@
 						class="task-search-select" id="project-name" name="project-id">
 						<option value="-1">すべて</option>
 						<c:forEach var="project" items="${projectList}">
-							<option value="${project}">
-								<c:out value="${project}" />
+							<option value="${project.id}">
+								<c:out value="${project.name}" />
 							</option>
 						</c:forEach>
 					</select>
@@ -68,8 +68,6 @@
 
 				<button type="submit" name="btn-id" value="task-search"
 					class="task-search-btn">検索</button>
-				<button type="submit" name="btn-id" value="task-regist"
-					class="task-regist-btn">登録</button>
 			</form>
 		<!-- 検索フォームここまで -->
 			<!-- 自分のタスク一覧ここから -->

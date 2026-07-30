@@ -12,147 +12,179 @@
 	href="${pageContext.request.contextPath}/css/month.css">
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/month.js" defer></script>
-<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico">
+<link rel="icon"
+	href="${pageContext.request.contextPath}/images/favicon.ico">
 </head>
 <body>
 	<%@ include file="/WEB-INF/jsp/common/header.jsp"%>
-	<main class="main">
-		<!---------- メインここから ---------->
+	<main class="main month-page">
 		<div class="title-area">
 			<h1 class="page-title">月次集計</h1>
 		</div>
-		<div class="msg-area">
+		<div class="month-message-area">
 			<c:if test="${not empty msg}">
-				<p class="success-message">
+				<p class="month-success-message">
 					<c:out value="${msg}" />
 				</p>
 			</c:if>
 			<c:if test="${not empty errMsg}">
-				<p class="error-message">
+				<p class="month-error-message">
 					<c:out value="${errMsg}" />
 				</p>
 			</c:if>
 		</div>
+		<c:choose>
+			<c:when test="${sessionScope.user.role == 1}">
+				<c:set var="monthPageId" value="MO01" />
+			</c:when>
+			<c:otherwise>
+				<c:set var="monthPageId" value="MO02" />
+			</c:otherwise>
+		</c:choose>
 		<c:url var="lastMonthUrl" value="/Controller">
-			<c:param name="page-id" value="MO01" />
+			<c:param name="page-id" value="${monthPageId}" />
 			<c:param name="month" value="${lastMonth}" />
 		</c:url>
 		<c:url var="nextMonthUrl" value="/Controller">
-			<c:param name="page-id" value="MO01" />
+			<c:param name="page-id" value="${monthPageId}" />
 			<c:param name="month" value="${nextMonth}" />
 		</c:url>
 		<section class="month-control-area">
-			<div class="month-control">
-				<a href="${lastMonthUrl}" class="month-change-btn"> ＜ </a> <span
-					class="target-month"> <c:out value="${targetMonth}" />
-				</span> <a href="${nextMonthUrl}" class="month-change-btn"> ＞ </a>
+			<a href="${lastMonthUrl}" class="month-change-btn" aria-label="前月を表示">＜</a>
+			<div class="target-month-area">
+				<span class="target-month-label">対象月</span> <span
+					class="target-month"><c:out value="${targetMonth}" /></span>
 			</div>
+			<a href="${nextMonthUrl}" class="month-change-btn" aria-label="翌月を表示">＞</a>
 		</section>
 		<section class="month-summary-area">
-			<h2 class="sub-page-title">月次サマリー</h2>
-			<table class="month-table">
-				<thead>
-					<tr>
-						<th>稼働メンバー</th>
-						<th>総工数</th>
-						<th>予定工数</th>
-						<th>残工数</th>
-					</tr>
-				</thead>
-				<tbody>
+			<div class="sub-title-area">
+				<h1 class="sub-page-title">月次サマリー</h1>
+			</div>
 
-					<c:forEach var="summary" items="${summaryList}">
-						<tr>
-							<td><c:out value="${summary.memberCount}" /> 人</td>
-							<td><fmt:formatNumber value="${summary.totalWork}"
-									maxFractionDigits="1" /> h</td>
-							<td><fmt:formatNumber value="${summary.estimatedWork}"
-									maxFractionDigits="1" /> h</td>
-							<td><fmt:formatNumber value="${summary.remainWork}"
-									maxFractionDigits="1" /> h</td>
-						</tr>
-					</c:forEach>
+			<c:forEach var="summary" items="${summaryList}">
+				<div class="month-summary-grid">
+					<div class="month-summary-card member-summary-card">
+						<span class="month-summary-label">稼働メンバー</span> <span
+							class="month-summary-value"><c:out
+								value="${summary.memberCount}" /><small> 人</small></span>
+					</div>
+					<div class="month-summary-card total-summary-card">
+						<span class="month-summary-label">総工数</span> <span
+							class="month-summary-value"><fmt:formatNumber
+								value="${summary.totalWork}" maxFractionDigits="1" /><small>
+								h</small></span>
+					</div>
+					<div class="month-summary-card plan-summary-card">
+						<span class="month-summary-label">予定工数</span> <span
+							class="month-summary-value"><fmt:formatNumber
+								value="${summary.estimatedWork}" maxFractionDigits="1" /><small>
+								h</small></span>
+					</div>
+					<div class="month-summary-card remain-summary-card">
+						<span class="month-summary-label">残工数</span> <span
+							class="month-summary-value"><fmt:formatNumber
+								value="${summary.remainWork}" maxFractionDigits="1" /><small>
+								h</small></span>
+					</div>
+				</div>
+			</c:forEach>
 
-				</tbody>
-			</table>
 		</section>
 		<section class="project-summary-area">
-			<h2 class="sub-page-title">案件別実績</h2>
-			<table class="month-table">
-				<thead>
-					<tr>
-						<th>案件名</th>
-						<th>実績工数</th>
-						<th>予定工数</th>
-						<th>残り工数</th>
-						<th>進捗率</th>
-					</tr>
-				</thead>
-				<tbody>
-
-					<c:forEach var="project" items="${projectSummaryList}">
+			<div class="sub-title-area">
+				<h1 class="sub-page-title">案件別実績</h1>
+			</div>
+			<div class="month-table-area">
+				<table class="month-table">
+					<thead>
 						<tr>
-							<td><c:out value="${project.name}" /></td>
-							<td><fmt:formatNumber value="${project.totalWork}"
-									maxFractionDigits="1" /> h</td>
-							<td><fmt:formatNumber value="${project.plannedWork}"
-									maxFractionDigits="1" /> h</td>
-							<td><fmt:formatNumber value="${project.remainWork}"
-									maxFractionDigits="1" /> h</td>
-							<td>
-								<div class="progress">
-									<progress value="${project.progressRate}" max="100">
-									</progress>
-									<span> <fmt:formatNumber value="${project.progressRate}"
-											maxFractionDigits="1" /> %
-									</span>
-								</div>
-							</td>
+							<th class="month-name-column">案件名</th>
+							<th>実績工数</th>
+							<th>予定工数</th>
+							<th>残り工数</th>
+							<th class="month-progress-column">進捗率</th>
 						</tr>
-					</c:forEach>
+					</thead>
+					<tbody>
 
-				</tbody>
-			</table>
+						<c:forEach var="project" items="${projectSummaryList}">
+							<tr>
+								<td class="month-name-cell" title="${project.name}"><c:out
+										value="${project.name}" /></td>
+								<td><fmt:formatNumber value="${project.totalWork}"
+										maxFractionDigits="1" /> h</td>
+								<td><fmt:formatNumber value="${project.plannedWork}"
+										maxFractionDigits="1" /> h</td>
+								<td><fmt:formatNumber value="${project.remainWork}"
+										maxFractionDigits="1" /> h</td>
+								<td>
+									<div class="month-progress">
+										<progress value="${project.progressRate}" max="100"
+											class="month-progress-bar"></progress>
+										<span class="month-progress-value"><fmt:formatNumber
+												value="${project.progressRate}" maxFractionDigits="1" />%</span>
+									</div>
+								</td>
+							</tr>
+						</c:forEach>
+
+					</tbody>
+				</table>
+			</div>
 		</section>
 		<section class="user-summary-area">
-			<h2 class="sub-page-title">ユーザー別実績</h2>
-			<table class="month-table">
-				<thead>
-					<tr>
-						<th>担当者名</th>
-						<th>実績工数</th>
-						<th>予定工数</th>
-						<th>残り工数</th>
-						<th>進捗率</th>
-					</tr>
-				</thead>
-				<tbody>
-
-
-					<c:forEach var="user" items="${userSummaryList}">
+			<div class="sub-title-area">
+				<h1 class="sub-page-title">
+					<c:choose>
+						<c:when test="${sessionScope.user.role == 1}">ユーザー別実績</c:when>
+						<c:otherwise>個人実績</c:otherwise>
+					</c:choose>
+				</h1>
+			</div>
+			<div class="month-table-area">
+				<table class="month-table">
+					<thead>
 						<tr>
-							<td><c:out value="${user.userName}" /></td>
-							<td><fmt:formatNumber value="${user.totalWork}"
-									maxFractionDigits="1" /> h</td>
-							<td><fmt:formatNumber value="${user.plannedWork}"
-									maxFractionDigits="1" /> h</td>
-							<td><fmt:formatNumber value="${user.remainWork}"
-									maxFractionDigits="1" /> h</td>
-							<td>
-								<div class="progress">
-									<progress value="${user.progressRate}" max="100"> </progress>
-									<span> <fmt:formatNumber value="${user.progressRate}"
-											maxFractionDigits="1" /> %
-									</span>
-								</div>
-							</td>
+							<th class="month-name-column">担当者名</th>
+							<th>実績工数</th>
+							<th>予定工数</th>
+							<th>残り工数</th>
+							<th class="month-progress-column">進捗率</th>
 						</tr>
-					</c:forEach>
+					</thead>
+					<tbody>
 
-				</tbody>
-			</table>
+						<c:set var="monthUserFound" value="false" />
+						<c:forEach var="userSummary" items="${userSummaryList}">
+							<c:if
+								test="${sessionScope.user.role == 1 || userSummary.userName == sessionScope.user.userName}">
+								<c:set var="monthUserFound" value="true" />
+								<tr>
+									<td class="month-name-cell"><c:out
+											value="${userSummary.userName}" /></td>
+									<td><fmt:formatNumber value="${userSummary.totalWork}"
+											maxFractionDigits="1" /> h</td>
+									<td><fmt:formatNumber value="${userSummary.plannedWork}"
+											maxFractionDigits="1" /> h</td>
+									<td><fmt:formatNumber value="${userSummary.remainWork}"
+											maxFractionDigits="1" /> h</td>
+									<td>
+										<div class="month-progress">
+											<progress value="${userSummary.progressRate}" max="100"
+												class="month-progress-bar"></progress>
+											<span class="month-progress-value"><fmt:formatNumber
+													value="${userSummary.progressRate}" maxFractionDigits="1" />%</span>
+										</div>
+									</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+
+					</tbody>
+				</table>
+			</div>
 		</section>
-		<!---------- メインここまで ---------->
 	</main>
 	<%@ include file="/WEB-INF/jsp/common/footer.jsp"%>
 </body>

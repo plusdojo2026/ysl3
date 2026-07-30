@@ -96,7 +96,7 @@ public class WorkService {
 	}
 
 	//工数を削除するメソッド
-	public int workDelete(int workId) {
+	public int workDelete(int workId, int userId) {
 		int ans = 0;
 		// DB接続
 		access();
@@ -107,7 +107,7 @@ public class WorkService {
 			WorkDAO dao = new WorkDAO(conn);
 
 			// 工数削除処理を実施。DAOのメソッドを実行
-			ans = dao.workDelete(workId);
+			ans = dao.workDelete(workId, userId);
 		} finally {
 
 			// DB接続解除

@@ -248,19 +248,17 @@ public class UserDAO {
 	}
 
 	//	タスクに紐づけられているユーザー取得メソッド（タスク登録の際の担当者選ぶ用）----------------------------------------------------------
-	public ArrayList<UserDTO> selectTaskUserName(int projectId) {
+	public ArrayList<UserDTO> selectTaskUserName() {
 		ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
 
 		// DTO実体化
 		UserDTO dto = null;
 
 		// SQL文を準備する
-		String sql = "SELECT * FROM users WHERE sol = 1 AND user_id IN (SELECT user_id FROM tasks WHERE project_id = ?)";
+		String sql = "SELECT * FROM users WHERE sol = 1 ORDER BY user_id";
 
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
 			
-			// 変数セット
-			pStmt.setInt(1,  projectId);
 			
 			try (ResultSet rs = pStmt.executeQuery()) {
 				while (rs.next()) {
