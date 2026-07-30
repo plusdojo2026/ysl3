@@ -87,6 +87,8 @@ public class WorkAction {
 		
 		UserDTO loginUser = (UserDTO) session.getAttribute("user");
 		
+		System.out.println(taskId);
+		
 		// セッションが切れている場合
 		if (loginUser == null) {
 			page = "/WEB-INF/jsp/login.jsp";

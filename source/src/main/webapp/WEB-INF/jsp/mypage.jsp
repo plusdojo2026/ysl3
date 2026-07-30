@@ -40,8 +40,8 @@
 				</div>
 				<div class="mypage-role">
 					<c:choose>
-						<c:when test="${user.role == 0}">管理者</c:when>
-						<c:when test="${user.role == 1}">PM</c:when>
+						<c:when test="${user.role == 1}">管理者</c:when>
+						<c:when test="${user.role == 0}">一般</c:when>
 						<c:otherwise>メンバー</c:otherwise>
 					</c:choose>
 				</div>

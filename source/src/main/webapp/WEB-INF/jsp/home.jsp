@@ -164,8 +164,8 @@
 										value="${workLog.taskName}" />
 								</span> <span class="home-work-log-date"> <c:out
 										value="${workLog.workDate}" />
-								</span> <span class="work-log-open-label"> 表示 <span
-									class="work-log-arrow">›</span>
+								</span> <span class="work-log-open-label"><span
+									class="work-log-arrow"></span>
 								</span>
 							</summary>
 							<div class="work-log-detail">

@@ -69,80 +69,100 @@
 
 				<button type="submit" name="btn-id" value="task-search"
 					class="task-search-btn">検索</button>
+				<button type="submit" name="btn-id" value="task-regist"
+					class="task-regist-btn">登録</button>
 			</form>
 
-			<section class="task-list-card">
-				<c:choose>
-					<c:when test="${empty taskList}">
-						<p class="task-empty">表示できるタスクはありません。</p>
-					</c:when>
+			<!-- 自分のタスク一覧ここから -->
+			<section class="my-task-area">
 
-					<c:otherwise>
-						<table class="task-table">
-							<thead class="task-table-head">
-								<tr>
-									<th class="task-table-title">案件名</th>
-									<th class="task-table-title">タスク名</th>
-									<th class="task-table-title">担当者</th>
-									<th class="task-table-title">状態</th>
-									<th class="task-table-title">優先度</th>
-									<th class="task-table-title">期限</th>
-									<th class="task-table-title">見積</th>
-									<th class="task-table-title">進捗</th>
-									<th class="task-table-title">操作</th>
-								</tr>
-						</table>
-						<tbody>
-							<c:forEach var="task" items="${taskList}">
-								<tr class="task-row">
-									<td class="task-data task-project-name"
-										title="${fn:escapeXml(task.projectName)}"><c:out
-											value="${task.projectName}" /></td>
-									<td class="task-data"><c:url var="taskDetailUrl"
-											value="/Controller">
-											<c:param name="page-id" value="TA04" />
-											<c:param name="task-id" value="${task.taskId}" />
-										</c:url> <a href="${taskDetailUrl}" class="task-name-link"
-										title="${fn:escapeXml(task.name)}"> <c:out
-												value="${task.name}" />
-									</a></td>
-									<td class="task-data"><c:out value="${task.userName}" />
-									</td>
-									<td class="task-data"><c:choose>
-											<c:when test="${task.status == 0}">未着手</c:when>
-											<c:when test="${task.status == 1}">進行中</c:when>
-											<c:when test="${task.status == 2}">完了</c:when>
-											<c:when test="${task.status == 3}">保留</c:when>
-										</c:choose></td>
-									<td class="task-data"><c:choose>
-											<c:when test="${task.priority == 0}">低</c:when>
-											<c:when test="${task.priority == 1}">中</c:when>
-											<c:when test="${task.priority == 2}">高</c:when>
-										</c:choose></td>
-									<td class="task-data"><c:out value="${task.limitDate}" />
-									</td>
-									<td class="task-data"><c:out
-											value="${task.estimatedWorks}" />h</td>
-									<td class="task-data"><progress class="task-progress"
-											value="${task.progress}" max="100"></progress> <c:out
-											value="${task.progress}" />%</td>
-									<td class="task-data">
-										<form method="post"
-											action="${pageContext.request.contextPath}/Controller"
-											class="task-edit-form">
-											<input type="hidden" name="page-id" value="TA01"> <input
-												type="hidden" name="task-id" value="${task.taskId}">
-											<button type="submit" name="btn-id" value="task-update"
-												class="task-edit-button">編集</button>
-										</form>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-						</table>
-					</c:otherwise>
-				</c:choose>
+				<div class="card-area">
+					<c:forEach var="task" items="${taskList}">
+						<div
+							class="task-card <c:choose><c:when test='${task.priority == 0}'>priority-low</c:when><c:when test='${task.priority == 1}'>priority-medium</c:when><c:when test='${task.priority == 2}'>priority-high</c:when><c:otherwise>priority-unknown</c:otherwise></c:choose>">
+							<!-- タスクメイン情報 -->
+							<c:url var="taskDetailUrl" value="/Controller">
+								<c:param name="page-id" value="TA04" />
+								<c:param name="task-id" value="${task.taskId}" />
+							</c:url>
+							<h3 class="task-title">
+								<a href="${taskDetailUrl}" class="task-link"><c:out
+										value="${task.name}" /></a>
+							</h3>
+							<!-- タスクメイン情報 -->
+							<div class="task-card-info">
+								<span class="meta-item limit"> 期限：<c:out
+										value="${task.limitDate}" /></span> <span
+									class="meta-item task-assignee"> 担当者： <c:choose>
+										<c:when test="${not empty task.userName}">
+											<c:out value="${task.userName}" />
+										</c:when>
+										<c:otherwise>
+											<c:out value="${user.userName}" />
+										</c:otherwise>
+									</c:choose>
+								</span> <span class="meta-item status"> <c:choose>
+										<c:when test="${task.status == 0}">
+											<span class="status">開始前</span>
+										</c:when>
+										<c:when test="${task.status == 1}">
+											<span class="status">進行中</span>
+										</c:when>
+										<c:when test="${task.status == 2}">
+											<span class="status">完了</span>
+										</c:when>
+										<c:when test="${task.status == 3}">
+											<span class="status">保留</span>
+										</c:when>
+										<c:otherwise>
+											<span class="status">不明</span>
+										</c:otherwise>
+									</c:choose>
+								</span> <span class="hidden"> 優先度: <c:choose>
+										<c:when test="${task.priority == 0}">低</c:when>
+										<c:when test="${task.priority == 1}">中</c:when>
+										<c:when test="${task.priority == 2}">高</c:when>
+										<c:otherwise>不明</c:otherwise>
+									</c:choose>
+								</span> <span class="meta-item time"> 見積工数
+									<div class="font-big">
+										<c:out value="${task.estimatedWorks}" />
+										H
+									</div>
+								</span>
+							</div>
+							<!-- 進捗バー -->
+							<div class="task-progress">
+								<progress value="${task.progress}" max="100"
+									class="progress-bar"></progress>
+								<span class="progress-text"><c:out
+										value="${task.progress}" />%</span>
+							</div>
+							<div class="task-actions">
+								<!-- 工数登録ボタン -->
+								<form method="post"
+									action="${pageContext.request.contextPath}/Controller"
+									style="display: inline;">
+									<input type="hidden" name="page-id" value="HO01"> <input
+										type="hidden" name="task-id" value="${task.taskId}">
+									<button type="submit" name="btn-id" value="work-regist"
+										class="btn work-btn">工数登録</button>
+								</form>
+								<!-- 削除ボタン -->
+								<form method="post"
+									action="${pageContext.request.contextPath}/Controller"
+									style="display: inline;">
+									<input type="hidden" name="page-id" value="HO01"> <input
+										type="hidden" name="task-id" value="${task.taskId}">
+									<button type="submit" name="btn-id" value="task-delete"
+										class="btn delete-btn">削除</button>
+								</form>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
 			</section>
+			<!-- 自分のタスク一覧ここまで -->
 		</div>
 	</main>
 
