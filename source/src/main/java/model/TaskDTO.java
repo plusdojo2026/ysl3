@@ -2,10 +2,6 @@ package model;
 
 import java.io.Serializable;
 
-
-
-
-
 public class TaskDTO implements Serializable {
 	private int taskId;
 	private int userId;

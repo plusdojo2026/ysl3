@@ -195,7 +195,7 @@ public class ProjectAction {
 		
 		//taskの一覧をprojectDetailから取得するサービスDAOを実行する
 		TaskService taskService = new TaskService();
-		ArrayList<TaskDTO> ProjectTaskList = taskService.projectTaskList(userId,projectId);
+		ArrayList<TaskDTO> projectTaskList = taskService.projectTaskList(userId,projectId);
 		
 		//workの一覧をprojectDetailから取得するサービスDAOを実行する
 		WorkService workService = new WorkService();
@@ -206,7 +206,7 @@ public class ProjectAction {
 		
 		request.setAttribute("projectWorkList" , projectWorkList);
 		
-		request.setAttribute("projectTaskList" , ProjectTaskList);
+		request.setAttribute("projectTaskList" , projectTaskList);
 		
 		return page;
 	}
