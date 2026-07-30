@@ -31,7 +31,7 @@
 				class="project-regist-btn">新規登録</button>
 		</form>
 		<!-- 検索フォームここから -->
-		<form class="project-search-form">
+		<form class="project-search-form" method="post">
 			<input type="hidden" name="page-id" value="PR01"> 
 			<select name="projectStatus" class="project-select" placeholder="ステータス">
 				<option value="" disabled selected style="display: none;">ステータス</option>
