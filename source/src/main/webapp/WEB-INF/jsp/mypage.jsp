@@ -13,6 +13,7 @@
 	href="${pageContext.request.contextPath}/css/mypage.css" />
 <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
 <script src="${pageContext.request.contextPath}/js/mypage.js" defer></script>
+<link rel="icon" href="${pageContext.request.contextPath}/images/favicon.ico">
 </head>
 
 <body>
