@@ -147,8 +147,11 @@ public class ProjectAction {
 				projectId
 			);
 		
-		request.setAttribute("ans", ans);
-		
+		ArrayList<ProjectDTO> projectList =
+				service.projectSelectAll();
+				request.setAttribute("projectList", projectList);
+				request.setAttribute("ans", ans);
+				
 		return page;
 		}
 	//projectStatusChangeメソッド
