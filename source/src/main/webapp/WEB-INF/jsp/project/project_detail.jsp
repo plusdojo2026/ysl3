@@ -49,19 +49,16 @@
         <c:forEach var="task" items="${projectTaskList}">
             <tr>
                 <td><c:out value="${task.taskId}" /></td>
-                <td><c:out value="${task.name}" /></td>
-                <td><c:out value="${task.userName}" /></td>
-                <td><c:out value="${task.limitDate}" /></td>
-                <td><c:out value="${task.status}" /></td>
+                <td><div>タスク名</div><c:out value="${task.name}" /></td>
+                <td><div>担当者</div><c:out value="${task.userName}" /></td>
+                <td><div>期限：</div><c:out value="${task.limitDate}" /></td>
+                <td><div>ステータス</div><c:out value="${task.status}" /></td>
+                <td><div>%</div><c:out value="${task.progress}" /></td>
             </tr>
         </c:forEach>
         </table>
-        
-          <div>タスク名</div>
-          <div>担当者</div>
-          <div>期限：</div>
-          <div>ステータス</div>
-          <div>%</div>
+          
+          
           <button>工数入力</button>
           <button>削除</button>
         </div>

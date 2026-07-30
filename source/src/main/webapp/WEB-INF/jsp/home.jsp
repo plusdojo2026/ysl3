@@ -19,9 +19,7 @@
 	<%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 
 	<main class="main">
-		<div class="title-area">
-			<h1 class="page-title">ホーム</h1>
-		</div>
+		<div class="title-area"><h1 class="page-title">ホーム</h1></div>
 		<div class="msg-area">
 			<c:if test="${not empty errMsg}">
 				<div>

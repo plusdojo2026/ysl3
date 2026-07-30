@@ -255,6 +255,10 @@ public class Controller extends HttpServlet {
 			} else if (pageId.equals("TA03") && btnId.equals("task-update")) {
 				TaskAction action = new TaskAction(request);
 				page = action.taskUpdate();
+				
+			} else if (pageId.equals("TA01") && btnId.equals("task-edit")) {
+				TaskAction action = new TaskAction(request);
+				page = action.taskToEdit();
 
 				// ホーム画面からタスク削除
 			} else if (pageId.equals("HO01") && btnId.equals("task-delete")) {
