@@ -146,7 +146,7 @@
 									時間
 								</p>
 								<p>
-								名前：
+								担当：
 								<c:out value="${workLog.userName}" />
 								</p>
 								<!-- 工数削除 -->

@@ -72,6 +72,7 @@
         <c:forEach var="e" items="${projectWorkList}" >
  	  <p>工数ログ名：${e.explainText}</p>
  	  <p>時間：${e.work}</p>
+ 	  <p>担当：${e.userName }</p>
  	 <input type="submit" name="work-delete-btn" value="削除" onclick="return delete()">
    </c:forEach><br>
         </div>
