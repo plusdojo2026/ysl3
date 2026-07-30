@@ -124,7 +124,7 @@ public class WorkDAO {
 
 		if (userId == 0) {
 
-			sql = "SELECT * FROM works LIMIT 10";
+			sql = "SELECT * FROM works join users on works.user_id = users.user_id LIMIT 10";
 			pStmt = conn.prepareStatement(sql);
 		} else {
 			// SELECT文を準備する
@@ -136,18 +136,29 @@ public class WorkDAO {
 		}
 
 		ResultSet rs = pStmt.executeQuery();
+		WorkDTO dto = new WorkDTO();
+		if (userId == 0) {
+			while (rs.next()) {
+				
+				dto.setWork(rs.getFloat("work"));
+				dto.setExplainText(rs.getString("work_explanation"));
+				dto.setWorkDate(rs.getString("work_date"));
+				dto.setUserName(rs.getString("user_name"));
+				workList.add(dto);
+			}
+		} else {
 
-		// 移し替え
-		while (rs.next()) {
-			WorkDTO dto = new WorkDTO();
-			dto.setId(rs.getInt("work_id"));
-			dto.setTaskId(rs.getInt("task_id"));
-			dto.setWork(rs.getFloat("work"));
-			dto.setExplainText(rs.getString("work_explanation"));
-			dto.setWorkDate(rs.getString("work_date"));
-			workList.add(dto);
+			// 移し替え
+			while (rs.next()) {
+
+				dto.setId(rs.getInt("work_id"));
+				dto.setTaskId(rs.getInt("task_id"));
+				dto.setWork(rs.getFloat("work"));
+				dto.setExplainText(rs.getString("work_explanation"));
+				dto.setWorkDate(rs.getString("work_date"));
+				workList.add(dto);
+			}
 		}
-
 		return workList;
 	}
 
@@ -201,7 +212,7 @@ public class WorkDAO {
 
 		String sql = null;
 		PreparedStatement pStmt = null;
-		
+
 		if (userId == 0) {
 			// SELECT文を準備する
 			sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE t.project_id = ? LIMIT 10";
