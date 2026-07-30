@@ -30,7 +30,7 @@
           <p>ステータス${projectDetail.status}</p>
           <p>進捗度${projectDetail.progressRate}</p>
           <p>開始日${projectDetail.startDate}</p>
-          <p>期限日${projectDetail.limitDate}</
+          <p>期限日${projectDetail.limitDate}</p>
           
           <div>優先度</div>
           <div>PM名</div>
@@ -46,10 +46,13 @@
         <div class="task-log-card">
         
         <table>
-        <c:forEach var="task" items="${taskList}">
+        <c:forEach var="task" items="${projectTaskList}">
             <tr>
-                <td><c:out value="${task.id}" /></td>
-                <td><c:out value="${task.taskName}" /></td>
+                <td><c:out value="${task.taskId}" /></td>
+                <td><c:out value="${task.name}" /></td>
+                <td><c:out value="${task.userName}" /></td>
+                <td><c:out value="${task.limitDate}" /></td>
+                <td><c:out value="${task.status}" /></td>
             </tr>
         </c:forEach>
         </table>
