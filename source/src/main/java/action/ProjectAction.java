@@ -71,7 +71,7 @@ public class ProjectAction {
 	//projectRegistメソッド
 	public String projectRegist() throws UnsupportedEncodingException, SQLException {
 		//返却する次の飛び先のURLをとりあえず定義
-		String page = "/WEB-INF/jsp/project/project_regist.jsp";
+		String page = "/WEB-INF/jsp/project/project_list.jsp";
 
 		//入力値の取得
 		request.setCharacterEncoding("UTF-8");
