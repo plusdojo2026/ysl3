@@ -48,8 +48,8 @@ public class ProjectAction {
 		
 		String projectName = request.getParameter("projectName");
 		
-		int projectStatus = 0;
-		int projectPriority = 0;
+		int projectStatus = -1;
+		int projectPriority = -1;
 		
 		if (statusStr != null && !statusStr.isEmpty()) {
 			projectStatus = Integer.parseInt(statusStr);
@@ -195,7 +195,7 @@ public class ProjectAction {
 		
 		//taskの一覧をprojectDetailから取得するサービスDAOを実行する
 		TaskService taskService = new TaskService();
-		ArrayList<TaskDTO> projectTaskList = taskService.projectTaskList(userId,projectId);
+		ArrayList<TaskDTO> projectTaskList = taskService.projectTaskList(projectId,userId);
 		
 		//workの一覧をprojectDetailから取得するサービスDAOを実行する
 		WorkService workService = new WorkService();

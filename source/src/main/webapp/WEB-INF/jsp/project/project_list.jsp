@@ -32,20 +32,24 @@
 		</form>
 		<!-- 検索フォームここから -->
 		<form class="project-search-form">
-			<input type="hidden" name="page-id" value="PR01"> <select
-				class="project-select" placeholder="ステータス">
+			<input type="hidden" name="page-id" value="PR01"> 
+			<select name="projectStatus" class="project-select" placeholder="ステータス">
 				<option value="" disabled selected style="display: none;">ステータス</option>
-				<option>進行中</option>
-				<option>完了</option>
-				<option>保留</option>
-			</select> <select class="project-select">
+				<option value="0">開始前</option>
+				<option value="1">進行中</option>
+				<option value="2">完了</option>
+				<option value="3">保留</option>
+			</select> 
+			<select name="projectPriority" class="project-select">
 				<option value="" disabled selected style="display: none;">優先度</option>
-				<option>低</option>
-				<option>中</option>
-				<option>高</option>
-			</select> <input type="text" class="project-search-text" placeholder="キーワード検索"
-				name="keyword"><button type="submit" name="btn-id" value="project-search"
-					class="project-search-btn">検索</button>
+				<option value="0">低</option>
+				<option value="1">中</option>
+				<option value="2">高</option>
+			</select>
+			 <input type="text" class="project-search-text" placeholder="キーワード検索"
+				name="projectName">
+			<input type="submit" name="btn-id" value="検索"
+					class="project-search-btn">
 		</form>
 		<!-- 検索フォームここまで -->
 
