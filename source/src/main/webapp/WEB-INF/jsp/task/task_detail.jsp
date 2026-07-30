@@ -15,7 +15,7 @@
 <body>
 	<%@ include file="/WEB-INF/jsp/common/header.jsp"%>
 	<main class="main">
-		<h1>タスク詳細</h1>
+		<div class="title-area"><h1 class="page-title">タスク詳細</h1></div>
 		<!-- メッセージ表示領域 -->
 		<div class="msg-area">
 			<c:if test="${not empty msg}">
