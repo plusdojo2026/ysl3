@@ -69,11 +69,11 @@ public class WorkAction {
 	}
 	
 	//工数の登録メソッド
-	public String regist() throws UnsupportedEncodingException {
-		
+	public String regist() throws UnsupportedEncodingException, SQLException {
+		HomeAction action = new HomeAction(request);
 	
 		// 戻り値のページを定義
-		String page = "/WEB-INF/jsp/work_regist.jsp";
+		String page = null;
 		
 		//値の取得
 		request.setCharacterEncoding("UTF-8");
@@ -110,6 +110,7 @@ public class WorkAction {
 			request.setAttribute("errMsg", "※工数登録できませんでした");
 		}
 
+		page = action.homeSelectAll();
 		// 戻り値
 		return page;
 	

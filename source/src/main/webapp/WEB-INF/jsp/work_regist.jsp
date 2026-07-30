@@ -24,7 +24,7 @@
 			</div>
 
 			<form method="POST" action="<c:url value='/Controller'/>">
-			    <!-- これだけ残す -->
+			
 			    <input type="hidden" name="task-id" value="${TaskShow.taskId}">
 
 
@@ -46,13 +46,11 @@
 				<div class="work-input-row">
 					<div class="work-input-group">
 						<div class="work-input-title">日付（必須）</div>
-						<input type="date" id="day" name="work-date"
-							value="<%=LocalDate.now()%>" class="work-input">
+						<input type="date" id="day" name="work-date" value="<%=LocalDate.now()%>" class="work-input">
 					</div>
 					<div class="work-input-group">
 						<div class="work-input-title">作業内容</div>
-						<input type="text" id="work-explanation" name="explain-text"
-							class="work-input">
+						<input type="text" id="work-explanation" name="explain-text" class="work-input">
 					</div>
 				</div>
 

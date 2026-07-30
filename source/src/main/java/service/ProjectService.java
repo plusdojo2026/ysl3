@@ -17,40 +17,38 @@ public class ProjectService {
 	private Connection conn = null;
 
 	// データベース接続用 ※「romance_magic」は、データベース名
-	private static final String url ="jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
+	private static final String url = "jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
 	private static final String dbUser = "root";
 	private static final String dbPassword = "password";
 
-	
 	// データベースとの接続を行うメソッド
 	private void access() {
-		   try {
-		       // MySQLドライバーを読み込む
-		       Class.forName(
-		               "com.mysql.cj.jdbc.Driver"
-		       );
-		       // DBへ接続
-		       conn = DriverManager.getConnection(url, dbUser, dbPassword);
-		   } catch (ClassNotFoundException e) {
-		       throw new RuntimeException("MySQLドライバーが見つかりません", e);
-		   } catch (SQLException e) {
-		       throw new RuntimeException("データベースへの接続に失敗しました", e);
-		   }
+		try {
+			// MySQLドライバーを読み込む
+			Class.forName(
+					"com.mysql.cj.jdbc.Driver");
+			// DBへ接続
+			conn = DriverManager.getConnection(url, dbUser, dbPassword);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("MySQLドライバーが見つかりません", e);
+		} catch (SQLException e) {
+			throw new RuntimeException("データベースへの接続に失敗しました", e);
 		}
+	}
 
 	// データベースとの接続を切断するメソッド
 	private void close() {
-		   if (conn == null) {
-		       return;
-		   }
-		   try {
-		       conn.close();
-		   } catch (SQLException e) {
-		       throw new RuntimeException("データベースの切断に失敗しました", e);
-		   } finally {
-		       conn = null;
-		   }
+		if (conn == null) {
+			return;
 		}
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			throw new RuntimeException("データベースの切断に失敗しました", e);
+		} finally {
+			conn = null;
+		}
+	}
 
 	//projectSelectAllメソッド
 	public ArrayList<ProjectDTO> projectSelectAll() {
@@ -94,7 +92,8 @@ public class ProjectService {
 
 	//projectRegistメソッド
 	public int projectRegist(String projectCode, String projectName, String customer, int pmId, int projectStatus,
-			int projectPriority, String projectStartDate, String projectEndDate,float projectEstimatedWorks ,String projectExplain,String projectLimit)
+			int projectPriority, String projectStartDate, String projectEndDate, float projectEstimatedWorks,
+			String projectExplain, String projectLimit)
 			throws SQLException {
 		int ans = 0;
 
@@ -107,7 +106,7 @@ public class ProjectService {
 			ProjectDAO dao = new ProjectDAO(conn);
 			// ユーザー登録処理を実施。DAOのメソッドを実行
 			ans = dao.projectRegist(projectCode, projectName, customer, pmId, projectStatus, projectPriority,
-					projectStartDate, projectEndDate,projectEstimatedWorks, projectExplain,projectLimit);
+					projectStartDate, projectEndDate, projectEstimatedWorks, projectExplain, projectLimit);
 		} finally {
 
 			// DB接続解除
@@ -120,7 +119,8 @@ public class ProjectService {
 
 	//projectUpdateメソッド
 	public int projectUpdate(String projectCode, String projectName, String customer, int pmId, int projectStatus,
-			int projectPriority, String projectStartDate, String projectEndDate,Float projectEstimatedWorks,String projectExplain,String projectLimit,int projectId)
+			int projectPriority, String projectStartDate, String projectEndDate, Float projectEstimatedWorks,
+			String projectExplain, String projectLimit, int projectId)
 			throws SQLException {
 		int ans = 0;
 
@@ -133,7 +133,7 @@ public class ProjectService {
 			ProjectDAO dao = new ProjectDAO(conn);
 			// ユーザー登録処理を実施。DAOのメソッドを実行
 			ans = dao.projectUpdate(projectCode, projectName, customer, pmId, projectStatus, projectPriority,
-					projectStartDate, projectEndDate, projectEstimatedWorks,projectExplain,projectLimit, projectId);
+					projectStartDate, projectEndDate, projectEstimatedWorks, projectExplain, projectLimit, projectId);
 		} finally {
 
 			// DB接続解除
@@ -177,98 +177,122 @@ public class ProjectService {
 		return dto;
 	}
 
-	
 	//追加メソッド
 	public ProjectDTO projectToEdit(int projectId)
-	throws SQLException{
-		
+			throws SQLException {
+
 		ProjectDTO dto = null;
-		
+
 		access();
 		try {
 			ProjectDAO dao = new ProjectDAO(conn);
-			
+
 			dto = dao.projectToEdit(projectId);
-		}finally {
+		} finally {
 			close();
-		}return dto;
-		
+		}
+		return dto;
+
 	}
-	
+
 	// サマリーカード表示用データ取得
 	//	 稼働メンバー数
 	//	 総工数
 	//	 予定工数
 	//	 残工数を取得する	
-	
+
 	public List<ProjectDTO> getSummaryCard(String month) {
-		
-		 // 各DAOを実体化
-	    ProjectDAO projectdao = new ProjectDAO(conn);
-	    TaskDAO taskdao = new TaskDAO(conn);
-	    WorkDAO workdao = new WorkDAO(conn);
-	    
-	    // 総工数を取得
-	    float TotalWork =
-	            projectdao.getTotalWork();
 
+		// 【修正】DB接続を開始する（これを忘れていたため null になっていました）
+		access();
 
-	    // 対象月の予定工数を取得
-	    float PlannedWork =
-	            taskdao.getPlannedWork(month);
+		// 念のため、戻り値用のリストをtryの外で定義
+		List<ProjectDTO> list = new ArrayList<>();
 
+		try {
+			// 各DAOを実体化（access() の後なので conn に接続情報が入っています）
+			ProjectDAO projectdao = new ProjectDAO(conn);
+			TaskDAO taskdao = new TaskDAO(conn);
+			WorkDAO workdao = new WorkDAO(conn);
 
-	    // 対象月の稼働メンバーを取得
-	    int MemberCount =
-	            workdao.getMemberCount(month);
+			// 【修正】総工数を取得（引数に month を渡すように変更）
+			float TotalWork = projectdao.getTotalWork(month);
 
+			// 対象月の予定工数を取得
+			float PlannedWork = taskdao.getPlannedWork(month);
 
-	    // 残工数を計算
-	    // 残工数 = 総工数 - 予定工数
-	    float RemainWork =
-	            TotalWork - PlannedWork;
-	    
-	 // DTOへ取得結果を設定
-	    ProjectDTO dto = new ProjectDTO();
+			// 対象月の稼働メンバーを取得
+			int MemberCount = workdao.getMemberCount(month);
 
-	    // 稼働メンバー数
-	    dto.setMemberCount(MemberCount);
+			// 残工数を計算
+			// 残工数 = 総工数 - 予定工数
+			float RemainWork = TotalWork - PlannedWork;
 
-	    // 総工数
-	    dto.setTotalWork(TotalWork);
+			// DTOへ取得結果を設定
+			ProjectDTO dto = new ProjectDTO();
 
-	    // 予定工数
-	    dto.setEstimatedWork(PlannedWork);
+			// 稼働メンバー数
+			dto.setMemberCount(MemberCount);
 
-	    // 残工数
-	    dto.setRemainWork(RemainWork);
+			// 総工数
+			dto.setTotalWork(TotalWork);
 
+			// 予定工数
+			dto.setEstimatedWork(PlannedWork);
 
-	    // Action側がListで受け取るためList化
-	    List<ProjectDTO> list = new ArrayList<>();
+			// 残工数
+			dto.setRemainWork(RemainWork);
 
-	    list.add(dto);
+			// Action側がListで受け取るためList化
+			list.add(dto);
 
-	    // サマリーカードを返却
-	    return list;
+		} finally {
+			// 【修正】使い終わったら必ず接続を解除する
+			close();
+		}
+
+		// サマリーカードを返却
+		return list;
 	}
-	
+
 	//	案件別実績
-	public List<ProjectDTO> getProjectSummary(String month){
-		
-		//	DAO実体化	
-	    ProjectDAO dao = new ProjectDAO(conn);
-	    
-	    return dao.getProjectSummary(month);
+	public List<ProjectDTO> getProjectSummary(String month) {
+		List<ProjectDTO> list = null;
+
+		// 【修正】DB接続
+		access();
+
+		try {
+			// DAO実体化	
+			ProjectDAO dao = new ProjectDAO(conn);
+			list = dao.getProjectSummary(month);
+
+		} finally {
+			// 【修正】DB接続解除
+			close();
+		}
+
+		return list;
 	}
-	
+
 	//	ユーザー別実績
-	public List<ProjectDTO> getUserSummary(String month){
-		
-		//	DAO実体化	
-	    ProjectDAO dao = new ProjectDAO(conn);
-	    
-	    return dao.getUserSummary(month);
+	public List<ProjectDTO> getUserSummary(String month) {
+		List<ProjectDTO> list = null;
+
+		// 【修正】DB接続
+		access();
+
+		try {
+			// DAO実体化	
+			ProjectDAO dao = new ProjectDAO(conn);
+			list = dao.getUserSummary(month);
+
+		} finally {
+			// 【修正】DB接続解除
+			close();
+		}
+
+		return list;
 	}
-	
+
 }

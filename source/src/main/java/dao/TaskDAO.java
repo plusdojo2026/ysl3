@@ -452,15 +452,6 @@ public class TaskDAO {
 		}
 
 	//  案件詳細画面のタスク項目を削除するメソッド
-	//public ArrayList<TaskDTO> projectDetailDelete(int taskId, int userId) throws SQLException {
-		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
-		//	(処理)
-
-		//return taskList;
-
-	//}
-
-	//  案件詳細画面のタスク項目を削除するメソッド
 	public ArrayList<TaskDTO> projectDetailDelete(int taskId, int userId) {
 		ArrayList<TaskDTO> taskList = new ArrayList<TaskDTO>();
 		//	処理はのちに記述。今は返すだけ

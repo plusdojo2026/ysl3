@@ -321,37 +321,38 @@ import model.ProjectDTO;
 	
 	//サマリーカード用
 	//総工数メソッド
-	public float getTotalWork()	{
-		//		
+	// 総工数メソッド（【修正】引数 String targetMonth を追加）
+	public float getTotalWork(String targetMonth)	{
 		float TotalWork = 0;
 		
-		//SQL文
 		String sql =
 				"SELECT SUM(work) AS total_work FROM works "
 				+ "WHERE DATE_FORMAT(work_date,'%Y-%m')=?";
 		
-		try (PreparedStatement ps = conn.prepareStatement(sql);) 
-			{
-			
-	        //SQL文を実行
-	        ResultSet rs = ps.executeQuery();
-	        
-	        // 取得結果が存在する場合
-	        if (rs.next()) {
-
-	            // 総工数を取得
-	            TotalWork = rs.getFloat("TotalWork");
-	        }
-
-	    } catch (SQLException e) {
-
-	        // SQL実行時のエラー表示
-	        e.printStackTrace();
-	    }
+		if (this.conn == null) {
+			System.out.println("データベース接続(conn)がnullです。");
+			return 0;
+		}
 		
-	    // 総工数を返す
-	    return TotalWork;
+		try (PreparedStatement ps = conn.prepareStatement(sql)) 
+		{
+			// 【修正】? に引数の値をセットする
+			ps.setString(1, targetMonth);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					// 【修正】取得名を小文字の total_work に変更
+					TotalWork = rs.getFloat("total_work");
+				}
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return TotalWork;
 	}
+
 	
 	//案件別実績
 	//

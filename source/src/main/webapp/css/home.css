@@ -15,6 +15,11 @@
 	font-weight: 500;
 }
 
+.main {
+	width: 1200px;
+	margin:0 auto;
+}
+
 
 /* 画面配置を、左にナビ・タスク右に工数ログにする*/
 .home-layout {
