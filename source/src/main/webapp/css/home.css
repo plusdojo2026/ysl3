@@ -17,7 +17,7 @@
 
 .main {
 	width: 1200px;
-	margin:0 auto;
+	margin: 0 auto;
 }
 
 
@@ -58,6 +58,8 @@
 	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
 	background-color: #fff;
 	transition: 0.1s;
+	display: flex;
+	cursor: pointer;
 }
 
 .nav-card:hover {
@@ -75,6 +77,21 @@
 	font-weight: 650;
 	text-decoration: none;
 }
+
+.nav-icon {
+	width: 56px;
+	height: 56px;
+	object-fit: contain;
+	flex-shrink: 0;
+	margin-left: 16px;
+	margin-right: 8px;
+	align-self: center;
+	display: block;
+	cursor: pointer;
+}
+
+
+
 /*------------------------*/
 /*--------工数ログ--------*/
 /*------------------------*/

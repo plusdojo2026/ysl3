@@ -59,7 +59,7 @@
 				<div class="work-slider-card">
 					<h2 class="work-slider-title">実施工数（必須、0.5時間刻み）</h2>
 					<div class="work-time-display">
-						<span id="time-label">0.5時間</span>
+						<span id="time-label">6.0時間</span>
 					</div>
 					<input type="range" id="work" name="work" min="0.5" max="24"
 						step="0.5" value="0.5" class="work-slider"

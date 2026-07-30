@@ -34,18 +34,22 @@
 				<!-- ナビゲーションここから -->
 				<section class="nav-area">
 					<div class="nav-card">
+					<img class="nav-icon" alt="案件一覧" src="${pageContext.request.contextPath}/images/icon/project_icon.jpg">
 						<a
 							href="${pageContext.request.contextPath}/Controller?page-id=PR01">案件一覧</a>
 					</div>
 					<div class="nav-card">
+					<img class="nav-icon" alt="タスク一覧" src="${pageContext.request.contextPath}/images/icon/task_icon.jpg">
 						<a
 							href="${pageContext.request.contextPath}/Controller?page-id=TA01">タスク一覧</a>
 					</div>
 					<div class="nav-card">
+					<img class="nav-icon" alt="月次集計" src="${pageContext.request.contextPath}/images/icon/month_icon.jpg">
 						<a
 							href="${pageContext.request.contextPath}/Controller?page-id=MO01">月次集計</a>
 					</div>
 					<div class="nav-card">
+					<img class="nav-icon" alt="マイページ" src="${pageContext.request.contextPath}/images/icon/mypage_icon.jpg">
 						<a
 							href="${pageContext.request.contextPath}/Controller?page-id=MY01">マイページ</a>
 					</div>
