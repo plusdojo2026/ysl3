@@ -67,7 +67,7 @@ import model.ProjectDTO;
 		} 
 	
 		
-		sql +="ORDER BY project_id";
+		sql +=" ORDER BY project_id";
 		
 		PreparedStatement pStmt = conn.prepareStatement(sql);
 		
@@ -83,26 +83,33 @@ import model.ProjectDTO;
 		
 		if(projectStatus !=-1) {
 			pStmt.setInt(index,projectStatus);
+		}
+	
+		
+		if(projectPriority != -1) {
+			pStmt.setInt(index, projectPriority);
 			index++;
 		}
 		
-		if(projectPriority != 0) {
-			pStmt.setInt(index++, projectPriority);
-		}
 		
-		if(projectName != null && !projectName.isEmpty());
-		{
-			pStmt.setString(index++, "%" + projectName + "%");
-		}
 		ResultSet rs = pStmt.executeQuery();
 		
 		while (rs.next()) {
 			ProjectDTO dto = new ProjectDTO();
 			
-			dto.setId(rs.getInt("project_id"));
-			dto.setStatus(rs.getInt("project_status"));
-			dto.setPriority(rs.getInt("project_priority"));
-			dto.setName(rs.getString("project_name"));
+			dto.setId(rs.getInt("project_id"));//ID
+			 dto.setCode(rs.getString("project_code"));//CODE
+			dto.setStatus(rs.getInt("project_status"));//ステータス
+			dto.setPriority(rs.getInt("project_priority"));//優先度
+			dto.setName(rs.getString("project_name"));//プロジェクト名
+			dto.setCustomer(rs.getString("customer"));//顧客名
+			dto.setPmId(rs.getInt("pm_id"));//PMID
+			dto.setStartDate(rs.getString("project_start_date"));
+			dto.setEndDate(rs.getString("project_end_date"));
+            dto.setLimitDate(rs.getString("project_limit"));
+            dto.setExplainText(rs.getString("project_explanation"));
+            dto.setEstimatedWork(rs.getFloat("project_estimated_works"));
+			
 			
 			projectList.add(dto);
 		}
