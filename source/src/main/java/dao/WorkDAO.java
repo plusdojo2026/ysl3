@@ -50,13 +50,13 @@ public class WorkDAO {
 	}
 
 	//工数登録するメソッド
-	public int workRegist(int userId,int taskId,float work,String explainText,String workDate) {
+	public int workRegist(int userId, int taskId, float work, String explainText, String workDate) {
 		int ans = 0;
 		//SQLを準備
 		String sql = "INSERT INTO works VALUES (0,?, ?, ?, ?, ?)";
 
 		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
-			
+
 			pStmt.setInt(1, userId);
 			pStmt.setInt(2, taskId);
 			pStmt.setFloat(3, work);
@@ -152,72 +152,89 @@ public class WorkDAO {
 	}
 
 	//タスク詳細に工数ログを表示するメソッド
-	public ArrayList<WorkDTO> TaskWorkList(int userId, int taskId) {
+	public ArrayList<WorkDTO> TaskWorkList(int userId, int taskId) throws SQLException {
 		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
-		
-		// SELECT文を準備する
-		String sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE w.user_id = ? AND t.project_id = ?";
-		//デバッグ（SQL文の確認用）
-		System.out.println(sql);
 
-		// まとめる
-		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+		String sql = null;
+		PreparedStatement pStmt = null;
+
+		if (userId == 0) {
+			sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE t.project_id = ? LIMIT 10";
+
+			pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, taskId);
+		} else {
+			// SELECT文を準備する
+			sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE w.user_id = ? AND t.project_id = ? LIMIT 10";
+
+			// まとめる
+			pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, userId);
 			pStmt.setInt(2, taskId);
 
-			try (ResultSet rs = pStmt.executeQuery()) {
-				// 移し替え
-				while (rs.next()) {
-					WorkDTO dto = new WorkDTO();
-					dto.setExplainText(rs.getString("work_explanation"));
-					dto.setId(rs.getInt("work_id"));
-					dto.setTaskId(rs.getInt("task_id"));
-					dto.setTaskName(rs.getString("task_name"));
-					dto.setUserName(rs.getString("user_name"));
-					dto.setWorkDate(rs.getString("work_date"));
-					dto.setWork(rs.getFloat("work"));
-					workList.add(dto);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
+
+		System.out.println(userId);
+
+		ResultSet rs = pStmt.executeQuery();
+		// 移し替え
+		while (rs.next()) {
+			WorkDTO dto = new WorkDTO();
+			dto.setExplainText(rs.getString("work_explanation"));
+			dto.setId(rs.getInt("work_id"));
+			dto.setTaskId(rs.getInt("task_id"));
+			dto.setTaskName(rs.getString("task_name"));
+			dto.setUserName(rs.getString("user_name"));
+			dto.setWorkDate(rs.getString("work_date"));
+			dto.setWork(rs.getFloat("work"));
+			workList.add(dto);
+		}
+
 		return workList;
 	}
 
 	//案件詳細に工数ログを表示するメソッド
-	public ArrayList<WorkDTO> ProjectWorkList(int userId, int projectId) {
+	public ArrayList<WorkDTO> ProjectWorkList(int userId, int projectId) throws SQLException {
 		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
-		// SELECT文を準備する
-		String sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE w.user_id = ? AND t.project_id = ?";
 
-		//デバッグ（SQL文の確認用）
-		System.out.println(sql);
+		String sql = null;
+		PreparedStatement pStmt = null;
+		
+		if (userId == 0) {
+			// SELECT文を準備する
+			sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE t.project_id = ? LIMIT 10";
 
-		// まとめる
-		try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
+			// まとめる
+			pStmt = conn.prepareStatement(sql);
+
+			pStmt.setInt(1, projectId);
+		} else {
+			// SELECT文を準備する
+			sql = "SELECT work_explanation,project_id,w.work_id,w.task_id, t.task_name,work_date,work,w.user_id, u.user_name FROM works as w join tasks  AS t on w.task_id = t.task_id LEFT JOIN users AS u ON w.user_id = u.user_id WHERE w.user_id = ? AND t.project_id = ? LIMIT 10";
+
+			// まとめる
+			pStmt = conn.prepareStatement(sql);
 
 			pStmt.setInt(1, userId);
 			pStmt.setInt(2, projectId);
-
-			try (ResultSet rs = pStmt.executeQuery()) {
-				// 移し替え
-				while (rs.next()) {
-					WorkDTO dto = new WorkDTO();
-					dto.setExplainText(rs.getString("work_explanation"));
-					dto.setId(rs.getInt("work_id"));
-					dto.setTaskId(rs.getInt("task_id"));
-					dto.setTaskName(rs.getString("task_name"));
-					dto.setUserName(rs.getString("user_name"));
-					dto.setWorkDate(rs.getString("work_date"));
-					dto.setWork(rs.getFloat("work"));
-					workList.add(dto);
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
+
+		ResultSet rs = pStmt.executeQuery();
+		// 移し替え
+		while (rs.next()) {
+			WorkDTO dto = new WorkDTO();
+			dto.setExplainText(rs.getString("work_explanation"));
+			dto.setId(rs.getInt("work_id"));
+			dto.setTaskId(rs.getInt("task_id"));
+			dto.setTaskName(rs.getString("task_name"));
+			dto.setUserName(rs.getString("user_name"));
+			dto.setWorkDate(rs.getString("work_date"));
+			dto.setWork(rs.getFloat("work"));
+			workList.add(dto);
+		}
+
 		return workList;
 	}
 

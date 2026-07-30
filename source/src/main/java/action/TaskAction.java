@@ -283,6 +283,10 @@ public class TaskAction {
 		}
 		int userId = loginUser.getId();
 
+		if (loginUser.getRole() == 1) {
+			userId = 0;
+		}
+		
 		// Serviceを実体化して処理を依頼
 		TaskService service = new TaskService();
 		TaskDTO taskDetail = service.taskDetail(taskId);

@@ -13,40 +13,38 @@ public class WorkService {
 	private Connection conn = null;
 
 	// データベース接続用 ※「romance_magic」は、データベース名
-	private static final String url ="jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
+	private static final String url = "jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
 	private static final String dbUser = "root";
 	private static final String dbPassword = "password";
 
-	
 	// データベースとの接続を行うメソッド
 	private void access() {
-		   try {
-		       // MySQLドライバーを読み込む
-		       Class.forName(
-		               "com.mysql.cj.jdbc.Driver"
-		       );
-		       // DBへ接続
-		       conn = DriverManager.getConnection(url, dbUser, dbPassword);
-		   } catch (ClassNotFoundException e) {
-		       throw new RuntimeException("MySQLドライバーが見つかりません", e);
-		   } catch (SQLException e) {
-		       throw new RuntimeException("データベースへの接続に失敗しました", e);
-		   }
+		try {
+			// MySQLドライバーを読み込む
+			Class.forName(
+					"com.mysql.cj.jdbc.Driver");
+			// DBへ接続
+			conn = DriverManager.getConnection(url, dbUser, dbPassword);
+		} catch (ClassNotFoundException e) {
+			throw new RuntimeException("MySQLドライバーが見つかりません", e);
+		} catch (SQLException e) {
+			throw new RuntimeException("データベースへの接続に失敗しました", e);
 		}
+	}
 
 	// データベースとの接続を切断するメソッド
 	private void close() {
-		   if (conn == null) {
-		       return;
-		   }
-		   try {
-		       conn.close();
-		   } catch (SQLException e) {
-		       throw new RuntimeException("データベースの切断に失敗しました", e);
-		   } finally {
-		       conn = null;
-		   }
+		if (conn == null) {
+			return;
 		}
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			throw new RuntimeException("データベースの切断に失敗しました", e);
+		} finally {
+			conn = null;
+		}
+	}
 
 	//工数一覧を表示するメソッド
 	public ArrayList<WorkDTO> workSelectAll(int userId) {
@@ -72,7 +70,7 @@ public class WorkService {
 	}
 
 	//工数登録するメソッド
-	public int workRegist(int userId,int taskId, float work, String explainText,String workDate) {
+	public int workRegist(int userId, int taskId, float work, String explainText, String workDate) {
 		int ans = 0;
 		// DB接続
 		access();
@@ -83,7 +81,7 @@ public class WorkService {
 			WorkDAO dao = new WorkDAO(conn);
 
 			// 工数登録処理を実施。DAOのメソッドを実行
-			ans = dao.workRegist(userId,taskId, work, explainText, workDate);
+			ans = dao.workRegist(userId, taskId, work, explainText, workDate);
 		} finally {
 
 			// DB接続解除
@@ -155,7 +153,7 @@ public class WorkService {
 
 		return workList;
 	}
-	
+
 	//工数登録画面で案件名とタスク名を表示する
 	public WorkDTO workToRegist(int taskId) {
 		WorkDTO ans = null;
@@ -164,34 +162,11 @@ public class WorkService {
 
 		try {
 
-		// DAOを実体化
-		WorkDAO dao = new WorkDAO(conn);
-
-		//DAOのメソッドを実行
-		ans = dao.workToRegist(taskId);
-		
-		} finally {
-
-		// DB接続解除
-		close();
-		}	
-		
-		return ans;
-	}
-
-
-//タスク詳細に工数ログを表示するメソッド
-	public ArrayList<WorkDTO> taskWorkList(int userId,int taskId) {
-		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
-		// DB接続
-		access();
-
-		try {
 			// DAOを実体化
 			WorkDAO dao = new WorkDAO(conn);
 
-			// ホームに工数ログを表示。DAOのメソッドを実行
-			workList = dao.TaskWorkList(userId,taskId);
+			//DAOのメソッドを実行
+			ans = dao.workToRegist(taskId);
 
 		} finally {
 
@@ -199,30 +174,43 @@ public class WorkService {
 			close();
 		}
 
-		return workList;
+		return ans;
 	}
-	
-//案件詳細に工数ログを表示するメソッド
-	public ArrayList<WorkDTO> ProjectWorkList(int userId,int projectId) {
+
+	//タスク詳細に工数ログを表示するメソッド
+	public ArrayList<WorkDTO> taskWorkList(int userId, int taskId) throws SQLException {
 		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
 		// DB接続
 		access();
 
-		try {
 		// DAOを実体化
-			WorkDAO dao = new WorkDAO(conn);
+		WorkDAO dao = new WorkDAO(conn);
 
-			// ホームに工数ログを表示。DAOのメソッドを実行
-			workList = dao.ProjectWorkList(userId,projectId);
+		// ホームに工数ログを表示。DAOのメソッドを実行
+		workList = dao.TaskWorkList(userId, taskId);
 
-		} finally {
-
-			// DB接続解除
-			close();
-		}
+		// DB接続解除
+		close();
 
 		return workList;
-		}
-		
 	}
 
+	//案件詳細に工数ログを表示するメソッド
+	public ArrayList<WorkDTO> ProjectWorkList(int userId, int projectId) throws SQLException {
+		ArrayList<WorkDTO> workList = new ArrayList<WorkDTO>();
+		// DB接続
+		access();
+
+		// DAOを実体化
+		WorkDAO dao = new WorkDAO(conn);
+
+		// ホームに工数ログを表示。DAOのメソッドを実行
+		workList = dao.ProjectWorkList(userId, projectId);
+
+		// DB接続解除
+		close();
+
+		return workList;
+	}
+
+}
