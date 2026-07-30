@@ -222,7 +222,7 @@ public class Controller extends HttpServlet {
 				page = action.selectProjectUserName();
 
 				// 案件検索
-			} else if (pageId.equals("PR01") && btnId.equals("project-search")) {
+			} else if (pageId.equals("PR01") && btnId.equals("検索")) {
 				ProjectAction action = new ProjectAction(request);
 				page = action.projectSearch();
 

@@ -82,13 +82,12 @@ import model.ProjectDTO;
 		
 		
 		if(projectStatus !=-1) {
-			pStmt.setInt(index,projectStatus);
+			pStmt.setInt(index++,projectStatus);
 		}
 	
 		
 		if(projectPriority != -1) {
-			pStmt.setInt(index, projectPriority);
-			index++;
+			pStmt.setInt(index++, projectPriority);
 		}
 		
 		
