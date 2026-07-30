@@ -278,7 +278,7 @@ public class TaskDAO {
 	public TaskDTO taskDetail(int taskId) throws SQLException {
 		TaskDTO dto = null;
 		//	処理はのちに記述。今は返すだけ
-		String sql = "SELECT project_name,task_name,task_status,task_priority,task_estimated_works,"
+		String sql = "SELECT tasks.task_id, project_name,task_name,task_status,task_priority,task_estimated_works,"
 				+ "progress,task_start_date,task_limit,task_explanation,user_name, tasks.project_id FROM tasks "
 				+ "LEFT JOIN users ON tasks.user_id = users.user_id "
 				+ "LEFT JOIN projects ON tasks.project_id = projects.project_id "
@@ -294,6 +294,7 @@ public class TaskDAO {
 		//移し替え
 		if (rs.next()) {
 			dto = new TaskDTO();
+			dto.setTaskId(rs.getInt("task_id"));
 			dto.setName(rs.getString("task_name"));
 			dto.setStatus(rs.getInt("task_status"));
 			dto.setPriority(rs.getInt("task_priority"));

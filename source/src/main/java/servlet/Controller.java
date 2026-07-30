@@ -384,18 +384,10 @@ public class Controller extends HttpServlet {
 
 				// タスク登録画面
 			} else if (pageId.equals("TA01") && btnId.equals("task-regist")) {
-
-				if (!isActive(request, "project-id")) {
-
-					request.setAttribute("errMsg", "登録先の案件を選択してください");
-					TaskAction action = new TaskAction(request);
-					page = action.taskSelectAll();
-
-				} else {
-
-					TaskAction action = new TaskAction(request);
-					page = action.taskToRegist();
-				}
+				
+				TaskAction action = new TaskAction(request);
+				page = action.taskToRegist();
+				
 
 				// タスク登録
 			} else if (pageId.equals("TA02") && btnId.equals("task-regist")) {
