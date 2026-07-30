@@ -13,14 +13,14 @@ public class WorkService {
 	private Connection conn = null;
 
 	// データベース接続用 ※「romance_magic」は、データベース名
-	private static final String url = "jdbc:mysql://localhost:3306/ysl3?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
-	private static final String dbUser = "ysl3";
-	private static final String dbPassword = "Kz3Dvi22zPhkEzDg";
+//	private static final String url = "jdbc:mysql://localhost:3306/ysl3?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
+//	private static final String dbUser = "ysl3";
+//	private static final String dbPassword = "Kz3Dvi22zPhkEzDg";
 
 	// ローカル接続用 ※「romance_magic」は、データベース名
-//	private static final String url = "jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
-//	private static final String dbUser = "root";
-//	private static final String dbPassword = "password";
+	private static final String url = "jdbc:mysql://localhost:3306/romance_magic?useSSL=false&serverTimezone=Asia/Tokyo&characterEncoding=UTF-8";
+	private static final String dbUser = "root";
+	private static final String dbPassword = "password";
 	
 	// データベースとの接続を行うメソッド
 	private void access() {
