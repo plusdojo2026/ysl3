@@ -56,28 +56,34 @@ import model.ProjectDTO;
 	public ArrayList<ProjectDTO> projectSearch(int projectStatus , int projectPriority , String projectName) throws SQLException {
 		
 		ArrayList<ProjectDTO> projectList  = new ArrayList<ProjectDTO>();
-		String sql = "SELECT * FROM projects where 1 = 1 ";
+		String sql = "SELECT * FROM projects where project_name LIKE ? ";
 
 			
-		if (projectStatus != 0 ) {
-			sql += " AND project_Status =  ?";
+		if (projectStatus != -1) {
+			sql += " AND project_status =  ?";
 		}
-		if (projectPriority != 0 ) {
+		if (projectPriority != -1 ) {
 			sql +=  " AND project_priority =  ?";
 		} 
-		
-		if (projectName != null && ! projectName.isEmpty()) {
-			sql += " AND project_name Like ?";
-		}
+	
 		
 		sql +="ORDER BY project_id";
 		
 		PreparedStatement pStmt = conn.prepareStatement(sql);
-		int index = 1;
+		
+
+		if (projectName != null && ! projectName.isEmpty()) {
+			pStmt.setString(1, "%" + projectName + "%");
+			} else {
+			pStmt.setString(1, "%");
+			}
+		
+		int index = 2;
 		
 		
-		if(projectStatus !=0) {
-			pStmt.setInt(index++,projectStatus);
+		if(projectStatus !=-1) {
+			pStmt.setInt(index,projectStatus);
+			index++;
 		}
 		
 		if(projectPriority != 0) {
