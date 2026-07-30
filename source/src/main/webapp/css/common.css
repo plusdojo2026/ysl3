@@ -185,7 +185,6 @@ a {
 	padding-left: 24px;
 	display: flex;
 	align-items: center;
-	border-bottom: 4px solid #29988B;
 }
 
 .menu-title {
@@ -243,10 +242,6 @@ a {
 	color: #29988B;
 }
 
-.menu-link:hover::after {
-	right: 20px;
-	color: #29988B;
-}
 
 .logout-link {
 	margin-top: 16px;
@@ -257,9 +252,5 @@ a {
 .logout-link:hover {
 	border-left-color: #D84343;
 	background-color: #fff3f3;
-	color: #D84343;
-}
-
-.logout-link:hover::after {
 	color: #D84343;
 }

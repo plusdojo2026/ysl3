@@ -11,7 +11,6 @@
 </header>
 <nav id="menu" class="menu" aria-label="メインメニュー">
 	<div class="menu-top">
-		<p class="menu-title">メニュー</p>
 		<button id="closeButton" class="close-btn" type="button"
 			aria-label="メニューを閉じる">×</button>
 	</div>
