@@ -414,8 +414,7 @@ public class TaskDAO {
 			String sql = "SELECT tasks.*, user_name, project_name FROM tasks "
 					+ "LEFT JOIN users ON tasks.user_id = users.user_id "
 					+ "LEFT JOIN projects ON tasks.project_id = projects.project_id "
-					+ "WHERE tasks.user_id = ? AND projects.project_id = ?"
-					+ "ORDER BY tasks.update_at DESC";
+					+ "WHERE tasks.user_id = ? AND projects.project_id = ? ORDER BY tasks.update_at DESC";
 
 			//デバッグ（SQL文の確認用）
 			System.out.println(sql);
