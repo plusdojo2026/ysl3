@@ -19,7 +19,7 @@ public class MonthAction {
 	}
 	
 	//	月次画面の初期表示
-	public String month() throws UnsupportedEncodingException {
+	public String monthSelect() throws UnsupportedEncodingException {
 		String page = "/WEB-INF/jsp/month.jsp";
 		
 		//	値の取得			
