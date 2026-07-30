@@ -31,7 +31,7 @@
 					<c:out value="${errMsg}" />
 				</c:if>
 			</div>
-
+		<!-- 検索フォームここから -->
 			<form method="post"
 				action="${pageContext.request.contextPath}/Controller"
 				class="task-search-form">
@@ -72,7 +72,7 @@
 				<button type="submit" name="btn-id" value="task-regist"
 					class="task-regist-btn">登録</button>
 			</form>
-
+		<!-- 検索フォームここまで -->
 			<!-- 自分のタスク一覧ここから -->
 			<section class="my-task-area">
 

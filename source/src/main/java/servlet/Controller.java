@@ -308,6 +308,10 @@ public class Controller extends HttpServlet {
 			} else if (pageId.equals("TA01") && btnId.equals("task-regist")) {
 				TaskAction action = new TaskAction(request);
 				page = action.taskToRegist();
+				
+			} else if (pageId.equals("PR01") && btnId.equals("project-regist")) {
+				ProjectAction action = new ProjectAction(request);
+				page = action.selectProjectUserNamePlus();
 //	
 //			} else if ((pageId.equals("MO01") || pageId.equals("MO02")) && btnId.equals("csv-output")) {
 //				 MonthAction action = new MonthAction(request);

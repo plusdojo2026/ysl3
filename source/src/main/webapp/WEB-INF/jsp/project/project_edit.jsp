@@ -1,75 +1,143 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <title>案件編集 | TaskManager</title>
-
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/project.css"/>
-<script src="${pageContext.request.contextPath}/js/common.js" defer></script>
-<script src="${pageContext.request.contextPath}/js/project.js" defer></script>
+    <meta charset="UTF-8">
+    <title>案件編集 | TaskManager</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/common.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/task.css">
+    <script src="${pageContext.request.contextPath}/js/common.js" defer></script>
+    <script src="${pageContext.request.contextPath}/js/project.js" defer></script>
 </head>
-
 <body>
-  <%@ include file="/WEB-INF/jsp/common/header.jsp" %>
-  <!---------- メインここから ---------->
-  <main class="main">
-    <!-- 案件編集フォームここから -->
-	  <form method="POST" class="pr-edit-form" action="<c:url value='/Controller'/>">
-        <input type="hidden" name="page-id" value="PR03">
-        <input type="hidden"name="project-id"  value="${project.id}">
-        案件コード(必須)<br>
-        <input type="text" class="pr-regist-input" name="project-code" placeholder="20文字以内" required max="20" value="${project.code}"><br>
-        案件名(必須)<br>
-        <input type="text" class="pr-regist-input" name="project-name" placeholder="案件名を入力してください" required max="100" value="${project.name}"><br>
-        顧客名<br>
-        <input type="text" class="pr-regist-input" name="customer" placeholder="顧客名を入力してください" required max="50" value="${project.customer}"><br>
-        担当PM<br>
-        <select class="pr-regist-input pr-regist-select" name="pm-id" >
-        <c:forEach var="user" items="${pmList}">
-        <option value="${user.id}"
-        <c:if test="${user.id == project.pmId}">selected</c:if>> ${user.userName} </option>
-        </c:forEach>
-       
-        </select>
-        <br>
-        ステータス（必須）<br>
-        <select class="pr-regist-input pr-regist-select" name="project-status" >
-         <option value="" disabled selected style="display:none;">選択してください</option>
-         <option value="0" ${project.status == 0 ? 'selected' : ''}>開始前</option>
-   		 <option value="1" ${project.status == 1 ? 'selected' : ''}>進行中</option>
-   		 <option value="2" ${project.status == 2 ? 'selected' : ''}>完了</option>
-    	 <option value="3" ${project.status == 3 ? 'selected' : ''}>保留</option>
-   		</select>
-   		<br>
-        優先度(必須)<br>
-        <select class="pr-regist-input pr-regist-select" name="project-priority" >
-        <option value="" disabled selected style="display:none;">選択してください</option>
-   		<option value="0" ${project.priority == 0 ? 'selected' : ''}>低</option>
-    	<option value="1" ${project.priority == 1 ? 'selected' : ''}>中</option>
-    	<option value="2" ${project.priority == 2 ? 'selected' : ''}>高</option>
-        </select>
-        <br>開始日<br>
-        <input type="date" class="pr-regist-input pr-regist-date" name="project-start-date" value="${project.startDate}"><br>
-        終了予定日<br>
-        <input type="date" class="pr-regist-input pr-regist-date" name="project-end-date" value="${project.endDate}"><br>
-        予算工数(h)<br>
-        <input type="number" class="pr-regist-input" name="project-estimated-works" value="${project.estimatedWork}"><br>
-        説明<br>
-        <input type="text" class="pr-regist-input" name="project-explain" max="1000" value="${project.explainText}">
-        <br>
-        期限<br>
-        <input type="date" class="pr-regist-input pr-regist-date" name="project-limit" value="${project.limitDate}">
-        <br>
-        
-        <input type="submit" class="regist-btn" name="btn-id"  value="更新">
-      </form>
-    <!-- 案件編集フォームここまで -->
-  </main>
-    <!---------- メインここまで ---------->
-  <%@ include file="/WEB-INF/jsp/common/footer.jsp" %>
+    <%@ include file="/WEB-INF/jsp/common/header.jsp"%>
+    <main class="main">
+        <div class="management-page">
+            <div class="title-area">
+                <h1 class="page-title">案件編集</h1>
+            </div>
+            <!-- メッセージ表示領域 -->
+            <div class="management-message-area">
+                <c:if test="${not empty msg}">
+                    <c:out value="${msg}" />
+                </c:if>
+                <c:if test="${not empty errMsg}">
+                    <c:out value="${errMsg}" />
+                </c:if>
+            </div>
+            <!-- 案件編集フォーム -->
+            <form class="management-form-card" method="POST" action="<c:url value='/Controller'/>">
+                <input type="hidden" name="page-id" value="PR03">
+                <input type="hidden" name="project-id" value="${project.id}">
+                <div class="management-form-grid">
+                    <!-- 案件コード -->
+                    <div class="management-field">
+                        <label class="management-label" for="project-code">
+                            案件コード
+                            <span class="management-required">（必須）</span>
+                        </label>
+                        <input class="management-input" type="text" id="project-code" name="project-code" value="${project.code}" maxlength="20" required>
+                    </div>
+                    <!-- 案件名 -->
+                    <div class="management-field">
+                        <label class="management-label" for="project-name">
+                            案件名
+                            <span class="management-required">（必須）</span>
+                        </label>
+                        <input class="management-input" type="text" id="project-name" name="project-name" value="${project.name}" maxlength="100" required>
+                    </div>
+                    <!-- 顧客名 -->
+                    <div class="management-field">
+                        <label class="management-label" for="customer">
+                            顧客名
+                            <span class="management-required">（必須）</span>
+                        </label>
+                        <input class="management-input" type="text" id="customer" name="customer" value="${project.customer}" maxlength="50" required>
+                    </div>
+                    <!-- PM -->
+                    <div class="management-field">
+                        <label class="management-label" for="pm-id">
+                            PM
+                            <span class="management-required">（必須）</span>
+                        </label>
+                        <select class="management-select" id="pm-id" name="pm-id" required>
+                            <c:forEach var="user" items="${pmList}">
+                                <option value="${user.id}" ${user.id == project.pmId ? 'selected' : ''}>
+                                    <c:out value="${user.userName}" />
+                                </option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <!-- ステータス -->
+                    <div class="management-field">
+                        <label class="management-label" for="project-status">
+                            ステータス
+                            <span class="management-required">（必須）</span>
+                        </label>
+                        <select class="management-select" id="project-status" name="project-status" required>
+                            <option value="0" ${project.status == 0 ? 'selected' : ''}>開始前</option>
+                            <option value="1" ${project.status == 1 ? 'selected' : ''}>進行中</option>
+                            <option value="2" ${project.status == 2 ? 'selected' : ''}>完了</option>
+                            <option value="3" ${project.status == 3 ? 'selected' : ''}>保留</option>
+                        </select>
+                    </div>
+                    <!-- 優先度 -->
+                    <div class="management-field">
+                        <label class="management-label" for="project-priority">
+                            優先度
+                            <span class="management-required">（必須）</span>
+                        </label>
+                        <select class="management-select" id="project-priority" name="project-priority" required>
+                            <option value="0" ${project.priority == 0 ? 'selected' : ''}>低</option>
+                            <option value="1" ${project.priority == 1 ? 'selected' : ''}>中</option>
+                            <option value="2" ${project.priority == 2 ? 'selected' : ''}>高</option>
+                        </select>
+                    </div>
+                    <!-- 開始日・終了日 -->
+                    <div class="management-field management-field-wide">
+                        <label class="management-label">
+                            開始日／終了日
+                        </label>
+                        <div class="management-date-period">
+                            <input class="management-input" type="date" name="project-start-date" value="${project.startDate}" required>
+                            <span class="management-date-separator">ー</span>
+                            <input class="management-input" type="date" name="project-end-date" value="${project.endDate}">
+                        </div>
+                    </div>
+                    <!-- 見積工数 -->
+                    <div class="management-field">
+                        <label class="management-label" for="project-estimated-works">
+                            見積工数
+                            <span class="management-required">（必須）</span>
+                        </label>
+                        <input class="management-input" type="number" id="project-estimated-works" name="project-estimated-works" value="${project.estimatedWork}" min="0.5" step="0.5" required>
+                    </div>
+                    <!-- 期限 -->
+                    <div class="management-field">
+                        <label class="management-label" for="project-limit">
+                            期限
+                            <span class="management-required">（必須）</span>
+                        </label>
+                        <input class="management-input" type="date" id="project-limit" name="project-limit" value="${project.limitDate}" required>
+                    </div>
+                    <!-- 案件概要 -->
+                    <div class="management-field management-field-wide">
+                        <label class="management-label" for="project-explain">
+                            案件概要
+                        </label>
+                        <input class="management-input" type="text" id="project-explain" name="project-explain" value="${project.explainText}" maxlength="2000">
+                    </div>
+                </div>
+                <!-- 更新ボタン -->
+                <div class="management-btn-area">
+                    <button class="management-submit-btn" type="submit" name="btn-id" value="更新">
+                        保存
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <%@ include file="/WEB-INF/jsp/common/footer.jsp"%>
 </body>
 </html>
