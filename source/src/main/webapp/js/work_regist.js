@@ -1,6 +1,5 @@
 
 
-const workNum = document.getElementById("time-label");
-
-const workNumText = workNum.texytextContent;
-workNumText = "jj";
+function updateTime(val) {
+    document.getElementById('time-label').textContent = parseFloat(val).toFixed(1) + '時間';
+}

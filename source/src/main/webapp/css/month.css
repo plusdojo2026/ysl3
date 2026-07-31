@@ -51,20 +51,17 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid #29988B;
 	border-radius: 2px;
-	background-color: #29988B;
-	color: #fff;
+	color: #29988B;
 	font-size: 18px;
-	font-weight: 650;
+	font-weight: 900;
 	text-decoration: none;
 	cursor: pointer;
 	transition: 0.2s;
 }
 
 .month-change-btn:hover {
-	background-color: #fff;
-	color: #29988B;
+	
 }
 
 
@@ -143,6 +140,7 @@
 .month-summary-value {
 	color: #4E4D4C;
 	font-size: 28px;
+	margin-right: 8px;
 	font-weight: 650;
 	line-height: 1.4;
 	text-align: right;

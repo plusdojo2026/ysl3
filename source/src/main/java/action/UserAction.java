@@ -62,6 +62,9 @@ public class UserAction {
 			HttpSession session = request.getSession();
 			session.setAttribute("user", dto);
 
+			// セッション有効時間を30分に設定
+			session.setMaxInactiveInterval(30 * 60);
+
 			// ホームアクションに飛ばし、ホーム画面でタスクやログを表示する
 			HomeAction action = new HomeAction(request);
 			page = action.homeSelectAll();

@@ -79,6 +79,14 @@ public class WorkAction {
 		String workDate = request.getParameter("work-date");
 		String explainText = request.getParameter("explain-text");
 		float work = Float.parseFloat(request.getParameter("work"));
+		
+		
+		System.out.println("task-id=" + request.getParameter("task-id"));
+		System.out.println("work-date=" + request.getParameter("work-date"));
+		System.out.println("explain=" + request.getParameter("explain-text"));
+		System.out.println("work=" + request.getParameter("work"));
+		System.out.println("page-id=" + request.getParameter("page-id"));
+		System.out.println("btn-id=" + request.getParameter("btn-id"));
 
 		// セッションを取得
 		HttpSession session = request.getSession(false);

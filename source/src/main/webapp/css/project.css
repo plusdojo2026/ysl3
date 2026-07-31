@@ -206,11 +206,11 @@
 	outline: none;
 }
 
-.project-search-select:hover {
+.project-select:hover {
 	border: 1px solid #4E4D4C;
 }
 
-.project-search-select:focus {
+.project-select:focus {
 	border: 1px solid #4E4D4C;
 }
 
@@ -319,7 +319,7 @@
 	color: #4E4D4C;
 }
 
-.project-assignee {
+.project-pm {
 	font-weight: 650;
 }
 

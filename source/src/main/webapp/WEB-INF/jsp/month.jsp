@@ -85,7 +85,7 @@
 						<span class="month-summary-label">残工数</span> <span
 							class="month-summary-value"><fmt:formatNumber
 								value="${summary.remainWork}" maxFractionDigits="1" /><small>
-								h</small></span>
+								 h</small></span>
 					</div>
 				</div>
 			</c:forEach>

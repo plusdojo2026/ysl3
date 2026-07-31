@@ -89,8 +89,8 @@
 							<!-- タスクメイン情報 -->
 							<div class="task-card-info">
 								<span class="meta-item limit"> 期限：<c:out
-										value="${task.limitDate}" /></span> <span
-									class="meta-item task-assignee"> 担当者： <c:choose>
+										value="${task.limitDate}" /></span>
+								<span class="meta-item task-assignee"> 担当者： <c:choose>
 										<c:when test="${not empty task.userName}">
 											<c:out value="${task.userName}" />
 										</c:when>
@@ -115,7 +115,8 @@
 											<span class="status">不明</span>
 										</c:otherwise>
 									</c:choose>
-								</span> <span class="hidden"> 優先度: <c:choose>
+								</span>
+								<span class="hidden"> 優先度: <c:choose>
 										<c:when test="${task.priority == 0}">低</c:when>
 										<c:when test="${task.priority == 1}">中</c:when>
 										<c:when test="${task.priority == 2}">高</c:when>
@@ -128,6 +129,8 @@
 									</div>
 								</span>
 							</div>
+							
+
 							<!-- 進捗バー -->
 							<div class="task-progress">
 								<progress value="${task.progress}" max="100"
